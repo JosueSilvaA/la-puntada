@@ -8,6 +8,7 @@ import {
 
 import Hola from './Components/Hola'
 import Home from './Pages/Home'
+import Login from './Pages/Login'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/home" exact component={Home} />
           <Route path="/saludo" exact component={ () => <Hola name="mundo" /> } />
+          <Route path="/login" exact component={Login} />
 
       </Switch>
 
