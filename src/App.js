@@ -6,9 +6,9 @@ import {
   // Link
 } from 'react-router-dom'
 
-import Hola from './Components/Hola'
-import Home from './Pages/Home'
 import Login from './Pages/Login'
+import Main from './Pages/Main'
+import Inventory from './Pages/Inventory'
 
 
 function App() {
@@ -17,10 +17,13 @@ function App() {
       {/* Configuración de Router */}
     <Router>
       <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/home" exact component={Home} />
-          <Route path="/saludo" exact component={ () => <Hola name="mundo" /> } />
+          <Route path="/" exact component={Login} />
           <Route path="/login" exact component={Login} />
+          <Route path="/main" exact component={Main} />
+          <Route path="/inventory" exact component={Inventory} />
+
+          {/* <Route path="/home" exact component={Home} /> */}
+          {/* <Route path="/saludo" exact component={ () => <Hola name="mundo" /> } /> */}
 
       </Switch>
 
