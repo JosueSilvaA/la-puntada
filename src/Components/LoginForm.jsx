@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import TextField from '@material-ui/core/TextField';
+import Alert from '@material-ui/lab/Alert'
+import { useHistory  } from 'react-router-dom';
 import { FormControl, Checkbox, Button, Card, IconButton, InputLabel, OutlinedInput, InputAdornment, CardContent } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import Logo from '../logo.svg'
 import LoginController from '../Controllers/loginController';
 
 const LoginForm = (props) => {
-    const [Data, setData] = useState({ showPass: false, loading: false })
-
+    const [Data, setData] = useState({ showPass: false, loading: false, error:'' })
+    let history = useHistory();
     const inputStyles = {
         width: '100%',
     }
@@ -16,15 +18,24 @@ const LoginForm = (props) => {
     const { register, handleSubmit, errors } = useForm();
 
     const onSubmit = async (data, e) => {
+        
         e.preventDefault()
         setData({
             showPass: Data.showPass,
             loading: true
         })
-       // props.logApi(data)
        const Login = new LoginController();
        const respuesta = await Login.Autenticar(data.usuario, data.password);
        console.log(respuesta)
+        if(respuesta.status === 200){         
+            history.push("/main");
+        } else {
+            setData({
+                loading:false,
+                showPass:Data.showPass,
+
+            })
+        }
     }
 
     const onClick = () => {
@@ -40,7 +51,6 @@ const LoginForm = (props) => {
                 <Card className="bg-gray">
                     <div>
                         <img src={Logo} alt=""/>
-
                     </div>
                     <CardContent>
                         <form onSubmit={handleSubmit(onSubmit)} >
@@ -111,7 +121,7 @@ const LoginForm = (props) => {
                                 />
                                 <span
                                  className="text-success" style={{marginLeft:'-10px'}} >
-                                    Matener sesión
+                                    Mantener sesión
                                 </span>
                                 <Button
                                     type="submit"
@@ -123,6 +133,7 @@ const LoginForm = (props) => {
                                  Login
                             </Button>
                             </div>
+                                {Data.error ? <Alert severity="error">{Data.error}</Alert>: ''}
 
                         </form>
 `
