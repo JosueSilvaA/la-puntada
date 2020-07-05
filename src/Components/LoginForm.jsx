@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { FormControl, Checkbox, Button, Card, IconButton, InputLabel, OutlinedInput, InputAdornment, CardContent } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import Logo from '../logo.svg'
+import LoginController from '../Controllers/loginController';
 
 const LoginForm = (props) => {
     const [Data, setData] = useState({ showPass: false, loading: false })
@@ -14,13 +15,16 @@ const LoginForm = (props) => {
 
     const { register, handleSubmit, errors } = useForm();
 
-    const onSubmit = (data, e) => {
+    const onSubmit = async (data, e) => {
         e.preventDefault()
         setData({
             showPass: Data.showPass,
             loading: true
         })
-        props.logApi(data)
+       // props.logApi(data)
+       const Login = new LoginController();
+       const respuesta = await Login.Autenticar(data.usuario, data.password);
+       console.log(respuesta)
     }
 
     const onClick = () => {
