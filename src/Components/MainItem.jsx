@@ -7,11 +7,14 @@ const MainItem = (props) => {
         width: '70px',
         height: '80px'
     }
+    const cardStyles = {
+        boxShadow: 'none'
+    }
 
     return (
         <React.Fragment>
             <div className="col-sm-6 col-6 mt-2">
-                <Card className="border border-danger" >
+                <Card >
                     <CardActionArea>
                         <Link to={props.route}>
 
@@ -20,9 +23,9 @@ const MainItem = (props) => {
                                 style={imgStyles}
                                 image={props.iconItem}
                             />
-                            <div>
-                                <p className="text-center mb-0 h3">{props.nameItem}</p>
-                            </div>
+                            
+                            <p className="text-center mb-0 h5">{props.nameItem}</p>
+                            
                         </Link>
                     </CardActionArea>
 
