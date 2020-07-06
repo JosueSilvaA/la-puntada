@@ -35,13 +35,14 @@ const LoginForm = () => {
     });
     const Login = new LoginController();
     const respuesta = await Login.Autenticar(data.usuario, data.password);
-    if (respuesta.status === 200) {
-      history.push('/main');
+    if (respuesta.Error) {
+        setData({
+            loading: false,
+            showPass: Data.showPass,
+            error: respuesta.Error
+          });
     } else {
-      setData({
-        loading: false,
-        showPass: Data.showPass,
-      });
+        history.push('/main');
     }
   };
 
@@ -127,6 +128,7 @@ const LoginForm = () => {
                   Login
                 </Button>
               </div>
+              <br></br>
               {Data.error ? <Alert severity="error">{Data.error}</Alert> : ''}
             </form>
             `
