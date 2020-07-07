@@ -30,7 +30,7 @@ const Main = () => {
           <MainItem
             iconItem="https://img.icons8.com/doodle/50/000000/group.png"
             nameItem="Usuarios"
-            route="/inventory"
+            route="/users"
           />
         </div>
       </div>

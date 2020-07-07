@@ -3,38 +3,28 @@ import { Card, CardMedia, CardActionArea } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 const MainItem = (props) => {
-    const imgStyles = {
-        width: '70px',
-        height: '80px'
-    }
-    const cardStyles = {
-        boxShadow: 'none'
-    }
+  // eslint-disable-next-line react/prop-types
+  const { route, iconItem, nameItem } = props;
+  const imgStyles = {
+    width: '70px',
+    height: '80px',
+  };
 
-    return (
-        <React.Fragment>
-            <div className="col-sm-6 col-6 mt-2">
-                <Card >
-                    <CardActionArea>
-                        <Link to={props.route}>
+  return (
+    <>
+      <div className="col-sm-6 col-6 mt-2">
+        <Card>
+          <CardActionArea>
+            <Link to={route}>
+              <CardMedia className="mx-auto" style={imgStyles} image={iconItem} />
 
-                            <CardMedia
-                                className="mx-auto"
-                                style={imgStyles}
-                                image={props.iconItem}
-                            />
-                            
-                            <p className="text-center mb-0 h5">{props.nameItem}</p>
-                            
-                        </Link>
-                    </CardActionArea>
-
-                </Card>
-
-            </div>
-
-        </React.Fragment>
-    )
-}
+              <p className="text-center mb-0 h5">{nameItem}</p>
+            </Link>
+          </CardActionArea>
+        </Card>
+      </div>
+    </>
+  );
+};
 
 export default MainItem;

@@ -1,9 +1,15 @@
 import React from 'react';
+import UserListItem from '../Components/UserListItem';
 
 const Users = () => {
   return (
     <>
-      <h1>Users page</h1>
+      <UserListItem />
+      <UserListItem />
+      <UserListItem />
+      <UserListItem />
+      <UserListItem />
+      <UserListItem />
     </>
   );
 };
