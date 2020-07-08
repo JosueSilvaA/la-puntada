@@ -14,7 +14,16 @@ const UserListItem = ({ rol, nombres, apellido, imgUsuario, estado }) => {
   return (
     <>
       <List>
-        <ListItem alignItems="flex-start">
+        <ListItem
+          alignItems="flex-start"
+          className="bg-white"
+          style={{
+            borderTopLeftRadius: '40px',
+            borderBottomLeftRadius: '40px',
+            borderTopRightRadius: '40px',
+            borderBottomRightRadius: '40px',
+          }}
+        >
           <ListItemAvatar>
             <Avatar alt="Remy Sharp" src={imgUsuario} />
           </ListItemAvatar>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Fab, Backdrop, Fade, Modal, Button, CircularProgress, Divider } from '@material-ui/core';
+import Helmet from 'react-helmet';
 import Alert from '@material-ui/lab/Alert';
 import UserListItem from '../Components/UserListItem';
 import UserControler from '../Controllers/UsersController';
@@ -43,10 +44,11 @@ const Users = () => {
   });
   return (
     <>
+      <Helmet bodyAttributes={{ style: 'background-color : #694bb6' }} />
       <div className=" mt-2">
-        <span className="h2">Empleados</span>
+        <span className="h2 text-white ml-4">Empleados</span>
       </div>
-      <Divider />
+      <Divider className="bg-success0" />
       <div className="d-flex mt-3">
         {Data.loading && <CircularProgress className="mx-auto" size={50} color="secondary" />}
         {Check && (
@@ -58,7 +60,7 @@ const Users = () => {
       <Fab
         style={{ position: 'fixed', bottom: '0', right: '0' }}
         variant="round"
-        color="secondary"
+        color="default"
         aria-label="add"
         onClick={handleOpen}
       >
