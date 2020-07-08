@@ -5,7 +5,7 @@ import UserControler from '../Controllers/UsersController';
 import RegisterForm from '../Components/RegisterForm';
 
 const Users = () => {
-  const [Open, setOpen] = useState(true);
+  const [Open, setOpen] = useState(false);
   const [Data, setData] = useState({ users: [] });
   useEffect(() => {
     async function GetUsers() {

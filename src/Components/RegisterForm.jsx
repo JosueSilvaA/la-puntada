@@ -1,42 +1,74 @@
 import React, { useState } from 'react';
+import {
+  TextField,
+  FormControl,
+  Button,
+  IconButton,
+  InputLabel,
+  Input,
+  InputAdornment,
+} from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { useForm } from 'react-hook-form';
-import { TextField, Button } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
+import { useHistory } from 'react-router-dom';
 import UserControler from '../Controllers/UsersController';
 
 const RegisterForm = () => {
-  const [Data, setData] = useState(false);
+  const [Data, setData] = useState({
+    showPass: false,
+    loading: false,
+    error: false,
+    message: '',
+  });
 
-  /* 
-  nombres:req.body.nombres,
-            apellido:req.body.apellido,
-            usuario:req.body.usuario,
-            direccion:req.body.direccion,
-            correo:req.body.correo,
-            contrasena:req.body.contrasena,
-            identidad:req.body.identidad,
-            telefono:req.body.telefono,
-            estado:req.body.estado,
-            conexiones:[]
-  */
+  // eslint-disable-next-line no-unused-vars
+  const { register, handleSubmit, errors } = useForm();
+  const history = useHistory();
+
   const onSubmit = async (data, e) => {
+    setData({
+      showPass: Data.showPass,
+      loading: true,
+    });
     const user = new UserControler();
-    const newUser = await user.registerUser({ h: 'jkj' });
+    const newUser = await user.registerUser(data);
     console.log(newUser);
+    if (newUser.err) {
+      setData({
+        showPass: Data.showPass,
+        loading: false,
+        error: true,
+        message: newUser.message,
+      });
+    } else if (!newUser.Error) {
+      // agregar alerta
+      history.push('/users');
+    } else {
+      setData({
+        showPass: Data.showPass,
+        loading: false,
+        error: true,
+        message: newUser.Response,
+      });
+    }
     e.preventDefault();
+  };
+  const showPass = () => {
+    setData({
+      showPass: !Data.showPass,
+    });
   };
 
   const inputStyles = {
     width: '100%',
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const { register, handleSubmit, errors } = useForm();
-
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="mx-auto bg-white p-4">
         <div>
-          <h2 id="transition-modal-title">Registro nuevo usuario</h2>
+          <h3 id="transition-modal-title">Registro nuevo usuario</h3>
         </div>
         <div className="mt-2">
           <TextField
@@ -51,6 +83,7 @@ const RegisterForm = () => {
               },
             })}
           />
+          <span className="text-danger text-small mb-0">{errors?.nombres?.message}</span>
         </div>
         <div className="mt-2">
           <TextField
@@ -65,6 +98,7 @@ const RegisterForm = () => {
               },
             })}
           />
+          <span className="text-danger text-small mb-0">{errors?.apellido?.message}</span>
         </div>
         <div className="mt-2">
           <TextField
@@ -79,6 +113,7 @@ const RegisterForm = () => {
               },
             })}
           />
+          <span className="text-danger text-small mb-0">{errors?.correo?.message}</span>
         </div>
         <div className="mt-2">
           <TextField
@@ -93,19 +128,39 @@ const RegisterForm = () => {
               },
             })}
           />
+          <span className="text-danger text-small mb-0">{errors?.usuario?.message}</span>
         </div>
+        <FormControl className="mt-3" style={inputStyles}>
+          <InputLabel htmlFor="standard-adornment-password">Contraseña</InputLabel>
+          <Input
+            id="standard-adornment-password"
+            type={Data.showPass ? 'text' : 'password'}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton aria-label="toggle password visibility" onClick={showPass} edge="end">
+                  {Data.showPass ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+            labelWidth={80}
+            name="contrasena"
+            inputRef={register({
+              required: {
+                value: true,
+                message: 'Ingresa tu contraseña',
+              },
+            })}
+          />
+          <span className="text-danger text-small mb-0">{errors?.password?.message}</span>
+        </FormControl>
         <div className="mt-2">
           <TextField
             style={inputStyles}
             id="standard-basic"
             label="Dirección"
+            placeholder="Campo opcional"
             name="direccion"
-            inputRef={register({
-              required: {
-                value: true,
-                message: 'Debe ingresar una dirección',
-              },
-            })}
+            inputRef={register}
           />
         </div>
 
@@ -122,6 +177,7 @@ const RegisterForm = () => {
               },
             })}
           />
+          <span className="text-danger text-small mb-0">{errors?.identidad?.message}</span>
         </div>
         <div className="mt-2">
           <TextField
@@ -136,9 +192,22 @@ const RegisterForm = () => {
               },
             })}
           />
+          <span className="text-danger text-small mb-0">{errors?.telefono?.message}</span>
         </div>
-        <div className="mt-3">
-          <Button type="submit" variant="contained" color="primary" className="btn-block">
+        <div>
+          <span className="text-danger text-small mb-0">
+            {Data.error ? <Alert severity="error">{Data.message}</Alert> : ''}
+          </span>
+        </div>
+        <div className="mt-5">
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className="btn-block"
+            disabled={Data.loading}
+          >
+            {Data.loading && <i className="fa fa-refresh fa-spin" />}
             Registrar
           </Button>
         </div>
