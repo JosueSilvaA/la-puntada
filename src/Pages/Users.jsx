@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Fab, Backdrop, Fade, Modal, Button } from '@material-ui/core';
+import { Fab, Backdrop, Fade, Modal, Button, CircularProgress, Divider } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import UserListItem from '../Components/UserListItem';
 import UserControler from '../Controllers/UsersController';
 import RegisterForm from '../Components/RegisterForm';
 
 const Users = () => {
   const [Open, setOpen] = useState(false);
-  const [Data, setData] = useState({ users: [] });
-  useEffect(() => {
-    async function GetUsers() {
-      const user = new UserControler();
-      const users = await user.getUsers();
-      setData({
-        users,
-      });
-    }
-    GetUsers();
-  }, []);
+  const [Check, setCheck] = useState(false);
+  const [Data, setData] = useState({ users: [], loading: true });
 
   const handleOpen = () => {
     setOpen(true);
@@ -26,19 +18,49 @@ const Users = () => {
     setOpen(false);
   };
 
+  const setTime = () => {
+    setTimeout(() => {
+      setCheck(false);
+    }, 5000);
+  };
+
+  const getUsersList = async (register) => {
+    const user = new UserControler();
+    const users = await user.getUsers();
+    setData({
+      users,
+      loading: false,
+    });
+    if (register) {
+      handleClose();
+      setCheck(true);
+      setTime();
+    }
+  };
+
+  useEffect(() => {
+    getUsersList(false);
+  });
   return (
     <>
-      <div className=" mt-2 border border-danger">
+      <div className=" mt-2">
         <span className="h2">Empleados</span>
+      </div>
+      <Divider />
+      <div className="d-flex mt-3">
+        {Data.loading && <CircularProgress className="mx-auto" size={50} color="secondary" />}
+        {Check && (
+          <Alert severity="success" className="mx-auto text-success">
+            Usuario agregado
+          </Alert>
+        )}
       </div>
       <Fab
         style={{ position: 'fixed', bottom: '0', right: '0' }}
         variant="round"
         color="secondary"
         aria-label="add"
-        // href="/main"
         onClick={handleOpen}
-        // onClick={getUser}
       >
         <div>
           <img
@@ -78,7 +100,7 @@ const Users = () => {
           <div className="border border-dark" id="transition-modal-title">
             <div className="container">
               <div className="">
-                <RegisterForm />
+                <RegisterForm getUsersList={getUsersList} />
               </div>
               <div className="bg-white pb-3 d-flex content-align-center">
                 <Button

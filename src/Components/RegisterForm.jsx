@@ -11,10 +11,10 @@ import {
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { useForm } from 'react-hook-form';
 import Alert from '@material-ui/lab/Alert';
-import { useHistory } from 'react-router-dom';
 import UserControler from '../Controllers/UsersController';
 
-const RegisterForm = () => {
+// eslint-disable-next-line react/prop-types
+const RegisterForm = ({ getUsersList }) => {
   const [Data, setData] = useState({
     showPass: false,
     loading: false,
@@ -24,7 +24,6 @@ const RegisterForm = () => {
 
   // eslint-disable-next-line no-unused-vars
   const { register, handleSubmit, errors } = useForm();
-  const history = useHistory();
 
   const onSubmit = async (data, e) => {
     setData({
@@ -33,7 +32,6 @@ const RegisterForm = () => {
     });
     const user = new UserControler();
     const newUser = await user.registerUser(data);
-    console.log(newUser);
     if (newUser.err) {
       setData({
         showPass: Data.showPass,
@@ -41,9 +39,10 @@ const RegisterForm = () => {
         error: true,
         message: newUser.message,
       });
-    } else if (!newUser.Error) {
+    }
+    if (newUser.Success) {
       // agregar alerta
-      history.push('/users');
+      getUsersList(true);
     } else {
       setData({
         showPass: Data.showPass,
