@@ -5,7 +5,7 @@ class LoginController {
     this.data = { usuario, contrasena };
     let datosRespuesta;
     await axios
-      .post('http://localhost:3000/api/usuario/login', this.data)
+      .post('https://api-la-puntada.herokuapp.com/api/usuario/login', this.data)
       .then((res) => {
         datosRespuesta = res.data;
         return res;

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Fab, TextField, Backdrop, Fade, Modal, Button } from '@material-ui/core';
 import UserListItem from '../Components/UserListItem';
+import getUsers from '../Controllers/UsersController';
 
 const Users = () => {
   const [Open, setOpen] = useState(false);
-
+  const [Data, setData] = useState({ users: [] });
   const handleOpen = () => {
     setOpen(true);
   };
@@ -13,10 +14,19 @@ const Users = () => {
     setOpen(false);
   };
 
+  useEffect(() => {
+    async function GetUsers() {
+      const users = await getUsers();
+      setData({
+        users,
+      });
+    }
+    GetUsers();
+  }, []);
+
   const inputStyles = {
     width: '100%',
   };
-
   return (
     <>
       <div className=" mt-2 border border-danger">
@@ -29,6 +39,7 @@ const Users = () => {
         aria-label="add"
         // href="/main"
         onClick={handleOpen}
+        // onClick={getUser}
       >
         <div>
           <img
@@ -39,18 +50,18 @@ const Users = () => {
           />
         </div>
       </Fab>
-      <div style={{ position: 'absolute' }}>
-        <UserListItem />
-        <UserListItem />
-        <UserListItem />
-        <UserListItem />
-        <UserListItem />
-        <UserListItem />
-        <UserListItem />
-        <UserListItem />
-        <UserListItem />
-        <UserListItem />
-        <UserListItem />
+      <div style={{ position: 'absolute', width: '100%' }}>
+        {Data.users.map((user) => (
+          <UserListItem
+            // eslint-disable-next-line no-underscore-dangle
+            key={user._id}
+            rol={user.rol}
+            nombres={user.nombres}
+            apellido={user.apellido}
+            imgUsuario={user.imgUsuario}
+            estado={user.estado}
+          />
+        ))}
       </div>
       <Modal
         style={{ position: 'absolute' }}
