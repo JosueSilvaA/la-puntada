@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Fab, TextField, Backdrop, Fade, Modal, Button } from '@material-ui/core';
+import { Fab, Backdrop, Fade, Modal, Button } from '@material-ui/core';
 import UserListItem from '../Components/UserListItem';
-import getUsers from '../Controllers/UsersController';
+import UserControler from '../Controllers/UsersController';
+import RegisterForm from '../Components/RegisterForm';
 
 const Users = () => {
-  const [Open, setOpen] = useState(false);
+  const [Open, setOpen] = useState(true);
   const [Data, setData] = useState({ users: [] });
+  useEffect(() => {
+    async function GetUsers() {
+      const user = new UserControler();
+      const users = await user.getUsers();
+      setData({
+        users,
+      });
+    }
+    GetUsers();
+  }, []);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -14,19 +26,6 @@ const Users = () => {
     setOpen(false);
   };
 
-  useEffect(() => {
-    async function GetUsers() {
-      const users = await getUsers();
-      setData({
-        users,
-      });
-    }
-    GetUsers();
-  }, []);
-
-  const inputStyles = {
-    width: '100%',
-  };
   return (
     <>
       <div className=" mt-2 border border-danger">
@@ -76,44 +75,21 @@ const Users = () => {
         }}
       >
         <Fade in={Open}>
-          <div className="">
-            <div className="d-flex content-align-center" id="transition-modal-description">
-              <form className="mx-auto bg-white p-4">
-                <div>
-                  <h2 id="transition-modal-title">Registro nuevo usuario</h2>
-                </div>
-                <div className="mt-2">
-                  <TextField style={inputStyles} id="standard-basic" label="Nombre" />
-                </div>
-                <div className="mt-2">
-                  <TextField style={inputStyles} id="standard-basic" label="Apellidos" />
-                </div>
-                <div className="mt-2">
-                  <TextField style={inputStyles} id="standard-basic" label="Correo" />
-                </div>
-                <div className="mt-2">
-                  <TextField style={inputStyles} id="standard-basic" label="Nombre de Usuario" />
-                </div>
-                <div className="mt-2">
-                  <TextField style={inputStyles} id="standard-basic" label="N. Identidad" />
-                </div>
-                <div className="mt-2">
-                  <TextField style={inputStyles} id="standard-basic" label="N. Telefono" />
-                </div>
-                <div className="mt-3">
-                  <Button variant="contained" color="primary">
-                    Registrar
-                  </Button>
-                  <Button
-                    className="ml-4"
-                    variant="contained"
-                    color="secondary"
-                    onClick={handleClose}
-                  >
-                    Cancelar
-                  </Button>
-                </div>
-              </form>
+          <div className="border border-dark" id="transition-modal-title">
+            <div className="container">
+              <div className="">
+                <RegisterForm />
+              </div>
+              <div className="bg-white pb-3 d-flex content-align-center">
+                <Button
+                  className="mx-4 btn-block"
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleClose}
+                >
+                  Cancelar
+                </Button>
+              </div>
             </div>
           </div>
         </Fade>
