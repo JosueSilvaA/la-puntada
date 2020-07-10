@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Fab, Backdrop, Fade, Modal, Button, CircularProgress, Divider } from '@material-ui/core';
+import {
+  Fab,
+  Backdrop,
+  Fade,
+  Modal,
+  Button,
+  CircularProgress,
+  Divider,
+  Tooltip,
+  Icon,
+} from '@material-ui/core';
 import Helmet from 'react-helmet';
 import Alert from '@material-ui/lab/Alert';
 import UserListItem from '../Components/UserListItem';
 import UserControler from '../Controllers/UsersController';
 import RegisterForm from '../Components/RegisterForm';
+import BackButton from '../Components/BackButton';
 
 const Users = () => {
   const [Open, setOpen] = useState(false);
@@ -45,8 +56,9 @@ const Users = () => {
   return (
     <>
       <Helmet bodyAttributes={{ style: 'background-color : #694bb6' }} />
-      <div className=" mt-2">
-        <span className="h2 text-white ml-4">Empleados</span>
+      <div className=" mt-2 ">
+        <BackButton route="/main" />
+        <span className="h2 text-white">Empleados</span>
       </div>
       <Divider className="bg-success0" />
       <div className="d-flex mt-3">
@@ -57,22 +69,23 @@ const Users = () => {
           </Alert>
         )}
       </div>
-      <Fab
-        style={{ position: 'fixed', bottom: '0', right: '0' }}
-        variant="round"
-        color="default"
-        aria-label="add"
-        onClick={handleOpen}
-      >
-        <div>
-          <img
-            src="https://img.icons8.com/dusk/64/000000/add-user-male.png"
-            alt="addUser"
-            height="40"
-            width="40"
-          />
-        </div>
-      </Fab>
+      <Tooltip title="Add" aria-label="add">
+        <Fab
+          style={{
+            position: 'fixed',
+            bottom: '0',
+            right: '0',
+            marginRight: '0.4rem',
+            marginBottom: '0.7rem',
+          }}
+          variant="round"
+          color="default"
+          aria-label="add"
+          onClick={handleOpen}
+        >
+          <Icon className="fas fa-user-plus" style={{ width: '2rem' }} />
+        </Fab>
+      </Tooltip>
       <div style={{ position: 'absolute', width: '100%' }}>
         {Data.users.map((user) => (
           <UserListItem

@@ -17,6 +17,7 @@ const UserListItem = ({ rol, nombres, apellido, imgUsuario, estado }) => {
         <ListItem
           alignItems="flex-start"
           className="bg-white"
+          button="true"
           style={{
             borderTopLeftRadius: '40px',
             borderBottomLeftRadius: '40px',
