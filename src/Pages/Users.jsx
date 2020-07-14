@@ -15,7 +15,7 @@ import Alert from '@material-ui/lab/Alert';
 import UserListItem from '../Components/UserListItem';
 import UserControler from '../Controllers/UsersController';
 import RegisterForm from '../Components/RegisterForm';
-import BackButton from '../Components/BackButton';
+import NavBar from '../Components/Navbar';
 
 const Users = () => {
   const [Open, setOpen] = useState(false);
@@ -56,10 +56,7 @@ const Users = () => {
   return (
     <>
       <Helmet bodyAttributes={{ style: 'background-color : #694bb6' }} />
-      <div className=" mt-2 ">
-        <BackButton route="/main" />
-        <span className="h2 text-white">Empleados</span>
-      </div>
+      <NavBar pageName="Usuarios" goBack />
       <Divider className="bg-success0" />
       <div className="d-flex mt-3">
         {Data.loading && <CircularProgress className="mx-auto" size={50} color="secondary" />}
