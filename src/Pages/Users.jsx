@@ -90,7 +90,7 @@ const Users = () => {
             key={user._id}
             rol={user.rol}
             nombres={user.nombres}
-            apellido={user.apellido}
+            apellido={user.apellidos}
             imgUsuario={user.imgUsuario}
             estado={user.estado}
           />
@@ -103,6 +103,7 @@ const Users = () => {
         open={Open}
         Onclose={handleClose}
         closeAfterTransition
+        disableScrollLock="false"
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,

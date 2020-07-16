@@ -20,7 +20,7 @@ class UsersController {
     let Res;
     const dataUser = {
       nombres: data.nombres,
-      apellido: data.apellido,
+      apellidos: data.apellido,
       usuario: data.usuario,
       direccion: 'Debes actualizar tu dirección',
       correo: data.correo,

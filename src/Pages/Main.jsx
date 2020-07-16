@@ -27,7 +27,13 @@ const Main = () => {
             bgColor="green"
             pdLeft="5px"
           />
-          <MainItem iconItem="fas fa-car" nameItem="Inventario" route="/inventory" bgColor="blue" />
+          <MainItem
+            iconItem="fas fa-list-alt"
+            nameItem="Manejar Inventario"
+            route="/inventory"
+            bgColor="blue"
+            pdLeft="8px"
+          />
         </Grid>
       </div>
     </>
