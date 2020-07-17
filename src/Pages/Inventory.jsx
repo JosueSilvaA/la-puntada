@@ -7,7 +7,6 @@ import DeleteProduct from '../Components/DeleteProduct';
 
 const Inventory = () => {
   const [Value, setValue] = useState({ value: 0, component: NewProduct });
-  const [Name, setName] = useState('hola');
 
   const handleChange = (event, newValue) => {
     // await setValue(newValue);

@@ -158,7 +158,7 @@ const RegisterForm = ({ getUsersList }) => {
               },
             })}
           />
-          <span className="text-danger text-small mb-0">{errors?.password?.message}</span>
+          <span className="text-danger text-small mb-0">{errors?.contrasena?.message}</span>
         </FormControl>
         <div className="mt-2">
           <TextField

@@ -4,38 +4,77 @@ import { useForm } from 'react-hook-form';
 import Products from '../Controllers/ProductsController';
 
 const NewProduct = () => {
-  /* Lista de Proveedores */
-  const [Proveedores, setProveedores] = useState(['hola']);
-  /* Proveedor seleccionado */
-  const [Proveedor, setProveedor] = useState(true);
-  /* Tipo de Producto a Registrar */
-  const [TipoProduct, setTipoProduct] = useState({
-    list: [
-      { id: 1, name: 'tipo1' },
-      { id: 2, name: 'tipo2' },
-      { id: 3, name: 'tipo3' },
+  /* Selects options */
+  const [SelectOption, setSelectOption] = useState({
+    providersList: ['hola'],
+    productType: [
+      { id: 1, name: 'Producto de textil' },
+      { id: 2, name: 'Producto escolar' },
+      { id: 3, name: 'Producto variado' },
     ],
-    selected: { value: false, name: 'Selecciona un tipo' },
   });
+  /* Options selected */
+  const [Selected, setSelected] = useState({
+    selectedType: { value: false, id: '', name: '' },
+    selectedProvider: { value: false, id: '', name: '' },
+  });
+
+  /* Render Options */
+  const [TypeProductSelect, setTypeProductSelect] = useState({
+    tipo1: false,
+    tipo2: false,
+    tipo3: false,
+  });
+
   const { register, handleSubmit, errors } = useForm();
 
-  const handleChange = (event) => {
-    // eslint-disable-next-line no-underscore-dangle
-    setProveedor(event.target.value);
-  };
-
-  const handleChangeTypeProduct = (event) => {
-    setTipoProduct({
-      list: TipoProduct.list,
-      selected: event.target.value,
+  const handleChangeProvider = (event) => {
+    setSelected({
+      selectedType: Selected.selectedType,
+      // eslint-disable-next-line no-underscore-dangle
+      selectedProvider: {
+        value: true,
+        id: event.target.value._id,
+        name: event.target.value.nombre,
+      },
     });
   };
 
+  const handleChangeTypeProduct = (event) => {
+    setSelected({
+      selectedType: { value: true, id: event.target.value.id, name: event.target.value.name },
+      selectedProvider: Selected.selectedProvider,
+    });
+    if (event.target.value.id === 1) {
+      setTypeProductSelect({
+        tipo1: true,
+        tipo2: false,
+        tipo3: false,
+      });
+    } else if (event.target.value.id === 2) {
+      setTypeProductSelect({
+        tipo1: false,
+        tipo2: true,
+        tipo3: false,
+      });
+    } else {
+      setTypeProductSelect({
+        tipo1: false,
+        tipo2: false,
+        tipo3: true,
+      });
+    }
+  };
+
   const getProvidersList = async () => {
-    if (Proveedores[0] === 'hola') {
+    if (SelectOption.providersList[0] === 'hola') {
       const productObj = new Products();
       const providersList = await productObj.getPproviders();
-      setProveedores(providersList);
+      // setProveedores(providersList);
+      setSelectOption({
+        providersList,
+        productType: SelectOption.productType,
+      });
     }
   };
 
@@ -44,9 +83,10 @@ const NewProduct = () => {
   });
 
   const onSubmit = (data, e) => {
-    console.log(data);
-    if(Proveedor.estado === undefined){
-      console.log('selecconad lsdjfl')
+    if (Selected.selectedType.value && Selected.selectedProvider.value) {
+      /* Mandar a registrar el producto */
+    } else {
+      /* Faltan los campos tipoProducto y/o proveedor */
     }
     e.preventDefault();
   };
@@ -61,16 +101,24 @@ const NewProduct = () => {
       >
         <Grid container spacing={3} alignItems="center" className="border border-danger">
           <Grid item xs={11} className="mx-auto">
-            <FormHelperText>*Selecciona tipo de producto</FormHelperText>
-            <Select value={TipoProduct.selected} onChange={handleChangeTypeProduct} displayEmpty>
+            <Select
+              lalue={Selected.selectedType.name}
+              onChange={handleChangeTypeProduct}
+              label="Selecciona un tipo producto"
+              // displayEmpty
+            >
               <MenuItem value="" disabled>
                 Selecciona el Tipo de producto
               </MenuItem>
-              {TipoProduct.list.map((dato) => (
+              {SelectOption.productType.map((dato) => (
                 <MenuItem value={dato}>{dato.name}</MenuItem>
               ))}
             </Select>
-            <FormHelperText className="text-small text-danger">*Selecciona tipo de producto</FormHelperText>
+            {!Selected.selectedType.value && (
+              <FormHelperText className="text-small text-danger">
+                *Selecciona tipo de producto
+              </FormHelperText>
+            )}
           </Grid>
 
           <Grid item xs={11} className="mx-auto">
@@ -96,50 +144,40 @@ const NewProduct = () => {
               id="standard-select-currency"
               select
               label="Proveedor"
-              value={Proveedor}
-              onChange={handleChange}
+              lalue={Selected.selectedProvider.name}
+              onChange={handleChangeProvider}
             >
-              {Proveedores.map((proveedor) => (
-                <MenuItem key={proveedor.name} value={proveedor}>
+              {SelectOption.providersList.map((proveedor) => (
+                <MenuItem key={proveedor.nombre} value={proveedor}>
                   {proveedor.nombre}
                 </MenuItem>
               ))}
             </TextField>
-            <TextField
-              className="d-none"
-              id=""
-              label=""
-              color="primary"
-              name="proveedorSelect"
-              autoComplete="off"
-              // eslint-disable-next-line no-underscore-dangle
-              value={Proveedor._id}
-              inputRef={register({
-                required: {
-                  value: true,
-                  message: 'Selecciona un proveedor',
-                },
-              })}
-            />
-            <span className="text-small text-danger">{errors?.proveedor?.message}</span>
+            {!Selected.selectedProvider.value && (
+              <FormHelperText className="text-small text-danger">
+                *Selecciona un proveedor
+              </FormHelperText>
+            )}
           </Grid>
-          <Grid item xs={11} className="mx-auto">
-            <TextField
-              style={{ width: '100%' }}
-              id="standard-basic"
-              label="Marca"
-              color="primary"
-              name="marca"
-              autoComplete="off"
-              inputRef={register({
-                required: {
-                  value: true,
-                  message: 'Ingresa la marca',
-                },
-              })}
-            />
-            <span className="text-small text-danger">{errors?.marca?.message}</span>
-          </Grid>
+          {(TypeProductSelect.tipo2 || TypeProductSelect.tipo3) && (
+            <Grid item xs={11} className="mx-auto">
+              <TextField
+                style={{ width: '100%' }}
+                id="standard-basic"
+                label="Marca"
+                color="primary"
+                name="marca"
+                autoComplete="off"
+                inputRef={register({
+                  required: {
+                    value: true,
+                    message: 'Ingresa la marca',
+                  },
+                })}
+              />
+              <span className="text-small text-danger">{errors?.marca?.message}</span>
+            </Grid>
+          )}
           <Grid item xs={11} className="mx-auto">
             <TextField
               style={{ width: '100%' }}
