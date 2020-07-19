@@ -41,6 +41,7 @@ const UserListItem = ({ rol, nombres, apellido, imgUsuario, estado }) => {
           />
         </ListItem>
         <Divider />
+        
       </List>
     </>
   );

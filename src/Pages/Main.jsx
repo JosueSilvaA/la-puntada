@@ -21,11 +21,11 @@ const Main = () => {
             pdLeft="5px"
           />
           <MainItem
-            iconItem="fas fa-boxes"
-            nameItem="Inventario"
-            route="/inventory"
-            bgColor="green"
-            pdLeft="5px"
+            iconItem="fab fa-stack-overflow"
+            nameItem="Catalogos"
+            route="/catalogo"
+            bgColor=" #e67e22 "
+            pdLeft="12px"
           />
           <MainItem
             iconItem="fas fa-list-alt"
