@@ -1,5 +1,5 @@
-.box{
-    width: 100%;
-    border:1px solid black;
-    height: 400px;
+.contenedor-catalogo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
