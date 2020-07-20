@@ -1,37 +1,69 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "../Components/Navbar";
-import { Grid, Divider } from "@material-ui/core";
+import React, { useEffect, useState } from 'react'
+import Navbar from '../Components/Navbar';
+import { Grid } from '@material-ui/core';
 import "../Styles/Catalogue.css";
 import CatalogueController from "../Controllers/CatologueController";
-import ProductListItem from "../Components/ProductListItem";
+import ProductListItemSchool from "../Components/ProductListItemSchool";
+import ProductListItemTextil from '../Components/ProductListItemTextil'
 
 const Catalogue = () => {
-  const [ProductList, setProductList] = useState([0]);
+  const [ProductListSchool, setProductListSchool] = useState([0]);
+  const [ProductListTextil,setProductListTextil] =  useState([0]);
 
-  const getProductos = async () => {
+  const getProductosSchool = async () => {
     const catalogo = new CatalogueController();
-    const products = await catalogo.getAllProducts();
-
-    setProductList(products);
+    const productsSchool = await catalogo.getProductsSchool();
+    const productsTextil = await catalogo.getProductsTextil();
+    setProductListSchool(productsSchool);
+    setProductListTextil(productsTextil);
   };
 
   useEffect(() => {
-    if (ProductList[0] === 0) {
-      getProductos();
+    if (ProductListSchool[0] === 0  || ProductListTextil[0] === 0) {
+      getProductosSchool();
     }
   });
 
   return (
     <>
       <Navbar pageName={"Catalogo"} goBack />
-      <Grid className='mt-2' style={{width:'100%',margin:'0px',padding:'2%'}}>
-        <h5 style={{textAlign:'center'}}>Productos Escolares</h5> 
-        <hr/> 
-      </Grid>
-      <Grid container spacing={2} className=" contenedor-catalogo" style={{width:'100%',margin:'0px',padding:'2%'}}>
-        {ProductList.map(product => (
-          <ProductListItem key={product._id} product={product} />
+      
+      <Grid
+        container
+        spacing={2}
+        
+        style={{ width: "100%", margin: "0px", padding: "2%" }}
+      > 
+        <Grid
+          className="mt-2"
+          style={{ width: "100%",
+                   margin: "0px", 
+                   padding: "2%" 
+                }}
+        >
+          <h5 style={{ textAlign: "center",fontWeight:'bold' }}>Productos Escolares</h5>
+          <hr />
+        </Grid>
+
+        {ProductListSchool.map(productSchool => (
+          <ProductListItemSchool key={productSchool._id} product={productSchool} />
         ))}
+
+        <Grid
+          className="mt-2"
+          style={{ width: "100%",
+                   margin: "0px", 
+                   padding: "2%" 
+                }}
+        >
+        <h5 style={{ textAlign: "center",fontWeight:'bold' }}>Productos Textiles</h5>
+        <hr />
+        </Grid>
+        
+        {ProductListTextil.map(productTextil =>(
+          <ProductListItemTextil key = {productTextil._id} product ={productTextil}/>
+        ))}
+
       </Grid>
     </>
   );

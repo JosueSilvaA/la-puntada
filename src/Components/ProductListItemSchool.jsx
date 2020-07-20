@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { 
     Grid,
     Card,
@@ -9,7 +9,7 @@ import {
 from '@material-ui/core'
 
 
-const ProductListItem = ({product}) =>{
+const ProductListItemSchool = ({product}) =>{
     return(
         <>
             <Grid item  xs={12} md ={4} style={{padding:'2%'}}>
@@ -22,6 +22,7 @@ const ProductListItem = ({product}) =>{
                         src={product.imgProducto}
                         title="Paella dish"
                         style={{backgroundPosition:'center center',backgroundSize:'cover',width:'100%'}}
+                        alt={product.nombre}
                     />
                     <CardContent>
                         <Typography variant="body2" color="textSecondary" component="p">
@@ -33,7 +34,7 @@ const ProductListItem = ({product}) =>{
                             <br/>
                             Tipo Producto : {product.tipoUtil}
                             <br/>
-                            Precio : {product.precio}
+                            Precio : {product.precio} lps
                         </Typography>
                     </CardContent>
                 </Card>
@@ -43,4 +44,4 @@ const ProductListItem = ({product}) =>{
     )
 }
 
-export default ProductListItem
+export default ProductListItemSchool;
