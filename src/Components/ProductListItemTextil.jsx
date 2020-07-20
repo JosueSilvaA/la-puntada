@@ -8,6 +8,8 @@ import {
     } 
 from '@material-ui/core'
 
+import IconButton from '@material-ui/core/IconButton';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const ProductListItemTextil = ({product}) =>{
     return(
@@ -15,6 +17,11 @@ const ProductListItemTextil = ({product}) =>{
             <Grid item  xs={12} md ={4} style={{padding:'2%'}}>
                 <Card>
                     <CardHeader
+                        action={
+                            <IconButton aria-label="settings">
+                              <MoreVertIcon />
+                            </IconButton>
+                          }
                         title={product.nombre}
                         subheader={product.creada}
                     />
