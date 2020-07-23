@@ -1,8 +1,9 @@
 import React from 'react';
 import { Grid, Divider } from '@material-ui/core';
-
+import Hidden from '@material-ui/core/Hidden';
 import NavBar from '../Components/Navbar';
 import MainInventoryItem from '../Components/MainInventoryItem';
+import MainInventoryItem2 from '../Components/maininventoryitemweb';
 
 
 const MainInventory = () => {
@@ -10,38 +11,86 @@ const MainInventory = () => {
     <>
       <NavBar pageName="La Puntada" goBack={false} />
       <Divider />
-      <div className="" style={{marginTop:'1rem'}}>
-        <Grid container spacing={3} style={{width:'100%'}}>
-          <MainInventoryItem
-            iconItem="fas fa-table"
-            nameItem="Ver inventario"
-            route="/users"
-            bgColor="#694bb6"
-            pdLeft="0px"
-          />
-          <MainInventoryItem
-            iconItem="fas fa-plus-square"
-            nameItem="Agregar Producto"
-            route="/inventory"
-            bgColor="green"
-            pdLeft="0px"
-          />
-          <MainInventoryItem
-            iconItem="fas fa-check-square"
-            nameItem="Editar Producto"
-            route="/inventory"
-            bgColor="red"
-            pdLeft="0px"
-          />
-           <MainInventoryItem
-            iconItem="fas fa-trash"
-            nameItem="Eliminar Producto"
-            route="/main-inventory"
-            bgColor="blue"
-            pdLeft="0px"
-          />
-        </Grid>
-      </div>
+      <Hidden only={['lg', 'xl', 'md']}>
+          <div className="" style={{width:'100%',marginTop:'1rem'}}>
+            <Grid container mx="auto"   alignItems="center" spacing={3} style={{marginLeft:'0px',marginRight:'0px',width:'100%'}}>
+              
+                <Grid item xs>
+                  <MainInventoryItem
+                    iconItem="fas fa-table"
+                    nameItem="Ver inventario"
+                    route="/users"
+                    bgColor="#694bb6"
+                    pdLeft="0px"
+                  />
+                  <MainInventoryItem
+                    iconItem="fas fa-plus-square"
+                    nameItem="Agregar Producto"
+                    route="/inventory"
+                    bgColor="green"
+                    pdLeft="0px"
+                  />
+                  <MainInventoryItem
+                    iconItem="fas fa-check-square"
+                    nameItem="Editar Producto"
+                    route="/inventory"
+                    bgColor="red"
+                    pdLeft="0px"
+                  />
+                  <MainInventoryItem
+                    iconItem="fas fa-trash"
+                    nameItem="Eliminar Producto"
+                    route="/main-inventory"
+                    bgColor="blue"
+                    pdLeft="0px"
+                  />
+                </Grid> 
+            </Grid>
+          </div>
+      </Hidden>
+      <Hidden only={['xs', 'sm']} >
+          <div style={{borderColor:'black' , padding:'20px',width:'100%',marginTop:'1rem'}}>
+            <Grid container className=""   alignItems="center" spacing={3} style={{boxShadow: '2px 3px 31px -5px rgba(0,0,0,0.75)',paddingTop:'30px',paddingBottom:'30px' ,marginTop:'10px',marginBottom:'10px',marginLeft:'0px',marginRight:'0px',width:'100%'}}>
+              
+                <Grid item xs={6}>
+                      <MainInventoryItem2
+                        iconItem="fas fa-table"
+                        nameItem="Ver inventario"
+                        route="/users"
+                        bgColor="#694bb6"
+                        pdLeft="0px"
+                      />
+                 </Grid> 
+                  <Grid item xs={6}>
+                      <MainInventoryItem2
+                        iconItem="fas fa-plus-square"
+                        nameItem="Agregar Producto"
+                        route="/inventory"
+                        bgColor="green"
+                        pdLeft="0px"
+                      />
+                  </Grid>
+                  <Grid item xs={6}>
+                      <MainInventoryItem2
+                        iconItem="fas fa-check-square"
+                        nameItem="Editar Producto"
+                        route="/inventory"
+                        bgColor="red"
+                        pdLeft="0px"
+                      />
+                   </Grid>
+                  <Grid item xs={6}>
+                      <MainInventoryItem2
+                        iconItem="fas fa-trash"
+                        nameItem="Eliminar Producto"
+                        route="/main-inventory"
+                        bgColor="blue"
+                        pdLeft="0px"
+                      />
+                </Grid>              
+            </Grid>
+          </div>
+      </Hidden>
     </>
   );
 };

@@ -8,11 +8,11 @@ const MainInventoryItem = (props) => {
   return (
     <>
       <Grid item xs={12} style={{ margin:'0px',"padding":'0px'}} >
-        <div className="d-flex mx-auto text-center" style={{width:'auto'}} >
+        <div className="d-flex text-center" style={{width:'auto'}} >
           <Button
             variant="outlined"
             className=" mx-auto text-center"
-            style={{ margin:'4px',marginRight:'0px',marginLeft:'0px',alignItems: 'center', width: '22rem'  ,height: 'auto', borderRadius: '0%', background: bgColor }}
+            style={{ margin:'4px',marginRight:'0px',marginLeft:'0px',alignItems: 'center', width: '100%'  ,height: '6rem', borderRadius: '0%', background: bgColor }}
             href={route}
           >
             <div className="d-flex col-4 text-center" style={{paddingLeft:'24px', alignItems:'center'}}>
