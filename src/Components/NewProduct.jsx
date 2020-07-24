@@ -133,11 +133,11 @@ const NewProduct = () => {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        style={{ width: '90%' }}
-        className="border border-danger mx-auto"
+        style={{ width: '80%', background: 'white', borderRadius: '15px' }}
+        className="mx-auto mt-4 border >border-success"
       >
-        <Grid container spacing={3} alignItems="center" className="border border-danger">
-          <Grid item xs={11} className="mx-auto">
+        <Grid container spacing={3} alignItems="center">
+          <Grid item xs={11} className="mx-auto mt-2">
             <FormControl>
               <InputLabel id="demo-simple-select-label">Tipo de producto</InputLabel>
               <Select
@@ -362,8 +362,8 @@ const NewProduct = () => {
             />
             <span className="text-small text-danger">{errors?.descripcion?.message}</span>
           </Grid>
-          <Grid item xs={11} className="mx-auto">
-            <Button type="submit" variant="contained" color="primary">
+          <Grid item md={11} className="mx-auto mb-2">
+            <Button type="submit" variant="contained" color="primary" className="mx-auto">
               Registrar Producto
             </Button>
           </Grid>

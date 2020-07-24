@@ -40,7 +40,13 @@ const SearchInventory = ({ selectProduct }) => {
 
   return (
     <>
-      <Grid item xs={10} md={6} className="mx-auto mt-3">
+      <Grid
+        item
+        xs={10}
+        md={6}
+        className="mx-auto mt-3 bg-white p-2"
+        style={{ borderRadius: '15px', color: 'black' }}
+      >
         <Autocomplete
           className="d-block"
           id="select"

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Helmet from 'react-helmet';
 import NavBar from '../Components/Navbar';
 import NewProduct from '../Components/NewProduct';
 import DeleteProduct from '../Components/DeleteProduct';
@@ -19,12 +20,14 @@ const Inventory = (props) => {
       }
     }
   };
+
   useEffect(() => {
     viewParams();
   });
 
   return (
     <>
+      <Helmet bodyAttributes={{ style: 'background-color : #362458' }} />
       <NavBar pageName={Value.name} goBack />
       <div className="">
         {/* eslint-disable-next-line react/jsx-pascal-case */}
