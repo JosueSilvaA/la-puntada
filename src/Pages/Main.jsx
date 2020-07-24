@@ -30,13 +30,6 @@ const Main = () => {
           <MainItem
             iconItem="fas fa-list-alt"
             nameItem="Manejar Inventario"
-            route="/inventory"
-            bgColor="blue"
-            pdLeft="8px"
-          />
-          <MainItem
-            iconItem="fas fa-list-alt"
-            nameItem="M-Inventario"
             route="/maininventory"
             bgColor="blue"
             pdLeft="8px"

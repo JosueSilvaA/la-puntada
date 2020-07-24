@@ -34,6 +34,14 @@ const EditProduct = () => {
 
   const selectProduct = (dataProduct) => {
     setProductToEdit({ value: true, product: dataProduct });
+    setEditing({
+      value: false,
+      type: {
+        escolar: false,
+        textil: false,
+        variado: false,
+      },
+    });
   };
 
   const editP = () => {
@@ -163,10 +171,10 @@ const EditProduct = () => {
         >
           <form
             onSubmit={handleSubmit(onSubmit)}
-            style={{ width: '90%' }}
-            className="border border-danger mx-auto"
+            style={{ width: '80%', background: 'white', borderRadius: '15px' }}
+            className="mx-auto pt-3 border border-success"
           >
-            <Grid container spacing={3} alignItems="center" className="border border-danger">
+            <Grid container spacing={3} alignItems="center">
               {/* <Grid item xs={11} className="mx-auto">
             <FormControl>
               <InputLabel id="demo-simple-select-label">Tipo de producto</InputLabel>
@@ -403,7 +411,7 @@ const EditProduct = () => {
                 />
                 <span className="text-small text-danger">{errors?.descripcion?.message}</span>
               </Grid>
-              <Grid item xs={10} className="mx-auto">
+              <Grid item lg={3} md={10} className="mx-auto mb-3">
                 <Button type="submit" variant="contained" className="mx-auto" color="primary">
                   Editar Producto
                 </Button>

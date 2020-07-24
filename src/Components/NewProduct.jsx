@@ -136,7 +136,7 @@ const NewProduct = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{ width: '80%', background: 'white', borderRadius: '15px' }}
-        className="mx-auto mt-4 border >border-success"
+        className="mx-auto mt-4 border border-success"
       >
         <Grid container spacing={3} alignItems="center">
           <Grid item xs={11} className="mx-auto mt-2">
@@ -364,7 +364,7 @@ const NewProduct = () => {
             />
             <span className="text-small text-danger">{errors?.descripcion?.message}</span>
           </Grid>
-          <Grid item md={11} className="mx-auto mb-2">
+          <Grid item lg={3} md={11} className="mx-auto mb-3">
             <Button type="submit" variant="contained" color="primary" className="mx-auto">
               Registrar Producto
             </Button>
