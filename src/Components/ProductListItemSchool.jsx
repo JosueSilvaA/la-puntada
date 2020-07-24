@@ -4,11 +4,13 @@ import { Grid, Card, CardHeader, CardContent, Typography } from '@material-ui/co
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+import "../Styles/Catalogue.css";
+
 const ProductListItemSchool = ({ product }) => {
   return (
     <>
-      <Grid item xs={12} md={4} style={{ padding: '2%' }}>
-        <Card>
+      <Grid item xs={12} sm={6} md={4} lg={3} style={{padding:'10px'}}>
+        <Card style={{cursor:"default"}}>
           <CardHeader
             action={
               <IconButton aria-label="settings">
@@ -21,11 +23,11 @@ const ProductListItemSchool = ({ product }) => {
           <img
             src={product.imgProducto}
             title="Paella dish"
-            style={{ backgroundPosition: 'center center', backgroundSize: 'cover', width: '100%' }}
+            className = 'imagen-tarjeta'
             alt={product.nombre}
           />
           <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
+            <Typography variant="button" color="textSecondary" component="p" style={{fontWeight:"bold"}}>
               Descripcion : {product.descripcion}
               <br />
               Color : {product.color}
@@ -35,6 +37,8 @@ const ProductListItemSchool = ({ product }) => {
               Tipo Producto : {product.tipoUtil}
               <br />
               Precio : {product.precio} lps
+              <br/>
+              Cantidad : {product.cantidad}
             </Typography>
           </CardContent>
         </Card>
