@@ -8,10 +8,6 @@ import {
   Button,
   CardMedia,
   CardActions,
-  Select,
-  FormHelperText,
-  InputLabel,
-  FormControl,
   Typography,
   ListItemText,
 } from '@material-ui/core';

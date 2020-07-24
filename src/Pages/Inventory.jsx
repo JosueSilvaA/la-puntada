@@ -6,32 +6,82 @@ import DeleteProduct from '../Components/DeleteProduct';
 import EditProduct from '../Components/EditProduct';
 
 const Inventory = (props) => {
-  const [Value, setValue] = useState({ value: -1, component: NewProduct, name: '' });
+  const [RenderOption, setRenderOption] = useState({
+    delete: false,
+    edit: false,
+    new: false,
+    deleteiId: false,
+    editId: false,
+    value: false,
+    navbarName: '',
+  });
 
   const viewParams = () => {
     const route = props.match.params;
-    if (Value.value === -1) {
-      if (route.action === 'deleteProduct') {
-        setValue({ value: 2, component: DeleteProduct, name: 'Borrar Producto' });
-      } else if (route.action === 'editProduct') {
-        setValue({ value: 1, component: EditProduct, name: 'Editar Producto' });
-      } else if (route.action === 'newProduct') {
-        setValue({ value: 0, component: NewProduct, name: 'Nuevo Producto' });
+    if (route.action === 'deleteProduct') {
+      if (route.idProduct !== undefined) {
+        setRenderOption({
+          delete: false,
+          edit: false,
+          new: false,
+          deleteiId: true,
+          editId: false,
+          value: true,
+          navbarName: 'Borrar Producto',
+        });
+      } else {
+        setRenderOption({
+          delete: true,
+          edit: false,
+          new: false,
+          deleteiId: false,
+          editId: false,
+          value: true,
+          navbarName: 'Borrar Producto',
+        });
       }
+    } else if (route.action === 'editProduct') {
+      if (route.idProduct === undefined) {
+        setRenderOption({
+          delete: false,
+          edit: true,
+          new: false,
+          deleteiId: false,
+          editId: false,
+          value: true,
+          navbarName: 'Editar Producto',
+        });
+      }
+    } else if (route.action === 'newProduct') {
+      setRenderOption({
+        delete: false,
+        edit: false,
+        new: true,
+        deleteiId: false,
+        editId: false,
+        value: true,
+        navbarName: 'Nuevo Producto',
+      });
     }
   };
 
   useEffect(() => {
-    viewParams();
+    if (!RenderOption.value) {
+      viewParams();
+    }
   });
 
   return (
     <>
       <Helmet bodyAttributes={{ style: 'background-color : #362458' }} />
-      <NavBar pageName={Value.name} goBack />
+      <NavBar pageName={RenderOption.navbarName} goBack />
       <div className="">
         {/* eslint-disable-next-line react/jsx-pascal-case */}
-        <Value.component />
+        {/* <Value.component /> */}
+        {RenderOption.delete && <DeleteProduct />}
+        {RenderOption.deleteiId && <DeleteProduct idProduct={props.match.params.idProduct} />}
+        {RenderOption.edit && <EditProduct />}
+        {RenderOption.new && <NewProduct />}
       </div>
     </>
   );

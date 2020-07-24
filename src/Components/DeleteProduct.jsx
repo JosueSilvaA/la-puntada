@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Grid,
   Card,
@@ -13,7 +13,7 @@ import {
 import SearchProduct from './SearchProducts';
 import Product from '../Controllers/ProductsController';
 
-const DeleteProduct = () => {
+const DeleteProduct = ({ idProduct = '0' }) => {
   const [ProducSelected, setProducSelected] = useState({ value: false, product: {} });
 
   const selectProduct = (dataProduct) => {
@@ -28,10 +28,23 @@ const DeleteProduct = () => {
     }
   };
 
+  const getProductById = async () => {
+    const product = new Product();
+    const result = await product.GetProductById(idProduct);
+    if (!result.err) {
+      setProducSelected({ value: true, product: result.items });
+    }
+  };
+
+  useEffect(() => {
+    if (idProduct !== '0' && ProducSelected.value === false) {
+      getProductById();
+    }
+  });
+
   return (
     <>
-      <SearchProduct selectProduct={selectProduct} />
-
+      <SearchProduct selectProduct={selectProduct} idProduct={idProduct} />
       {ProducSelected.value && (
         <Grid item xs={10} md={4} className="mx-auto mt-3">
           <Card>

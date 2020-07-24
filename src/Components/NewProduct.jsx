@@ -107,7 +107,9 @@ const NewProduct = () => {
   };
 
   useEffect(() => {
-    getProvidersList();
+    if (SelectOption.providersList[0] === 'hola') {
+      getProvidersList();
+    }
   });
 
   const onSubmit = async (data, e) => {

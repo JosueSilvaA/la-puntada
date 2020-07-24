@@ -110,6 +110,25 @@ class Products {
       });
     return res;
   };
+
+  GetProductById = async (idProduct) => {
+    let res;
+    await axios
+      .get(
+        `http://api-la-puntada.herokuapp.com/api/productoGeneral/obtenerProductoPorId/${idProduct}`
+      )
+      .then((response) => {
+        res = { err: false, items: response.data.Items };
+      })
+      .catch((err) => {
+        res = {
+          err: true,
+          message: '¡Oops!, Ocurrió un problema al realizar la conexión.',
+          error: err,
+        };
+      });
+    return res;
+  };
 }
 
 export default Products;
