@@ -22,6 +22,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/main" exact component={Main} />
           <Route path="/inventory" exact component={Inventory} />
+          <Route path="/inventory/:action" exact component={Inventory} />
           <Route path="/catalogo" exact component={Catalogue}/>
           <Route path="/users" exact component={Users} />
           <Route path="/MainInventory" exact component={MainInventory} />

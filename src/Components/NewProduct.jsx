@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, TextField, MenuItem, Select, Button, FormHelperText } from '@material-ui/core';
+import {
+  Grid,
+  TextField,
+  MenuItem,
+  Select,
+  Button,
+  FormHelperText,
+  InputLabel,
+  FormControl,
+} from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { Autocomplete } from '@material-ui/lab';
 import Products from '../Controllers/ProductsController';
@@ -37,7 +46,6 @@ const NewProduct = () => {
   const handleChangeProvider = (event) => {
     setSelected({
       selectedType: Selected.selectedType,
-      // eslint-disable-next-line no-underscore-dangle
       selectedProvider: {
         value: true,
         id: event.target.value._id,
@@ -123,7 +131,6 @@ const NewProduct = () => {
 
   return (
     <>
-      <p>Insertar nuevo Producto</p>
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{ width: '90%' }}
@@ -131,26 +138,26 @@ const NewProduct = () => {
       >
         <Grid container spacing={3} alignItems="center" className="border border-danger">
           <Grid item xs={11} className="mx-auto">
-            <Select
-              lalue={Selected.selectedType.name}
-              onChange={handleChangeTypeProduct}
-              label="Selecciona un tipo producto"
-              // displayEmpty
-            >
-              <MenuItem value="" disabled>
-                Selecciona el Tipo de producto
-              </MenuItem>
-              {SelectOption.productType.map((dato) => (
-                <MenuItem value={dato} key={dato.id}>
-                  {dato.name}
-                </MenuItem>
-              ))}
-            </Select>
-            {!Selected.selectedType.value && (
-              <FormHelperText className="text-small text-danger">
-                *Selecciona tipo de producto
-              </FormHelperText>
-            )}
+            <FormControl>
+              <InputLabel id="demo-simple-select-label">Tipo de producto</InputLabel>
+              <Select
+                labelId="demo-multiple-name-label"
+                id="demo-simple-select-label"
+                lalue={Selected.selectedType.name}
+                onChange={handleChangeTypeProduct}
+              >
+                {SelectOption.productType.map((productType) => (
+                  <MenuItem key={productType.id} value={productType}>
+                    {productType.name}
+                  </MenuItem>
+                ))}
+              </Select>
+              {!Selected.selectedType.value && (
+                <FormHelperText className="text-small text-danger">
+                  *Selecciona tipo de producto
+                </FormHelperText>
+              )}
+            </FormControl>
           </Grid>
 
           <Grid item xs={11} className="mx-auto">
@@ -170,14 +177,77 @@ const NewProduct = () => {
             />
             <span className="text-small text-danger">{errors?.nombre?.message}</span>
           </Grid>
-          {TypeProductSelect.tipo2 && (
+          {(TypeProductSelect.tipo2 || TypeProductSelect.tipo3) && (
             <Grid item xs={11} className="mx-auto">
               <TextField
                 style={{ width: '100%' }}
                 id="standard-basic"
-                label="Tipo Util"
+                label="Marca"
                 color="primary"
-                name="tipoUtil"
+                name="marca"
+                autoComplete="off"
+                inputRef={register({
+                  required: {
+                    value: true,
+                    message: 'Ingresa la marca',
+                  },
+                })}
+              />
+              <span className="text-small text-danger">{errors?.marca?.message}</span>
+            </Grid>
+          )}
+
+          {/* Product Type Escolar */}
+          {TypeProductSelect.tipo2 && (
+            <>
+              <Grid item xs={11} className="mx-auto">
+                <TextField
+                  style={{ width: '100%' }}
+                  id="standard-basic"
+                  label="Tipo Util"
+                  color="primary"
+                  name="tipoUtil"
+                  autoComplete="off"
+                  inputRef={register({
+                    required: {
+                      value: true,
+                      message: 'Ingresa el tipoUtil',
+                    },
+                  })}
+                />
+                <span className="text-small text-danger">{errors?.tipoUtil?.message}</span>
+              </Grid>
+            </>
+          )}
+          {TypeProductSelect.tipo1 && (
+            <>
+              <Grid item xs={11} className="mx-auto">
+                <TextField
+                  style={{ width: '100%' }}
+                  id="standard-basic"
+                  label="Tipo textil"
+                  color="primary"
+                  name="tipoTextil"
+                  autoComplete="off"
+                  inputRef={register({
+                    required: {
+                      value: true,
+                      message: 'Ingresa el tipoTextil',
+                    },
+                  })}
+                />
+                <span className="text-small text-danger">{errors?.tipoTextil?.message}</span>
+              </Grid>
+            </>
+          )}
+          {TypeProductSelect.tipo3 && (
+            <Grid item xs={11} className="mx-auto">
+              <TextField
+                style={{ width: '100%' }}
+                id="standard-basic"
+                label="Tipo Variado"
+                color="primary"
+                name="tipoVariado"
                 autoComplete="off"
                 inputRef={register({
                   required: {
@@ -186,51 +256,53 @@ const NewProduct = () => {
                   },
                 })}
               />
-              <span className="text-small text-danger">{errors?.tipoUtil?.message}</span>
+              <span className="text-small text-danger">{errors?.tipoVariado?.message}</span>
             </Grid>
           )}
 
           {/* Color select */}
-          <Grid item xs={11} className="mx-auto">
-            <Autocomplete
-              freeSolo
-              id="free-solo-2-demo"
-              disableClearable
-              options={SelectOption.colorEscolar}
-              getOptionLabel={(option) => option.name}
-              renderOption={(option) => (
-                <>
-                  {option.name}
-                  <span
-                    style={{
-                      paddingLeft: 'auto',
-                      width: '20px',
-                      height: '20px',
-                      background: option.code,
-                    }}
+          {(TypeProductSelect.tipo1 || TypeProductSelect.tipo2) && (
+            <Grid item xs={11} className="mx-auto">
+              <Autocomplete
+                freeSolo
+                id="free-solo-2-demo"
+                disableClearable
+                options={SelectOption.colorEscolar}
+                getOptionLabel={(option) => option.name}
+                renderOption={(option) => (
+                  <>
+                    {option.name}
+                    <span
+                      style={{
+                        paddingLeft: 'auto',
+                        width: '20px',
+                        height: '20px',
+                        background: option.code,
+                      }}
+                    />
+                  </>
+                )}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Selecciona el color"
+                    onBlur={chageColor}
+                    margin="normal"
+                    variant="standard"
+                    name="color"
+                    inputRef={register({
+                      required: {
+                        value: true,
+                        message: 'Debes seleccionar un color',
+                      },
+                    })}
+                    InputProps={{ ...params.InputProps, type: 'search' }}
                   />
-                </>
-              )}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Ingresa el color"
-                  onBlur={chageColor}
-                  margin="normal"
-                  variant="standard"
-                  name="color"
-                  inputRef={register({
-                    required: {
-                      value: true,
-                      message: 'Debes seleccionar un color',
-                    },
-                  })}
-                  InputProps={{ ...params.InputProps, type: 'search' }}
-                />
-              )}
-            />
-          </Grid>
-
+                )}
+              />
+              <span className="text-small text-danger">{errors?.color?.message}</span>
+            </Grid>
+          )}
           <Grid item xs={11} className="mx-auto">
             <TextField
               style={{ width: '100%' }}
@@ -252,25 +324,6 @@ const NewProduct = () => {
               </FormHelperText>
             )}
           </Grid>
-          {(TypeProductSelect.tipo2 || TypeProductSelect.tipo3) && (
-            <Grid item xs={11} className="mx-auto">
-              <TextField
-                style={{ width: '100%' }}
-                id="standard-basic"
-                label="Marca"
-                color="primary"
-                name="marca"
-                autoComplete="off"
-                inputRef={register({
-                  required: {
-                    value: true,
-                    message: 'Ingresa la marca',
-                  },
-                })}
-              />
-              <span className="text-small text-danger">{errors?.marca?.message}</span>
-            </Grid>
-          )}
           <Grid item xs={11} className="mx-auto">
             <TextField
               style={{ width: '100%' }}
