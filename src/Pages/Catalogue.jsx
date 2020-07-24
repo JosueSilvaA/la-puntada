@@ -31,32 +31,19 @@ const Catalogue = () => {
       <Grid
         container
         spacing={2}
-        
-        style={{ width: "100%", margin: "0px", padding: "2%" }}
+        className = 'contenedor-catalogo'
       > 
-        <Grid
-          className="mt-2"
-          style={{ width: "100%",
-                   margin: "0px", 
-                   padding: "2%" 
-                }}
-        >
-          <h5 style={{ textAlign: "center",fontWeight:'bold' }}>Productos Escolares</h5>
+        <Grid className="mt-2 contenedor-titulo">
+          <h5 className="titulo-categoria">Productos Escolares</h5>
           <hr />
         </Grid>
 
         {ProductListSchool.map(productSchool => (
-          <ProductListItemSchool key={productSchool._id} product={productSchool} />
+          <ProductListItemSchool  key={productSchool._id} product={productSchool} />
         ))}
 
-        <Grid
-          className="mt-2"
-          style={{ width: "100%",
-                   margin: "0px", 
-                   padding: "2%" 
-                }}
-        >
-        <h5 style={{ textAlign: "center",fontWeight:'bold' }}>Productos Textiles</h5>
+        <Grid className="mt-2 contenedor-titulo">
+        <h5 className="titulo-categoria">Productos Textiles</h5>
         <hr />
         </Grid>
         
