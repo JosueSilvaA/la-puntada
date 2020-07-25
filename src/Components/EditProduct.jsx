@@ -53,6 +53,16 @@ const EditProduct = () => {
         value: true,
         type: { escolar: true, textil: false, variado: false },
       });
+    } else if (ProductToEdit.product.tipoVariado !== undefined) {
+      setEditing({
+        value: true,
+        type: { escolar: false, textil: false, variado: true },
+      });
+    } else if (ProductToEdit.product.tipoTextil !== undefined) {
+      setEditing({
+        value: true,
+        type: { escolar: false, textil: true, variado: false },
+      });
     }
   };
 
@@ -77,6 +87,7 @@ const EditProduct = () => {
         value: false,
         product: {},
       });
+      alert(result.message);
     }
     event.preventDefault();
   };
@@ -124,9 +135,21 @@ const EditProduct = () => {
                   secondary={
                     <>
                       <Typography component="span" variant="body2" color="textPrimary">
-                        Tipo Util :
+                        Tipo Producto:
                       </Typography>
                       {ProductToEdit.product.tipoUtil}
+                      {ProductToEdit.product.tipoTextil}
+                      {ProductToEdit.product.tipoVariado}
+                    </>
+                  }
+                />
+                <ListItemText
+                  secondary={
+                    <>
+                      <Typography component="span" variant="body2" color="textPrimary">
+                        Proveedor :
+                      </Typography>
+                      {ProductToEdit.product.proveedor}
                     </>
                   }
                 />
@@ -216,7 +239,7 @@ const EditProduct = () => {
                 />
                 <span className="text-small text-danger">{errors?.nombre?.message}</span>
               </Grid>
-              {(Editing.type.escolar || Editing.type.variado) && (
+              {Editing.type.escolar && (
                 <Grid item xs={11} className="mx-auto">
                   <TextField
                     style={{ width: '100%' }}

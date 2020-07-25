@@ -22,9 +22,10 @@ const DeleteProduct = ({ idProduct = '0' }) => {
 
   const deleteP = async () => {
     const productControl = new Product();
-    const result = await productControl.delete(ProducSelected.product._id);
+    const result = await productControl.delete(ProducSelected.product);
     if (!result.err) {
       setProducSelected({ value: false, product: {} });
+      alert(result.message);
     }
   };
 
@@ -84,9 +85,11 @@ const DeleteProduct = ({ idProduct = '0' }) => {
                   secondary={
                     <>
                       <Typography component="span" variant="body2" color="textPrimary">
-                        Tipo Util :
+                        Tipo producto :
                       </Typography>
                       {ProducSelected.product.tipoUtil}
+                      {ProducSelected.product.tipoTextil}
+                      {ProducSelected.product.tipoVariado}
                     </>
                   }
                 />

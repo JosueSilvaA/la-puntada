@@ -16,6 +16,19 @@ class LoginController {
       });
     return datosRespuesta;
   }
+
+  GetInfoUser = async (idUser) => {
+    let res;
+    await axios
+      .get(`https://api-la-puntada.herokuapp.com/api/usuario/infoUsuario/${idUser}`)
+      .then((response) => {
+        res = { err: false, item: response.data.Items };
+      })
+      .catch((err) => {
+        res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
+      });
+    return res;
+  };
 }
 
 export default LoginController;

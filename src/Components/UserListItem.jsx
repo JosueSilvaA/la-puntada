@@ -17,7 +17,7 @@ const UserListItem = ({ rol, nombres, apellido, imgUsuario, estado }) => {
         <ListItem
           alignItems="flex-start"
           className="bg-white"
-          button="true"
+          button
           style={{
             borderTopLeftRadius: '40px',
             borderBottomLeftRadius: '40px',
@@ -26,7 +26,7 @@ const UserListItem = ({ rol, nombres, apellido, imgUsuario, estado }) => {
           }}
         >
           <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src={imgUsuario} />
+            <Avatar alt={nombres} src={imgUsuario} />
           </ListItemAvatar>
           <ListItemText
             primary={`${nombres} ${apellido}`}
@@ -41,7 +41,6 @@ const UserListItem = ({ rol, nombres, apellido, imgUsuario, estado }) => {
           />
         </ListItem>
         <Divider />
-        
       </List>
     </>
   );

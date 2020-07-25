@@ -20,7 +20,7 @@ import NavBar from '../Components/Navbar';
 const Users = () => {
   const [Open, setOpen] = useState(false);
   const [Check, setCheck] = useState(false);
-  const [Data, setData] = useState({ users: [], loading: true });
+  const [Data, setData] = useState({ users: [], loading: true, value: false });
 
   const handleOpen = () => {
     setOpen(true);
@@ -41,6 +41,7 @@ const Users = () => {
     const users = await user.getUsers();
     setData({
       users,
+      value: true,
       loading: false,
     });
     if (register) {
@@ -51,7 +52,9 @@ const Users = () => {
   };
 
   useEffect(() => {
-    getUsersList(false);
+    if (!Data.value) {
+      getUsersList(false);
+    }
   });
   return (
     <>
@@ -69,7 +72,7 @@ const Users = () => {
       <Tooltip title="Add" aria-label="add">
         <Fab
           style={{
-            position: 'fixed',
+            position: 'absolute',
             bottom: '0',
             right: '0',
             marginRight: '0.4rem',
@@ -83,7 +86,7 @@ const Users = () => {
           <Icon className="fas fa-user-plus" style={{ width: '2rem' }} />
         </Fab>
       </Tooltip>
-      <div style={{ position: 'absolute', width: '100%' }}>
+      <div style={{ position: 'relative', width: '100%' }}>
         {Data.users.map((user) => (
           <UserListItem
             // eslint-disable-next-line no-underscore-dangle
@@ -101,7 +104,7 @@ const Users = () => {
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={Open}
-        Onclose={handleClose}
+        onClose={handleClose}
         closeAfterTransition
         disableScrollLock="false"
         BackdropComponent={Backdrop}

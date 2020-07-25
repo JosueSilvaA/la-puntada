@@ -44,12 +44,20 @@ class Products {
       };
     } else if (Selected.selectedType.id === 3) {
       route = 'https://api-la-puntada.herokuapp.com/api/productoVariado/registroProducto';
+      dataProduct = {
+        nombre: data.nombre,
+        proveedor: Selected.selectedProvider.id,
+        precio: data.precio,
+        tipoVariado: data.tipoVariado,
+        descripcion: data.descripcion,
+      };
     }
 
     let res;
     await axios
       .post(`${route}`, dataProduct)
       .then((response) => {
+        console.log(response)
         res = response.data;
       })
       .catch((err) => {
@@ -61,7 +69,7 @@ class Products {
   getProductsLIst = async () => {
     let res;
     await axios
-      .get('http://api-la-puntada.herokuapp.com/api/productoEscolar/obtenerProductosEscolares')
+      .get('http://api-la-puntada.herokuapp.com/api/productoVariado/obtenerProductosVariados')
       .then((response) => {
         res = { err: false, items: response.data.Items };
       })
@@ -71,13 +79,20 @@ class Products {
     return res;
   };
 
-  delete = async (idProduct) => {
+  delete = async (Product) => {
     let res;
+    let route;
+    if (Product.tipoTextil !== undefined) {
+      route = `http://api-la-puntada.herokuapp.com/api/productoTextil/${Product._id}/eliminarProductoTextil`;
+    } else if (Product.tipoUtil !== undefined) {
+      route = `http://api-la-puntada.herokuapp.com/api/productoEscolar/${Product._id}/eliminarProductoEscolar`;
+    } else if (Product.tipoVariado) {
+      route = `http://api-la-puntada.herokuapp.com/api/productoVariado/${Product._id}/eliminarProductoVariado`;
+    }
     await axios
-      .put(
-        `http://api-la-puntada.herokuapp.com/api/productoEscolar/${idProduct}/eliminarProductoEscolar`
-      )
+      .put(`${route}`)
       .then((response) => {
+        console.log(response);
         res = { err: false, message: response.data.Success };
       })
       .catch((err) => {
@@ -90,20 +105,20 @@ class Products {
     let res;
     let route;
     if (product.type.escolar) {
-      route = `http://api-la-puntada.herokuapp.com/api/productoEscolar/${product.id}/editarProductoEscolar`;
+      route = `https://api-la-puntada.herokuapp.com/api/productoEscolar/${product.id}/editarProductoEscolar`;
     }
 
     if (product.type.variado) {
-      route = `/${product.data.id}/editarProductoEscolar`;
+      route = `https://api-la-puntada.herokuapp.com/api/productoVariado/${product.id}/editarProductoVariado`;
     }
 
     if (product.type.textil) {
-      route = `/${product.data.id}/editarProductoEscolar`;
+      route = `https://api-la-puntada.herokuapp.com/api/productoTextil/${product.id}/editarProductoTextil`;
     }
     await axios
       .put(`${route}`, product.data)
       .then((response) => {
-        res = { err: false, message: response.data.Success };
+        res = { err: false, message: response.data.Response };
       })
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
