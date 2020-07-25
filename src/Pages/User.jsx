@@ -23,15 +23,26 @@ const User = () => {
   return (
     <>
       <Grid container alignItems="center" className="border border-danger">
-        <Grid item lg={3} sm={4} xs={10} className="bg-dark mx-auto border border-success">
+        <Grid item lg={3} sm={4} xs={10} className="mx-auto border border-success">
           <Avatar
             alt={infoUser.nombre}
             src={infoUser.imgUsuario}
-            className="mx-auto"
+            className="mx-auto border border-danger"
             style={{ width: '10rem', height: '10rem', fontSize: '7rem' }}
           />
-          <Grid item justify="center" alignContent="center">
+          <Grid item>
             <ListItemText
+              className="text-center"
+              secondary={
+                <>
+                  <Typography component="span" variant="h5" className="text-danger">
+                    {infoUser.usuario}
+                  </Typography>
+                </>
+              }
+            />
+            <ListItemText
+              className="text-center"
               secondary={
                 <>
                   <Typography component="span" variant="body2" color="textPrimary">
@@ -42,6 +53,7 @@ const User = () => {
               }
             />
             <ListItemText
+              className="text-center"
               secondary={
                 <>
                   <Typography component="span" variant="body2" color="textPrimary">
@@ -52,6 +64,7 @@ const User = () => {
               }
             />
             <ListItemText
+              className="text-center"
               secondary={
                 <>
                   <Typography component="span" variant="body2" color="textPrimary">

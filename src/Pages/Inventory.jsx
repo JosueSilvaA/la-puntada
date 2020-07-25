@@ -73,7 +73,7 @@ const Inventory = (props) => {
 
   return (
     <>
-      <Helmet bodyAttributes={{ style: 'background-color : #362458' }} />
+      <Helmet bodyAttributes={{ style: 'background-color : #fa4e4e' }} />
       <NavBar pageName={RenderOption.navbarName} goBack />
       <div className="">
         {/* eslint-disable-next-line react/jsx-pascal-case */}

@@ -69,7 +69,7 @@ class Products {
   getProductsLIst = async () => {
     let res;
     await axios
-      .get('http://api-la-puntada.herokuapp.com/api/productoVariado/obtenerProductosVariados')
+      .get('http://api-la-puntada.herokuapp.com/api/productoGeneral/obtenerProductos')
       .then((response) => {
         res = { err: false, items: response.data.Items };
       })

@@ -354,7 +354,7 @@ const EditProduct = () => {
                     renderInput={(params) => (
                       <TextField
                         {...params}
-                        label="Selecciona el color"
+                        label="Cambiar el color"
                         // onBlur={chageColor}
                         margin="normal"
                         placeholder={`Color actual ${ProductToEdit.product.color}`}

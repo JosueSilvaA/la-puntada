@@ -28,6 +28,7 @@ const SearchInventory = ({ selectProduct }) => {
   });
 
   const selectOneProduct = () => {
+    // eslint-disable-next-line no-undef
     const selectedProduct = document.getElementById('select');
     setTimeout(() => {
       Products.forEach((product) => {
@@ -51,13 +52,14 @@ const SearchInventory = ({ selectProduct }) => {
           className="d-block"
           id="select"
           onClose={selectOneProduct}
-          options={Connection ? Products : [{ nombre: 'ha ocurrido un error.' }]}
+          options={Connection ? Products : [{ nombre: 'Intentando conectar con la Api' }]}
           getOptionLabel={(product) => product.nombre}
           filterOptions={filterOptions}
           renderInput={(params) => (
             <TextField
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...params}
-              disabled={Connection}
+              disabled={!Connection}
               label="Buscar Producto"
               variant="standard"
             />
