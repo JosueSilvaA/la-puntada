@@ -17,7 +17,6 @@ import {
 } from '@material-ui/core';
 
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import Logo from '../Assets/Icons/Login.png';
 import LoginController from '../Controllers/loginController';
 
 const LoginForm = () => {
