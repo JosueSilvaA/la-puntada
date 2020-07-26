@@ -148,6 +148,40 @@ const Catalogue = () => {
             </Grid>
           </Grid>
         )}
+        {productSelect.type.variado && (
+          <Grid container style={{display:'flex',justifyContent:'center',marginTop:'1%'}}>
+            <Grid item  xs={12} sm={6} md={6} lg={4}>
+                <Card style={{cursor:"default"}}>
+                    <CardHeader
+                        action={
+                            <IconButton aria-label="settings">
+                              <MoreVertIcon />
+                            </IconButton>
+                          }
+                        title={productSelect.product.nombre}
+                        subheader={productSelect.product.creada}
+                    />
+                    <img
+                        src={productSelect.product.imgProducto}
+                        title="Paella dish"
+                        className = 'imagen-tarjeta'
+                        alt={productSelect.product.nombre}
+                    />
+                    <CardContent>
+                        <Typography variant="button" color="textSecondary" component="p" style={{fontWeight:"bold"}}>
+                            Descripcion : {productSelect.product.descripcion}
+                            <br/>
+                            Precio : {productSelect.product.precio} lps
+                            <br/>
+                            Tipo producto : {productSelect.product.tipoTextil}
+                            <br/>
+                            Cantidad : {productSelect.product.cantidad}
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </Grid>
+          </Grid>
+        )}
         <Grid className="mt-2 contenedor-titulo">
           <h5 className="titulo-categoria">Productos Escolares</h5>
           <hr />
