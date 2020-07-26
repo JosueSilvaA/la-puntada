@@ -4,22 +4,27 @@ import "../Styles/Catalogue.css";
 import CatalogueController from "../Controllers/CatologueController";
 import ProductListItemSchool from "../Components/ProductListItemSchool";
 import ProductListItemTextil from '../Components/ProductListItemTextil'
+import ProductListItemVaried from '../Components/ProductListItemVaried';
 import SearchProduct from '../Components/SearchProducts'
 import { Grid, Card, CardHeader, CardContent, Typography } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+
 const Catalogue = () => {
   const [ProductListSchool, setProductListSchool] = useState([0]);
   const [ProductListTextil,setProductListTextil] =  useState([0]);
+  const [ProductListVaried, setProductListVaried] = useState([0])
   const [productSelect, setproductSelect] = useState({type:{escolar:false,textil:false,variado:false},product:{}});
 
   const getProductosSchool = async () => {
     const catalogo = new CatalogueController();
     const productsSchool = await catalogo.getProductsSchool();
     const productsTextil = await catalogo.getProductsTextil();
+    const productsVaried = await catalogo.getProductsVaried();
     setProductListSchool(productsSchool);
     setProductListTextil(productsTextil);
+    setProductListVaried(productsVaried);
   };
 
   useEffect(() => {
@@ -161,6 +166,14 @@ const Catalogue = () => {
           <ProductListItemTextil key = {productTextil._id} product ={productTextil}/>
         ))}
 
+        <Grid className="mt-2 contenedor-titulo">
+          <h5 className="titulo-categoria">Productos Variados</h5>
+          <hr />
+        </Grid>
+        
+        {ProductListVaried.map(productVaried =>(
+          <ProductListItemVaried key = {productVaried._id} product = {productVaried}/>
+        ))}
       </Grid>
     </>
   );
