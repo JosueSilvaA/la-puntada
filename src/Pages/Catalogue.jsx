@@ -71,7 +71,7 @@ const Catalogue = () => {
         <SearchProduct selectProduct={selectProduct}/>
         {productSelect.type.escolar && (
         <Grid container style={{display:'flex',justifyContent:'center'}}>
-          <Grid item xs={12} sm={6} md={4} lg={3} style={{padding:'10px'}}>
+          <Grid item xs={12} sm={6} md={6} lg={4} style={{padding:'10px'}}>
             <Card style={{cursor:"default"}}>
               <CardHeader
                 action={
@@ -108,8 +108,8 @@ const Catalogue = () => {
         </Grid>
         )}
         {productSelect.type.textil && (
-          <Grid container style={{display:'flex',justifyContent:'center'}}>
-            <Grid item  xs={12} sm={6} md={4} lg={3}>
+          <Grid container style={{display:'flex',justifyContent:'center',marginTop:'1%'}}>
+            <Grid item  xs={12} sm={6} md={6} lg={4}>
                 <Card style={{cursor:"default"}}>
                     <CardHeader
                         action={
