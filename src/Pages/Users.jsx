@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import {
   Fab,
@@ -89,8 +90,8 @@ const Users = () => {
       <div style={{ position: 'relative', width: '100%' }}>
         {Data.users.map((user) => (
           <UserListItem
-            // eslint-disable-next-line no-underscore-dangle
             key={user._id}
+            idUser={user._id}
             rol={user.rol}
             nombres={user.nombres}
             apellido={user.apellidos}

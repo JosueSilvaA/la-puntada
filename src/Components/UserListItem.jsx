@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom'
 import {
   List,
   ListItem,
@@ -10,7 +11,12 @@ import {
 } from '@material-ui/core';
 
 // eslint-disable-next-line react/prop-types
-const UserListItem = ({ rol, nombres, apellido, imgUsuario, estado }) => {
+const UserListItem = ({ rol, nombres, apellido, imgUsuario, estado, idUser }) => {
+  const history = useHistory();
+
+  const onClick = () => {
+    history.push(`/user/${idUser}`)
+  }
   return (
     <>
       <List>
@@ -18,6 +24,7 @@ const UserListItem = ({ rol, nombres, apellido, imgUsuario, estado }) => {
           alignItems="flex-start"
           className="bg-white"
           button
+          onClick={onClick}
           style={{
             borderTopLeftRadius: '40px',
             borderBottomLeftRadius: '40px',

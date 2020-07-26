@@ -29,6 +29,19 @@ class LoginController {
       });
     return res;
   };
+
+  GetInfoRol = async (idRol) => {
+    let res;
+    await axios
+      .get(`https://api-la-puntada.herokuapp.com/api/usuario/obtenerRolPrivilegios/${idRol}`)
+      .then((response) => {
+        res = { err: false, items: response.data.Items };
+      })
+      .catch((err) => {
+        res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
+      });
+    return res;
+  };
 }
 
 export default LoginController;
