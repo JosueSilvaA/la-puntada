@@ -179,7 +179,7 @@ const NewProduct = () => {
             />
             <span className="text-small text-danger">{errors?.nombre?.message}</span>
           </Grid>
-          {(TypeProductSelect.tipo2 || TypeProductSelect.tipo3) && (
+          {TypeProductSelect.tipo2 && (
             <Grid item xs={11} className="mx-auto">
               <TextField
                 style={{ width: '100%' }}
