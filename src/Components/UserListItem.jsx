@@ -1,10 +1,11 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 import {
   List,
   ListItem,
   ListItemAvatar,
   Avatar,
+  Grid,
   ListItemText,
   Typography,
   Divider,
@@ -15,40 +16,43 @@ const UserListItem = ({ rol, nombres, apellido, imgUsuario, estado, idUser }) =>
   const history = useHistory();
 
   const onClick = () => {
-    history.push(`/user/${idUser}`)
-  }
+    history.push(`/user/${idUser}`);
+  };
+
   return (
     <>
-      <List>
-        <ListItem
-          alignItems="flex-start"
-          className="bg-white"
-          button
-          onClick={onClick}
-          style={{
-            borderTopLeftRadius: '40px',
-            borderBottomLeftRadius: '40px',
-            borderTopRightRadius: '40px',
-            borderBottomRightRadius: '40px',
-          }}
-        >
-          <ListItemAvatar>
-            <Avatar alt={nombres} src={imgUsuario} />
-          </ListItemAvatar>
-          <ListItemText
-            primary={`${nombres} ${apellido}`}
-            secondary={
-              <>
-                <Typography component="span" variant="body2" color="textPrimary">
-                  Rol:
-                </Typography>
-                {rol}
-              </>
-            }
-          />
-        </ListItem>
-        <Divider />
-      </List>
+      <Grid item lg={5} md={3} sm={5} xs={11} className="mx-auto">
+        <List>
+          <ListItem
+            alignItems="center"
+            className="bg-white"
+            button
+            onClick={onClick}
+            style={{
+              borderTopLeftRadius: '40px',
+              borderBottomLeftRadius: '40px',
+              borderTopRightRadius: '40px',
+              borderBottomRightRadius: '40px',
+              paddingBottom: '0px',
+            }}
+          >
+            <ListItemAvatar>
+              <Avatar alt={nombres} src={imgUsuario} />
+            </ListItemAvatar>
+            <ListItemText
+              primary={`${nombres} ${apellido}`}
+              secondary={
+                <>
+                  <Typography component="span" variant="body2" color="textPrimary">
+                    Rol:
+                  </Typography>
+                  {rol}
+                </>
+              }
+            />
+          </ListItem>
+        </List>
+      </Grid>
     </>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Grid,
   Card,
@@ -13,6 +14,7 @@ import {
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { Autocomplete } from '@material-ui/lab';
+import swal from 'sweetalert';
 import SearchProduct from './SearchProducts';
 import Product from '../Controllers/ProductsController';
 
@@ -31,6 +33,7 @@ const EditProduct = () => {
     },
   });
   const { register, handleSubmit, errors } = useForm();
+  const history = useHistory();
 
   const selectProduct = (dataProduct) => {
     setProductToEdit({ value: true, product: dataProduct });
@@ -87,7 +90,9 @@ const EditProduct = () => {
         value: false,
         product: {},
       });
-      alert(result.message);
+      swal('Exito', result.message, 'success', { timer: 2000 }).then(() => {
+        history.replace('/maininventory');
+      });
     }
     event.preventDefault();
   };

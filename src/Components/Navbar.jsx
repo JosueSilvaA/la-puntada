@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
-import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, Hidden } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Menu } from '@material-ui/icons';
 import UserController from '../Controllers/loginController';
@@ -26,7 +26,7 @@ const NavBar = ({ pageName, goBack }) => {
       <div>
         <AppBar position="static" className="pl-0">
           <Toolbar>
-            {goBack && <BackButton />}
+            <Hidden only={['xl', 'lg', 'md']}>{goBack && <BackButton />}</Hidden>
             <Typography>{pageName}</Typography>
             <div className="ml-auto">
               <IconButton

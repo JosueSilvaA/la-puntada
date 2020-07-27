@@ -1,10 +1,17 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 // import { Card, CardMedia, CardActionArea, Button } from '@material-ui/core';
 import { Grid, Button, Icon } from '@material-ui/core';
 
 const MainItem = (props) => {
   // eslint-disable-next-line react/prop-types
-  const { route, iconItem, nameItem, bgColor, pdLeft } = props;
+  const { route, iconItem, nameItem, bgColor } = props;
+  const history = useHistory();
+
+  const goTo = () => {
+    history.push(route);
+  };
+
   return (
     <>
       <Grid item xs={6}>
@@ -13,11 +20,11 @@ const MainItem = (props) => {
             variant="outlined"
             className="mx-auto"
             style={{ width: '4rem', height: '4rem', borderRadius: '50%', background: bgColor }}
-            href={route}
+            onClick={goTo}
           >
             <Icon
               className={iconItem}
-              style={{ width: '2.9rem', fontSize: '28px', color: 'white', paddingLeft: pdLeft }}
+              style={{ width: '2.9rem', fontSize: '28px', color: 'white' }}
             />
           </Button>
         </div>

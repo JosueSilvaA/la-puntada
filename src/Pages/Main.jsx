@@ -13,26 +13,18 @@ const Main = () => {
       <Divider />
       <div className="mt-5">
         <Grid container spacing={3}>
-          <MainItem
-            iconItem="fas fa-users"
-            nameItem="Usuarios"
-            route="/users"
-            bgColor="#694bb6"
-            pdLeft="5px"
-          />
+          <MainItem iconItem="fas fa-users" nameItem="Usuarios" route="/users" bgColor="#694bb6" />
           <MainItem
             iconItem="fab fa-stack-overflow"
             nameItem="Catalogos"
             route="/catalogo"
             bgColor=" #e67e22 "
-            pdLeft="12px"
           />
           <MainItem
             iconItem="fas fa-list-alt"
             nameItem="Manejar Inventario"
             route="/maininventory"
             bgColor="blue"
-            pdLeft="8px"
           />
         </Grid>
       </div>

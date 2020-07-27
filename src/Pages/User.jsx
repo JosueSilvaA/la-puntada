@@ -6,6 +6,7 @@ import {
   Typography,
   Divider,
   Card,
+  CircularProgress,
   CardActionArea,
   CardContent,
   CardActions,
@@ -110,13 +111,20 @@ const User = (props) => {
           <Grid item lg={12} xs={11} className="mx-auto">
             <Card>
               <CardActionArea>
-                <Typography
-                  component="h1"
-                  variant="h4"
-                  className="border-bottom border-danger mb-1"
-                >
-                  Usuario {InfoRol.value && InfoRol.info.rol.nombre}
-                </Typography>
+                {!InfoRol.value && (
+                  <div className="d-flex">
+                    <CircularProgress className="mx-auto" size={50} color="secondary" />
+                  </div>
+                )}
+                {InfoRol.value && (
+                  <Typography
+                    component="h1"
+                    variant="h4"
+                    className="border-bottom border-danger mb-1"
+                  >
+                    Usuario {InfoRol.value && InfoRol.info.rol.nombre}
+                  </Typography>
+                )}
                 <CardContent>
                   <div className="d-flex">
                     <Typography component="h3" variant="h5" className="mx-auto">
@@ -124,6 +132,11 @@ const User = (props) => {
                     </Typography>
                   </div>
                   <Divider />
+                  {!InfoRol.value && (
+                    <div className="d-flex">
+                      <CircularProgress className="mx-auto" size={50} color="secondary" />
+                    </div>
+                  )}
                   {InfoRol.value &&
                     InfoRol.info.privilegios.map((elemento) => (
                       <div key={elemento._id}>

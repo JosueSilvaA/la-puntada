@@ -57,8 +57,7 @@ class Products {
     await axios
       .post(`${route}`, dataProduct)
       .then((response) => {
-        console.log(response)
-        res = response.data;
+        res = { err: false, message: response.data.Response };
       })
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
@@ -92,8 +91,7 @@ class Products {
     await axios
       .put(`${route}`)
       .then((response) => {
-        console.log(response);
-        res = { err: false, message: response.data.Success };
+        res = { err: false, message: response.data.Response };
       })
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };

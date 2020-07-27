@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import swal from 'sweetalert';
+import { useHistory } from 'react-router-dom';
 import {
   Grid,
   Card,
@@ -20,13 +22,32 @@ const DeleteProduct = ({ idProduct = '0' }) => {
     setProducSelected({ value: true, product: dataProduct });
   };
 
-  const deleteP = async () => {
+  const history = useHistory();
+
+  const deleteP = () => {
     const productControl = new Product();
-    const result = await productControl.delete(ProducSelected.product);
-    if (!result.err) {
-      setProducSelected({ value: false, product: {} });
-      alert(result.message);
-    }
+    swal({
+      title: '¿Estás seguro?',
+      text: 'Ya no podrás consultar este producto!.',
+      icon: 'warning',
+      // buttons: true,
+      buttons: ['Cancelar', 'Eliminar'],
+      dangerMode: true,
+    }).then(async (willDelete) => {
+      if (willDelete) {
+        const result = await productControl.delete(ProducSelected.product);
+        if (!result.err) {
+          setProducSelected({ value: false, product: {} });
+          swal('Éxito', result.message, 'success', { timer: 2000 }).then(() => {
+            history.replace('/maininventory');
+          });
+        } else {
+          swal('Error', result.message, 'warning', { timer: 2000 });
+        }
+      } else {
+        swal('Tu producto está seguro!');
+      }
+    });
   };
 
   const getProductById = async () => {

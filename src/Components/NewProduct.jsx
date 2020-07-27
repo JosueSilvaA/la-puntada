@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import swal from 'sweetalert';
 import {
   Grid,
   TextField,
@@ -42,6 +44,7 @@ const NewProduct = () => {
   });
 
   const { register, handleSubmit, errors } = useForm();
+  const history = useHistory();
 
   const handleChangeProvider = (event) => {
     setSelected({
@@ -117,14 +120,18 @@ const NewProduct = () => {
       /* Mandar a registrar el producto */
       const products = new Products();
       const result = await products.newProducto(Selected, data);
-      if (result.err !== undefined) {
+      console.log(result)
+      if (result.err) {
         /* Ocurri'o un error de conexi'on */
-      } else if (result.Success) {
-        alert(result.Response);
+
+        swal('Error', result.message, 'error', { timer: 2000 });
+      } else if (!result.err) {
+        swal('Éxito', result.message, 'success', { timer: 2000 }).then(() => {
+          history.replace('/maininventory');
+        });
       } else if (!result.Success) {
-        alert(result.Response);
+        swal(' ', result.message, 'warning', { timer: 3000 });
       }
-      console.log(result);
     } else {
       /* Faltan los campos tipoProducto y/o proveedor */
     }

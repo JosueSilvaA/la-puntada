@@ -65,7 +65,7 @@ const MainInventory = () => {
                       <MainInventoryItem2
                         iconItem="fas fa-plus-square"
                         nameItem="Agregar Producto"
-                        route="/inventory"
+                        route="/inventory/newProduct"
                         bgColor="green"
                         pdLeft="0px"
                       />
@@ -74,7 +74,7 @@ const MainInventory = () => {
                       <MainInventoryItem2
                         iconItem="fas fa-check-square"
                         nameItem="Editar Producto"
-                        route="/inventory"
+                        route="/inventory/editProduct"
                         bgColor="red"
                         pdLeft="0px"
                       />
@@ -83,7 +83,7 @@ const MainInventory = () => {
                       <MainInventoryItem2
                         iconItem="fas fa-trash"
                         nameItem="Eliminar Producto"
-                        route="/main-inventory"
+                        route="/inventory/deleteProduct"
                         bgColor="blue"
                         pdLeft="0px"
                       />

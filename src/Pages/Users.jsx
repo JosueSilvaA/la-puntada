@@ -6,6 +6,7 @@ import {
   Fade,
   Modal,
   Button,
+  Grid,
   CircularProgress,
   Divider,
   Tooltip,
@@ -37,7 +38,7 @@ const Users = () => {
     }, 5000);
   };
 
-  const getUsersList = async (register) => {
+  const getUsersList = async (register = false) => {
     const user = new UserControler();
     const users = await user.getUsers();
     setData({
@@ -54,9 +55,9 @@ const Users = () => {
 
   useEffect(() => {
     if (!Data.value) {
-      getUsersList(false);
+      getUsersList();
     }
-  });
+  }, []);
   return (
     <>
       <Helmet bodyAttributes={{ style: 'background-color : #694bb6' }} />
@@ -87,7 +88,7 @@ const Users = () => {
           <Icon className="fas fa-user-plus" style={{ width: '2rem' }} />
         </Fab>
       </Tooltip>
-      <div style={{ position: 'relative', width: '100%' }}>
+      <Grid container alignItems="center">
         {Data.users.map((user) => (
           <UserListItem
             key={user._id}
@@ -99,7 +100,7 @@ const Users = () => {
             estado={user.estado}
           />
         ))}
-      </div>
+      </Grid>
       <Modal
         style={{ position: 'absolute' }}
         aria-labelledby="transition-modal-title"
