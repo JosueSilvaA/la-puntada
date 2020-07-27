@@ -61,7 +61,7 @@ const Users = () => {
   return (
     <>
       <Helmet bodyAttributes={{ style: 'background-color : #694bb6' }} />
-      <NavBar pageName="Usuarios" goBack />
+      <NavBar pageName="La Puntada - Usuarios" goBack />
       <Divider className="bg-success0" />
       <div className="d-flex mt-3">
         {Data.loading && <CircularProgress className="mx-auto" size={50} color="secondary" />}

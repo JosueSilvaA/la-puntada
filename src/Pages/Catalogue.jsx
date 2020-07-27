@@ -66,7 +66,7 @@ const Catalogue = () => {
 
   return (
     <>
-      <Navbar pageName={"Catalogo"} goBack />
+      <Navbar pageName={"La Puntada - Catalogo"} goBack />
       
       <Grid
         container

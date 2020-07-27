@@ -9,7 +9,7 @@ import MainInventoryItem2 from '../Components/maininventoryitemweb';
 const MainInventory = () => {
   return (
     <>
-      <NavBar pageName="La Puntada" goBack={false} />
+      <NavBar pageName="La Puntada - Inventario" goBack />
       <Divider />
       <Hidden only={['lg', 'xl', 'md']}>
           <div className="" style={{width:'100%',marginTop:'1rem'}}>
@@ -19,7 +19,7 @@ const MainInventory = () => {
                   <MainInventoryItem
                     iconItem="fas fa-table"
                     nameItem="Ver inventario"
-                    route="/users"
+                    route="/Catalogo"
                     bgColor="#694bb6"
                     pdLeft="0px"
                   />
@@ -50,13 +50,13 @@ const MainInventory = () => {
       </Hidden>
       <Hidden only={['xs', 'sm']} >
           <div style={{borderColor:'black' , padding:'20px',width:'100%',marginTop:'1rem'}}>
-            <Grid container className=""   alignItems="center" spacing={3} style={{boxShadow: '2px 3px 31px -5px rgba(0,0,0,0.75)',paddingTop:'30px',paddingBottom:'30px' ,marginTop:'10px',marginBottom:'10px',marginLeft:'0px',marginRight:'0px',width:'100%'}}>
+            <Grid container className=""   alignItems="center" spacing={3} style={{paddingTop:'30px',paddingBottom:'30px' ,marginTop:'10px',marginBottom:'10px',marginLeft:'0px',marginRight:'0px',width:'100%'}}>
               
                 <Grid item xs={6}>
                       <MainInventoryItem2
                         iconItem="fas fa-table"
                         nameItem="Ver inventario"
-                        route="/users"
+                        route="/catalogo"
                         bgColor="#694bb6"
                         pdLeft="0px"
                       />
