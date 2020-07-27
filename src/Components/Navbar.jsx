@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
-import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography , Avatar} from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Menu } from '@material-ui/icons';
 import UserController from '../Controllers/loginController';
@@ -27,16 +27,16 @@ const NavBar = ({ pageName, goBack }) => {
         <AppBar position="static" className="pl-0">
           <Toolbar>
             {goBack && <BackButton />}
-            <Typography>{pageName}</Typography>
-            <div className="ml-auto">
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                color="inherit"
-              >
-                <AccountCircleIcon />
-              </IconButton>
+            <Typography style={{width:'60%'}}>{pageName}</Typography>
+            
+            <div className="d-flex justify-content-end align-items-center" style={{width:'40%'}}>
+              <div style={{textAlign:'right'}}>{UserInfo.user.usuario}</div>
+              <Avatar
+                src={UserInfo.user.imgUsuario}
+                className="border border-danger ml-2"
+                style={{ width: '2.4rem', height: '2.4rem' }}
+              />
+              
               <IconButton edge="end" color="inherit" aria-label="menu">
                 <Menu />
               </IconButton>
