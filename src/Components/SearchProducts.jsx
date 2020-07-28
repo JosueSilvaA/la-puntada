@@ -52,15 +52,16 @@ const SearchInventory = ({ selectProduct }) => {
           className="d-block"
           id="select"
           onClose={selectOneProduct}
-          options={Connection ? Products : [{ nombre: 'Intentando conectar con la Api' }]}
+          disableListWrap={!Connection}
+          options={Connection ? Products : [{ nombre: '....' }]}
           getOptionLabel={(product) => product.nombre}
           filterOptions={filterOptions}
           renderInput={(params) => (
             <TextField
               // eslint-disable-next-line react/jsx-props-no-spreading
               {...params}
-              disabled={!Connection}
-              label="Buscar Producto"
+              placeholder={!Connection ? 'Error de conexión..' : 'Selecciona una producto'}
+              error={!Connection}
               variant="standard"
             />
           )}

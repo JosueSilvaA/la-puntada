@@ -54,9 +54,7 @@ const Users = () => {
   };
 
   useEffect(() => {
-    if (!Data.value) {
-      getUsersList();
-    }
+    getUsersList();
   }, []);
   return (
     <>
