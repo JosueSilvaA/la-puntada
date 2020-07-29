@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import {
   Grid,
   TextField,
@@ -28,8 +29,10 @@ import {
 import { PlusOne, Remove } from '@material-ui/icons';
 import swal from 'sweetalert';
 import SearchBar from './SearchProducts';
+import NavBar from './Navbar';
 
 import Products from '../Controllers/ProductsController';
+import InvoiceController from '../Controllers/InvoiceCotroller';
 
 const ProviderInvoice = () => {
   const [Providers, setProviders] = useState({
@@ -46,6 +49,7 @@ const ProviderInvoice = () => {
   const [OpenModal, setOpenModal] = useState(false);
 
   const { register, handleSubmit, errors } = useForm();
+  const history = useHistory();
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -114,13 +118,25 @@ const ProviderInvoice = () => {
     setOpen(true);
   };
 
-  const onSubmit = (data, e) => {
-    console.log(data);
+  const onSubmit = async (data, e) => {
     if (!ProviderSelected.value) {
       swal('Ojo', 'Se debe seleccionar el proveedor', 'warning');
-    }
-    if (!ProductsSelected.value) {
+    } else if (!ProductsSelected.value) {
       swal('Ojo', 'Se debe seleccionar al menos un producto', 'warning');
+    } else {
+      const invoice = new InvoiceController();
+      const result = await invoice.saveProviderInvoice({
+        data,
+        idProveedor: ProviderSelected.id,
+        productos: ProductsSelected.products,
+      });
+      if (!result.err) {
+        swal('Éxito', result.message, 'success', { timer: 2000 }).then(() => {
+          history.replace('/main');
+        });
+      } else {
+        swal('Error', result.message, 'error');
+      }
     }
   };
 
@@ -130,7 +146,8 @@ const ProviderInvoice = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} style={{ width: '90%' }} className="mx-auto">
+      <NavBar pageName="Factura Proveedor" goBack />
+      <form onSubmit={handleSubmit(onSubmit)} style={{ width: '90%' }} className="mx-auto mt-4">
         <Grid container alignItems="center" spacing={3}>
           <Grid item lg={7} md={8} sm={10} xs={11} className="mx-auto">
             <Grid container alignItems="center" spacing={4}>
@@ -155,7 +172,7 @@ const ProviderInvoice = () => {
                     ) : (
                       <MenuItem
                         value=""
-                        desabled
+                        disabled
                         className="text-danger"
                         style={{ fontSize: '15px' }}
                       >

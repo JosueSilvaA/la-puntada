@@ -41,15 +41,17 @@ const Users = () => {
   const getUsersList = async (register = false) => {
     const user = new UserControler();
     const users = await user.getUsers();
-    setData({
-      users,
-      value: true,
-      loading: false,
-    });
-    if (register) {
-      handleClose();
-      setCheck(true);
-      setTime();
+    if (!users.err) {
+      setData({
+        users,
+        value: true,
+        loading: false,
+      });
+      if (register) {
+        handleClose();
+        setCheck(true);
+        setTime();
+      }
     }
   };
 

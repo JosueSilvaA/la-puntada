@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
   CardActions,
   CardActionArea,
   Card,
@@ -24,6 +29,9 @@ import { useForm } from 'react-hook-form';
 import { PlusOne, Remove } from '@material-ui/icons';
 import swal from 'sweetalert';
 import SearchBar from './SearchProducts';
+import NavBar from './Navbar';
+import UserControler from '../Controllers/UsersController';
+import InvoiceController from '../Controllers/InvoiceCotroller';
 
 const ClientInvoice = () => {
   const [Open, setOpen] = useState(false);
@@ -31,7 +39,16 @@ const ClientInvoice = () => {
   const [TempProduct, setTempProduct] = useState({ value: false, product: {}, mount: 1 });
   /* Productos seleccionados para la factura */
   const [ProductsSelected, setProductsSelected] = useState({ value: false, products: [] });
+  const [UsersList, setUsersList] = useState({
+    value: false,
+    users: [],
+    selected: { value: false, id: '' },
+    connection: true,
+  });
+  const [OpenSelectUser, setOpenSelectUser] = useState(false);
+
   const { register, handleSubmit, errors } = useForm();
+  const history = useHistory();
 
   const handleOpen = () => {
     setOpen(true);
@@ -40,6 +57,48 @@ const ClientInvoice = () => {
     setOpen(false);
     setTempProduct({ value: false, product: {}, mount: 1 });
   };
+  const getUsersList = async () => {
+    const user = new UserControler();
+    const result = await user.getUsers();
+    if (!result.err) {
+      setUsersList({
+        value: true,
+        users: result.items,
+        selected: { value: false, id: '' },
+        connection: true,
+      });
+    } else {
+      setUsersList((prevState) => {
+        return {
+          ...prevState,
+          connection: false,
+        };
+      });
+    }
+  };
+  const handleOpenUserSelect = () => {
+    setOpenSelectUser(true);
+    getUsersList();
+  };
+  const handleCloseUserSelect = () => {
+    setOpenSelectUser(false);
+  };
+  const handleChangeUserSelect = (event) => {
+    setUsersList((prevState) => {
+      return {
+        ...prevState,
+        selected: { value: true, id: event.target.value },
+      };
+    });
+  };
+  /* 
+   setTempProduct((prevState) => {
+      return {
+        ...prevState,
+        mount: tempMount,
+      };
+    });
+  */
 
   /* add product to invoice */
   const addProduct = () => {
@@ -86,16 +145,32 @@ const ClientInvoice = () => {
       });
     */
 
-  const onSubmit = (data, e) => {
-    console.log({ productos: ProductsSelected.products, data });
+  const onSubmit = async (data, e) => {
     if (!ProductsSelected.value) {
-      swal('Ojo', 'Se debe seleccionar al menos un producto', 'warning');
+      swal('Aviso', 'Se debe seleccionar al menos un producto', 'warning');
+    } else if (!UsersList.selected.value) {
+      swal('Aviso', 'Se debe seleccionar el empleado', 'warning');
+    } else {
+      /* Save invoice */
+      const contInvoice = new InvoiceController();
+      const result = await contInvoice.saveClientInvoice({
+        productos: ProductsSelected.products,
+        data,
+        idEmpleado: UsersList.selected.id,
+      });
+      if (!result.err) {
+        swal('Éxito', result.message, 'success', { timer: 2000 }).then(() => {
+          history.replace('/main');
+        });
+      } else {
+        swal('Error', result.message, 'error');
+      }
     }
   };
 
   return (
     <>
-      {/* <ProviderInvoice /> */}
+      <NavBar pageName="Factura Cliente" goBack />
       <form onSubmit={handleSubmit(onSubmit)} style={{ width: '90%' }} className="mx-auto mt-5">
         <Grid container alignItems="center" spacing={3}>
           <Grid item lg={7} md={8} sm={10} xs={11} className="mx-auto">
@@ -186,7 +261,36 @@ const ClientInvoice = () => {
                 <span className="text-small text-danger">{errors?.fechaFactura?.message}</span>
               </Grid>
               <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
-                <TextField
+                <FormControl style={{ width: '100%' }}>
+                  <InputLabel id="demo-controlled-open-select-label">Empleado</InputLabel>
+                  <Select
+                    labelId="demo-controlled-open-select-label"
+                    open={OpenSelectUser}
+                    onClose={handleCloseUserSelect}
+                    onOpen={handleOpenUserSelect}
+                    value={UsersList.selected.id}
+                    onChange={handleChangeUserSelect}
+                  >
+                    {UsersList.value ? (
+                      UsersList.users.map((element) => (
+                        // eslint-disable-next-line no-underscore-dangle
+                        <MenuItem key={element._id} value={element._id}>
+                          {element.nombres}
+                        </MenuItem>
+                      ))
+                    ) : (
+                      <MenuItem
+                        value=""
+                        disabled
+                        className="text-danger"
+                        style={{ fontSize: '15px' }}
+                      >
+                        Conectando con la Api....
+                      </MenuItem>
+                    )}
+                  </Select>
+                </FormControl>
+                {/* <TextField
                   style={{ width: '100%' }}
                   id="standard-basic"
                   label="Nombre del empleado"
@@ -201,6 +305,7 @@ const ClientInvoice = () => {
                   })}
                 />
                 <span className="text-small text-danger">{errors?.nombreEmpleado?.message}</span>
+                 */}
               </Grid>
               <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
                 <TextField
