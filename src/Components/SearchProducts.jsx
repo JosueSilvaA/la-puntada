@@ -60,7 +60,7 @@ const SearchInventory = ({ selectProduct }) => {
             <TextField
               // eslint-disable-next-line react/jsx-props-no-spreading
               {...params}
-              placeholder={!Connection ? 'Error de conexión..' : 'Selecciona una producto'}
+              placeholder={!Connection ? 'Esperando conexión...' : 'Selecciona una producto'}
               error={!Connection}
               variant="standard"
             />

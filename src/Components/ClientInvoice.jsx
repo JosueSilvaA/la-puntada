@@ -1,13 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
 import {
   Grid,
-  TextField,
-  Button,
-  InputLabel,
-  FormControl,
-  Select,
-  MenuItem,
   CardActions,
   CardActionArea,
   Card,
@@ -15,6 +8,8 @@ import {
   CardMedia,
   Typography,
   ListItemText,
+  Button,
+  TextField,
   Modal,
   IconButton,
   Paper,
@@ -25,33 +20,24 @@ import {
   TableRow,
   TableCell,
 } from '@material-ui/core';
+import { useForm } from 'react-hook-form';
 import { PlusOne, Remove } from '@material-ui/icons';
 import swal from 'sweetalert';
 import SearchBar from './SearchProducts';
 
-import Products from '../Controllers/ProductsController';
-
-const ProviderInvoice = () => {
-  const [Providers, setProviders] = useState({
-    value: false,
-    provider: [],
-  });
+const ClientInvoice = () => {
   const [Open, setOpen] = useState(false);
-  const [ProviderSelected, setProviderSelected] = useState({ value: false, id: '' });
-  /* Product from search bar */
+  /* Guarda el producto seleccionado de la barra de busqueda */
   const [TempProduct, setTempProduct] = useState({ value: false, product: {}, mount: 1 });
-  /* Products Invoice */
+  /* Productos seleccionados para la factura */
   const [ProductsSelected, setProductsSelected] = useState({ value: false, products: [] });
-  /* Modal control */
-  const [OpenModal, setOpenModal] = useState(false);
-
   const { register, handleSubmit, errors } = useForm();
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
+  const handleOpen = () => {
+    setOpen(true);
   };
-  const handleCloseModal = () => {
-    setOpenModal(false);
+  const handleClose = () => {
+    setOpen(false);
     setTempProduct({ value: false, product: {}, mount: 1 });
   };
 
@@ -94,78 +80,95 @@ const ProviderInvoice = () => {
   const selectProduct = (data) => {
     setTempProduct({ value: true, product: data, mount: 1 });
   };
-
-  const getProviders = async () => {
-    const product = new Products();
-    const result = await product.getPproviders();
-    if (!result.err) {
-      setProviders({ value: true, provider: result });
-    }
-  };
-  const handleChange = (event) => {
-    setProviderSelected({ value: true, id: event.target.value });
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  /* 
+     setProductToEdit((prevState) => {
+        return { ...prevState, value: false };
+      });
+    */
 
   const onSubmit = (data, e) => {
     console.log(data);
-    if (!ProviderSelected.value) {
-      swal('Ojo', 'Se debe seleccionar el proveedor', 'warning');
-    }
     if (!ProductsSelected.value) {
       swal('Ojo', 'Se debe seleccionar al menos un producto', 'warning');
     }
   };
 
-  useEffect(() => {
-    getProviders();
-  }, []);
-
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} style={{ width: '90%' }} className="mx-auto">
+      {/* <ProviderInvoice /> */}
+      <form onSubmit={handleSubmit(onSubmit)} style={{ width: '90%' }} className="mx-auto mt-5">
         <Grid container alignItems="center" spacing={3}>
           <Grid item lg={7} md={8} sm={10} xs={11} className="mx-auto">
-            <Grid container alignItems="center" spacing={4}>
-              <Grid item lg={4} md={4} sm={10} xs={11} className="mx-auto">
-                <FormControl style={{ width: '100%' }}>
-                  <InputLabel id="demo-controlled-open-select-label">Proveedor</InputLabel>
-                  <Select
-                    labelId="demo-controlled-open-select-label"
-                    open={Open}
-                    onClose={handleClose}
-                    onOpen={handleOpen}
-                    value={ProviderSelected.id}
-                    onChange={handleChange}
-                  >
-                    {Providers.value ? (
-                      Providers.provider.map((element) => (
-                        // eslint-disable-next-line no-underscore-dangle
-                        <MenuItem key={element._id} value={element._id}>
-                          {element.nombre}
-                        </MenuItem>
-                      ))
-                    ) : (
-                      <MenuItem
-                        value=""
-                        desabled
-                        className="text-danger"
-                        style={{ fontSize: '15px' }}
-                      >
-                        Error de conexión. Intentando conectar con la Api....
-                      </MenuItem>
-                    )}
-                  </Select>
-                </FormControl>
+            <Grid container alignItems="center" spacing={3}>
+              <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
+                <TextField
+                  style={{ width: '100%' }}
+                  id="standard-basic"
+                  label="Nombre Cliente"
+                  color="primary"
+                  name="nombreCliente"
+                  autoComplete="off"
+                  inputRef={register({
+                    required: {
+                      value: true,
+                      message: 'Ingresa un nombre',
+                    },
+                  })}
+                />
+                <span className="text-small text-danger">{errors?.nombreCliente?.message}</span>
               </Grid>
-              <Grid item lg={4} md={3} sm={6} xs={11} className="mx-auto">
+              <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
+                <TextField
+                  style={{ width: '100%' }}
+                  id="standard-basic"
+                  label="RTN factura"
+                  color="primary"
+                  name="rtn"
+                  autoComplete="off"
+                  inputRef={register({
+                    required: {
+                      value: true,
+                      message: 'Ingresa el rtn de la factura.',
+                    },
+                  })}
+                />
+                <span className="text-small text-danger">{errors?.rtn?.message}</span>
+              </Grid>
+              <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
+                <TextField
+                  style={{ width: '100%' }}
+                  id="standard-basic"
+                  label="Telefono"
+                  color="primary"
+                  name="telefono"
+                  autoComplete="off"
+                  inputRef={register({
+                    required: {
+                      value: true,
+                      message: 'Ingresa un nombre',
+                    },
+                  })}
+                />
+                <span className="text-small text-danger">{errors?.telefono?.message}</span>
+              </Grid>
+              <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
+                <TextField
+                  style={{ width: '100%' }}
+                  id="standard-basic"
+                  label="Dirección"
+                  color="primary"
+                  name="direccion"
+                  autoComplete="off"
+                  inputRef={register({
+                    required: {
+                      value: true,
+                      message: 'Ingresa la dirección.',
+                    },
+                  })}
+                />
+                <span className="text-small text-danger">{errors?.direccion?.message}</span>
+              </Grid>
+              <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
                 <TextField
                   style={{ width: '100%' }}
                   id="standard-basic"
@@ -182,7 +185,24 @@ const ProviderInvoice = () => {
                 />
                 <span className="text-small text-danger">{errors?.fechaFactura?.message}</span>
               </Grid>
-              <Grid item lg={4} md={3} sm={6} xs={11} className="mx-auto">
+              <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
+                <TextField
+                  style={{ width: '100%' }}
+                  id="standard-basic"
+                  label="Nombre del empleado"
+                  color="primary"
+                  name="nombreEmpleado"
+                  autoComplete="off"
+                  inputRef={register({
+                    required: {
+                      value: true,
+                      message: 'Ingresa un nombre',
+                    },
+                  })}
+                />
+                <span className="text-small text-danger">{errors?.nombreEmpleado?.message}</span>
+              </Grid>
+              <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
                 <TextField
                   style={{ width: '100%' }}
                   id="standard-basic"
@@ -199,11 +219,11 @@ const ProviderInvoice = () => {
                 />
                 <span className="text-small text-danger">{errors?.subTotal?.message}</span>
               </Grid>
-              <Grid item lg={4} md={3} sm={6} xs={11} className="mx-auto">
+              <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
                 <TextField
                   style={{ width: '100%' }}
                   id="standard-basic"
-                  label="isv"
+                  label="ISV"
                   color="primary"
                   name="isv"
                   autoComplete="off"
@@ -216,11 +236,11 @@ const ProviderInvoice = () => {
                 />
                 <span className="text-small text-danger">{errors?.isv?.message}</span>
               </Grid>
-              <Grid item lg={4} md={3} sm={6} xs={11} className="mx-auto">
+              <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
                 <TextField
                   style={{ width: '100%' }}
                   id="standard-basic"
-                  label="total"
+                  label="Total"
                   color="primary"
                   name="total"
                   autoComplete="off"
@@ -233,11 +253,11 @@ const ProviderInvoice = () => {
                 />
                 <span className="text-small text-danger">{errors?.total?.message}</span>
               </Grid>
-              <Grid item lg={4} md={3} sm={6} xs={11} className="mx-auto">
+              <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
                 <TextField
                   style={{ width: '100%' }}
                   id="standard-basic"
-                  label="estado"
+                  label="Estado"
                   color="primary"
                   name="estado"
                   autoComplete="off"
@@ -279,7 +299,7 @@ const ProviderInvoice = () => {
             </Grid>
             <Grid item xl={10} lg={10} md={10} sm={10} className="mx-auto mb-3">
               <Button
-                onClick={handleOpenModal}
+                onClick={handleOpen}
                 variant="contained"
                 color="primary"
                 className="btn-block"
@@ -297,10 +317,9 @@ const ProviderInvoice = () => {
           </Grid>
         </Grid>
       </form>
-
       <Modal
-        open={OpenModal}
-        onClose={handleCloseModal}
+        open={Open}
+        onClose={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
@@ -443,7 +462,7 @@ const ProviderInvoice = () => {
                       color="secondary"
                       className="mx-auto"
                       variant="contained"
-                      onClick={handleCloseModal}
+                      onClick={handleClose}
                     >
                       Cerrar
                     </Button>
@@ -454,8 +473,14 @@ const ProviderInvoice = () => {
           </Grid>
         </>
       </Modal>
+      {/* 
+   
+    productos:{
+        type:mongoose.SchemaTypes.Array,
+        required:true
+    }
+      */}
     </>
   );
 };
-
-export default ProviderInvoice;
+export default ClientInvoice;

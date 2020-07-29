@@ -14,6 +14,8 @@ import Catalogue from './Pages/Catalogue';
 import MainInventory from './Pages/maininventory';
 import User from './Pages/User';
 import Invoices from './Pages/Invoices';
+import ProviderInvoice from './Components/ProviderInvoice';
+import ClientInvoice from './Components/ClientInvoice';
 
 function App() {
   return (
@@ -32,7 +34,8 @@ function App() {
             <Route path="/users" exact component={Users} />
             <Route path="/user/:idUser" exact component={User} />
             <Route path="/MainInventory" exact component={MainInventory} />
-            <Route path="/invoices" exact component={Invoices} />
+            <Route path="/providerInvoice" exact component={ProviderInvoice} />
+            <Route path="/clientInvoice" exact component={ClientInvoice} />
             {/* <Route path="/home" exact component={Home} /> */}
             {/* <Route path="/saludo" exact component={ () => <Hola name="mundo" /> } /> */}
           </Switch>
