@@ -87,7 +87,7 @@ const ClientInvoice = () => {
     */
 
   const onSubmit = (data, e) => {
-    console.log(data);
+    console.log({ productos: ProductsSelected.products, data });
     if (!ProductsSelected.value) {
       swal('Ojo', 'Se debe seleccionar al menos un producto', 'warning');
     }
@@ -252,23 +252,6 @@ const ClientInvoice = () => {
                   })}
                 />
                 <span className="text-small text-danger">{errors?.total?.message}</span>
-              </Grid>
-              <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
-                <TextField
-                  style={{ width: '100%' }}
-                  id="standard-basic"
-                  label="Estado"
-                  color="primary"
-                  name="estado"
-                  autoComplete="off"
-                  inputRef={register({
-                    required: {
-                      value: true,
-                      message: 'Ingresa un nombre',
-                    },
-                  })}
-                />
-                <span className="text-small text-danger">{errors?.estado?.message}</span>
               </Grid>
             </Grid>
           </Grid>

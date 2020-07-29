@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core';
 import Helmet from 'react-helmet';
 import UserController from '../Controllers/loginController';
+import NavBar from '../Components/Navbar';
 
 const User = (props) => {
   const [infoUser, setInfoUser] = useState(false);
@@ -38,8 +39,9 @@ const User = (props) => {
   return (
     <>
       <Helmet bodyAttributes={{ style: 'background-color : #694bb6' }} />
-      <Grid container alignItems="center" className="mt-2">
-        <Grid item lg={3} sm={4} xs={10} className="mx-auto border border-success mb-3">
+      <NavBar pageName="Perfil Usuario" goBack />
+      <Grid container alignItems="center" className="mt-3">
+        <Grid item lg={3} md={3} sm={4} xs={10} className="mx-auto border border-success mb-3">
           <Card>
             <CardActionArea>
               <Avatar
@@ -107,9 +109,9 @@ const User = (props) => {
             </CardActions>
           </Card>
         </Grid>
-        <Grid item lg={8} sm={8} xs={11} className="mx-auto mb-3">
-          <Grid item lg={12} xs={11} className="mx-auto">
-            <Card>
+        <Grid item lg={8} md={8} sm={7} xs={11} className="mx-auto mb-3">
+          <Grid item lg={12} md={12} xs={11} className="mx-auto">
+            <Card className="border border-danger">
               <CardActionArea>
                 {!InfoRol.value && (
                   <div className="d-flex">
@@ -117,15 +119,12 @@ const User = (props) => {
                   </div>
                 )}
                 {InfoRol.value && (
-                  <Typography
-                    component="h1"
-                    variant="h4"
-                    className="border-bottom border-danger mb-1"
-                  >
+                  <Typography component="h1" variant="h4" className="mb-1 mt-2 ml-3">
                     Usuario {InfoRol.value && InfoRol.info.rol.nombre}
                   </Typography>
                 )}
-                <CardContent>
+                <Divider className="border-top border-danger" />
+                <CardContent style={{ minHeight: '18rem' }}>
                   <div className="d-flex">
                     <Typography component="h3" variant="h5" className="mx-auto">
                       Privilegios del usuario
