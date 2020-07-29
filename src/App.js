@@ -13,7 +13,6 @@ import Users from './Pages/Users';
 import Catalogue from './Pages/Catalogue';
 import MainInventory from './Pages/maininventory';
 import User from './Pages/User';
-import Invoices from './Pages/Invoices';
 import ProviderInvoice from './Components/ProviderInvoice';
 import ClientInvoice from './Components/ClientInvoice';
 
