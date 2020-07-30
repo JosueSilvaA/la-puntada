@@ -24,7 +24,7 @@ const NavBar = ({ pageName, goBack }) => {
   return (
     <>
       <div>
-        <AppBar position="static" className="pl-0">
+        <AppBar position="static" className="pl-0" style={{ background: '#cf1b1b' }}>
           <Toolbar>
             <Hidden only={['sl', 'lg', 'md']}>{goBack && <BackButton />}</Hidden>
             <Typography style={{ width: '60%' }}>{pageName}</Typography>
@@ -33,7 +33,7 @@ const NavBar = ({ pageName, goBack }) => {
               <div style={{ textAlign: 'right' }}>{UserInfo.user.usuario}</div>
               <Avatar
                 src={UserInfo.user.imgUsuario}
-                className="border border-danger ml-2"
+                className="border border-primary ml-2"
                 style={{ width: '2.4rem', height: '2.4rem' }}
               />
 

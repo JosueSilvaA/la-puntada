@@ -5,6 +5,7 @@ import {
   FormControl,
   InputLabel,
   Select,
+  FormHelperText,
   MenuItem,
   CardActions,
   CardActionArea,
@@ -26,6 +27,7 @@ import {
   TableCell,
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
+import Helmet from 'react-helmet';
 import { PlusOne, Remove } from '@material-ui/icons';
 import swal from 'sweetalert';
 import SearchBar from './SearchProducts';
@@ -139,11 +141,6 @@ const ClientInvoice = () => {
   const selectProduct = (data) => {
     setTempProduct({ value: true, product: data, mount: 1 });
   };
-  /* 
-     setProductToEdit((prevState) => {
-        return { ...prevState, value: false };
-      });
-    */
 
   const onSubmit = async (data, e) => {
     if (!ProductsSelected.value) {
@@ -170,9 +167,10 @@ const ClientInvoice = () => {
 
   return (
     <>
+      <Helmet bodyAttributes={{ style: 'background-color : #4b5d67' }} />
       <NavBar pageName="Factura Cliente" goBack />
       <form onSubmit={handleSubmit(onSubmit)} style={{ width: '90%' }} className="mx-auto mt-5">
-        <Grid container alignItems="center" spacing={3}>
+        <Grid container alignItems="center" spacing={3} style={{ background: '#eeeeee' }}>
           <Grid item lg={7} md={8} sm={10} xs={11} className="mx-auto">
             <Grid container alignItems="center" spacing={3}>
               <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
@@ -205,6 +203,18 @@ const ClientInvoice = () => {
                       value: true,
                       message: 'Ingresa el rtn de la factura.',
                     },
+                    pattern: {
+                      value: /^([0-9])*$/,
+                      message: 'RTN invalido.',
+                    },
+                    minLength: {
+                      value: 13,
+                      message: 'RTN incompleto.',
+                    },
+                    maxLength: {
+                      value: 13,
+                      message: 'RTN invalido.',
+                    },
                   })}
                 />
                 <span className="text-small text-danger">{errors?.rtn?.message}</span>
@@ -220,7 +230,19 @@ const ClientInvoice = () => {
                   inputRef={register({
                     required: {
                       value: true,
-                      message: 'Ingresa un nombre',
+                      message: 'Ingresa el número de telefono.',
+                    },
+                    pattern: {
+                      value: /^([0-9])*$/,
+                      message: 'Telefono invalido.',
+                    },
+                    minLength: {
+                      value: 8,
+                      message: 'Telefono incompleto.',
+                    },
+                    maxLength: {
+                      value: 8,
+                      message: 'Telefono invalido.',
                     },
                   })}
                 />
@@ -244,17 +266,19 @@ const ClientInvoice = () => {
                 <span className="text-small text-danger">{errors?.direccion?.message}</span>
               </Grid>
               <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
+                <span style={{ color: '#007bff', fontSize: '12px' }}>Fecha Factura</span>
                 <TextField
                   style={{ width: '100%' }}
                   id="standard-basic"
-                  label="Fecha de Factura"
+                  // label="Fecha de Factura"
+                  type="date"
                   color="primary"
                   name="fechaFactura"
                   autoComplete="off"
                   inputRef={register({
                     required: {
                       value: true,
-                      message: 'Ingresa un nombre',
+                      message: 'Ingresa la fecha de la factura.',
                     },
                   })}
                 />
@@ -290,22 +314,11 @@ const ClientInvoice = () => {
                     )}
                   </Select>
                 </FormControl>
-                {/* <TextField
-                  style={{ width: '100%' }}
-                  id="standard-basic"
-                  label="Nombre del empleado"
-                  color="primary"
-                  name="nombreEmpleado"
-                  autoComplete="off"
-                  inputRef={register({
-                    required: {
-                      value: true,
-                      message: 'Ingresa un nombre',
-                    },
-                  })}
-                />
-                <span className="text-small text-danger">{errors?.nombreEmpleado?.message}</span>
-                 */}
+                {!UsersList.selected.value && (
+                  <FormHelperText className="text-small text-danger">
+                    *Selecciona el empleado
+                  </FormHelperText>
+                )}
               </Grid>
               <Grid item lg={4} md={4} sm={5} xs={11} className="mx-auto">
                 <TextField
@@ -318,7 +331,15 @@ const ClientInvoice = () => {
                   inputRef={register({
                     required: {
                       value: true,
-                      message: 'Ingresa un nombre',
+                      message: 'Ingresa el subTotal.',
+                    },
+                    pattern: {
+                      value: /^([0-9])*$/,
+                      message: 'Dato invalido.',
+                    },
+                    min: {
+                      value: 0,
+                      message: 'El valor no puede ser negativo.',
                     },
                   })}
                 />
@@ -335,7 +356,15 @@ const ClientInvoice = () => {
                   inputRef={register({
                     required: {
                       value: true,
-                      message: 'Ingresa un nombre',
+                      message: 'Ingresa el ISV.',
+                    },
+                    pattern: {
+                      value: /^([0-9])*$/,
+                      message: 'Dato invalido.',
+                    },
+                    min: {
+                      value: 0,
+                      message: 'El valor no puede ser negativo.',
                     },
                   })}
                 />
@@ -352,7 +381,15 @@ const ClientInvoice = () => {
                   inputRef={register({
                     required: {
                       value: true,
-                      message: 'Ingresa un nombre',
+                      message: 'Ingresa el total.',
+                    },
+                    pattern: {
+                      value: /^([0-9])*$/,
+                      message: 'Dato invalido.',
+                    },
+                    min: {
+                      value: 0,
+                      message: 'El valor no puede ser negativo.',
                     },
                   })}
                 />
@@ -561,13 +598,6 @@ const ClientInvoice = () => {
           </Grid>
         </>
       </Modal>
-      {/* 
-   
-    productos:{
-        type:mongoose.SchemaTypes.Array,
-        required:true
-    }
-      */}
     </>
   );
 };

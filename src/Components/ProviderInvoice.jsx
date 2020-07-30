@@ -6,6 +6,7 @@ import {
   TextField,
   Button,
   InputLabel,
+  FormHelperText,
   FormControl,
   Select,
   MenuItem,
@@ -26,6 +27,7 @@ import {
   TableRow,
   TableCell,
 } from '@material-ui/core';
+import Helmet from 'react-helmet';
 import { PlusOne, Remove } from '@material-ui/icons';
 import swal from 'sweetalert';
 import SearchBar from './SearchProducts';
@@ -123,6 +125,7 @@ const ProviderInvoice = () => {
       swal('Ojo', 'Se debe seleccionar el proveedor', 'warning');
     } else if (!ProductsSelected.value) {
       swal('Ojo', 'Se debe seleccionar al menos un producto', 'warning');
+      console.log(data);
     } else {
       const invoice = new InvoiceController();
       const result = await invoice.saveProviderInvoice({
@@ -146,9 +149,10 @@ const ProviderInvoice = () => {
 
   return (
     <>
+      <Helmet bodyAttributes={{ style: 'background-color : #838383' }} />
       <NavBar pageName="Factura Proveedor" goBack />
       <form onSubmit={handleSubmit(onSubmit)} style={{ width: '90%' }} className="mx-auto mt-4">
-        <Grid container alignItems="center" spacing={3}>
+        <Grid container alignItems="center" spacing={3} style={{ background: '#eeeeee' }}>
           <Grid item lg={7} md={8} sm={10} xs={11} className="mx-auto">
             <Grid container alignItems="center" spacing={4}>
               <Grid item lg={4} md={4} sm={10} xs={11} className="mx-auto">
@@ -181,19 +185,26 @@ const ProviderInvoice = () => {
                     )}
                   </Select>
                 </FormControl>
+                {!ProviderSelected.value && (
+                  <FormHelperText className="text-small text-danger">
+                    *Selecciona el proveedor.
+                  </FormHelperText>
+                )}
               </Grid>
               <Grid item lg={4} md={3} sm={6} xs={11} className="mx-auto">
+                <span style={{ color: '#007bff', fontSize: '12px' }}>Fecha Factura</span>
                 <TextField
                   style={{ width: '100%' }}
                   id="standard-basic"
-                  label="Fecha de Factura"
+                  // label="Fecha de Factura"
+                  type="Date"
                   color="primary"
                   name="fechaFactura"
                   autoComplete="off"
                   inputRef={register({
                     required: {
                       value: true,
-                      message: 'Ingresa un nombre',
+                      message: 'Ingresa la fecha de la factura.',
                     },
                   })}
                 />
@@ -210,7 +221,15 @@ const ProviderInvoice = () => {
                   inputRef={register({
                     required: {
                       value: true,
-                      message: 'Ingresa un nombre',
+                      message: 'Ingresa el subTotal.',
+                    },
+                    pattern: {
+                      value: /^([0-9])*$/,
+                      message: 'Dato invalido.',
+                    },
+                    min: {
+                      value: 0,
+                      message: 'El valor no puede ser negativo.',
                     },
                   })}
                 />
@@ -227,7 +246,15 @@ const ProviderInvoice = () => {
                   inputRef={register({
                     required: {
                       value: true,
-                      message: 'Ingresa un nombre',
+                      message: 'Ingresa el ISV.',
+                    },
+                    pattern: {
+                      value: /^([0-9])*$/,
+                      message: 'Dato invalido.',
+                    },
+                    min: {
+                      value: 0,
+                      message: 'El valor no puede ser negativo.',
                     },
                   })}
                 />
@@ -244,7 +271,15 @@ const ProviderInvoice = () => {
                   inputRef={register({
                     required: {
                       value: true,
-                      message: 'Ingresa un nombre',
+                      message: 'Ingresa el total.',
+                    },
+                    pattern: {
+                      value: /^([0-9])*$/,
+                      message: 'Dato invalido.',
+                    },
+                    min: {
+                      value: 0,
+                      message: 'El valor no puede ser negativo.',
                     },
                   })}
                 />
@@ -261,7 +296,7 @@ const ProviderInvoice = () => {
                   inputRef={register({
                     required: {
                       value: true,
-                      message: 'Ingresa un nombre',
+                      message: 'Ingresa el estado.',
                     },
                   })}
                 />
