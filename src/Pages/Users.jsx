@@ -43,7 +43,7 @@ const Users = () => {
     const users = await user.getUsers();
     if (!users.err) {
       setData({
-        users,
+        users: users.items,
         value: true,
         loading: false,
       });
