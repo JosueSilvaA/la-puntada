@@ -298,6 +298,10 @@ const ProviderInvoice = () => {
                       value: true,
                       message: 'Ingresa el estado.',
                     },
+                    pattern: {
+                      value: /^[A-Za-z][A-Za-z0-9]*$/,
+                      message: 'No se permiten espacios en blancos.',
+                    },
                   })}
                 />
                 <span className="text-small text-danger">{errors?.estado?.message}</span>

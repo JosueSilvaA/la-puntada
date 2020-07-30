@@ -7,7 +7,8 @@ class LoginController {
     await axios
       .post('https://api-la-puntada.herokuapp.com/api/usuario/login', this.data)
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
+        window.localStorage.setItem('userToken', res.data.Items.token);
         datosRespuesta = res.data;
         return res;
       })

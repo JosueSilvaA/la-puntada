@@ -73,6 +73,7 @@ const RegisterForm = ({ getUsersList }) => {
           <TextField
             style={inputStyles}
             id="standard-basic"
+            autoComplete="off"
             label="Nombre"
             name="nombres"
             inputRef={register({
@@ -90,6 +91,7 @@ const RegisterForm = ({ getUsersList }) => {
             id="standard-basic"
             label="Apellidos"
             name="apellido"
+            autoComplete="off"
             inputRef={register({
               required: {
                 value: true,
@@ -104,11 +106,17 @@ const RegisterForm = ({ getUsersList }) => {
             style={inputStyles}
             id="standard-basic"
             label="Correo"
+            autoComplete="off"
             name="correo"
+            type="email"
             inputRef={register({
               required: {
                 value: true,
                 message: 'Debe ingresar un correo valido',
+              },
+              pattern: {
+                value: /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/,
+                message: 'Debes ingresar un correo valido.',
               },
             })}
           />
@@ -119,11 +127,16 @@ const RegisterForm = ({ getUsersList }) => {
             style={inputStyles}
             id="standard-basic"
             label="Nombre de Usuario"
+            autoComplete="off"
             name="usuario"
             inputRef={register({
               required: {
                 value: true,
                 message: 'Debe ingresar un nombre de usuario valido',
+              },
+              pattern: {
+                value: /^[A-Za-z][A-Za-z0-9]*$/,
+                message: 'No se permiten espacios en blancos.',
               },
             })}
           />
@@ -164,6 +177,7 @@ const RegisterForm = ({ getUsersList }) => {
           <TextField
             style={inputStyles}
             id="standard-basic"
+            autoComplete="off"
             label="Dirección"
             placeholder="Campo opcional"
             name="direccion"
@@ -176,11 +190,25 @@ const RegisterForm = ({ getUsersList }) => {
             style={inputStyles}
             id="standard-basic"
             label="N. Identidad"
+            autoComplete="off"
             name="identidad"
             inputRef={register({
               required: {
                 value: true,
-                message: 'Debe ingresar un número de identidad valido',
+                message: 'Debe ingresar un número de identidad.',
+              },
+
+              pattern: {
+                value: /^([0-9])*$/,
+                message: 'Número invalido.',
+              },
+              minLength: {
+                value: 13,
+                message: 'Número incompleto.',
+              },
+              maxLength: {
+                value: 13,
+                message: 'Número invalido.',
               },
             })}
           />
@@ -189,13 +217,26 @@ const RegisterForm = ({ getUsersList }) => {
         <div className="mt-2">
           <TextField
             style={inputStyles}
+            autoComplete="off"
             id="standard-basic"
             label="N. Telefono"
             name="telefono"
             inputRef={register({
               required: {
                 value: true,
-                message: 'Debe ingresar telefono valido',
+                message: 'Debe ingresar el telefono.',
+              },
+              pattern: {
+                value: /^([0-9])*$/,
+                message: 'Telefono invalido.',
+              },
+              minLength: {
+                value: 8,
+                message: 'Telefono incompleto.',
+              },
+              maxLength: {
+                value: 8,
+                message: 'Telefono invalido.',
               },
             })}
           />

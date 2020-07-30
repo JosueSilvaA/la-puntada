@@ -415,6 +415,10 @@ const EditProduct = () => {
                       value: true,
                       message: 'Ingresa un precio',
                     },
+                    min: {
+                      value: 0,
+                      message: 'El valor no puede ser negativo.',
+                    },
                   })}
                 />
                 <span className="text-small text-danger">{errors?.precio?.message}</span>
