@@ -49,7 +49,7 @@ const ClientInvoice = () => {
   });
   const [OpenSelectUser, setOpenSelectUser] = useState(false);
 
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, watch } = useForm();
   const history = useHistory();
 
   const handleOpen = () => {
@@ -376,6 +376,7 @@ const ClientInvoice = () => {
                   id="standard-basic"
                   label="Total"
                   color="primary"
+                  value={parseFloat(watch('subTotal')) + parseFloat(watch('isv'))}
                   name="total"
                   autoComplete="off"
                   inputRef={register({

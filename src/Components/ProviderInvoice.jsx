@@ -50,7 +50,7 @@ const ProviderInvoice = () => {
   /* Modal control */
   const [OpenModal, setOpenModal] = useState(false);
 
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, watch } = useForm();
   const history = useHistory();
 
   const handleOpenModal = () => {
@@ -267,6 +267,7 @@ const ProviderInvoice = () => {
                   label="total"
                   color="primary"
                   name="total"
+                  value={parseFloat(watch('subTotal')) + parseFloat(watch('isv'))}
                   autoComplete="off"
                   inputRef={register({
                     required: {
@@ -353,7 +354,7 @@ const ProviderInvoice = () => {
           </Grid>
         </Grid>
       </form>
-
+      <h2 className="bg-white"> {watch('subTotal')}</h2>
       <Modal
         open={OpenModal}
         onClose={handleCloseModal}
