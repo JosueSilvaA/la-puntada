@@ -17,14 +17,13 @@ export default function SimpleBottomNavigation(props) {
   const [value, setValue] = React.useState(0);
   const FirstIcon = props.firstIcon;
   const SecondIcon = props.secondIcon;
-  const { firstIconRoute, secondIconOnClick } = props;
+  const { firstIconOnClick, secondIconOnClick } = props;
   return (
     <BottomNavigation value={value} showLabels className={classes.stickToBottom}>
       <BottomNavigationAction
         label="Agregar Privilegio"
         icon={<FirstIcon />}
-        component={Link}
-        to={firstIconRoute}
+        onClick={firstIconOnClick}
       />
       <BottomNavigationAction
         label="Remover Privilegio"

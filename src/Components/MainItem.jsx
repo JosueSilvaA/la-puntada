@@ -4,7 +4,7 @@ import { Grid, Button, Icon } from '@material-ui/core';
 
 const MainItem = (props) => {
   // eslint-disable-next-line react/prop-types
-  const { route, iconItem, nameItem, bgColor } = props;
+  const { route, iconItem, nameItem, bgColor, pdLeft } = props;
   return (
     <>
       <Grid item xs={6}>
@@ -17,7 +17,7 @@ const MainItem = (props) => {
           >
             <Icon
               className={iconItem}
-              style={{ width: '2.9rem', fontSize: '28px', color: 'white', paddingLeft: '5px' }}
+              style={{ width: '2.9rem', fontSize: '28px', color: 'white', paddingLeft: pdLeft }}
             />
           </Button>
         </div>

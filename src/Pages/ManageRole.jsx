@@ -1,8 +1,12 @@
 import React from 'react';
 import List from '@material-ui/core/List';
+import InputLabel from '@material-ui/core/InputLabel';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import BuildIcon from '@material-ui/icons/Build';
@@ -25,15 +29,23 @@ class ManageRole extends React.Component {
     super();
     this.state = {
       privilegios: '',
+      privilegiosFaltantes: '',
       loaded: false,
+      loadedFaltantes: false,
       selected: '',
       open: '',
       privSelected: '',
+      openAdd: '',
+      idPrivilegio: '',
+      descripcionPrivilegio: '',
     };
-    this.agregarPrivilegio = this.agregarPrivilegio.bind(this);
     this.updateSelected = this.updateSelected.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleClickAdd = this.handleClickAdd.bind(this);
+    this.handleCloseAdd = this.handleCloseAdd.bind(this);
+    this.handleChangeSelect = this.handleChangeSelect.bind(this);
+    this.addPriv = this.addPriv.bind(this);
   }
 
   // const { text, title, agree, disagree } = props;
@@ -43,10 +55,15 @@ class ManageRole extends React.Component {
     if (this.isAlreadyMounted) {
       const { location } = this.props;
       const Roles = new RoleController();
+      //  const respuesta = await Roles.getPrivilegiosNotInRol(location.state.roleName);
       const respuesta = await Roles.getPrivilegiosPorRol(location.state.idRole);
+      const privilegios = await Roles.getPrivilegiosNotInRol(location.state.roleName);
+      console.log(respuesta);
       this.setState({
-        privilegios: respuesta.Items.privilegios,
+        privilegios: respuesta.Items,
+        privilegiosFaltantes: privilegios.Items,
         loaded: true,
+        loadedFaltantes: true,
       });
     }
   }
@@ -63,6 +80,25 @@ class ManageRole extends React.Component {
     });
   };
 
+  handleCloseAdd = () => {
+    this.setState({
+      openAdd: false,
+    });
+  };
+
+  handleClickAdd = () => {
+    this.setState({
+      openAdd: true,
+    });
+  };
+
+  handleChangeSelect = (e) => {
+    this.setState({
+      idPrivilegio: e.target.value,
+    });
+    this.obtenerInfoPrivilegio(e.target.value);
+  };
+
   updateSelected(selectedIndex, privSelected) {
     this.setState({
       selected: selectedIndex,
@@ -70,13 +106,44 @@ class ManageRole extends React.Component {
     });
   }
 
-  agregarPrivilegio() {
-    const { history } = this.props;
-    history.push('/add-priv-to-role');
+  obtenerInfoPrivilegio(idPrivilegio) {
+    const { privilegiosFaltantes } = this.state;
+    const privilegio = privilegiosFaltantes.find(function (privilegio, index) {
+      if (privilegio._id === idPrivilegio) {
+        console.log(privilegio.descripcion);
+        return privilegio.descripcion;
+      }
+    });
+    this.setState({
+      descripcionPrivilegio: privilegio.descripcion,
+    });
+  }
+
+  async addPriv() {
+    const { location } = this.props;
+    const { idPrivilegio } = this.state;
+    const Roles = new RoleController();
+    const respuesta = await Roles.addPrivToRole(location.state.idRole, idPrivilegio);
+    this.handleCloseAdd();
+    const privilegios = await Roles.getPrivilegiosNotInRol(location.state.roleName);
+    this.setState({
+      privilegiosFaltantes: privilegios.Items
+    });
   }
 
   render() {
-    const { loaded, privilegios, selected, open, privSelected } = this.state;
+    const {
+      loaded,
+      privilegios,
+      selected,
+      open,
+      privSelected,
+      openAdd,
+      privilegiosFaltantes,
+      loadedFaltantes,
+      nombrePrivilegio,
+      descripcionPrivilegio,
+    } = this.state;
     const { location } = this.props;
     return (
       <div>
@@ -102,10 +169,55 @@ class ManageRole extends React.Component {
         </List>
         <BottomNav
           firstIcon={AddIcon}
-          firstIconRoute="/login"
+          firstIconOnClick={this.handleClickAdd}
           secondIcon={ClearIcon}
           secondIconOnClick={this.handleClickOpen}
         />
+        <Dialog
+          open={openAdd}
+          onClose={this.handleCloseAdd}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">Agregar Privilegio</DialogTitle>
+          <DialogContent>
+            <DialogContentText>Seleccione un privilegio para agregarlo al rol.</DialogContentText>
+            <FormControl variant="outlined" style={{ minWidth: '100%' }}>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                value={nombrePrivilegio}
+                onChange={this.handleChangeSelect}
+                displayEmpty
+                autoWidth
+              >
+                {loadedFaltantes
+                  ? privilegiosFaltantes.map((e, i) => (
+                      <MenuItem value={e._id}>{e.nombre}</MenuItem>
+                    ))
+                  : ''}
+              </Select>
+            </FormControl>
+            {descripcionPrivilegio ? (
+              <DialogContentText>
+                {' '}
+                <br />
+                {descripcionPrivilegio}{' '}
+              </DialogContentText>
+            ) : (
+              ''
+            )}
+          </DialogContent>
+
+          <DialogActions>
+            <Button onClick={this.addPriv} color="primary">
+              Aceptar
+            </Button>
+            <Button onClick={this.handleCloseAdd} color="primary" autoFocus>
+              Rechazar
+            </Button>
+          </DialogActions>
+        </Dialog>
         <Dialog
           open={open}
           onClose={this.handleClose}
@@ -115,7 +227,7 @@ class ManageRole extends React.Component {
           <DialogTitle id="alert-dialog-title">Remover Privilegio</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              ¿Está seguro que desea remover el privilegio <b>{privSelected}</b> del rol  {' '}
+              ¿Está seguro que desea remover el privilegio <b>{privSelected}</b> del rol{' '}
               <b>{location.state.roleName}</b>?
             </DialogContentText>
           </DialogContent>

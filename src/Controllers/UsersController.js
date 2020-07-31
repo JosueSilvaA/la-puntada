@@ -16,31 +16,17 @@ class UsersController {
     return Res.Items;
   };
 
-  /*
-nombres:req.body.nombres,
-          apellido:req.body.apellido,
-          usuario:req.body.usuario,
-          direccion:req.body.direccion,
-          correo:req.body.correo,
-          contrasena:req.body.contrasena,
-          identidad:req.body.identidad,
-          telefono:req.body.telefono,
-          estado:req.body.estado,
-          conexiones:[]
-*/
-
   registerUser = async (data) => {
     let Res;
     const dataUser = {
       nombres: data.nombres,
-      apellido: data.apellido,
+      apellidos: data.apellido,
       usuario: data.usuario,
-      direccion: 'Actualizar dirección',
+      direccion: 'Debes actualizar tu dirección',
       correo: data.correo,
       contrasena: data.contrasena,
       identidad: data.identidad,
       telefono: data.telefono,
-      estado: true,
     };
 
     await axios

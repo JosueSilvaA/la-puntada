@@ -46,8 +46,8 @@ class Role extends React.Component {
   render() {
     const { loaded, roles } = this.state;
     return (
-     <div>
-       <AppBar titulo={'Roles'}></AppBar>
+      <div>
+        <AppBar titulo="Roles" />
         <List>
           {loaded
             ? roles.map((e, i) => (
@@ -57,13 +57,13 @@ class Role extends React.Component {
                       <SecurityIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={e.nombre} secondary="Jan 9, 2014" />
+                  <ListItemText primary={e.nombre} secondary={e.descripcion} />
                 </ListItem>
               ))
             : ''}
           <Divider variant="inset" component="li" />
         </List>
-     </div>
+      </div>
     );
   }
 }

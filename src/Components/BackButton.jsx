@@ -1,12 +1,18 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
 
-// eslint-disable-next-line react/prop-types
-const BackButton = ({ route }) => {
+const BackButton = () => {
+  const history = useHistory();
+
+  const goBack = () => {
+    history.goBack();
+  };
+
   return (
     <>
-      <Button href={route} style={{ marginBottom: '0.8rem', borderRadius: '20px' }}>
+      <Button onClick={goBack} style={{ borderRadius: '20px', marginLeft: '-30px' }}>
         <ArrowBack color="secondary" style={{ fontSize: '30px' }} />
       </Button>
     </>

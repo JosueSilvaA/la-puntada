@@ -1,18 +1,17 @@
 import React from 'react';
 import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { Menu } from '@material-ui/icons';
+import BackButton from './BackButton';
 
-const NavBar = () => {
+const NavBar = ({ pageName, goBack }) => {
   return (
     <>
       <div>
-        <AppBar position="static">
+        <AppBar position="static" className="pl-0">
           <Toolbar>
-            {/* <IconButton edge="start" color="inherit" aria-label="menu">
-                            <Menu />
-                        </IconButton>
-                        */}
-            <Typography>La Puntada</Typography>
+            {goBack && <BackButton />}
+            <Typography>{pageName}</Typography>
             <div className="ml-auto">
               <IconButton
                 aria-label="account of current user"
@@ -21,6 +20,9 @@ const NavBar = () => {
                 color="inherit"
               >
                 <AccountCircleIcon />
+              </IconButton>
+              <IconButton edge="end" color="inherit" aria-label="menu">
+                <Menu />
               </IconButton>
             </div>
           </Toolbar>

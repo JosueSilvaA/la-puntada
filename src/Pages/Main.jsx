@@ -9,48 +9,33 @@ import NavBar from '../Components/Navbar';
 const Main = () => {
   return (
     <>
-      <NavBar />
+      <NavBar pageName="La Puntada" goBack={false} />
       <Divider />
       <div className="mt-5">
         <Grid container spacing={3}>
-          <MainItem iconItem="fas fa-users" nameItem="Usuarios" route="/users" bgColor="#694bb6" />
           <MainItem
-            iconItem="fas fa-boxes"
-            nameItem="Inventario"
-            route="/inventory"
-            bgColor="green"
-          />
-          <MainItem iconItem="fas fa-car" nameItem="Inventario" route="/inventory" bgColor="blue" />
-        </Grid>
-      </div>
-      {/* <div className="container-fluid mt-3">
-        <div className="row justify-content-center">
-          <MainItem
-            iconItem="https://img.icons8.com/nolan/64/delivery-settings.png"
-            nameItem="Inventario"
-            route="/inventory"
-            bgColor="black"
-          />
-          <MainItem
-            iconItem="https://img.icons8.com/nolan/64/delivery-settings.png"
-            nameItem="Inventario"
-            route="/inventory"
-            bgColor="white"
-          />
-          <MainItem
-            iconItem="https://img.icons8.com/dusk/64/000000/total-sales.png"
-            nameItem="Reportes"
-            route="/inventory"
-            bgColor="white"
-          />
-          <MainItem
-            iconItem="https://img.icons8.com/dusk/64/000000/conference.png"
+            iconItem="fas fa-users"
             nameItem="Usuarios"
             route="/users"
             bgColor="#694bb6"
+            pdLeft="5px"
           />
-        </div>
-      </div> */}
+          <MainItem
+            iconItem="fab fa-stack-overflow"
+            nameItem="Catalogos"
+            route="/catalogo"
+            bgColor=" #e67e22 "
+            pdLeft="12px"
+          />
+          <MainItem
+            iconItem="fas fa-list-alt"
+            nameItem="Manejar Inventario"
+            route="/maininventory"
+            bgColor="blue"
+            pdLeft="8px"
+          />
+        </Grid>
+      </div>
     </>
   );
 };

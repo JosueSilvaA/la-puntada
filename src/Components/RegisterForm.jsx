@@ -148,9 +148,17 @@ const RegisterForm = ({ getUsersList }) => {
                 value: true,
                 message: 'Ingresa tu contraseña',
               },
+              minLength: {
+                value: 8,
+                message: 'De tener al menos 8 carácteres',
+              },
+              pattern: {
+                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/,
+                message: 'Debe contener minusculas, mayusculas, números y carácteres especiales',
+              },
             })}
           />
-          <span className="text-danger text-small mb-0">{errors?.password?.message}</span>
+          <span className="text-danger text-small mb-0">{errors?.contrasena?.message}</span>
         </FormControl>
         <div className="mt-2">
           <TextField
