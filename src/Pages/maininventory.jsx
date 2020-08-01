@@ -13,43 +13,43 @@ const MainInventory = () => {
       <NavBar pageName="La Puntada - Inventario" goBack />
       <Divider />
       <Hidden only={['lg', 'xl', 'md']}>
-          <div className="" style={{width:'100%',marginTop:'1rem',backgroundColor:'#f7dc6f '}}>
-            <Grid container mx="auto"   alignItems="center" spacing={3} style={{marginLeft:'0px',marginRight:'0px',width:'100%'}}>
+          <div className="contenedor-opciones-movil" style={{width:'100%'}}>
+            <Grid container className='prueba'  alignItems="center" spacing={5} style={{width:'95%'}}>
               
                 <Grid item xs>
                   <MainInventoryItem
                     iconItem="fas fa-table"
                     nameItem="Ver inventario"
                     route="/Catalogo"
-                    bgColor="#694bb6"
+                    bgColor="#f6ab6c"
                     pdLeft="0px"
                   />
                   <MainInventoryItem
                     iconItem="fas fa-plus-square"
                     nameItem="Agregar Producto"
                     route="/inventory/newProduct"
-                    bgColor="green"
+                    bgColor="#006a71"
                     pdLeft="0px"
                   />
                   <MainInventoryItem
                     iconItem="fas fa-check-square"
                     nameItem="Editar Producto"
                     route="/inventory/editProduct"
-                    bgColor="red"
+                    bgColor="#3b2e5a"
                     pdLeft="0px"
                   />
                   <MainInventoryItem
                     iconItem="fas fa-trash"
                     nameItem="Eliminar Producto"
                     route="/inventory/deleteProduct"
-                    bgColor="blue"
+                    bgColor="#b83b5e"
                     pdLeft="0px"
                   />
                 </Grid> 
             </Grid>
           </div>
       </Hidden>
-      <Hidden only={['xs', 'sm']} style={{border:'2px solid black'}}>
+      <Hidden only={['xs', 'sm']}>
           <div className='contenedor-opciones'>
             <Grid container className="opciones"   alignItems="center" spacing={5} style={{width:'80%'}}>
               
