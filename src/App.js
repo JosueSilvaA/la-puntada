@@ -12,7 +12,8 @@ import Inventory from './Pages/Inventory';
 import Users from './Pages/Users';
 import Roles from './Pages/Role';
 import ManageRole from './Pages/ManageRole'
-import Catalogue from './Pages/Catalogue'import MainInventory from './Pages/maininventory';
+import Catalogue from './Pages/Catalogue'
+import MainInventory from './Pages/maininventory';
 import User from './Pages/User';
 import ProviderInvoice from './Components/ProviderInvoice';
 import ClientInvoice from './Components/ClientInvoice';
