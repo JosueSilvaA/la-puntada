@@ -24,6 +24,7 @@
     width: 100%;
 }
 
+
 @media (max-width: 2000.98px) {
     .titulo-categoria{
         font-size: 45px;
@@ -57,6 +58,7 @@
         padding: 5%;
     }
 }
+
 
 
 

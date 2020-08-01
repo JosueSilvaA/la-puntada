@@ -71,7 +71,7 @@ const Catalogue = () => {
       <Grid
         container
         spacing={2}
-        className = 'contenedor-catalogo'
+        className = 'contenedor-catalogo mt-1'
       > 
         <SearchProduct selectProduct={selectProduct}/>
         {productSelect.type.escolar && (

@@ -1,0 +1,24 @@
+.contenedor-opciones{
+    background-color: #f1f3f5;
+    width: 100%;
+    height: 94vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.opciones{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.boton{
+    width: 100%;
+    height: 12rem;
+
+}
+
+.nombre-opcion{
+    font-weight: bold;
+    font-size: 18px;
+}

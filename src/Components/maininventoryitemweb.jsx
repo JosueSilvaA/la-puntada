@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 // import { Card, CardMedia, CardActionArea, Button } from '@material-ui/core';
 import { Grid, Button, Icon } from '@material-ui/core';
+import '../Styles/Inventario.css'
 
 const MainInventoryItem = (props) => {
   // eslint-disable-next-line react/prop-types
@@ -13,12 +14,12 @@ const MainInventoryItem = (props) => {
   };
   return (
     <>
-      <Grid item xs={12}  style={{marginRight:'0px', marginLeft:'0px'}}>
-        <div className="d-flex"  >
+      <Grid item xs={12} >
+        <div className="d-flex">
           <Button
             variant="outlined"
-            className=" mx-auto text-center"
-            style={{ width: '100%'  ,height: '12rem', borderRadius: '0%', background: bgColor }}
+            className=" mx-auto text-center boton"
+            style={{ background: bgColor,borderRadius:'10px' }}
             onClick={goTo}
           >
             <div className="flex-column" style={{padding:'5px'}}>
@@ -27,7 +28,7 @@ const MainInventoryItem = (props) => {
               style={{  width: 'auto', fontSize: '46px', color: 'white', paddingLeft: pdLeft }}
             />
             <br/>
-            <p className="text-center" style={{color: 'white'}}>{nameItem}</p>
+            <p className="text-center nombre-opcion" style={{color: 'white'}}>{nameItem}</p>
             </div>
             
           </Button>
