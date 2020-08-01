@@ -5,6 +5,7 @@ import Alert from '@material-ui/lab/Alert';
 import { useHistory } from 'react-router-dom';
 import {
   FormControl,
+  FormControlLabel,
   Checkbox,
   Button,
   Card,
@@ -14,8 +15,8 @@ import {
   InputAdornment,
   CardContent,
 } from '@material-ui/core';
+
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import Logo from '../logo.svg';
 import LoginController from '../Controllers/loginController';
 
 const LoginForm = () => {
@@ -57,8 +58,9 @@ const LoginForm = () => {
     <>
       <div className="mx-auto col-lg-4 col-sm-8  d-flex justify-content-center">
         <Card className="bg-gray">
-          <div>
-            <img src={Logo} alt="" />
+          <div style={{ textAlign: 'center', marginTop: '5vh' }}>
+            <br />
+            <i className="fas fa-user-circle fa-10x" style={{ color: '#39a8bf' }} />
           </div>
           <CardContent>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -107,22 +109,17 @@ const LoginForm = () => {
                 <span className="text-danger text-small mb-0">{errors?.password?.message}</span>
               </FormControl>
               <div>
-                <Checkbox
-                  /*     checked={checked}
-                                        onChange={handleChange} */
-                  inputProps={{ 'aria-label': 'primary checkbox' }}
-                  name="remember"
-                  inputRef={register}
+                <br />
+                <FormControlLabel
+                  control={<Checkbox onChange={onClick} name="checkedB" color="primary" />}
+                  label="Recordar usuario"
                 />
-                <span className="text-success" style={{ marginLeft: '-10px' }}>
-                  Mantener sesión
-                </span>
                 <Button
                   type="submit"
                   variant="contained"
-                  color="secondary"
                   className="btn-block mt-3"
                   disabled={!!Data.loading}
+                  style={{ backgroundColor: '#39a8bf', color: 'white' }}
                 >
                   {Data.loading && <i className="fa fa-refresh fa-spin" />}
                   Login
