@@ -27,7 +27,7 @@ const Inventory = (props) => {
           deleteiId: true,
           editId: false,
           value: true,
-          navbarName: 'Borrar Producto',
+          navbarName: 'La Puntada - Borrar Producto',
         });
       } else {
         setRenderOption({
@@ -37,7 +37,7 @@ const Inventory = (props) => {
           deleteiId: false,
           editId: false,
           value: true,
-          navbarName: 'Borrar Producto',
+          navbarName: 'La Puntada - Borrar Producto',
         });
       }
     } else if (route.action === 'editProduct') {
@@ -49,7 +49,7 @@ const Inventory = (props) => {
           deleteiId: false,
           editId: false,
           value: true,
-          navbarName: 'Editar Producto',
+          navbarName: 'La Puntada - Editar Producto',
         });
       }
     } else if (route.action === 'newProduct') {
@@ -60,7 +60,7 @@ const Inventory = (props) => {
         deleteiId: false,
         editId: false,
         value: true,
-        navbarName: 'Nuevo Producto',
+        navbarName: 'La Puntada - Nuevo Producto',
       });
     }
   };
@@ -73,7 +73,7 @@ const Inventory = (props) => {
 
   return (
     <>
-      <Helmet bodyAttributes={{ style: 'background-color : #362458' }} />
+      <Helmet bodyAttributes={{ style: 'background-color : #fa4e4e' }} />
       <NavBar pageName={RenderOption.navbarName} goBack />
       <div className="">
         {/* eslint-disable-next-line react/jsx-pascal-case */}

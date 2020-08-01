@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import {
   Fab,
@@ -5,6 +6,7 @@ import {
   Fade,
   Modal,
   Button,
+  Grid,
   CircularProgress,
   Divider,
   Tooltip,
@@ -20,7 +22,7 @@ import NavBar from '../Components/Navbar';
 const Users = () => {
   const [Open, setOpen] = useState(false);
   const [Check, setCheck] = useState(false);
-  const [Data, setData] = useState({ users: [], loading: true });
+  const [Data, setData] = useState({ users: [], loading: true, value: false });
 
   const handleOpen = () => {
     setOpen(true);
@@ -36,27 +38,30 @@ const Users = () => {
     }, 5000);
   };
 
-  const getUsersList = async (register) => {
+  const getUsersList = async (register = false) => {
     const user = new UserControler();
     const users = await user.getUsers();
-    setData({
-      users,
-      loading: false,
-    });
-    if (register) {
-      handleClose();
-      setCheck(true);
-      setTime();
+    if (!users.err) {
+      setData({
+        users: users.items,
+        value: true,
+        loading: false,
+      });
+      if (register) {
+        handleClose();
+        setCheck(true);
+        setTime();
+      }
     }
   };
 
   useEffect(() => {
-    getUsersList(false);
-  });
+    getUsersList();
+  }, []);
   return (
     <>
       <Helmet bodyAttributes={{ style: 'background-color : #694bb6' }} />
-      <NavBar pageName="Usuarios" goBack />
+      <NavBar pageName="La Puntada - Usuarios" goBack />
       <Divider className="bg-success0" />
       <div className="d-flex mt-3">
         {Data.loading && <CircularProgress className="mx-auto" size={50} color="secondary" />}
@@ -69,7 +74,7 @@ const Users = () => {
       <Tooltip title="Add" aria-label="add">
         <Fab
           style={{
-            position: 'fixed',
+            position: 'absolute',
             bottom: '0',
             right: '0',
             marginRight: '0.4rem',
@@ -83,11 +88,11 @@ const Users = () => {
           <Icon className="fas fa-user-plus" style={{ width: '2rem' }} />
         </Fab>
       </Tooltip>
-      <div style={{ position: 'absolute', width: '100%' }}>
+      <Grid container alignItems="center">
         {Data.users.map((user) => (
           <UserListItem
-            // eslint-disable-next-line no-underscore-dangle
             key={user._id}
+            idUser={user._id}
             rol={user.rol}
             nombres={user.nombres}
             apellido={user.apellidos}
@@ -95,13 +100,13 @@ const Users = () => {
             estado={user.estado}
           />
         ))}
-      </div>
+      </Grid>
       <Modal
         style={{ position: 'absolute' }}
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={Open}
-        Onclose={handleClose}
+        onClose={handleClose}
         closeAfterTransition
         disableScrollLock="false"
         BackdropComponent={Backdrop}

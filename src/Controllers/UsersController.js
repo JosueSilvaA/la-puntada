@@ -6,14 +6,13 @@ class UsersController {
     await axios
       .get('https://api-la-puntada.herokuapp.com/api/usuario/infoUsuarios')
       .then((res) => {
-        Res = res.data;
-        return res;
+        Res = { err: false, items: res.data.Items };
       })
       .catch((err) => {
         Res = new Error('¡Oops!, Ocurrió un problema al realizar la conexión.');
         return err;
       });
-    return Res.Items;
+    return Res;
   };
 
   registerUser = async (data) => {

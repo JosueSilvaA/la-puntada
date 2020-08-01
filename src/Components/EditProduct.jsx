@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Grid,
   Card,
@@ -13,6 +14,7 @@ import {
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { Autocomplete } from '@material-ui/lab';
+import swal from 'sweetalert';
 import SearchProduct from './SearchProducts';
 import Product from '../Controllers/ProductsController';
 
@@ -31,6 +33,7 @@ const EditProduct = () => {
     },
   });
   const { register, handleSubmit, errors } = useForm();
+  const history = useHistory();
 
   const selectProduct = (dataProduct) => {
     setProductToEdit({ value: true, product: dataProduct });
@@ -52,6 +55,16 @@ const EditProduct = () => {
       setEditing({
         value: true,
         type: { escolar: true, textil: false, variado: false },
+      });
+    } else if (ProductToEdit.product.tipoVariado !== undefined) {
+      setEditing({
+        value: true,
+        type: { escolar: false, textil: false, variado: true },
+      });
+    } else if (ProductToEdit.product.tipoTextil !== undefined) {
+      setEditing({
+        value: true,
+        type: { escolar: false, textil: true, variado: false },
       });
     }
   };
@@ -76,6 +89,9 @@ const EditProduct = () => {
       setProductToEdit({
         value: false,
         product: {},
+      });
+      swal('Exito', result.message, 'success', { timer: 2000 }).then(() => {
+        history.replace('/maininventory');
       });
     }
     event.preventDefault();
@@ -124,9 +140,21 @@ const EditProduct = () => {
                   secondary={
                     <>
                       <Typography component="span" variant="body2" color="textPrimary">
-                        Tipo Util :
+                        Tipo Producto:
                       </Typography>
                       {ProductToEdit.product.tipoUtil}
+                      {ProductToEdit.product.tipoTextil}
+                      {ProductToEdit.product.tipoVariado}
+                    </>
+                  }
+                />
+                <ListItemText
+                  secondary={
+                    <>
+                      <Typography component="span" variant="body2" color="textPrimary">
+                        Proveedor :
+                      </Typography>
+                      {ProductToEdit.product.proveedor}
                     </>
                   }
                 />
@@ -216,7 +244,7 @@ const EditProduct = () => {
                 />
                 <span className="text-small text-danger">{errors?.nombre?.message}</span>
               </Grid>
-              {(Editing.type.escolar || Editing.type.variado) && (
+              {Editing.type.escolar && (
                 <Grid item xs={11} className="mx-auto">
                   <TextField
                     style={{ width: '100%' }}
@@ -331,7 +359,7 @@ const EditProduct = () => {
                     renderInput={(params) => (
                       <TextField
                         {...params}
-                        label="Selecciona el color"
+                        label="Cambiar el color"
                         // onBlur={chageColor}
                         margin="normal"
                         placeholder={`Color actual ${ProductToEdit.product.color}`}
@@ -386,6 +414,10 @@ const EditProduct = () => {
                     required: {
                       value: true,
                       message: 'Ingresa un precio',
+                    },
+                    min: {
+                      value: 0,
+                      message: 'El valor no puede ser negativo.',
                     },
                   })}
                 />

@@ -13,7 +13,7 @@ const BackButton = () => {
   return (
     <>
       <Button onClick={goBack} style={{ borderRadius: '20px', marginLeft: '-30px' }}>
-        <ArrowBack color="secondary" style={{ fontSize: '30px' }} />
+        <ArrowBack color="primary" style={{ fontSize: '30px' }} />
       </Button>
     </>
   );
