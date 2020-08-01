@@ -88,7 +88,7 @@ const Users = () => {
           <Icon className="fas fa-user-plus" style={{ width: '2rem' }} />
         </Fab>
       </Tooltip>
-      <Grid container alignItems="center">
+      <Grid container alignItems="center tonta">
         {Data.users.map((user) => (
           <UserListItem
             key={user._id}
@@ -102,7 +102,7 @@ const Users = () => {
         ))}
       </Grid>
       <Modal
-        style={{ position: 'absolute' }}
+        style={{ position: 'absolute',marginTop:'2%'}}
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={Open}

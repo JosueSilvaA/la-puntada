@@ -119,10 +119,10 @@ const LoginForm = () => {
                   variant="contained"
                   className="btn-block mt-3"
                   disabled={!!Data.loading}
-                  style={{ backgroundColor: '#39a8bf', color: 'white' }}
+                  style={{ backgroundColor: '#39a8bf', color: 'white',minHeight:'2.5rem'}}
                 >
-                  {Data.loading && <i className="fa fa-refresh fa-spin" />}
-                  Login
+                  {Data.loading && <i className="fa fa-refresh fa-spin"/>}
+                  {!Data.loading && 'Login'}
                 </Button>
               </div>
               <br />
