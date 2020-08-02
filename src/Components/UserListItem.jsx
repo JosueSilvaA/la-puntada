@@ -40,7 +40,9 @@ const UserListItem = ({ rol, nombres, apellido, imgUsuario, estado, idUser }) =>
               <Avatar alt={nombres} src={imgUsuario} />
             </ListItemAvatar>
             <ListItemText
-              primary={`${nombres} ${apellido}`}
+              primary={
+              <div style={{fontWeight:'bold'}}>{nombres} {apellido}</div>
+              }
               secondary={
                 <>
                   <Typography component="span" variant="body2" color="textPrimary">

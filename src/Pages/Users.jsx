@@ -60,7 +60,7 @@ const Users = () => {
   }, []);
   return (
     <>
-      <Helmet bodyAttributes={{ style: 'background-color : #694bb6' }} />
+      <Helmet bodyAttributes={{ style: 'background-color : #6f4a8e' }} />
       <NavBar pageName="La Puntada - Usuarios" goBack />
       <Divider className="bg-success0" />
       <div className="d-flex mt-3">
