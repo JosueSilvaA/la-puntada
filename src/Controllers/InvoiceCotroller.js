@@ -29,6 +29,32 @@ class InvoiceController {
       });
     return res;
   };
+  getInvoicesProv = async () => {
+    let Res;
+    await axios
+      .get('https://api-la-puntada.herokuapp.com/api/facturaProveedor/obtenerFacturasProveedores')
+      .then((res) => {
+        Res = { err: false, items: res.data.Items };
+      })
+      .catch((err) => {
+        Res = new Error('¡Oops!, Ocurrió un problema al realizar la conexión.');
+        return err;
+      });
+    return Res;
+  };
+   getInvoicesCli = async () => {
+    let Res;
+    await axios
+      .get('https://api-la-puntada.herokuapp.com/api/facturaCliente/obtenerFacturasClientes')
+      .then((res) => {
+        Res = { err: false, items: res.data.Items };
+      })
+      .catch((err) => {
+        Res = new Error('¡Oops!, Ocurrió un problema al realizar la conexión.');
+        return err;
+      });
+    return Res;
+  };
 }
 
 export default InvoiceController;
