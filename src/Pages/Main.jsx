@@ -26,6 +26,18 @@ const Main = () => {
             route="/maininventory"
             bgColor="blue"
           />
+          <MainItem
+            iconItem="fas fa-file-invoice"
+            nameItem="Factura"
+            route="/mainInvoice"
+            bgColor="blue"
+          />
+          <MainItem
+            iconItem="fas fa-chart-line"
+            nameItem="Reportes"
+            route="/mainReport"
+            bgColor="blue"
+          />
         </Grid>
       </div>
     </>
