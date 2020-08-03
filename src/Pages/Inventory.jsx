@@ -73,9 +73,9 @@ const Inventory = (props) => {
 
   return (
     <>
-      <Helmet bodyAttributes={{ style: 'background-color : #fa4e4e' }} />
+      <Helmet bodyAttributes={{ style: 'background-color : #318fb5' }} />
       <NavBar pageName={RenderOption.navbarName} goBack />
-      <div className="">
+      <div>
         {/* eslint-disable-next-line react/jsx-pascal-case */}
         {/* <Value.component /> */}
         {RenderOption.delete && <DeleteProduct />}
