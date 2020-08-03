@@ -149,9 +149,9 @@ const ProviderInvoice = () => {
 
   return (
     <>
-      <Helmet bodyAttributes={{ style: 'background-color : #838383' }} />
+      <Helmet bodyAttributes={{ style: 'background-color : #318fb5' }} />
       <NavBar pageName="Factura Proveedor" goBack />
-      <form onSubmit={handleSubmit(onSubmit)} style={{ width: '90%' }} className="mx-auto mt-4">
+      <form onSubmit={handleSubmit(onSubmit)} style={{ width: '90%',marginTop:'5%' }} className="mx-auto">
         <Grid container alignItems="center" spacing={3} style={{ background: '#eeeeee' }}>
           <Grid item lg={7} md={8} sm={10} xs={11} className="mx-auto">
             <Grid container alignItems="center" spacing={4}>
