@@ -18,6 +18,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { useHistory } from 'react-router';
 import RoleController from '../Controllers/RoleController';
 import AppBar from '../Components/AppBar';
 import BottomNav from '../Components/BottomNav';
@@ -38,6 +39,8 @@ class ManageRole extends React.Component {
       openAdd: '',
       idPrivilegio: '',
       descripcionPrivilegio: '',
+      idPriv: '',
+      reload: true,
     };
     this.updateSelected = this.updateSelected.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -46,6 +49,7 @@ class ManageRole extends React.Component {
     this.handleCloseAdd = this.handleCloseAdd.bind(this);
     this.handleChangeSelect = this.handleChangeSelect.bind(this);
     this.addPriv = this.addPriv.bind(this);
+    this.removePriv = this.removePriv.bind(this);
   }
 
   // const { text, title, agree, disagree } = props;
@@ -99,10 +103,11 @@ class ManageRole extends React.Component {
     this.obtenerInfoPrivilegio(e.target.value);
   };
 
-  updateSelected(selectedIndex, privSelected) {
+  updateSelected(selectedIndex, privSelected, idPriv) {
     this.setState({
       selected: selectedIndex,
       privSelected,
+      idPriv,
     });
   }
 
@@ -127,7 +132,20 @@ class ManageRole extends React.Component {
     this.handleCloseAdd();
     const privilegios = await Roles.getPrivilegiosNotInRol(location.state.roleName);
     this.setState({
-      privilegiosFaltantes: privilegios.Items
+      privilegiosFaltantes: privilegios.Items,
+    });
+  }
+
+  async removePriv() {
+    const { location } = this.props;
+    const { idPriv, reload } = this.state;
+    const Roles = new RoleController();
+    const respuesta = await Roles.removePrivFromRole(location.state.idRole, idPriv);
+    this.handleClose();
+    const privilegios = await Roles.getPrivilegiosNotInRol(location.state.roleName);
+    this.setState({
+      privilegiosFaltantes: privilegios.Items,
+      reload: !reload,
     });
   }
 
@@ -153,7 +171,7 @@ class ManageRole extends React.Component {
             ? privilegios.map((e, i) => (
                 <ListItem
                   button
-                  onClick={() => this.updateSelected(i, e.nombre)}
+                  onClick={() => this.updateSelected(i, e.nombre, e._id)}
                   selected={selected === i}
                 >
                   <ListItemAvatar>
@@ -232,7 +250,7 @@ class ManageRole extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.removePriv} color="primary">
               Aceptar
             </Button>
             <Button onClick={this.handleClose} color="primary" autoFocus>

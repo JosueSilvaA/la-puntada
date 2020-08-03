@@ -47,6 +47,10 @@ function App() {
             <Route path="/MainReport" exact component={MainReport} />
             <Route path="/MainInvoice" exact component={MainInvoice} />
             <Route path="/employeeSalesReport" exact component={EmployeeSalesReport} />
+            {/* <Route path="/saludo" exact component={ () => <Hola name="mundo" /> } /> */}
+            <Route path="/invoiceList" exact component={invoiceList} />
+            <Route path="/MainReport" exact component={MainReport} />
+            <Route path="/MainInvoice" exact component={MainInvoice} />
             {/* <Route path="/home" exact component={Home} /> */}
             {/* <Route path="/saludo" exact component={ () => <Hola name="mundo" /> } /> */}
           </Switch>
