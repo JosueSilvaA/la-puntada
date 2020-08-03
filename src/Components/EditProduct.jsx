@@ -102,13 +102,12 @@ const EditProduct = () => {
       <SearchProduct selectProduct={selectProduct} />
 
       {ProductToEdit.value && (
-        <Grid item xs={10} md={4} className="mx-auto mt-4">
+        <Grid item xs={10} md={4} className="mx-auto mt-5">
           <Card>
             <CardActionArea>
               <CardMedia
                 component="img"
                 alt="Imagen del producto"
-                height="140"
                 src={ProductToEdit.product.imgProducto}
                 title="Contemplative Reptile"
               />

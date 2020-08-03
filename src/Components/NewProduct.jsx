@@ -14,6 +14,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { Autocomplete } from '@material-ui/lab';
 import Products from '../Controllers/ProductsController';
+import '../Styles/Productos.css'
 
 const NewProduct = () => {
   /* Selects options */
@@ -142,8 +143,8 @@ const NewProduct = () => {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        style={{ width: '80%', background: 'white', borderRadius: '15px' }}
-        className="mx-auto mt-4 border border-success"
+        style={{  borderRadius: '15px'}}
+        className="mx-auto border border-success formulario"
       >
         <Grid container spacing={3} alignItems="center">
           <Grid item xs={11} className="mx-auto mt-2">
@@ -376,7 +377,7 @@ const NewProduct = () => {
             <span className="text-small text-danger">{errors?.descripcion?.message}</span>
           </Grid>
           <Grid item lg={3} md={11} className="mx-auto mb-3">
-            <Button type="submit" variant="contained" color="primary" className="mx-auto">
+            <Button type="submit" variant="contained" color="primary" className="mx-auto" style={{fontWeight:'bold'}}>
               Registrar Producto
             </Button>
           </Grid>

@@ -68,13 +68,12 @@ const DeleteProduct = ({ idProduct = '0' }) => {
     <>
       <SearchProduct selectProduct={selectProduct} idProduct={idProduct} />
       {ProducSelected.value && (
-        <Grid item xs={10} md={4} className="mx-auto mt-3">
+        <Grid item xs={10} md={4} className="mx-auto mt-5">
           <Card>
             <CardActionArea>
               <CardMedia
                 component="img"
                 alt="Imagen del producto"
-                height="140"
                 src={ProducSelected.product.imgProducto}
                 title="Contemplative Reptile"
               />
@@ -137,7 +136,7 @@ const DeleteProduct = ({ idProduct = '0' }) => {
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="medium" color="primary" className="mx-auto" onClick={deleteP}>
+              <Button size="medium" color="primary" className="mx-auto" style={{fontWeight:'bold'}} onClick={deleteP}>
                 Eliminar Producto
               </Button>
             </CardActions>
