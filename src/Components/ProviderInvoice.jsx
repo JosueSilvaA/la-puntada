@@ -354,7 +354,6 @@ const ProviderInvoice = () => {
           </Grid>
         </Grid>
       </form>
-      <h2 className="bg-white"> {watch('subTotal')}</h2>
       <Modal
         open={OpenModal}
         onClose={handleCloseModal}
