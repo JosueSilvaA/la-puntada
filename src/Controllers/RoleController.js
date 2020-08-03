@@ -67,6 +67,24 @@ class RoleController {
       });
     return this.datosRespuesta;
   }
+
+  async removePrivFromRole(idRol, idPrivilegio) {
+    this.datosRespuesta = '';
+    await axios
+      .delete(
+        `https://api-la-puntada.herokuapp.com/api/rol/${idRol}/privilegios/${idPrivilegio}/eliminarPrivilegio`
+      )
+      .then((res) => {
+        console.log(res)
+        this.datosRespuesta = res.data;
+        return res;
+      })
+      .catch((err) => {
+        this.datosRespuesta = new Error('¡Oops!, Ocurrió un problema al realizar la conexión.');
+        return err;
+      });
+    return this.datosRespuesta;
+  }
 }
 
 export default RoleController;
