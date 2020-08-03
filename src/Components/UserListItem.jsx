@@ -21,7 +21,7 @@ const UserListItem = ({ rol, nombres, apellido, imgUsuario, estado, idUser }) =>
 
   return (
     <>
-      <Grid item lg={5} md={3} sm={5} xs={11} className="mx-auto">
+      <Grid item lg={3} md={4} sm={6} xs={12} className="mx-auto" style={{paddingLeft:'20px',paddingRight:'20px',margin:'0px'}}>
         <List>
           <ListItem
             alignItems="center"
@@ -40,7 +40,9 @@ const UserListItem = ({ rol, nombres, apellido, imgUsuario, estado, idUser }) =>
               <Avatar alt={nombres} src={imgUsuario} />
             </ListItemAvatar>
             <ListItemText
-              primary={`${nombres} ${apellido}`}
+              primary={
+              <div style={{fontWeight:'bold'}}>{nombres} {apellido}</div>
+              }
               secondary={
                 <>
                   <Typography component="span" variant="body2" color="textPrimary">
