@@ -15,18 +15,23 @@ import InvoiceListItemCli from '../Components/InvoiceListemItemCli';
 const InvoiceList= () => {
   
   const [DataProveedores, setInfoInvoicesProv] = useState({ invoicesProv: [], loading: true, value: false });
+  const [InfoProveedor, setInfoProv] = useState({ value: false, infoProve: {} });
   const [DataClientes, setInfoInvoicesCli] = useState({ invoicesCli: [], loading: true, value: false });
+  const [InfoEmpleado, setInfoEmp] = useState({ value: false, infoEmpl: [] });
 
   const getInvoicesList = async () => {
     const invoice = new invoiceController();
     const invoicesProv = await invoice.getInvoicesProv();
+    console.log(invoicesProv);
     const invoicesCli = await invoice.getInvoicesCli();
+    console.log(invoicesCli);
     if (!invoicesProv.err) {
       setInfoInvoicesProv({
         invoicesProv: invoicesProv.items,
         value: true,
         loading: false,
       });
+      
     }
     if (!invoicesCli.err) {
       setInfoInvoicesCli({
@@ -34,7 +39,28 @@ const InvoiceList= () => {
         value: true,
         loading: false,
       });
-    }     
+      
+      
+    }
+    const dataProv = await invoice.GetNameProvider(invoicesProv.items.proveedor);
+    console.log(dataProv);
+    if (!dataProv.err) {
+      setInfoProv({ value: true, infoProve: dataProv.items, });
+    } 
+   
+
+      const array ={};
+      for (let i=0; i<20;i++ ){
+        array[i]=invoicesCli.items[i].nombreEmpleado;
+        console.log(array);
+        
+      }
+      const dataEmp = await invoice.GetNameEmployee(array);
+       console.log(dataEmp);
+        if (!dataEmp.err) {
+          setInfoEmp({ value: true, infoEmpl: dataEmp.items, });
+        }
+      console.log(array);
     
   };
   useEffect(() => {
@@ -58,10 +84,13 @@ const InvoiceList= () => {
 
             {DataProveedores.invoicesProv.map((invoiceP)=> (
                 <InvoiceListItemProv   
-                  prove={invoiceP.proveedor} 
+                  prove={InfoProveedor.value && InfoProveedor.infoProve.nombre}
                   fechaFactura={invoiceP.fechaFactura}   
                   creada={invoiceP.creada}     
                   estado={invoiceP.estado}
+                  subtotal={invoiceP.subTotal}
+                  isv={invoiceP.isv}
+                  total={invoiceP.total}
                 />
               ))}
 
@@ -77,8 +106,11 @@ const InvoiceList= () => {
                   telefono={invoiceC.telefono}
                   direccion={invoiceC.direccion}
                   fechaFactura={invoiceC.fechaFactura}
-                  nombreEmp={invoiceC.nombreEmpleado}   
+                  nombreEmp={InfoEmpleado.value && InfoEmpleado.infoEmpl.nombres}   
                   creada={invoiceC.creada} 
+                  subtotal={invoiceC.subTotal}
+                  isv={invoiceC.isv}
+                  total={invoiceC.total}
                 />
               ))}
        </Grid>

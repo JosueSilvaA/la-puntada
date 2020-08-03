@@ -5,7 +5,7 @@ import {
   Card, CardHeader, CardContent
 } from '@material-ui/core';
 // eslint-disable-next-line react/prop-types
-const InvoiceListItemCli = ({cliente,rtn,telefono,direccion,fechaFactura, nombreEmp,creada }) => {
+const InvoiceListItemCli = ({cliente,rtn,telefono,direccion,fechaFactura, nombreEmp,creada,subtotal,isv,total }) => {
   
 
     return (
@@ -32,11 +32,11 @@ const InvoiceListItemCli = ({cliente,rtn,telefono,direccion,fechaFactura, nombre
               <br />  
               Nombre Empleado:{nombreEmp}
               <br />            
-              Subtotal: 
+              Subtotal: {subtotal}
               <br />
-              ISV : 
+              ISV : {isv}
               <br />
-              Total : 
+              Total : {total}
             </Typography>
           </CardContent>
         </Card>
