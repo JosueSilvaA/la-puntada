@@ -14,7 +14,7 @@ const MainReportItem = (props) => {
           <Button
             variant="outlined"
             className=" mx-auto text-center"
-            style={{ margin:'4px',marginRight:'0px',marginLeft:'0px',alignItems: 'center', width: '100%'  ,height: '6rem', borderRadius: '0%', background: bgColor }}
+            style={{ margin:'4px',marginRight:'0px',marginLeft:'0px',alignItems: 'center', width: '100%'  ,height: '6rem', borderRadius:'10px', background: bgColor }}
             
           >
             <div className="d-flex col-4 text-center" style={{paddingLeft:'24px', alignItems:'center'}}>
@@ -25,7 +25,7 @@ const MainReportItem = (props) => {
               <br/>
             </div>
                 <div className="d-flex col-8">
-                 <p className="text-center" style={{color: 'white'}}>{nameItem}</p>
+                 <p className="text-center nombre-opcion" style={{color: 'white',fontWeight:'bold'}}>{nameItem}</p>
                 </div>
             
           </Button>
@@ -40,7 +40,7 @@ const MainReportItem = (props) => {
             <Button
                 variant="outlined"
                 className=" mx-auto text-center"
-                style={{ width: '100%'  ,height: '12rem', borderRadius: '0%', background: bgColor }}
+                style={{ width: '100%'  ,height: '12rem', borderRadius: '10px', background: bgColor }}
                
             >
                 <div className="flex-column" style={{padding:'5px'}}>
@@ -49,7 +49,7 @@ const MainReportItem = (props) => {
                 style={{  width: 'auto', fontSize: '46px', color: 'white', paddingLeft: pdLeft }}
                 />
                 <br/>
-                <p className="text-center" style={{color: 'white'}}>{nameItem}</p>
+                <p className="text-center nombre-opcion" style={{color: 'white',fontWeight:'bold'}}>{nameItem}</p>
                 </div>
                 
             </Button>

@@ -31,7 +31,7 @@ const MainInvoiceItem = (props) => {
               <br/>
             </div>
                 <div className="d-flex col-8">
-                 <p className="text-center" style={{color: 'white'}}>{nameItem}</p>
+                 <p className="text-center nombre-opcion" style={{color: 'white'}}>{nameItem}</p>
                 </div>
             
           </Button>
@@ -55,7 +55,7 @@ const MainInvoiceItem = (props) => {
                 style={{  width: 'auto', fontSize: '46px', color: 'white', paddingLeft: pdLeft }}
                 />
                 <br/>
-                <p className="text-center" style={{color: 'white'}}>{nameItem}</p>
+                <p className="text-center nombre-opcion" style={{color: 'white'}}>{nameItem}</p>
                 </div>
                 
             </Button>

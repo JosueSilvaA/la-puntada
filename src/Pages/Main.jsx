@@ -11,9 +11,14 @@ const Main = () => {
     <>
       <NavBar pageName="La Puntada" goBack={false} />
       <Divider />
-      <div className="mt-5">
-        <Grid container spacing={3}>
-          <MainItem iconItem="fas fa-users" nameItem="Usuarios" route="/users" bgColor="#694bb6" />
+      <div className="mt-5" >
+        <Grid container spacing={3} style={{width:'100%',padding:'0px',marginL:'0px'}}>
+          <MainItem 
+            iconItem="fas fa-users" 
+            nameItem="Usuarios" 
+            route="/users" 
+            bgColor="#694bb6" 
+          />
           <MainItem
             iconItem="fab fa-stack-overflow"
             nameItem="Catalogos"
