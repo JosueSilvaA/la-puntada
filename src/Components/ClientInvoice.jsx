@@ -25,6 +25,7 @@ import {
   TableHead,
   TableRow,
   TableCell,
+  Divider,
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import Helmet from 'react-helmet';
@@ -167,9 +168,9 @@ const ClientInvoice = () => {
 
   return (
     <>
-      <Helmet bodyAttributes={{ style: 'background-color : #4b5d67' }} />
+      <Helmet bodyAttributes={{ style: 'background-color : #318fb5' }} />
       <NavBar pageName="Factura Cliente" goBack />
-      <form onSubmit={handleSubmit(onSubmit)} style={{ width: '90%' }} className="mx-auto mt-5">
+      <form onSubmit={handleSubmit(onSubmit)} style={{ width: '90%',marginTop:'5%' }} className="mx-auto">
         <Grid container alignItems="center" spacing={3} style={{ background: '#eeeeee' }}>
           <Grid item lg={7} md={8} sm={10} xs={11} className="mx-auto">
             <Grid container alignItems="center" spacing={3}>

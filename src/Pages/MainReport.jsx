@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Divider } from '@material-ui/core';
 import NavBar from '../Components/Navbar';
 import MainReportItem from '../Components/MainReportItem';
+import '../Styles/Reportes.css'
 
 
 const MainReport = () => {
@@ -10,27 +11,27 @@ const MainReport = () => {
       <NavBar pageName="La Puntada - Reportes" goBack />
       <Divider />
       <Grid >
-          <div className="" style={{width:'100%',marginTop:'1rem'}}>
-            <Grid container mx="auto"   alignItems="center" spacing={3} style={{marginLeft:'0px',marginRight:'0px',width:'100%'}}>
+          <div className="contenedor-opciones" style={{width:'100%'}}>
+            <Grid container mx="auto" className='opciones'  alignItems="center" spacing={5} style={{width:'80%'}}>
                 <MainReportItem
                     iconItem="fas fa-file-invoice-dollar"
                     nameItem="Ventas Diarias"
                     route=""
-                    bgColor="#694bb6"
+                    bgColor="#f6ab6c"
                     pdLeft="0px"
                 />
                 <MainReportItem
                     iconItem="fas fa-receipt"
                     nameItem="Compras Diarias"
                     route=""
-                    bgColor="green"
+                    bgColor="#006a71"
                     pdLeft="0px"
                     />
                   <MainReportItem
                     iconItem="fas fa-clipboard"
                     nameItem="Ventas Semanales"
                     route=""
-                    bgColor="red"
+                    bgColor="#3b2e5a"
                     pdLeft="0px"
                   />
                   
@@ -38,7 +39,7 @@ const MainReport = () => {
                     iconItem="fas fa-chart-area"
                     nameItem="Productos Más Vendido al Mes"
                     route=""
-                    bgColor="blue"
+                    bgColor="#b83b5e"
                     pdLeft="0px"
                   />
              </Grid>
