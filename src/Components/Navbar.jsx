@@ -4,14 +4,17 @@ import { AppBar, Toolbar, IconButton, Typography, Avatar, Hidden } from '@materi
 import { Menu } from '@material-ui/icons';
 import UserController from '../Controllers/loginController';
 import BackButton from './BackButton';
-import "../Styles/Navbar.css";
+import '../Styles/Navbar.css';
 
 const NavBar = ({ pageName, goBack }) => {
   const [UserInfo, setUserInfo] = useState({ value: false, user: {} });
 
   const decodeToken = async () => {
     const user = new UserController();
-    const token = window.localStorage.getItem('userToken');
+    let token = window.localStorage.getItem('userToken');
+    if (token === null) {
+      token = window.sessionStorage.getItem('userToken');
+    }
     if (token !== null) {
       const tokenDecoded = jwtDecode(token);
       const dataUser = await user.GetInfoUser(tokenDecoded.id);
@@ -30,9 +33,14 @@ const NavBar = ({ pageName, goBack }) => {
         <AppBar position="static" className="pl-0" style={{ background: '#24a19c' }}>
           <Toolbar>
             <Hidden only={['sl', 'lg', 'md']}>{goBack && <BackButton />}</Hidden>
-            <p className="logo" style={{ width: '60%'}}>{pageName}</p>
+            <p className="logo" style={{ width: '60%' }}>
+              {pageName}
+            </p>
 
-            <div className="d-flex justify-content-end align-items-center usuario" style={{ width: '40%' }}>
+            <div
+              className="d-flex justify-content-end align-items-center usuario"
+              style={{ width: '40%' }}
+            >
               {UserInfo.value && (
                 <>
                   <div style={{ textAlign: 'right' }}>{UserInfo.user.usuario}</div>

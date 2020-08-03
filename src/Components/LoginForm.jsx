@@ -5,7 +5,6 @@ import Alert from '@material-ui/lab/Alert';
 import { useHistory } from 'react-router-dom';
 import {
   FormControl,
-  FormControlLabel,
   Checkbox,
   Button,
   Card,
@@ -35,7 +34,7 @@ const LoginForm = () => {
       loading: true,
     });
     const Login = new LoginController();
-    const respuesta = await Login.Autenticar(data.usuario, data.password);
+    const respuesta = await Login.Autenticar(data.usuario, data.password, data.remember);
     if (respuesta.Error) {
       setData({
         loading: false,
@@ -48,9 +47,11 @@ const LoginForm = () => {
   };
 
   const onClick = () => {
-    setData({
-      showPass: !Data.showPass,
-      loading: Data.loading,
+    setData((prevState) => {
+      return {
+        ...prevState,
+        showPass: !Data.showPass,
+      };
     });
   };
 
@@ -110,10 +111,14 @@ const LoginForm = () => {
               </FormControl>
               <div>
                 <br />
-                <FormControlLabel
-                  control={<Checkbox onChange={onClick} name="checkedB" color="primary" />}
-                  label="Recordar usuario"
+                <Checkbox
+                  inputProps={{ 'aria-label': 'primary checkbox' }}
+                  name="remember"
+                  inputRef={register}
                 />
+                <span className="text-success" style={{ marginLeft: '-10px' }}>
+                  Mantener sesión
+                </span>
                 <Button
                   type="submit"
                   variant="contained"

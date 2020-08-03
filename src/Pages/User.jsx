@@ -12,13 +12,11 @@ import {
   CardActions,
   Button,
   List,
-  ListItem
+  ListItem,
 } from '@material-ui/core';
 import Helmet from 'react-helmet';
 import UserController from '../Controllers/loginController';
 import NavBar from '../Components/Navbar';
-
-
 
 const User = (props) => {
   const [infoUser, setInfoUser] = useState(false);
@@ -38,7 +36,6 @@ const User = (props) => {
   useEffect(() => {
     getInfo();
   }, []);
-
 
   return (
     <>
@@ -104,10 +101,20 @@ const User = (props) => {
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="medium" color="primary" className="mx-auto" style={{fontWeight:'bold',outline:"0"}}>
+              <Button
+                size="medium"
+                color="primary"
+                className="mx-auto"
+                style={{ fontWeight: 'bold', outline: '0' }}
+              >
                 Editar
               </Button>
-              <Button size="medium" color="primary" className="mx-auto" style={{fontWeight:'bold',outline:"0"}}>
+              <Button
+                size="medium"
+                color="primary"
+                className="mx-auto"
+                style={{ fontWeight: 'bold', outline: '0' }}
+              >
                 Borrar
               </Button>
             </CardActions>
@@ -123,12 +130,12 @@ const User = (props) => {
                   </div>
                 )}
                 <div className="d-flex mt-3">
-                    <Typography component="h3" variant="h5" className="mx-auto">
-                      <div style={{fontSize:'25px',color:'#444444',fontWeight:'bold'}}>
-                        Privilegios del usuario
-                      </div>                      
-                    </Typography>
-                  </div>
+                  <Typography component="h3" variant="h5" className="mx-auto">
+                    <div style={{ fontSize: '25px', color: '#444444', fontWeight: 'bold' }}>
+                      Privilegios del usuario
+                    </div>
+                  </Typography>
+                </div>
                 <CardContent style={{ minHeight: '19.8rem' }}>
                   <Divider />
                   {!InfoRol.value && (
@@ -140,19 +147,22 @@ const User = (props) => {
                     InfoRol.info.privilegios.map((elemento) => (
                       <div key={elemento._id}>
                         <Divider />
-                        <List component="nav"  aria-label="mailbox folders">
+                        <List component="nav" aria-label="mailbox folders">
                           <ListItem button>
-                            <ListItemText 
-                             primary={
-                               <div className='mb-2' style={{fontSize:'20px',color:'#444444'}}>
-                                 #{elemento.nombre}
-                               </div>
-                              } 
-                             secondary={
-                               <div style={{fontSize:'16px',fontWeight:'bold'}}>
+                            <ListItemText
+                              primary={
+                                <div
+                                  className="mb-2"
+                                  style={{ fontSize: '20px', color: '#444444' }}
+                                >
+                                  #{elemento.nombre}
+                                </div>
+                              }
+                              secondary={
+                                <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
                                   {elemento.descripcion}
-                               </div>
-                              } 
+                                </div>
+                              }
                             />
                           </ListItem>
                         </List>
@@ -164,21 +174,27 @@ const User = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid container className="mt-5 mb-5" style={{paddingLeft:'33px',paddingRight:'33px'}}>
-        <Grid item lg={12} md={12} xs={12} className='mx-auto' style={{backgroundColor:'#f1f3f5',borderRadius:'5px'}} alignItems="center">
-          <CardActionArea style={{padding:'20px'}}>
+      <Grid container className="mt-5 mb-5" style={{ paddingLeft: '33px', paddingRight: '33px' }}>
+        <Grid
+          item
+          lg={12}
+          md={12}
+          xs={12}
+          className="mx-auto"
+          style={{ backgroundColor: '#f1f3f5', borderRadius: '5px' }}
+          alignItems="center"
+        >
+          <CardActionArea style={{ padding: '20px' }}>
             <div className="d-flex mt-3">
-                    <Typography component="h3" variant="h5" className="mx-auto">
-                      <div style={{fontSize:'25px',color:'#444444',fontWeight:'bold'}}>
-                        Bitacora de Usuario
-                      </div>                      
-                    </Typography>
+              <Typography component="h3" variant="h5" className="mx-auto">
+                <div style={{ fontSize: '25px', color: '#444444', fontWeight: 'bold' }}>
+                  Bitacora de Usuario
+                </div>
+              </Typography>
             </div>
-            <Divider/>
-            <Divider/>
-            <CardContent style={{minHeight: '19.8rem'}}>
-  
-            </CardContent>
+            <Divider />
+            <Divider />
+            <CardContent style={{ minHeight: '19.8rem' }} />
           </CardActionArea>
         </Grid>
       </Grid>
