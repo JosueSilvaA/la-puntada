@@ -55,6 +55,34 @@ class InvoiceController {
       });
     return Res;
   };
+  GetNameProvider = async (idProveedor) => {
+    let res;
+    await axios
+      .get(`https://api-la-puntada.herokuapp.com/api/proveedor/${idProveedor}/obtenerProveedor`)
+      .then((response) => {
+        res = { err: false, items: response.data.Items };
+        
+      })
+      .catch((err) => {
+        res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
+      });
+    console.log(res);
+    return res;
+  };
+  GetNameEmployee = async (idEmpleado) => {
+    let res;
+    await axios
+      .get(`https://api-la-puntada.herokuapp.com/api/usuario/${idEmpleado}/obtenerUsuario`)
+      .then((response) => {
+        res = { err: false, items: response.data.Items };
+        
+      })
+      .catch((err) => {
+        res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
+      });
+    console.log(res);
+    return res;
+  };
 }
 
 export default InvoiceController;
