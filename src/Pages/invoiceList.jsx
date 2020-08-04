@@ -15,16 +15,12 @@ import InvoiceListItemCli from '../Components/InvoiceListemItemCli';
 const InvoiceList= () => {
   
   const [DataProveedores, setInfoInvoicesProv] = useState({ invoicesProv: [], loading: true, value: false });
-  const [InfoProveedor, setInfoProv] = useState({ value: false, infoProve: {} });
   const [DataClientes, setInfoInvoicesCli] = useState({ invoicesCli: [], loading: true, value: false });
-  const [InfoEmpleado, setInfoEmp] = useState({ value: false, infoEmpl: [] });
 
   const getInvoicesList = async () => {
     const invoice = new invoiceController();
     const invoicesProv = await invoice.getInvoicesProv();
-    console.log(invoicesProv);
     const invoicesCli = await invoice.getInvoicesCli();
-    console.log(invoicesCli);
     if (!invoicesProv.err) {
       setInfoInvoicesProv({
         invoicesProv: invoicesProv.items,
@@ -40,15 +36,7 @@ const InvoiceList= () => {
         loading: false,
       });
       
-      
-    }
-    const dataProv = await invoice.GetNameProvider(invoicesProv.items.proveedor);
-    console.log(dataProv);
-    if (!dataProv.err) {
-      setInfoProv({ value: true, infoProve: dataProv.items, });
-    } 
-   
-    
+    }  
   };
   useEffect(() => {
     getInvoicesList();
@@ -94,11 +82,12 @@ const InvoiceList= () => {
                   telefono={invoiceC.telefono}
                   direccion={invoiceC.direccion}
                   fechaFactura={invoiceC.fechaFactura}
-                  nombreEmp={InfoEmpleado.value && InfoEmpleado.infoEmpl.nombres}   
+                  nombreEmp={invoiceC.nombreEmpleado}   
                   creada={invoiceC.creada} 
                   subtotal={invoiceC.subTotal}
                   isv={invoiceC.isv}
                   total={invoiceC.total}
+                  productos={invoiceC.productos}
                 />
               ))}
        </Grid>
