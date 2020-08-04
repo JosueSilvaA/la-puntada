@@ -27,9 +27,9 @@ const Main = () => {
           />
           <MainItem
             iconItem="fas fa-list-alt"
-            nameItem="Manejar Inventario"
+            nameItem="Inventario"
             route="/maininventory"
-            bgColor="blue"
+            bgColor="#654062"
           />
           <MainItem
             iconItem="fas fa-file-invoice"
