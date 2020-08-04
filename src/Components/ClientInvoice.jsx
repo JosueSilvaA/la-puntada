@@ -50,6 +50,8 @@ const ClientInvoice = () => {
   });
   const [OpenSelectUser, setOpenSelectUser] = useState(false);
 
+  const [SubTotal, setSubTotal] = useState(0);
+
   const { register, handleSubmit, errors, watch } = useForm();
   const history = useHistory();
 
@@ -110,6 +112,7 @@ const ClientInvoice = () => {
       producto: TempProduct.product._id,
       cantidad: TempProduct.mount,
       nombre: TempProduct.product.nombre,
+      precio: TempProduct.product.precio,
     };
     setProductsSelected((prevState) => {
       return {
@@ -117,6 +120,8 @@ const ClientInvoice = () => {
         products: prevState.products.concat([prod]),
       };
     });
+    const sub = parseFloat(TempProduct.product.precio) * TempProduct.mount;
+    setSubTotal(SubTotal + sub);
     setTempProduct({ value: false, product: {}, mount: 1 });
   };
 
@@ -170,7 +175,11 @@ const ClientInvoice = () => {
     <>
       <Helmet bodyAttributes={{ style: 'background-color : #318fb5' }} />
       <NavBar pageName="Factura Cliente" goBack />
-      <form onSubmit={handleSubmit(onSubmit)} style={{ width: '90%',marginTop:'5%' }} className="mx-auto">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        style={{ width: '90%', marginTop: '5%' }}
+        className="mx-auto"
+      >
         <Grid container alignItems="center" spacing={3} style={{ background: '#eeeeee' }}>
           <Grid item lg={7} md={8} sm={10} xs={11} className="mx-auto">
             <Grid container alignItems="center" spacing={3}>
@@ -328,6 +337,7 @@ const ClientInvoice = () => {
                   label="subTotal"
                   color="primary"
                   name="subTotal"
+                  value={SubTotal}
                   autoComplete="off"
                   inputRef={register({
                     required: {
@@ -353,6 +363,7 @@ const ClientInvoice = () => {
                   label="ISV"
                   color="primary"
                   name="isv"
+                  value={SubTotal * 0.15}
                   autoComplete="off"
                   inputRef={register({
                     required: {
@@ -409,6 +420,7 @@ const ClientInvoice = () => {
                     <TableRow>
                       <TableCell align="center"> Producto</TableCell>
                       <TableCell align="center"> Cantidad</TableCell>
+                      <TableCell align="center"> Precio/u</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -418,6 +430,7 @@ const ClientInvoice = () => {
                           {element.nombre}
                         </TableCell>
                         <TableCell align="center">{element.cantidad}</TableCell>
+                        <TableCell align="center">{element.precio}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
