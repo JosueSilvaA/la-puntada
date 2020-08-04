@@ -154,7 +154,11 @@ const ClientInvoice = () => {
   };
 
   const selectProduct = (data) => {
-    setTempProduct({ value: true, product: data, mount: 1 });
+    if (data.cantidad === 0) {
+      swal('Aviso', 'Este producto no tiene existencias disponibles.', 'error');
+    } else {
+      setTempProduct({ value: true, product: data, mount: 1 });
+    }
   };
 
   const onSubmit = async (data, e) => {
