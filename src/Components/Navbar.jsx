@@ -1,13 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-import { AppBar, Toolbar, IconButton, Typography, Avatar, Hidden } from '@material-ui/core';
-import { Menu } from '@material-ui/icons';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Avatar,
+  Hidden,
+  Button,
+  Menu as MenuUser,
+  MenuItem,
+  Fade,
+} from '@material-ui/core';
+import { Menu, ExitToApp, Person } from '@material-ui/icons';
 import UserController from '../Controllers/loginController';
 import BackButton from './BackButton';
 import '../Styles/Navbar.css';
 
 const NavBar = ({ pageName, goBack }) => {
   const [UserInfo, setUserInfo] = useState({ value: false, user: {} });
+  const history = useHistory();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
   const decodeToken = async () => {
     const user = new UserController();
@@ -22,8 +38,25 @@ const NavBar = ({ pageName, goBack }) => {
         setUserInfo({ value: true, user: dataUser.item });
       }
     }
-    /* Ya tienes la información del usuario en el estado */
   };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleClickProfile = () => {
+    // eslint-disable-next-line no-underscore-dangle
+    history.push(`/user/${UserInfo.user._id}`);
+  };
+
+  const handleLogOut = () => {
+    history.push('/logout');
+  };
+
   useEffect(() => {
     decodeToken();
   }, []);
@@ -44,11 +77,34 @@ const NavBar = ({ pageName, goBack }) => {
               {UserInfo.value && (
                 <>
                   <div style={{ textAlign: 'right' }}>{UserInfo.user.usuario}</div>
-                  <Avatar
-                    src={UserInfo.user.imgUsuario}
-                    className="border border-primary ml-2"
-                    style={{ width: '2.4rem', height: '2.4rem' }}
-                  />
+                  <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick}>
+                    <Avatar
+                      src={UserInfo.user.imgUsuario}
+                      className="border border-primary"
+                      style={{ width: '2.4rem', height: '2.4rem' }}
+                    />
+                  </Button>
+                  <MenuUser
+                    id="fade-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={open}
+                    onClose={handleClose}
+                    TransitionComponent={Fade}
+                  >
+                    <MenuItem onClick={handleClickProfile}>
+                      <Person className="mr-1" />
+                      <Typography variant="inherit" className="ml-0">
+                        Perfil
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem onClick={handleLogOut}>
+                      <ExitToApp className="mr-1" />
+                      <Typography variant="inherit" className="ml-0">
+                        Cerrar Sesión
+                      </Typography>
+                    </MenuItem>
+                  </MenuUser>
                 </>
               )}
 
