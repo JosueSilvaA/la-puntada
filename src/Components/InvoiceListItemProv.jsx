@@ -9,7 +9,6 @@ import invoiceController from '../Controllers/InvoiceCotroller';
 
 // eslint-disable-next-line react/prop-types
 const InvoiceListItemProv = ({ prove, fechaFactura,creada,estado, productos,subtotal,isv,total}) => {
-    console.log('EL MALDITO ARRAY ',productos)
     const [InfoProveedor, setInfoProv] = useState({ value: false, infoProve: [] });
 
     const getInfoProveedor = async () =>{
