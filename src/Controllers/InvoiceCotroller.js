@@ -15,6 +15,7 @@ class InvoiceController {
   };
 
   saveProviderInvoice = async (data) => {
+    console.log(data)
     let res;
     await axios
       .post(
@@ -61,12 +62,11 @@ class InvoiceController {
       .get(`https://api-la-puntada.herokuapp.com/api/proveedor/${idProveedor}/obtenerProveedor`)
       .then((response) => {
         res = { err: false, items: response.data.Items };
-        
       })
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
       });
-    console.log(res);
+    
     return res;
   };
   GetNameEmployee = async (idEmpleado) => {

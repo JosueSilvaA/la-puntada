@@ -48,19 +48,6 @@ const InvoiceList= () => {
       setInfoProv({ value: true, infoProve: dataProv.items, });
     } 
    
-
-      const array ={};
-      for (let i=0; i<20;i++ ){
-        array[i]=invoicesCli.items[i].nombreEmpleado;
-        console.log(array);
-        
-      }
-      const dataEmp = await invoice.GetNameEmployee(array);
-       console.log(dataEmp);
-        if (!dataEmp.err) {
-          setInfoEmp({ value: true, infoEmpl: dataEmp.items, });
-        }
-      console.log(array);
     
   };
   useEffect(() => {
@@ -84,8 +71,9 @@ const InvoiceList= () => {
 
             {DataProveedores.invoicesProv.map((invoiceP)=> (
                 <InvoiceListItemProv   
-                  prove={InfoProveedor.value && InfoProveedor.infoProve.nombre}
+                  prove={invoiceP.proveedor}
                   fechaFactura={invoiceP.fechaFactura}   
+                  productos = {invoiceP.productos}
                   creada={invoiceP.creada}     
                   estado={invoiceP.estado}
                   subtotal={invoiceP.subTotal}

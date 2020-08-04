@@ -5,10 +5,22 @@ import {
   Typography,
   Card, CardHeader, CardContent
 } from '@material-ui/core';
+import invoiceController from '../Controllers/InvoiceCotroller';
 
 // eslint-disable-next-line react/prop-types
 const InvoiceListItemProv = ({ prove, fechaFactura,creada,estado, productos,subtotal,isv,total}) => {
+    console.log('EL MALDITO ARRAY ',productos)
+    const [InfoProveedor, setInfoProv] = useState({ value: false, infoProve: [] });
 
+    const getInfoProveedor = async () =>{
+      const invoiceProve = new invoiceController();
+      const proveedor =  await invoiceProve.GetNameProvider(prove);
+      setInfoProv({ value: true, infoProve: proveedor.items, });
+    }
+
+    useEffect(() => {
+      getInfoProveedor();
+    }, []);
 
     return (
     <>
@@ -16,7 +28,7 @@ const InvoiceListItemProv = ({ prove, fechaFactura,creada,estado, productos,subt
         <Card style={{cursor:"default"}}>           
             
                 <CardHeader
-                  title={prove}
+                  title={InfoProveedor.infoProve.nombre}
                   subheader={creada}
                />
            
@@ -25,7 +37,7 @@ const InvoiceListItemProv = ({ prove, fechaFactura,creada,estado, productos,subt
               Fecha Factura : {fechaFactura}
               <br />
               Productos : 
-              <br />              
+              {productos.map((product)=><p>{product.nombre}</p>)}          
               Subtotal: {subtotal}
               <br />
               ISV : {isv}
