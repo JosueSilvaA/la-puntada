@@ -50,6 +50,8 @@ const ProviderInvoice = () => {
   /* Modal control */
   const [OpenModal, setOpenModal] = useState(false);
 
+  const [SubTotal, setSubTotal] = useState(0);
+
   const { register, handleSubmit, errors, watch } = useForm();
   const history = useHistory();
 
@@ -68,6 +70,7 @@ const ProviderInvoice = () => {
       producto: TempProduct.product._id,
       cantidad: TempProduct.mount,
       nombre: TempProduct.product.nombre,
+      precio: TempProduct.product.precio,
     };
     setProductsSelected((prevState) => {
       return {
@@ -75,6 +78,8 @@ const ProviderInvoice = () => {
         products: prevState.products.concat([prod]),
       };
     });
+    const sub = parseFloat(TempProduct.product.precio) * TempProduct.mount;
+    setSubTotal(SubTotal + sub);
     setTempProduct({ value: false, product: {}, mount: 1 });
   };
 
@@ -125,8 +130,8 @@ const ProviderInvoice = () => {
       swal('Ojo', 'Se debe seleccionar el proveedor', 'warning');
     } else if (!ProductsSelected.value) {
       swal('Ojo', 'Se debe seleccionar al menos un producto', 'warning');
-      console.log(data);
     } else {
+      console.log(ProductsSelected);
       const invoice = new InvoiceController();
       const result = await invoice.saveProviderInvoice({
         data,
@@ -151,7 +156,11 @@ const ProviderInvoice = () => {
     <>
       <Helmet bodyAttributes={{ style: 'background-color : #318fb5' }} />
       <NavBar pageName="Factura Proveedor" goBack />
-      <form onSubmit={handleSubmit(onSubmit)} style={{ width: '90%',marginTop:'5%' }} className="mx-auto">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        style={{ width: '90%', marginTop: '5%' }}
+        className="mx-auto"
+      >
         <Grid container alignItems="center" spacing={3} style={{ background: '#eeeeee' }}>
           <Grid item lg={7} md={8} sm={10} xs={11} className="mx-auto">
             <Grid container alignItems="center" spacing={4}>
@@ -217,6 +226,7 @@ const ProviderInvoice = () => {
                   label="subTotal"
                   color="primary"
                   name="subTotal"
+                  value={SubTotal}
                   autoComplete="off"
                   inputRef={register({
                     required: {
@@ -242,6 +252,7 @@ const ProviderInvoice = () => {
                   label="isv"
                   color="primary"
                   name="isv"
+                  value={SubTotal * 0.15}
                   autoComplete="off"
                   inputRef={register({
                     required: {
@@ -318,6 +329,7 @@ const ProviderInvoice = () => {
                   <TableHead>
                     <TableRow>
                       <TableCell align="center"> Producto</TableCell>
+                      <TableCell align="center"> Precio/u</TableCell>
                       <TableCell align="center"> Cantidad</TableCell>
                     </TableRow>
                   </TableHead>
@@ -327,6 +339,7 @@ const ProviderInvoice = () => {
                         <TableCell align="left" component="th" scope="row">
                           {element.nombre}
                         </TableCell>
+                        <TableCell align="center">{element.precio}</TableCell>
                         <TableCell align="center">{element.cantidad}</TableCell>
                       </TableRow>
                     ))}
