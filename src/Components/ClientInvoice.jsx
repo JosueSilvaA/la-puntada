@@ -127,23 +127,32 @@ const ClientInvoice = () => {
 
   /* update product mount */
   const updateMountPlusOne = () => {
-    const tempMount = TempProduct.mount + 1;
-    setTempProduct((prevState) => {
-      return {
-        ...prevState,
-        mount: tempMount,
-      };
-    });
+    if (TempProduct.product.cantidad === TempProduct.mount) {
+      swal('Aviso', 'No puedes exceder las existencias del producto.', 'warning');
+    } else {
+      const tempMount = TempProduct.mount + 1;
+      setTempProduct((prevState) => {
+        return {
+          ...prevState,
+          mount: tempMount,
+        };
+      });
+    }
   };
   const updateMountRemoveOne = () => {
-    const tempMount = TempProduct.mount - 1;
-    setTempProduct((prevState) => {
-      return {
-        ...prevState,
-        mount: tempMount,
-      };
-    });
+    if (TempProduct.mount === 1) {
+      swal('Aviso', 'La cantidad mínima permitida es 1.', 'warning');
+    } else {
+      const tempMount = TempProduct.mount - 1;
+      setTempProduct((prevState) => {
+        return {
+          ...prevState,
+          mount: tempMount,
+        };
+      });
+    }
   };
+
   const selectProduct = (data) => {
     setTempProduct({ value: true, product: data, mount: 1 });
   };
@@ -567,7 +576,14 @@ const ClientInvoice = () => {
                         >
                           <Remove />
                         </IconButton>
-                        <span className="border border-danger p-3 mx-2">{TempProduct.mount}</span>
+                        <input
+                          type="text"
+                          min={1}
+                          className="border border-primary mx-1 text-center"
+                          max={TempProduct.product.cantidad}
+                          value={TempProduct.mount}
+                          style={{ width: '2rem', height: '3rem' }}
+                        />
                         <IconButton
                           aria-label="delete"
                           onClick={updateMountPlusOne}
