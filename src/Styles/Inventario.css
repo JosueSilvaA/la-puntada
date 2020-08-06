@@ -3,8 +3,7 @@
 }
 /* ESTILOS PARA LAS CATEGORIAS DE INVENTARIO WEB*/
 .contenedor-opciones{
-    background-color: #f1f3f5;
-    width: 100%;
+    /* width: 100%; */
     height: 94vh;
     display: flex;
     justify-content: center;
@@ -29,8 +28,7 @@
 
 /* ESTILOS PARA LAS CATEGORIAS DE INVENTARIO MOVIL*/
 .contenedor-opciones-movil{
-    background-color: #f1f3f5;
-    width: 100%;
+    /* width: 100%; */
     height: 93vh;
     display: flex;
     justify-content: center;

@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
   // Link
 } from 'react-router-dom';
 
@@ -22,6 +23,14 @@ import MainReport from './Pages/MainReport';
 import MainInvoice from './Pages/MainInvoice';
 import EmployeeSalesReport from './Pages/EmployeeSalesReport';
 import Reporte from './Pages/ReporteVentasDiarias';
+
+const logOut = () => {
+  // eslint-disable-next-line no-undef
+  localStorage.removeItem('userToken');
+  // eslint-disable-next-line no-undef
+  sessionStorage.removeItem('userToken');
+  return <Redirect to="/login" />;
+};
 
 function App() {
   return (
@@ -53,6 +62,7 @@ function App() {
             <Route path="/invoiceList" exact component={invoiceList} />
             <Route path="/MainReport" exact component={MainReport} />
             <Route path="/MainInvoice" exact component={MainInvoice} />
+            <Route path="/logout" exact component={logOut} />
             {/* <Route path="/home" exact component={Home} /> */}
             {/* <Route path="/saludo" exact component={ () => <Hola name="mundo" /> } /> */}
           </Switch>

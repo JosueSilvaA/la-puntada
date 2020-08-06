@@ -27,6 +27,7 @@ const InvoiceList= () => {
         value: true,
         loading: false,
       });
+      
     }
     if (!invoicesCli.err) {
       setInfoInvoicesCli({
@@ -34,8 +35,8 @@ const InvoiceList= () => {
         value: true,
         loading: false,
       });
-    }     
-    
+      
+    }  
   };
   useEffect(() => {
     getInvoicesList();
@@ -58,10 +59,14 @@ const InvoiceList= () => {
 
             {DataProveedores.invoicesProv.map((invoiceP)=> (
                 <InvoiceListItemProv   
-                  prove={invoiceP.proveedor} 
+                  prove={invoiceP.proveedor}
                   fechaFactura={invoiceP.fechaFactura}   
+                  productos = {invoiceP.productos}
                   creada={invoiceP.creada}     
                   estado={invoiceP.estado}
+                  subtotal={invoiceP.subTotal}
+                  isv={invoiceP.isv}
+                  total={invoiceP.total}
                 />
               ))}
 
@@ -79,6 +84,10 @@ const InvoiceList= () => {
                   fechaFactura={invoiceC.fechaFactura}
                   nombreEmp={invoiceC.nombreEmpleado}   
                   creada={invoiceC.creada} 
+                  subtotal={invoiceC.subTotal}
+                  isv={invoiceC.isv}
+                  total={invoiceC.total}
+                  productos={invoiceC.productos}
                 />
               ))}
        </Grid>

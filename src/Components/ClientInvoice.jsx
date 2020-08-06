@@ -50,6 +50,8 @@ const ClientInvoice = () => {
   });
   const [OpenSelectUser, setOpenSelectUser] = useState(false);
 
+  const [SubTotal, setSubTotal] = useState(0);
+
   const { register, handleSubmit, errors, watch } = useForm();
   const history = useHistory();
 
@@ -110,6 +112,7 @@ const ClientInvoice = () => {
       producto: TempProduct.product._id,
       cantidad: TempProduct.mount,
       nombre: TempProduct.product.nombre,
+      precio: TempProduct.product.precio,
     };
     setProductsSelected((prevState) => {
       return {
@@ -117,30 +120,45 @@ const ClientInvoice = () => {
         products: prevState.products.concat([prod]),
       };
     });
+    const sub = parseFloat(TempProduct.product.precio) * TempProduct.mount;
+    setSubTotal(SubTotal + sub);
     setTempProduct({ value: false, product: {}, mount: 1 });
   };
 
   /* update product mount */
   const updateMountPlusOne = () => {
-    const tempMount = TempProduct.mount + 1;
-    setTempProduct((prevState) => {
-      return {
-        ...prevState,
-        mount: tempMount,
-      };
-    });
+    if (TempProduct.product.cantidad === TempProduct.mount) {
+      swal('Aviso', 'No puedes exceder las existencias del producto.', 'warning');
+    } else {
+      const tempMount = TempProduct.mount + 1;
+      setTempProduct((prevState) => {
+        return {
+          ...prevState,
+          mount: tempMount,
+        };
+      });
+    }
   };
   const updateMountRemoveOne = () => {
-    const tempMount = TempProduct.mount - 1;
-    setTempProduct((prevState) => {
-      return {
-        ...prevState,
-        mount: tempMount,
-      };
-    });
+    if (TempProduct.mount === 1) {
+      swal('Aviso', 'La cantidad mínima permitida es 1.', 'warning');
+    } else {
+      const tempMount = TempProduct.mount - 1;
+      setTempProduct((prevState) => {
+        return {
+          ...prevState,
+          mount: tempMount,
+        };
+      });
+    }
   };
+
   const selectProduct = (data) => {
-    setTempProduct({ value: true, product: data, mount: 1 });
+    if (data.cantidad === 0) {
+      swal('Aviso', 'Este producto no tiene existencias disponibles.', 'error');
+    } else {
+      setTempProduct({ value: true, product: data, mount: 1 });
+    }
   };
 
   const onSubmit = async (data, e) => {
@@ -170,7 +188,11 @@ const ClientInvoice = () => {
     <>
       <Helmet bodyAttributes={{ style: 'background-color : #318fb5' }} />
       <NavBar pageName="Factura Cliente" goBack />
-      <form onSubmit={handleSubmit(onSubmit)} style={{ width: '90%',marginTop:'5%' }} className="mx-auto">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        style={{ width: '90%', marginTop: '5%' }}
+        className="mx-auto"
+      >
         <Grid container alignItems="center" spacing={3} style={{ background: '#eeeeee' }}>
           <Grid item lg={7} md={8} sm={10} xs={11} className="mx-auto">
             <Grid container alignItems="center" spacing={3}>
@@ -328,6 +350,7 @@ const ClientInvoice = () => {
                   label="subTotal"
                   color="primary"
                   name="subTotal"
+                  value={SubTotal}
                   autoComplete="off"
                   inputRef={register({
                     required: {
@@ -353,6 +376,7 @@ const ClientInvoice = () => {
                   label="ISV"
                   color="primary"
                   name="isv"
+                  value={SubTotal * 0.15}
                   autoComplete="off"
                   inputRef={register({
                     required: {
@@ -409,6 +433,7 @@ const ClientInvoice = () => {
                     <TableRow>
                       <TableCell align="center"> Producto</TableCell>
                       <TableCell align="center"> Cantidad</TableCell>
+                      <TableCell align="center"> Precio/u</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -418,6 +443,7 @@ const ClientInvoice = () => {
                           {element.nombre}
                         </TableCell>
                         <TableCell align="center">{element.cantidad}</TableCell>
+                        <TableCell align="center">{element.precio}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -554,7 +580,14 @@ const ClientInvoice = () => {
                         >
                           <Remove />
                         </IconButton>
-                        <span className="border border-danger p-3 mx-2">{TempProduct.mount}</span>
+                        <input
+                          type="text"
+                          min={1}
+                          className="border border-primary mx-1 text-center"
+                          max={TempProduct.product.cantidad}
+                          value={TempProduct.mount}
+                          style={{ width: '2rem', height: '3rem' }}
+                        />
                         <IconButton
                           aria-label="delete"
                           onClick={updateMountPlusOne}

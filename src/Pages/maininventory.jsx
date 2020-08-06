@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Divider } from '@material-ui/core';
+import Helmet from 'react-helmet';
 import Hidden from '@material-ui/core/Hidden';
 import NavBar from '../Components/Navbar';
 import MainInventoryItem from '../Components/MainInventoryItem';
@@ -10,10 +11,11 @@ import '../Styles/Inventario.css'
 const MainInventory = () => {
   return (
     <>
+      <Helmet bodyAttributes={{ style: 'background-color : #654062' }} />
       <NavBar pageName="La Puntada - Inventario" goBack />
       <Divider />
       <Hidden only={['lg', 'xl', 'md']}>
-          <div className="contenedor-opciones-movil" style={{width:'100%'}}>
+          <div className="contenedor-opciones-movil" >
             <Grid container className='prueba'  alignItems="center" spacing={5} style={{width:'95%'}}>
               
                 <Grid item xs>
