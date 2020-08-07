@@ -25,7 +25,6 @@ import {
   TableHead,
   TableRow,
   TableCell,
-  Divider,
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import Helmet from 'react-helmet';
@@ -154,10 +153,20 @@ const ClientInvoice = () => {
   };
 
   const selectProduct = (data) => {
-    if (data.cantidad === 0) {
-      swal('Aviso', 'Este producto no tiene existencias disponibles.', 'error');
-    } else {
-      setTempProduct({ value: true, product: data, mount: 1 });
+    let tempBan = false;
+    ProductsSelected.products.forEach((element, index) => {
+      if (element.producto === data._id) {
+        tempBan = true;
+      }
+    });
+    if (tempBan) {
+      swal('Aviso', 'Ya has seleccionado este producto.', 'warning');
+    } else if (!tempBan) {
+      if (data.cantidad === 0) {
+        swal('Aviso', 'Este producto no tiene existencias disponibles.', 'error');
+      } else {
+        setTempProduct({ value: true, product: data, mount: 1 });
+      }
     }
   };
 
@@ -358,7 +367,7 @@ const ClientInvoice = () => {
                       message: 'Ingresa el subTotal.',
                     },
                     pattern: {
-                      value: /^([0-9])*$/,
+                      value: /^\d+\.?\d*$/,
                       message: 'Dato invalido.',
                     },
                     min: {
@@ -384,7 +393,7 @@ const ClientInvoice = () => {
                       message: 'Ingresa el ISV.',
                     },
                     pattern: {
-                      value: /^([0-9])*$/,
+                      value: /^\d+\.?\d*$/,
                       message: 'Dato invalido.',
                     },
                     min: {
@@ -410,7 +419,7 @@ const ClientInvoice = () => {
                       message: 'Ingresa el total.',
                     },
                     pattern: {
-                      value: /^([0-9])*$/,
+                      value: /^\d+\.?\d*$/,
                       message: 'Dato invalido.',
                     },
                     min: {

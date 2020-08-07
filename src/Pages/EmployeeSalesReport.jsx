@@ -1,74 +1,38 @@
 import React, { useState } from 'react';
-import html2canvas from 'html2canvas';
-import {
-  Grid,
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+// import ReactPDF, { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
+import { Button, Grid } from '@material-ui/core';
+// import swal from 'sweetalert';
 import SearchUser from '../Components/SearchUSer';
+import NavBar from '../Components/Navbar';
 
 const EmployeeSalesReport = () => {
-  const [ImgReport, setImgReport] = useState('k');
-  const [UserSelected, setUserSelected] = useState({ value: false, user: {} });
+  const [Report, setReport] = useState({ value: false, reports: [], user: {} });
+  const history = useHistory();
 
-  const captureDiv = () => {
-    html2canvas(document.querySelector('#capture')).then((canvas) => {
-      const imge = canvas.toDataURL('image/jpeg', 0.9);
-      setImgReport(imge);
-      console.log(imge);
+  const selectUser = (user) => {
+    setReport((prevState) => {
+      return {
+        ...prevState,
+        user,
+      };
     });
   };
 
-  const selectUser = (user) => {
-    setUserSelected({ value: true, user });
-    console.log(user._id);
+  const onClick = () => {
+    // eslint-disable-next-line no-underscore-dangle
+    history.push(`/employeeSalesReport/${Report.user._id}`);
   };
 
   return (
     <>
-      <h2>employee sales Report</h2>
+      <NavBar goBack pageName="Reporte de ventas" />
       <SearchUser selectUser={selectUser} />
-      <Grid id="capture" container alignItems="center" className="border border-danger">
-        <Grid item xl={12}>
-          <Grid item lg={5} className="bg-dark">
-            <h1>hola</h1>
-          </Grid>
-        </Grid>
-        <Grid item xl={12} lg={12} className="mx-auto">
-          <TableContainer aria-label="customized table">
-            <TableHead>
-              <TableRow className="bg-secondary">
-                <TableCell>Fecha</TableCell>
-                <TableCell>Empleado</TableCell>
-                <TableCell>Cliente</TableCell>
-                <TableCell>Monto</TableCell>
-                <TableCell>Fecha</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell>hjkalhf adkjl</TableCell>
-                <TableCell>hjkalhf adkjl</TableCell>
-                <TableCell>hjkalhf adkjl</TableCell>
-                <TableCell>hjkalhf adkjl</TableCell>
-                <TableCell>hjkalhf adkjl</TableCell>
-              </TableRow>
-            </TableBody>
-          </TableContainer>
-        </Grid>
+      <Grid container>
+        <Button onClick={onClick} color="secondary" variant="contained" className="mx-auto mt-4">
+          Mostrar Reporte
+        </Button>
       </Grid>
-      <Button color="secondary" onClick={captureDiv}>
-        IMG
-      </Button>
-      <a href={ImgReport} download="my-file.jpeg">
-        Download
-      </a>
     </>
   );
 };

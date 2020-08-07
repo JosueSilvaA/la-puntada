@@ -240,7 +240,7 @@ const ProviderInvoice = () => {
                       message: 'Ingresa el subTotal.',
                     },
                     pattern: {
-                      value: /^([0-9])*$/,
+                      value: /^\d+\.?\d*$/,
                       message: 'Dato invalido.',
                     },
                     min: {
@@ -266,7 +266,7 @@ const ProviderInvoice = () => {
                       message: 'Ingresa el ISV.',
                     },
                     pattern: {
-                      value: /^([0-9])*$/,
+                      value: /^\d+\.?\d*$/,
                       message: 'Dato invalido.',
                     },
                     min: {
@@ -292,7 +292,7 @@ const ProviderInvoice = () => {
                       message: 'Ingresa el total.',
                     },
                     pattern: {
-                      value: /^([0-9])*$/,
+                      value: /^\d+\.?\d*$/,
                       message: 'Dato invalido.',
                     },
                     min: {

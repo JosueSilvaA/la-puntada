@@ -22,6 +22,7 @@ import invoiceList from './Pages/invoiceList';
 import MainReport from './Pages/MainReport';
 import MainInvoice from './Pages/MainInvoice';
 import EmployeeSalesReport from './Pages/EmployeeSalesReport';
+import EmployeeSalesReportId from './Reports/EmployeeSalesReport';
 import Reporte from './Pages/ReporteVentasDiarias';
 
 const logOut = () => {
@@ -57,6 +58,7 @@ function App() {
             <Route path="/MainReport" exact component={MainReport} />
             <Route path="/MainInvoice" exact component={MainInvoice} />
             <Route path="/employeeSalesReport" exact component={EmployeeSalesReport} />
+            <Route path="/employeeSalesReport/:idUser" exact component={EmployeeSalesReportId} />
             <Route path="/VentasDiarias" exact component={Reporte} />
             {/* <Route path="/saludo" exact component={ () => <Hola name="mundo" /> } /> */}
             <Route path="/invoiceList" exact component={invoiceList} />

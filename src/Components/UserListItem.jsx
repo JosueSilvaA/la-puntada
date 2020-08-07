@@ -8,7 +8,6 @@ import {
   Grid,
   ListItemText,
   Typography,
-  Divider,
 } from '@material-ui/core';
 
 // eslint-disable-next-line react/prop-types
