@@ -28,7 +28,7 @@ const MainItem = (props) => {
             />
           </Button>
         </div>
-        <p className="text-center">{nameItem}</p>
+        <p className="text-center" style={{fontWeight:'bold',color:'#444444'}}>{nameItem}</p>
       </Grid>
 
       {/* <div className="col-sm-6 col-6 mt-2 d-flex"> */}

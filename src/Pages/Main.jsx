@@ -43,6 +43,12 @@ const Main = () => {
             route="/mainReport"
             bgColor="blue"
           />
+          <MainItem
+            iconItem="fas fa-user-tie"
+            nameItem="Proveedores"
+            route="/providers"
+            bgColor="#3b6978"
+          />
         </Grid>
       </div>
     </>
