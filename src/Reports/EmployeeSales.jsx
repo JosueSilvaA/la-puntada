@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     marginTop: '20rem',
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: '80%',
+    width: '85%',
     borderStyle: 'solid',
     borderWidth: 1,
     borderRightWidth: 0,
@@ -24,7 +24,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
   },
   tableCol: {
-    width: '20%',
+    width: '19%',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+  },
+  tableColNumber: {
+    width: '5%',
     borderStyle: 'solid',
     borderWidth: 1,
     borderLeftWidth: 0,
@@ -47,22 +54,28 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 18,
-    margin: 12,
+    textAlign: 'center',
+    marginBottom: '3rem',
   },
   subtitle2: {
     fontSize: '13',
+  },
+  totals: {
+    fontSize: 12,
+    textAlign: 'right',
+    marginTop: '10rem',
   },
 });
 
 const EmployeeSales = (props) => {
   // eslint-disable-next-line react/prop-types
   const { data } = props;
-  const date = moment().format('L');
+  const date = moment().format('LLL');
   return (
     <Document title="Reporte de Ventas">
       <Page style={styles.body}>
-        <Text style={styles.title}>Reporte de Ventas por Empleado</Text>
-        <Text style={styles.subtitle}>LA PUNTADA</Text>
+        <Text style={styles.title}>LA PUNTADA</Text>
+        <Text style={styles.subtitle}>Reporte de Ventas por Empleado</Text>
         <Text style={styles.subtitle2}>Fecha emisión: {date}</Text>
         <Text style={styles.subtitle2}>
           {/* eslint-disable-next-line react/prop-types */}
@@ -70,6 +83,9 @@ const EmployeeSales = (props) => {
         </Text>
         <View style={styles.table}>
           <View style={styles.tableRow1}>
+            <View style={styles.tableColNumber}>
+              <Text style={styles.tableCell}>No.</Text>
+            </View>
             <View style={styles.tableCol}>
               <Text style={styles.tableCell}>RTN</Text>
             </View>
@@ -87,8 +103,11 @@ const EmployeeSales = (props) => {
             </View>
           </View>
           {/* eslint-disable-next-line react/prop-types */}
-          {data.reports.map((venta) => (
+          {data.reports.map((venta, index) => (
             <View style={styles.tableRow}>
+              <View style={styles.tableColNumber}>
+                <Text style={styles.tableCell}>{index + 1}</Text>
+              </View>
               <View style={styles.tableCol}>
                 <Text style={styles.tableCell}>{venta.rtn}</Text>
               </View>
@@ -106,6 +125,10 @@ const EmployeeSales = (props) => {
               </View>
             </View>
           ))}
+        </View>
+        <View style={styles.totals}>
+          <Text>Ventas realizadas: {data.reports.length}</Text>
+          <Text>Total Ventas: {data.totalAmount}</Text>
         </View>
       </Page>
     </Document>

@@ -24,7 +24,7 @@ import MainInvoice from './Pages/MainInvoice';
 import EmployeeSalesReport from './Pages/EmployeeSalesReport';
 import EmployeeSalesReportId from './Reports/EmployeeSalesReport';
 import Reporte from './Pages/ReporteVentasDiarias';
-import Providers from './Pages/Providers'
+import Providers from './Pages/Providers';
 
 const logOut = () => {
   // eslint-disable-next-line no-undef
@@ -68,7 +68,12 @@ function App() {
             <Route path="/logout" exact component={logOut} />
             {/* <Route path="/home" exact component={Home} /> */}
             {/* <Route path="/saludo" exact component={ () => <Hola name="mundo" /> } /> */}
-            <Route path="/providers" exact component={Providers}></Route>
+            <Route path="/providers" exact component={Providers} />
+            <Route
+              path="/employeeSalesReport/:idUser/:date"
+              exact
+              component={EmployeeSalesReportId}
+            />
           </Switch>
         </div>
       </Router>

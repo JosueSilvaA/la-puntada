@@ -20,7 +20,7 @@ const Reporte = (data) => (
 
 const dateFormat = (data) => {
   let date = data;
-  date = moment().format('MMMM Do YYYY');
+  date = moment().format('L');
   return date;
 };
 
@@ -29,8 +29,9 @@ const EmployeeSalesReport = (props) => {
   const history = useHistory();
 
   const getEmployeeReport = async (id) => {
+    const { params } = props.match;
     const reports = new SalesReport();
-    const result = await reports.EmployeeSalesReport(id);
+    const result = await reports.EmployeeSalesReport({ id, date: params.date });
 
     if (!result.err) {
       if (result.items.length === 0) {
@@ -40,15 +41,19 @@ const EmployeeSalesReport = (props) => {
           history.replace('/employeeSalesReport');
         });
       }
+      let totalAmount = 0;
       result.items.forEach((element, index) => {
         const date = dateFormat(element.fechaFactura);
         result.items[index].fechaFactura = date;
+        totalAmount += result.items[index].total;
       });
+
       setReport((prevState) => {
         return {
           ...prevState,
           value: true,
           reports: result.items,
+          totalAmount,
         };
       });
     } else {
@@ -73,7 +78,6 @@ const EmployeeSalesReport = (props) => {
   const viewParams = () => {
     // eslint-disable-next-line react/prop-types
     if (props.match.params.idUser !== undefined) {
-      // eslint-disable-next-line react/prop-types
       getUser(props.match.params.idUser);
     }
   };

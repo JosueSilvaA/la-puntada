@@ -1,10 +1,11 @@
 import axios from 'axios';
 
 class SalesReports {
-  EmployeeSalesReport = async (id) => {
+  EmployeeSalesReport = async (data) => {
+    console.log(data)
     let Res;
     await axios
-      .get(`https://api-la-puntada.herokuapp.com/api/facturaCliente/obtenerVentasEmpleado/${id}`)
+      .get(`https://api-la-puntada.herokuapp.com/api/facturaCliente/obtenerVentasEmpleado/${data.id}`)
       .then((res) => {
         Res = { err: false, items: res.data.Items };
       })
