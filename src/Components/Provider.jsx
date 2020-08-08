@@ -2,8 +2,17 @@ import React from 'react'
 import { Grid, Card, CardHeader, CardContent, Typography } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import moment from 'moment';
+import 'moment/locale/es';
 
 const Provider = ({provider}) => {
+
+    const dateFormat = (data) => {
+        let date = data;
+        moment.locale('es');
+        date = moment().format('LL');
+        return date;
+    };
 
     console.log('PROVEEDOR ',provider)
 
@@ -18,7 +27,7 @@ const Provider = ({provider}) => {
                     </IconButton>
                     }
                     title={provider.nombre}
-                    subheader={provider.creado}
+                    subheader={dateFormat(provider.creado)}
                 />
                 <img
                     src={provider.imgProveedor}
