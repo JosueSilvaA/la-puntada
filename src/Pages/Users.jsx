@@ -79,6 +79,7 @@ const Users = () => {
             right: '0',
             marginRight: '0.4rem',
             marginBottom: '0.7rem',
+            zIndex:'1'
           }}
           variant="round"
           color="default"

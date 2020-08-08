@@ -53,5 +53,20 @@ class UsersController {
       });
     return res;
   };
+
+  getRolUser = async (idRol) =>{
+    console.log(idRol);
+    let res;
+    await axios
+    .post(`https://api-la-puntada.herokuapp.com/api/usuario/obtenerRol/${idRol}`)
+    .then((response) =>{
+      res = {err: false, item : response.data.Items};
+      console.log('Rol ', res )
+    })
+    .catch((err) => {
+      res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
+    });
+    return res;
+  }
 }
 export default UsersController;
