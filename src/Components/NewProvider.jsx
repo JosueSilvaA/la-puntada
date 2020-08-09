@@ -16,11 +16,11 @@ import swal from 'sweetalert';
 import { useHistory } from 'react-router-dom';
 
 
-const NewProvider = () => {
+const NewProvider = (props) => {
     const history = useHistory();
       // eslint-disable-next-line no-unused-vars
-      const { register, handleSubmit, errors, watch } = useForm();
-      const [TipoProducto, setTipoProducto] = useState('')
+      const { register, handleSubmit, errors } = useForm();
+      const [TipoProducto, setTipoProducto] = useState({select:false,value:''})
       const [Data, setData] = useState({
         showPass: false,
         loading: false,
@@ -30,22 +30,24 @@ const NewProvider = () => {
       
       const onSubmit = async (data, e) => {
         const providerService = new ProviderController();
-        const newProvider = await providerService.newProvider(data,TipoProducto);
-        if(newProvider.Error === false){
-            setData({
-                loading:true
-            })
-            swal('Éxito',newProvider.Response, 'success', { timer: 2000 }).then(() => {
-                history.replace('/providers');
-            });
-        }else{
-            swal('Error', newProvider.Response, 'error');
+        if(TipoProducto.select){
+          const newProvider = await providerService.newProvider(data,TipoProducto.value);
+          if(newProvider.Error === false){
+              setData({
+                  loading:true
+              })
+              swal('Éxito',newProvider.Response, 'success', { timer: 2000 }).then(() => {
+                  props.providers();
+              });
+          }else{
+              swal('Error', newProvider.Response, 'error');
+          }
         }
         e.preventDefault();
       };
 
       const handleChange = (event) => {
-        setTipoProducto(event.target.value);
+        setTipoProducto({select:true,value:event.target.value});
       };
     
       return (
@@ -151,13 +153,14 @@ const NewProvider = () => {
                     <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={TipoProducto}
+                    value={TipoProducto.value}
                     onChange={handleChange}
                     >
                     <MenuItem value='Producto Textil'>Producto Textil</MenuItem>
                     <MenuItem value='Producto Escolar'>Producto Escolar</MenuItem>
                     <MenuItem value='Producto Variado'>Producto Variado</MenuItem>
                     </Select>
+                    <span className="text-small text-danger">{ !TipoProducto.select ? 'Seleccione un tipo de producto': ''}</span>
                 </FormControl>
             </div>
             <div className="mt-5">

@@ -24,6 +24,7 @@ const Providers = () => {
         const servicesProvider = new ProvidersController();
         const dataProviders = await servicesProvider.getProviders();
         setProviders(dataProviders.items)
+        handleClose();
     }
 
     const handleOpen = () => {
@@ -44,19 +45,10 @@ const Providers = () => {
         <>
             <Helmet bodyAttributes={{ style: 'background-color : #3b6978' }} />
             <NavBar pageName="La Puntada-Proveedores" goBack />
-            <Grid
-                container
-                spacing={2}
-                className = ' mt-1'
-                style={{display:'flex',justifyContent:'center',padding:'2%'}}
-            > 
-                {providers.map(pro =>(
-                    <Provider key ={pro._id} provider ={pro}/>
-                ))}
-                <Tooltip title="Add" aria-label="add">
+            <Tooltip title="Add" aria-label="add">
                     <Fab
                     style={{
-                        position: 'absolute',
+                        position:'fixed',
                         bottom: '0',
                         right: '0',
                         marginRight: '0.4rem',
@@ -71,8 +63,17 @@ const Providers = () => {
                     <Icon className="fas fa-user-plus" style={{ width: '2rem' }} />
                     </Fab>
                 </Tooltip>
+            <Grid
+                container
+                spacing={2}
+                className = ' mt-1'
+                style={{display:'flex',justifyContent:'center',padding:'2%'}}
+            > 
+                {providers.map(pro =>(
+                    <Provider key ={pro._id} provider ={pro}/>
+                ))}
                 <Modal
-                    style={{position:'fixed',marginTop:'5%'}}
+                    style={{position:'fixed',marginTop:'2%'}}
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
                     open={Open}
@@ -88,7 +89,7 @@ const Providers = () => {
                     <div className="border border-dark" id="transition-modal-title">
                         <div className="container">
                         <div className="">
-                            <NewProvider/>
+                            <NewProvider providers={getProviders}/>
                         </div>
                         <div className="bg-white pb-3 d-flex content-align-center">
                             <Button
@@ -105,6 +106,7 @@ const Providers = () => {
                     </Fade>
                 </Modal>
             </Grid>
+            
         </>
     )
 }
