@@ -63,18 +63,10 @@ const Users = () => {
       <Helmet bodyAttributes={{ style: 'background-color : #6f4a8e' }} />
       <NavBar pageName="La Puntada - Usuarios" goBack />
       <Divider className="bg-success0" />
-      <div className="d-flex mt-3">
-        {Data.loading && <CircularProgress className="mx-auto" size={50} color="secondary" />}
-        {Check && (
-          <Alert severity="success" className="mx-auto text-success">
-            Usuario agregado
-          </Alert>
-        )}
-      </div>
       <Tooltip title="Add" aria-label="add">
         <Fab
           style={{
-            position: 'absolute',
+            position: 'fixed',
             bottom: '0',
             right: '0',
             marginRight: '0.4rem',
@@ -89,6 +81,14 @@ const Users = () => {
           <Icon className="fas fa-user-plus" style={{ width: '2rem' }} />
         </Fab>
       </Tooltip>
+      <div className="d-flex mt-3">
+        {Data.loading && <CircularProgress className="mx-auto" size={50} color="secondary" />}
+        {Check && (
+          <Alert severity="success" className="mx-auto text-success">
+            Usuario agregado
+          </Alert>
+        )}
+      </div>
       <Grid container alignItems="center tonta">
         {Data.users.map((user) => (
           <UserListItem

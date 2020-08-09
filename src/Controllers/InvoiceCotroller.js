@@ -7,6 +7,7 @@ class InvoiceController {
       .post(`https://api-la-puntada.herokuapp.com/api/facturaCliente/registroFacturaCliente`, data)
       .then((response) => {
         res = { err: false, message: response.data.Response };
+        console.log('FACTURA DEVOLUCION CLIENTE',response.data.Items)
       })
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
