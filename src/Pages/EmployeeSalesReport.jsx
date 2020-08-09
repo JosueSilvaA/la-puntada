@@ -2,29 +2,29 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 // import ReactPDF, { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
 import { Button, Grid, TextField } from '@material-ui/core';
-// import swal from 'sweetalert';
+import swal from 'sweetalert';
 import { useForm } from 'react-hook-form';
+import moment from 'moment';
 import SearchUser from '../Components/SearchUSer';
 import NavBar from '../Components/Navbar';
 
 const EmployeeSalesReport = () => {
-  const [Report, setReport] = useState({ value: false, reports: [], user: {} });
+  const [Report, setReport] = useState({ value: false, user: {} });
   const [Filter, setFilter] = useState(false);
   const history = useHistory();
   const { register, handleSubmit, errors, watch } = useForm();
 
   const selectUser = (user) => {
-    setReport((prevState) => {
-      return {
-        ...prevState,
-        user,
-      };
-    });
+    setReport({ value: true, user });
   };
 
   const onClick = () => {
-    // eslint-disable-next-line no-underscore-dangle
-    history.push(`/employeeSalesReport/${Report.user._id}`);
+    if (!Report.value) {
+      swal('Error', 'Debes seleccionar un empleado!.', 'warning');
+    } else {
+      // eslint-disable-next-line no-underscore-dangle
+      history.push(`/employeeSalesReport/${Report.user._id}`);
+    }
   };
 
   const onClickFilter = () => {
@@ -32,8 +32,31 @@ const EmployeeSalesReport = () => {
   };
 
   const onSubmitFilter = (data) => {
-    console.log(data);
-    history.push(`/employeeSalesReport/${Report.user._id}/${data.fechaInicial}-${data.fechaFinal}`);
+    if (data.fechaInicial === '' || data.fechaFinal === '') {
+      swal({
+        title: 'No has seleccionado las fechas!',
+        text: 'Deseas ver el reporte de ventas general para este usuario.',
+        icon: 'warning',
+        // buttons: true,
+        buttons: ['Cancelar', 'Continuar'],
+        dangerMode: true,
+      }).then((result) => {
+        if (result) {
+          onClick();
+        }
+      });
+    } else if (!Report.value) {
+      swal('Error', 'Debes seleccionar un empleado!.', 'warning');
+    } else {
+      const date = moment(data.fechaFinal).isAfter(data.fechaInicial);
+      if (!date) {
+        swal('Error', 'Debes seleccionar un parametro de fechas correcto', 'error');
+      } else {
+        history.push(
+          `/employeeSalesReport/${Report.user._id}/${data.fechaInicial}_${data.fechaFinal}`
+        );
+      }
+    }
   };
 
   return (
@@ -53,14 +76,8 @@ const EmployeeSalesReport = () => {
                 color="primary"
                 name="fechaInicial"
                 autoComplete="off"
-                inputRef={register({
-                  required: {
-                    value: true,
-                    message: 'Ingresa la fecha de la factura.',
-                  },
-                })}
+                inputRef={register()}
               />
-              <span className="text-small text-danger">{errors?.fechaInicial?.message}</span>
             </Grid>
             <Grid item lg={2} md={3} sm={4} xs={6} className="mx-auto">
               <span style={{ color: '#007bff', fontSize: '12px' }}>Fecha Final</span>
@@ -72,14 +89,8 @@ const EmployeeSalesReport = () => {
                 color="primary"
                 name="fechaFinal"
                 autoComplete="off"
-                inputRef={register({
-                  required: {
-                    value: true,
-                    message: 'Ingresa la fecha de la factura.',
-                  },
-                })}
+                inputRef={register()}
               />
-              <span className="text-small text-danger">{errors?.fechaFinal?.message}</span>
             </Grid>
             <Grid item xl={13} lg={12} md={4} className="d-flex mx-auto mb-3 mt-4">
               <Button type="submit" variant="contained" color="primary" className="mx-auto">

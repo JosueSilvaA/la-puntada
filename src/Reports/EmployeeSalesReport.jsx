@@ -19,8 +19,8 @@ const Reporte = (data) => (
 );
 
 const dateFormat = (data) => {
-  let date = data;
-  date = moment().format('L');
+  const tempArray = data.split('T');
+  const date = moment(tempArray[0]).format('L');
   return date;
 };
 
@@ -42,10 +42,12 @@ const EmployeeSalesReport = (props) => {
         });
       }
       let totalAmount = 0;
+      let totalISV = 0;
       result.items.forEach((element, index) => {
         const date = dateFormat(element.fechaFactura);
         result.items[index].fechaFactura = date;
         totalAmount += result.items[index].total;
+        totalISV += result.items[index].isv;
       });
 
       setReport((prevState) => {
@@ -54,6 +56,7 @@ const EmployeeSalesReport = (props) => {
           value: true,
           reports: result.items,
           totalAmount,
+          totalISV,
         };
       });
     } else {

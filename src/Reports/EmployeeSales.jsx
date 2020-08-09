@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
 const EmployeeSales = (props) => {
   // eslint-disable-next-line react/prop-types
   const { data } = props;
+  const totalAmountIsv = data.totalAmount + data.totalISV;
   const date = moment().format('LLL');
   return (
     <Document title="Reporte de Ventas">
@@ -129,6 +130,8 @@ const EmployeeSales = (props) => {
         <View style={styles.totals}>
           <Text>Ventas realizadas: {data.reports.length}</Text>
           <Text>Total Ventas: {data.totalAmount}</Text>
+          <Text>Total ISV: {data.totalISV}</Text>
+          <Text>Total: {totalAmountIsv.toFixed(2)}</Text>
         </View>
       </Page>
     </Document>
