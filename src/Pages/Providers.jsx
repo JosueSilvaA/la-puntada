@@ -3,24 +3,17 @@ import Helmet from 'react-helmet';
 import NavBar from '../Components/Navbar';
 import { 
     Grid, 
-    Card, 
-    CardHeader, 
-    CardContent, 
-    Typography,
     Fab,
     Backdrop,
     Fade,
     Modal,
     Button,
-    CircularProgress,
-    Divider,
     Tooltip,
     Icon, } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import "../Styles/Providers.css";
 import ProvidersController from '../Controllers/ProvidersController'
 import Provider from '../Components/Provider'
+import NewProvider from '../Components/NewProvider';
 
 const Providers = () => {
 
@@ -79,7 +72,7 @@ const Providers = () => {
                     </Fab>
                 </Tooltip>
                 <Modal
-                    style={{ position: 'absolute',marginTop:'2%'}}
+                    style={{position:'fixed',marginTop:'5%'}}
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
                     open={Open}
@@ -95,7 +88,7 @@ const Providers = () => {
                     <div className="border border-dark" id="transition-modal-title">
                         <div className="container">
                         <div className="">
-                            
+                            <NewProvider/>
                         </div>
                         <div className="bg-white pb-3 d-flex content-align-center">
                             <Button
