@@ -12,10 +12,12 @@ import {
   Menu as MenuUser,
   MenuItem,
   Fade,
+  Drawer,
 } from '@material-ui/core';
 import { Menu, ExitToApp, Person } from '@material-ui/icons';
 import UserController from '../Controllers/loginController';
 import BackButton from './BackButton';
+import DrawerItems from './DrawerItems';
 import '../Styles/Navbar.css';
 
 const NavBar = ({ pageName, goBack }) => {
@@ -24,6 +26,15 @@ const NavBar = ({ pageName, goBack }) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+  const [DrawerState, setDrawerState] = useState(false);
+
+  const openDrawer = () => {
+    setDrawerState(true);
+  };
+  const closeDrawer = () => {
+    setDrawerState(false);
+  };
 
   const decodeToken = async () => {
     const user = new UserController();
@@ -60,6 +71,7 @@ const NavBar = ({ pageName, goBack }) => {
   useEffect(() => {
     decodeToken();
   }, []);
+
   return (
     <>
       <div>
@@ -108,13 +120,18 @@ const NavBar = ({ pageName, goBack }) => {
                 </>
               )}
 
-              <IconButton edge="end" color="inherit" aria-label="menu">
+              <IconButton onClick={openDrawer} edge="end" color="inherit" aria-label="menu">
                 <Menu />
               </IconButton>
             </div>
           </Toolbar>
         </AppBar>
       </div>
+      <Drawer anchor="right" open={DrawerState} onClose={closeDrawer}>
+        <div role="presentation" onClick={closeDrawer} onKeyDown={closeDrawer}>
+          <DrawerItems />
+        </div>
+      </Drawer>
     </>
   );
 };

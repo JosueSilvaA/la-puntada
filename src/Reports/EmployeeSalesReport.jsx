@@ -32,7 +32,6 @@ const EmployeeSalesReport = (props) => {
     const { params } = props.match;
     const reports = new SalesReport();
     const result = await reports.EmployeeSalesReport({ id, date: params.date });
-
     if (!result.err) {
       if (result.items.length === 0) {
         swal('Aviso', 'El usuaio no tiene ninguna venta registrada', 'error', {

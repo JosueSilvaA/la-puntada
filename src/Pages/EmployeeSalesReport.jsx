@@ -12,7 +12,7 @@ const EmployeeSalesReport = () => {
   const [Report, setReport] = useState({ value: false, user: {} });
   const [Filter, setFilter] = useState(false);
   const history = useHistory();
-  const { register, handleSubmit, errors, watch } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const selectUser = (user) => {
     setReport({ value: true, user });
