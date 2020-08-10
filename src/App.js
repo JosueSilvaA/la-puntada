@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,7 +9,19 @@ import {
 
 import Login from './Pages/Login';
 import Main from './Pages/Main';
+import PrivateMain from './PrivateRoutes/PrivateMain';
 import Inventory from './Pages/Inventory';
+import PrivateMainInventory from './PrivateRoutes/PrivateInventory';
+import PrivateCatalogue from './PrivateRoutes/PrivateCatalogue';
+import PrivateUsers from './PrivateRoutes/PrivateUsers';
+import PrivateUser from './PrivateRoutes/PrivateUser';
+import PrivateMainInvoice from './PrivateRoutes/PrivateMainInvoice';
+import PrivateMainReport from './PrivateRoutes/PrivateMainReport';
+import PrivateClientInvoice from './PrivateRoutes/PrivateClientInvoice';
+import PrivateProviderInvoice from './PrivateRoutes/PrivateProviderInvoice';
+import PrivateInvoiceList from './PrivateRoutes/PrivateInvoiceList';
+import PrivateEmployeeSalesReport from './PrivateRoutes/PrivateEmployeeSalesReport';
+import PrivateProviders from './PrivateRoutes/PrivateProviders';
 import Users from './Pages/Users';
 import Roles from './Pages/Role';
 import ManageRole from './Pages/ManageRole';
@@ -35,40 +47,63 @@ const logOut = () => {
 };
 
 function App() {
+  const [RenderOption, setRenderOption] = useState(false);
+  const [Auth, setAuth] = useState(false);
+
+  const viewToken = () => {
+    let token = window.localStorage.getItem('userToken');
+    if (token === null) {
+      token = window.sessionStorage.getItem('userToken');
+    }
+
+    if (token !== null) {
+      setAuth(true);
+    }
+    setRenderOption(true);
+  };
+
+  const changeAuth = () => {
+    setAuth(true);
+  };
+
+  const changeAuthOut = () => {
+    setAuth(false);
+  };
+
+  useEffect(() => {
+    viewToken();
+  }, []);
+
   return (
     <>
       {/* Configuración de Router */}
       <Router>
         <div className="App">
           <Switch>
-            <Route path="/" exact component={Login} />
-            <Route path="/login" exact component={Login} />
-            <Route path="/main" exact component={Main} />
-            <Route path="/inventory" exact component={Inventory} />
+            <Route path="/" exact component={() => <Login changeAuth={changeAuth} />} />
+            <Route path="/login" exact component={() => <Login changeAuth={changeAuth} />} />
+            <PrivateMain exact path="/main" Auth={Auth} />
+            <PrivateMainInventory exact path="/MainInventory" Auth={Auth} />
             <Route path="/inventory/:action" exact component={Inventory} />
             <Route path="/inventory/:action/:idProduct" exact component={Inventory} />
-            <Route path="/catalogo" exact component={Catalogue} />;
-            <Route path="/users" exact component={Users} />
+            <PrivateCatalogue exact path="/catalogo" Auth={Auth} />
+            <PrivateUsers exact path="/users" Auth={Auth} />
+            {/* <PrivateUser exact path="/user/:idUser" Auth={Auth} /> */}
             <Route path="/user/:idUser" exact component={User} />
-            <Route path="/MainInventory" exact component={MainInventory} />
-            <Route path="/providerInvoice" exact component={ProviderInvoice} />
-            <Route path="/clientInvoice" exact component={ClientInvoice} />
+            <PrivateClientInvoice exact path="/clientInvoice" Auth={Auth} />
+            <PrivateProviderInvoice exact path="/providerInvoice" Auth={Auth} />
             <Route path="/roles" exact component={Roles} />
             <Route path="/manage-role" exact component={ManageRole} />
-            <Route path="/invoiceList" exact component={invoiceList} />
-            <Route path="/MainReport" exact component={MainReport} />
-            <Route path="/MainInvoice" exact component={MainInvoice} />
-            <Route path="/employeeSalesReport" exact component={EmployeeSalesReport} />
+            <PrivateInvoiceList exact path="/invoiceList" Auth={Auth} />
+            <PrivateMainReport exact path="/mainReport" Auth={Auth} />
+            <PrivateMainInvoice exact path="/mainInvoice" Auth={Auth} />
+            <PrivateEmployeeSalesReport exact path="/employeeSalesReport" Auth={Auth} />
             <Route path="/employeeSalesReport/:idUser" exact component={EmployeeSalesReportId} />
             <Route path="/VentasDiarias" exact component={Reporte} />
-            {/* <Route path="/saludo" exact component={ () => <Hola name="mundo" /> } /> */}
-            <Route path="/invoiceList" exact component={invoiceList} />
-            <Route path="/MainReport" exact component={MainReport} />
-            <Route path="/MainInvoice" exact component={MainInvoice} />
             <Route path="/logout" exact component={logOut} />
             {/* <Route path="/home" exact component={Home} /> */}
             {/* <Route path="/saludo" exact component={ () => <Hola name="mundo" /> } /> */}
-            <Route path="/providers" exact component={Providers} />
+            <PrivateProviders exact path="/providers" Auth={Auth} />
             <Route
               path="/employeeSalesReport/:idUser/:date"
               exact

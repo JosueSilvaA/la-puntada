@@ -18,7 +18,7 @@ import {
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import LoginController from '../Controllers/loginController';
 
-const LoginForm = () => {
+const LoginForm = ({ changeAuth }) => {
   const [Data, setData] = useState({ showPass: false, loading: false, error: '' });
   const history = useHistory();
   const inputStyles = {
@@ -42,6 +42,7 @@ const LoginForm = () => {
         error: respuesta.Error,
       });
     } else {
+      changeAuth();
       history.push('/main');
     }
   };

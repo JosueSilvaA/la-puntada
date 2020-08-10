@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { CircularProgress } from '@material-ui/core';
 import LoginForm from '../Components/LoginForm';
 
-const Login = () => {
+const Login = ({ changeAuth }) => {
   const [ShowForm, setShowForm] = useState(false);
   const history = useHistory();
 
@@ -28,7 +28,6 @@ const Login = () => {
     } else {
       setShowForm(true);
     }
-    console.log(token);
   };
 
   useEffect(() => {
@@ -42,7 +41,7 @@ const Login = () => {
           <CircularProgress className="mx-auto" size={50} color="secondary" />
         </div>
       )}
-      <div style={estilosLogin}>{ShowForm && <LoginForm />}</div>
+      <div style={estilosLogin}>{ShowForm && <LoginForm changeAuth={changeAuth} />}</div>
     </>
   );
 };
