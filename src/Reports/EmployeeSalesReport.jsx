@@ -91,7 +91,7 @@ const EmployeeSalesReport = (props) => {
   return (
     <>
       {/* <NavBar goBack pageName="Reporte de ventas" /> */}
-      <div style={{ height: '99vh' }}>
+      <div style={{ height: '100vh' }}>
         {Report.value && Reporte(Report)}
         {/* <div>
         {value ? (

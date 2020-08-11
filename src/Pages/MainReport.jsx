@@ -43,8 +43,8 @@ const MainReport = () => {
 
             <MainReportItem
               iconItem="fas fa-chart-area"
-              nameItem="Productos Más Vendido al Mes"
-              route=""
+              nameItem="Productos Más Vendido"
+              route="/mostSelledProducts"
               bgColor="#b83b5e"
               pdLeft="0px"
             />

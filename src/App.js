@@ -35,6 +35,7 @@ import MainReport from './Pages/MainReport';
 import MainInvoice from './Pages/MainInvoice';
 import EmployeeSalesReport from './Pages/EmployeeSalesReport';
 import EmployeeSalesReportId from './Reports/EmployeeSalesReport';
+import MostSellsProducts from './Reports/MostSellsProducts';
 import Reporte from './Pages/ReporteVentasDiarias';
 import Providers from './Pages/Providers';
 
@@ -109,6 +110,7 @@ function App() {
               exact
               component={EmployeeSalesReportId}
             />
+            <Route path="/mostSelledProducts" exact component = {MostSellsProducts}/>
           </Switch>
         </div>
       </Router>

@@ -172,7 +172,7 @@ const NewProvider = (props) => {
                     disabled={Data.loading}
                 >
                     {Data.loading && <i className="fa fa-refresh fa-spin" />}
-                    Registrar
+                    {!Data.loading && 'Registrar'}
                 </Button>
             </div>
           </form>
