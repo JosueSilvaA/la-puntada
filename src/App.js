@@ -38,6 +38,7 @@ import EmployeeSalesReportId from './Reports/EmployeeSalesReport';
 import MostSellsProducts from './Reports/MostSellsProducts';
 import Reporte from './Pages/ReporteVentasDiarias';
 import Providers from './Pages/Providers';
+import bitacora from './Pages/Bitacora';
 
 const logOut = () => {
   // eslint-disable-next-line no-undef
@@ -101,7 +102,8 @@ function App() {
             <PrivateEmployeeSalesReport exact path="/employeeSalesReport" Auth={Auth} />
             <Route path="/employeeSalesReport/:idUser" exact component={EmployeeSalesReportId} />
             <Route path="/VentasDiarias" exact component={Reporte} />
-            <Route path="/logout" exact component={logOut} />
+            <Route path="/logout" exact component={logOut} />            
+            <Route path="/bitacora" exact component={bitacora} />
             {/* <Route path="/home" exact component={Home} /> */}
             {/* <Route path="/saludo" exact component={ () => <Hola name="mundo" /> } /> */}
             <PrivateProviders exact path="/providers" Auth={Auth} />

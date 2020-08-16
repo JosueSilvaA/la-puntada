@@ -44,6 +44,12 @@ const Main = () => {
             route="/providers"
             bgColor="#3b6978"
           />
+          <MainItem
+            iconItem="fas fa-book"
+            nameItem="Bitacora"
+            route="/Bitacora"
+            bgColor="#00CED1"
+          />
         </Grid>
       </div>
     </>
