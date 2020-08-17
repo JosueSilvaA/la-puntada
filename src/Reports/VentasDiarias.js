@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+/* eslint-disable react/prop-types */
+import React from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-import { ContactSupportOutlined } from '@material-ui/icons';
 // Create styles
 const styles = StyleSheet.create({
   table: {
@@ -31,7 +30,7 @@ const styles = StyleSheet.create({
 });
 
 const Quixote = (props) => {
-  const {data} = props;
+  const { data } = props;
   return (
     <Document>
       <Page style={styles.body}>
@@ -50,7 +49,7 @@ const Quixote = (props) => {
               <Text style={styles.tableCell}>Total</Text>
             </View>
           </View>
-          {data.map((e, i) => (
+          {data.map((e) => (
             <View style={styles.tableRow}>
               <View style={styles.tableCol}>
                 <Text style={styles.tableCell}>{e.nombreCliente}</Text>
@@ -59,10 +58,10 @@ const Quixote = (props) => {
                 <Text style={styles.tableCell}>{e.rtn}</Text>
               </View>
               <View style={styles.tableCol}>
-          <Text style={styles.tableCell}>{e.fechaFactura}</Text>
+                <Text style={styles.tableCell}>{e.fechaFactura}</Text>
               </View>
               <View style={styles.tableCol}>
-          <Text style={styles.tableCell}>{e.total}</Text>
+                <Text style={styles.tableCell}>{e.total}</Text>
               </View>
             </View>
           ))}

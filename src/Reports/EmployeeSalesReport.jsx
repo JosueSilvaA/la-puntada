@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import {
   PDFViewer,
@@ -80,6 +81,7 @@ const EmployeeSalesReport = (props) => {
   const viewParams = () => {
     // eslint-disable-next-line react/prop-types
     if (props.match.params.idUser !== undefined) {
+      // eslint-disable-next-line react/prop-types
       getUser(props.match.params.idUser);
     }
   };

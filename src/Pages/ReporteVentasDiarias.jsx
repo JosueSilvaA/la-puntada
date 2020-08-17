@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import ReactPDF, { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
-import axios from 'axios'
+import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
+import axios from 'axios';
 import VentasDiarias from '../Reports/VentasDiarias';
 
+// eslint-disable-next-line no-unused-vars
 const Reporte = () => (
   <PDFViewer>
     <VentasDiarias />
@@ -10,6 +12,7 @@ const Reporte = () => (
 );
 
 const App = () => {
+  // eslint-disable-next-line no-shadow
   const [Reporte, setReporte] = useState({ value: false, reporte: {} });
   async function getReporte() {
     let datosRespuesta;
@@ -19,11 +22,9 @@ const App = () => {
     await axios
       .post('http://localhost:3000/api/facturaCliente/obtenerVentasDiarias', postData)
       .then((res) => {
-        console.log(res);
         datosRespuesta = res.data;
       })
       .catch((err) => {
-        console.log(err);
         datosRespuesta = new Error('¡Oops!, Ocurrió un problema al realizar la conexión.');
       });
     setReporte({ value: true, reporte: datosRespuesta.Items });
@@ -43,6 +44,7 @@ const App = () => {
     <div>
       {value ? (
         <PDFDownloadLink document={<VentasDiarias data={reporte} />} fileName="somename.pdf">
+          {/* eslint-disable-next-line no-unused-vars */}
           {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
         </PDFDownloadLink>
       ) : (

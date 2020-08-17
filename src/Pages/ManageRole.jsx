@@ -1,6 +1,12 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
+/* eslint-disable array-callback-return */
+/* eslint-disable func-names */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import List from '@material-ui/core/List';
-import InputLabel from '@material-ui/core/InputLabel';
+// import InputLabel from '@material-ui/core/InputLabel';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -18,7 +24,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { useHistory } from 'react-router';
+// import { useHistory } from 'react-router';
 import RoleController from '../Controllers/RoleController';
 import AppBar from '../Components/AppBar';
 import BottomNav from '../Components/BottomNav';
@@ -62,7 +68,6 @@ class ManageRole extends React.Component {
       //  const respuesta = await Roles.getPrivilegiosNotInRol(location.state.roleName);
       const respuesta = await Roles.getPrivilegiosPorRol(location.state.idRole);
       const privilegios = await Roles.getPrivilegiosNotInRol(location.state.roleName);
-      console.log(respuesta);
       this.setState({
         privilegios: respuesta.Items,
         privilegiosFaltantes: privilegios.Items,
@@ -113,9 +118,9 @@ class ManageRole extends React.Component {
 
   obtenerInfoPrivilegio(idPrivilegio) {
     const { privilegiosFaltantes } = this.state;
+    // eslint-disable-next-line consistent-return
     const privilegio = privilegiosFaltantes.find(function (privilegio, index) {
       if (privilegio._id === idPrivilegio) {
-        console.log(privilegio.descripcion);
         return privilegio.descripcion;
       }
     });
@@ -125,9 +130,11 @@ class ManageRole extends React.Component {
   }
 
   async addPriv() {
+    // eslint-disable-next-line react/prop-types
     const { location } = this.props;
     const { idPrivilegio } = this.state;
     const Roles = new RoleController();
+    // eslint-disable-next-line no-unused-vars
     const respuesta = await Roles.addPrivToRole(location.state.idRole, idPrivilegio);
     this.handleCloseAdd();
     const privilegios = await Roles.getPrivilegiosNotInRol(location.state.roleName);
@@ -140,6 +147,7 @@ class ManageRole extends React.Component {
     const { location } = this.props;
     const { idPriv, reload } = this.state;
     const Roles = new RoleController();
+    // eslint-disable-next-line no-unused-vars
     const respuesta = await Roles.removePrivFromRole(location.state.idRole, idPriv);
     this.handleClose();
     const privilegios = await Roles.getPrivilegiosNotInRol(location.state.roleName);

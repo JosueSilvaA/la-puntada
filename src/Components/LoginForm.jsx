@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import TextField from '@material-ui/core/TextField';
@@ -125,9 +126,9 @@ const LoginForm = ({ changeAuth }) => {
                   variant="contained"
                   className="btn-block mt-3"
                   disabled={!!Data.loading}
-                  style={{ backgroundColor: '#39a8bf', color: 'white',minHeight:'2.5rem'}}
+                  style={{ backgroundColor: '#39a8bf', color: 'white', minHeight: '2.5rem' }}
                 >
-                  {Data.loading && <i className="fa fa-refresh fa-spin"/>}
+                  {Data.loading && <i className="fa fa-refresh fa-spin" />}
                   {!Data.loading && 'Login'}
                 </Button>
               </div>

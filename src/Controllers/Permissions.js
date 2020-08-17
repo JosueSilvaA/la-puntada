@@ -1,12 +1,12 @@
+/* eslint-disable no-unused-vars */
 class Permissions {
   routesPermissions = (token) => {
-    let res;
     const PermissionsRoutes = {
       users: false,
       editProduct: true,
       mainReport: false,
     };
-    res = { err: false, items: PermissionsRoutes };
+    const res = { err: false, items: PermissionsRoutes };
     return res;
   };
 }

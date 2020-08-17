@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
@@ -6,18 +7,16 @@ import {
   Redirect,
   // Link
 } from 'react-router-dom';
-import { CircularProgress } from "@material-ui/core";
-import PermissionsCtl from "./Controllers/Permissions";
-
+import { CircularProgress } from '@material-ui/core';
+import PermissionsCtl from './Controllers/Permissions';
 
 import Login from './Pages/Login';
-import Main from './Pages/Main';
 import PrivateMain from './PrivateRoutes/PrivateMain';
 import Inventory from './Pages/Inventory';
 import PrivateMainInventory from './PrivateRoutes/PrivateInventory';
 import PrivateCatalogue from './PrivateRoutes/PrivateCatalogue';
 import PrivateUsers from './PrivateRoutes/PrivateUsers';
-import PrivateUser from './PrivateRoutes/PrivateUser';
+// import PrivateUser from './PrivateRoutes/PrivateUser';
 import PrivateMainInvoice from './PrivateRoutes/PrivateMainInvoice';
 import PrivateMainReport from './PrivateRoutes/PrivateMainReport';
 import PrivateClientInvoice from './PrivateRoutes/PrivateClientInvoice';
@@ -25,22 +24,12 @@ import PrivateProviderInvoice from './PrivateRoutes/PrivateProviderInvoice';
 import PrivateInvoiceList from './PrivateRoutes/PrivateInvoiceList';
 import PrivateEmployeeSalesReport from './PrivateRoutes/PrivateEmployeeSalesReport';
 import PrivateProviders from './PrivateRoutes/PrivateProviders';
-import Users from './Pages/Users';
 import Roles from './Pages/Role';
 import ManageRole from './Pages/ManageRole';
-import Catalogue from './Pages/Catalogue';
-import MainInventory from './Pages/maininventory';
 import User from './Pages/User';
-import ProviderInvoice from './Components/ProviderInvoice';
-import ClientInvoice from './Components/ClientInvoice';
-import invoiceList from './Pages/invoiceList';
-import MainReport from './Pages/MainReport';
-import MainInvoice from './Pages/MainInvoice';
-import EmployeeSalesReport from './Pages/EmployeeSalesReport';
 import EmployeeSalesReportId from './Reports/EmployeeSalesReport';
 import MostSellsProducts from './Reports/MostSellsProducts';
 import Reporte from './Pages/ReporteVentasDiarias';
-import Providers from './Pages/Providers';
 import bitacora from './Pages/Bitacora';
 
 const logOut = () => {
@@ -52,8 +41,8 @@ const logOut = () => {
 };
 
 function App() {
- const [Auth, setAuth] = useState(false);
- // routes permisions
+  const [Auth, setAuth] = useState(false);
+  // routes permisions
   const [Permission, setPermission] = useState({
     users: false,
     editProduct: false,
@@ -61,20 +50,20 @@ function App() {
   });
   const [RenderOption, setRenderOption] = useState(false);
 
-   const routesConfig = () => {
-     let token = window.localStorage.getItem("userToken");
-     if (token === null) {
-       token = window.sessionStorage.getItem("userToken");
-     }
-     const routesControl = new PermissionsCtl();
-     // config permission
-     if (token !== null) {
-       const result = routesControl.routesPermissions(token);
-       if (!result.err) {
-         setPermission(result.items);
-       }
-     }
-   };
+  const routesConfig = () => {
+    let token = window.localStorage.getItem('userToken');
+    if (token === null) {
+      token = window.sessionStorage.getItem('userToken');
+    }
+    const routesControl = new PermissionsCtl();
+    // config permission
+    if (token !== null) {
+      const result = routesControl.routesPermissions(token);
+      if (!result.err) {
+        setPermission(result.items);
+      }
+    }
+  };
 
   const viewToken = () => {
     let token = window.localStorage.getItem('userToken');
@@ -94,9 +83,9 @@ function App() {
     routesConfig();
   };
 
-  const changeAuthOut = () => {
+  /*   const changeAuthOut = () => {
     setAuth(false);
-  };
+  }; */
 
   useEffect(() => {
     viewToken();
@@ -109,59 +98,31 @@ function App() {
         <div className="App">
           {!RenderOption && (
             <div className="d-flex">
-              <CircularProgress
-                className="mx-auto"
-                size={50}
-                color="secondary"
-              />
+              <CircularProgress className="mx-auto" size={50} color="secondary" />
             </div>
           )}
           {RenderOption && (
             <Switch>
-              <Route
-                path="/"
-                exact
-                component={() => <Login changeAuth={changeAuth} />}
-              />
-              <Route
-                path="/login"
-                exact
-                component={() => <Login changeAuth={changeAuth} />}
-              />
+              <Route path="/" exact component={() => <Login changeAuth={changeAuth} />} />
+              <Route path="/login" exact component={() => <Login changeAuth={changeAuth} />} />
               <PrivateMain exact path="/main" Auth={Auth} />
               <PrivateMainInventory exact path="/MainInventory" Auth={Auth} />
               <Route path="/inventory/:action" exact component={Inventory} />
-              <Route
-                path="/inventory/:action/:idProduct"
-                exact
-                component={Inventory}
-              />
+              <Route path="/inventory/:action/:idProduct" exact component={Inventory} />
               <PrivateCatalogue exact path="/catalogo" Auth={Auth} />
               <PrivateUsers exact path="/users" Auth={Auth} Permission={Permission.users} />
-              
+
               {/* <PrivateUser exact path="/user/:idUser" Auth={Auth} /> */}
               <Route path="/user/:idUser" exact component={User} />
               <PrivateClientInvoice exact path="/clientInvoice" Auth={Auth} />
-              <PrivateProviderInvoice
-                exact
-                path="/providerInvoice"
-                Auth={Auth}
-              />
+              <PrivateProviderInvoice exact path="/providerInvoice" Auth={Auth} />
               <Route path="/roles" exact component={Roles} />
               <Route path="/manage-role" exact component={ManageRole} />
               <PrivateInvoiceList exact path="/invoiceList" Auth={Auth} />
               <PrivateMainReport exact path="/mainReport" Auth={Auth} />
               <PrivateMainInvoice exact path="/mainInvoice" Auth={Auth} />
-              <PrivateEmployeeSalesReport
-                exact
-                path="/employeeSalesReport"
-                Auth={Auth}
-              />
-              <Route
-                path="/employeeSalesReport/:idUser"
-                exact
-                component={EmployeeSalesReportId}
-              />
+              <PrivateEmployeeSalesReport exact path="/employeeSalesReport" Auth={Auth} />
+              <Route path="/employeeSalesReport/:idUser" exact component={EmployeeSalesReportId} />
               <Route path="/VentasDiarias" exact component={Reporte} />
               <Route path="/logout" exact component={logOut} />
               <Route path="/bitacora" exact component={bitacora} />
@@ -173,11 +134,7 @@ function App() {
                 exact
                 component={EmployeeSalesReportId}
               />
-              <Route
-                path="/mostSelledProducts"
-                exact
-                component={MostSellsProducts}
-              />
+              <Route path="/mostSelledProducts" exact component={MostSellsProducts} />
             </Switch>
           )}
         </div>

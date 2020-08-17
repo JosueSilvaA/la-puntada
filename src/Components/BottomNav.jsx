@@ -1,8 +1,9 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   stickToBottom: {
@@ -14,6 +15,7 @@ const useStyles = makeStyles({
 
 export default function SimpleBottomNavigation(props) {
   const classes = useStyles();
+  // eslint-disable-next-line no-unused-vars
   const [value, setValue] = React.useState(0);
   const FirstIcon = props.firstIcon;
   const SecondIcon = props.secondIcon;
