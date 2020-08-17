@@ -6,6 +6,9 @@ import {
   Redirect,
   // Link
 } from 'react-router-dom';
+import { CircularProgress } from "@material-ui/core";
+import PermissionsCtl from "./Controllers/Permissions";
+
 
 import Login from './Pages/Login';
 import Main from './Pages/Main';
@@ -49,8 +52,29 @@ const logOut = () => {
 };
 
 function App() {
+ const [Auth, setAuth] = useState(false);
+ // routes permisions
+  const [Permission, setPermission] = useState({
+    users: false,
+    editProduct: false,
+    mainReport: false,
+  });
   const [RenderOption, setRenderOption] = useState(false);
-  const [Auth, setAuth] = useState(false);
+
+   const routesConfig = () => {
+     let token = window.localStorage.getItem("userToken");
+     if (token === null) {
+       token = window.sessionStorage.getItem("userToken");
+     }
+     const routesControl = new PermissionsCtl();
+     // config permission
+     if (token !== null) {
+       const result = routesControl.routesPermissions(token);
+       if (!result.err) {
+         setPermission(result.items);
+       }
+     }
+   };
 
   const viewToken = () => {
     let token = window.localStorage.getItem('userToken');
@@ -60,12 +84,14 @@ function App() {
 
     if (token !== null) {
       setAuth(true);
+      routesConfig();
     }
     setRenderOption(true);
   };
 
   const changeAuth = () => {
     setAuth(true);
+    routesConfig();
   };
 
   const changeAuthOut = () => {
@@ -81,39 +107,79 @@ function App() {
       {/* Configuración de Router */}
       <Router>
         <div className="App">
-          <Switch>
-            <Route path="/" exact component={() => <Login changeAuth={changeAuth} />} />
-            <Route path="/login" exact component={() => <Login changeAuth={changeAuth} />} />
-            <PrivateMain exact path="/main" Auth={Auth} />
-            <PrivateMainInventory exact path="/MainInventory" Auth={Auth} />
-            <Route path="/inventory/:action" exact component={Inventory} />
-            <Route path="/inventory/:action/:idProduct" exact component={Inventory} />
-            <PrivateCatalogue exact path="/catalogo" Auth={Auth} />
-            <PrivateUsers exact path="/users" Auth={Auth} />
-            {/* <PrivateUser exact path="/user/:idUser" Auth={Auth} /> */}
-            <Route path="/user/:idUser" exact component={User} />
-            <PrivateClientInvoice exact path="/clientInvoice" Auth={Auth} />
-            <PrivateProviderInvoice exact path="/providerInvoice" Auth={Auth} />
-            <Route path="/roles" exact component={Roles} />
-            <Route path="/manage-role" exact component={ManageRole} />
-            <PrivateInvoiceList exact path="/invoiceList" Auth={Auth} />
-            <PrivateMainReport exact path="/mainReport" Auth={Auth} />
-            <PrivateMainInvoice exact path="/mainInvoice" Auth={Auth} />
-            <PrivateEmployeeSalesReport exact path="/employeeSalesReport" Auth={Auth} />
-            <Route path="/employeeSalesReport/:idUser" exact component={EmployeeSalesReportId} />
-            <Route path="/VentasDiarias" exact component={Reporte} />
-            <Route path="/logout" exact component={logOut} />            
-            <Route path="/bitacora" exact component={bitacora} />
-            {/* <Route path="/home" exact component={Home} /> */}
-            {/* <Route path="/saludo" exact component={ () => <Hola name="mundo" /> } /> */}
-            <PrivateProviders exact path="/providers" Auth={Auth} />
-            <Route
-              path="/employeeSalesReport/:idUser/:date"
-              exact
-              component={EmployeeSalesReportId}
-            />
-            <Route path="/mostSelledProducts" exact component = {MostSellsProducts}/>
-          </Switch>
+          {!RenderOption && (
+            <div className="d-flex">
+              <CircularProgress
+                className="mx-auto"
+                size={50}
+                color="secondary"
+              />
+            </div>
+          )}
+          {RenderOption && (
+            <Switch>
+              <Route
+                path="/"
+                exact
+                component={() => <Login changeAuth={changeAuth} />}
+              />
+              <Route
+                path="/login"
+                exact
+                component={() => <Login changeAuth={changeAuth} />}
+              />
+              <PrivateMain exact path="/main" Auth={Auth} />
+              <PrivateMainInventory exact path="/MainInventory" Auth={Auth} />
+              <Route path="/inventory/:action" exact component={Inventory} />
+              <Route
+                path="/inventory/:action/:idProduct"
+                exact
+                component={Inventory}
+              />
+              <PrivateCatalogue exact path="/catalogo" Auth={Auth} />
+              <PrivateUsers exact path="/users" Auth={Auth} Permission={Permission.users} />
+              
+              {/* <PrivateUser exact path="/user/:idUser" Auth={Auth} /> */}
+              <Route path="/user/:idUser" exact component={User} />
+              <PrivateClientInvoice exact path="/clientInvoice" Auth={Auth} />
+              <PrivateProviderInvoice
+                exact
+                path="/providerInvoice"
+                Auth={Auth}
+              />
+              <Route path="/roles" exact component={Roles} />
+              <Route path="/manage-role" exact component={ManageRole} />
+              <PrivateInvoiceList exact path="/invoiceList" Auth={Auth} />
+              <PrivateMainReport exact path="/mainReport" Auth={Auth} />
+              <PrivateMainInvoice exact path="/mainInvoice" Auth={Auth} />
+              <PrivateEmployeeSalesReport
+                exact
+                path="/employeeSalesReport"
+                Auth={Auth}
+              />
+              <Route
+                path="/employeeSalesReport/:idUser"
+                exact
+                component={EmployeeSalesReportId}
+              />
+              <Route path="/VentasDiarias" exact component={Reporte} />
+              <Route path="/logout" exact component={logOut} />
+              <Route path="/bitacora" exact component={bitacora} />
+              {/* <Route path="/home" exact component={Home} /> */}
+              {/* <Route path="/saludo" exact component={ () => <Hola name="mundo" /> } /> */}
+              <PrivateProviders exact path="/providers" Auth={Auth} />
+              <Route
+                path="/employeeSalesReport/:idUser/:date"
+                exact
+                component={EmployeeSalesReportId}
+              />
+              <Route
+                path="/mostSelledProducts"
+                exact
+                component={MostSellsProducts}
+              />
+            </Switch>
+          )}
         </div>
       </Router>
     </>

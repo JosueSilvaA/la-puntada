@@ -134,7 +134,6 @@ const LoginForm = ({ changeAuth }) => {
               <br />
               {Data.error ? <Alert severity="error">{Data.error}</Alert> : ''}
             </form>
-            `
           </CardContent>
         </Card>
       </div>

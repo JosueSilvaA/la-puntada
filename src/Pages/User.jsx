@@ -13,6 +13,7 @@ import {
   Button,
   List,
   ListItem,
+  Modal,
 } from '@material-ui/core';
 import Helmet from 'react-helmet';
 import UserController from '../Controllers/loginController';
@@ -86,6 +87,10 @@ const User = (props) => {
   const [infoUser, setInfoUser] = useState(false);
   const [InfoRol, setInfoRol] = useState({ value: false, info: {} });
 
+  const [OpenModal, setOpenModal] = useState(false);
+  const imageUploader = React.useRef(null);
+  const [ImageUser, setImageUser] = useState({ value: false, img: '' });
+
   const getInfo = async () => {
     const user = new UserController();
     const userData = await user.GetInfoUser(props.match.params.idUser);
@@ -97,11 +102,34 @@ const User = (props) => {
       setInfoRol({ value: true, info: dataRol.items });
     }
   };
+
+
+  const onClickCardUser = () => {
+    setImageUser({ value: false, img: infoUser.imgUsuario });
+    setOpenModal(true);
+  };
+
+  const fileSelectedHandler = (event) => {
+    setImageUser({
+      value: true,
+      file: event.target.files[0],
+      img: URL.createObjectURL(event.target.files[0]),
+    });
+  };
+
+  const handleOPen = () => {
+    setOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+
   useEffect(() => {
     getInfo();
   }, []);
 
-  //Tabla bitacora
+  // Tabla bitacora
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -180,6 +208,7 @@ const User = (props) => {
             </CardActionArea>
             <CardActions>
               <Button
+                onClick={onClickCardUser}
                 size="medium"
                 color="primary"
                 className="mx-auto"
@@ -322,6 +351,50 @@ const User = (props) => {
            </CardActionArea>
         </Grid>
       </Grid>
+      <div>
+        <Modal
+          open={OpenModal}
+          onClose={handleClose}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+        >
+          <Grid container alignItems="center" spacing={3}>
+            <Grid item lg={6} md={6} sm={6} xs={10} className="bg-white mx-auto">
+              <Grid item lg={12} className="bg-white mx-auto">
+                <Avatar
+                  alt={infoUser.nombre}
+                  src={ImageUser.img}
+                  className="mx-auto border border-danger mt-2"
+                  style={{ width: '10rem', height: '10rem', fontSize: '7rem' }}
+                />
+                <input
+                  type="file"
+                  onChange={fileSelectedHandler}
+                  style={{ display: 'none' }}
+                  ref={imageUploader}
+                />
+              </Grid>
+              <Grid item lg={6} className="mx-auto d-flex mt-3">
+                {!ImageUser.value && (
+                  <Button
+                    onClick={() => imageUploader.current.click()}
+                    className="mx-auto"
+                    variant="contained"
+                    color="primary"
+                  >
+                    Elegir imagen
+                  </Button>
+                )}
+                {ImageUser.value && (
+                  <Button className="mx-auto" variant="contained" color="primary">
+                    Guardar
+                  </Button>
+                )}
+              </Grid>
+            </Grid>
+          </Grid>
+        </Modal>
+      </div>
     </>
   );
 };
