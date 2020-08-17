@@ -6,7 +6,7 @@ class CatalogueController {
 
     await axios
       .get(
-        "http://api-la-puntada.herokuapp.com/api/productoEscolar/obtenerProductosEscolares"
+        "https://api-la-puntada.herokuapp.com/api/productoEscolar/obtenerProductosEscolares"
       )
       .then(res => {
         Res = res.data.Items;
@@ -25,7 +25,7 @@ class CatalogueController {
 
     await axios
       .get(
-        "http://api-la-puntada.herokuapp.com/api/productoTextil/obtenerProductosTextiles"
+        "https://api-la-puntada.herokuapp.com/api/productoTextil/obtenerProductosTextiles"
       )
       .then(res => {
         Res = res.data.Items;
@@ -44,7 +44,7 @@ class CatalogueController {
 
     await axios
       .get(
-        "http://api-la-puntada.herokuapp.com/api/productoVariado/obtenerProductosVariados"
+        "https://api-la-puntada.herokuapp.com/api/productoVariado/obtenerProductosVariados"
       )
       .then(res => {
         Res = res.data.Items;

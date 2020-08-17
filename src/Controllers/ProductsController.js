@@ -4,7 +4,7 @@ class Products {
   getPproviders = async () => {
     let Res;
     await axios
-      .get('http://api-la-puntada.herokuapp.com/api/proveedor/obtenerProveedores')
+      .get('https://api-la-puntada.herokuapp.com/api/proveedor/obtenerProveedores')
       .then((res) => {
         Res = res.data.Items;
       })
@@ -68,7 +68,7 @@ class Products {
   getProductsLIst = async () => {
     let res;
     await axios
-      .get('http://api-la-puntada.herokuapp.com/api/productoGeneral/obtenerProductos')
+      .get('https://api-la-puntada.herokuapp.com/api/productoGeneral/obtenerProductos')
       .then((response) => {
         res = { err: false, items: response.data.Items };
       })
@@ -82,11 +82,11 @@ class Products {
     let res;
     let route;
     if (Product.tipoTextil !== undefined) {
-      route = `http://api-la-puntada.herokuapp.com/api/productoTextil/${Product._id}/eliminarProductoTextil`;
+      route = `https://api-la-puntada.herokuapp.com/api/productoTextil/${Product._id}/eliminarProductoTextil`;
     } else if (Product.tipoUtil !== undefined) {
-      route = `http://api-la-puntada.herokuapp.com/api/productoEscolar/${Product._id}/eliminarProductoEscolar`;
+      route = `https://api-la-puntada.herokuapp.com/api/productoEscolar/${Product._id}/eliminarProductoEscolar`;
     } else if (Product.tipoVariado) {
-      route = `http://api-la-puntada.herokuapp.com/api/productoVariado/${Product._id}/eliminarProductoVariado`;
+      route = `https://api-la-puntada.herokuapp.com/api/productoVariado/${Product._id}/eliminarProductoVariado`;
     }
     await axios
       .put(`${route}`)
@@ -128,7 +128,7 @@ class Products {
     let res;
     await axios
       .get(
-        `http://api-la-puntada.herokuapp.com/api/productoGeneral/obtenerProductoPorId/${idProduct}`
+        `https://api-la-puntada.herokuapp.com/api/productoGeneral/obtenerProductoPorId/${idProduct}`
       )
       .then((response) => {
         res = { err: false, items: response.data.Items };
