@@ -1,5 +1,6 @@
 .contenedor-catalogo {
     width: 100%;
+    min-height:93vh;
     margin: 0px;
     padding: 2%;
     background: #df5e88;

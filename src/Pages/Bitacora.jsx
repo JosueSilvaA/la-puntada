@@ -58,7 +58,8 @@ const rows = [
 
 const useStyles = makeStyles({
   root: {
-    width: '100%',
+    width: '95%',
+    margin:'0 auto'
   },
   container: {
     maxHeight: 440,
@@ -82,7 +83,7 @@ export default function StickyHeadTable() {
   return (
     <>
       <NavBar pageName="La Puntada - Bitacora" goBack />
-      <Grid style={{ padding: '30px' }}>
+      <Grid style={{ padding:'5%',backgroundColor:'#0f4c75',minHeight:'92vh'}}>
         <Paper className={classes.root}>
           <TableContainer className={classes.container}>
             <Table stickyHeader aria-label="sticky table">

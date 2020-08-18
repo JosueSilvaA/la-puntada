@@ -64,7 +64,7 @@ const InvoiceListItemCli = ({cliente,rtn,telefono,direccion,fechaFactura,product
                {productos.map((product)=>
                   <> 
                   <div className="d-flex"> 
-                    <div style={{width:'60%',textAlign:'center'}}>{product.nombre}</div>
+                    <div style={{width:'60%',textAlign:'center'}}># {product.nombre}</div>
                     <div  style={{width:'25%',textAlign:'right'}}>{product.cantidad}</div>
                <div  style={{width:'25%',textAlign:'right'}}>{product.precio}</div>  
                   </div>
