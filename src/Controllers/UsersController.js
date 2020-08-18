@@ -48,6 +48,7 @@ class UsersController {
       .then((response) => {
         res = { err: false, item: response.data.Items };
       })
+      // eslint-disable-next-line no-unused-vars
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
       });
@@ -61,6 +62,25 @@ class UsersController {
       .then((response) => {
         res = { err: false, item: response.data.Items };
       })
+      // eslint-disable-next-line no-unused-vars
+      .catch((err) => {
+        res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
+      });
+    return res;
+  };
+
+  changeRolUser = async (id, rol) => {
+    let res;
+    const data = {
+      id,
+      rol,
+    };
+    await axios
+      .put(`https://api-la-puntada.herokuapp.com/api/usuario/${id}/cambiarRol`, data)
+      .then((response) => {
+        res = { err: false, message: response.data.Response };
+      })
+      // eslint-disable-next-line no-unused-vars
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
       });

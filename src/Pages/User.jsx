@@ -29,6 +29,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import NavBar from '../Components/Navbar';
 import UserController from '../Controllers/loginController';
+import Tests from '../Components/tests';
 
 const columns = [
   { id: 'No', label: 'No', minWidth: 170 },
@@ -88,8 +89,6 @@ const User = (props) => {
   const [InfoRol, setInfoRol] = useState({ value: false, info: {} });
 
   const [OpenModal, setOpenModal] = useState(false);
-  const imageUploader = React.useRef(null);
-  const [ImageUser, setImageUser] = useState({ value: false, img: '' });
 
   const getInfo = async () => {
     const user = new UserController();
@@ -108,16 +107,7 @@ const User = (props) => {
   };
 
   const onClickCardUser = () => {
-    setImageUser({ value: false, img: infoUser.imgUsuario });
     handleOPen();
-  };
-
-  const fileSelectedHandler = (event) => {
-    setImageUser({
-      value: true,
-      file: event.target.files[0],
-      img: URL.createObjectURL(event.target.files[0]),
-    });
   };
 
   const handleClose = () => {
@@ -288,7 +278,6 @@ const User = (props) => {
           xs={12}
           className="mx-auto"
           style={{ backgroundColor: '#f1f3f5', borderRadius: '5px' }}
-          alignItems="center"
         >
           <CardActionArea style={{ padding: '20px' }}>
             <div className="d-flex mt-3">
@@ -362,37 +351,7 @@ const User = (props) => {
         >
           <Grid container alignItems="center" spacing={3}>
             <Grid item lg={6} md={6} sm={6} xs={10} className="bg-white mx-auto">
-              <Grid item lg={12} className="bg-white mx-auto">
-                <Avatar
-                  alt={infoUser.nombre}
-                  src={ImageUser.img}
-                  className="mx-auto border border-danger mt-2"
-                  style={{ width: '10rem', height: '10rem', fontSize: '7rem' }}
-                />
-                <input
-                  type="file"
-                  onChange={fileSelectedHandler}
-                  style={{ display: 'none' }}
-                  ref={imageUploader}
-                />
-              </Grid>
-              <Grid item lg={6} className="mx-auto d-flex mt-3">
-                {!ImageUser.value && (
-                  <Button
-                    onClick={() => imageUploader.current.click()}
-                    className="mx-auto"
-                    variant="contained"
-                    color="primary"
-                  >
-                    Elegir imagen
-                  </Button>
-                )}
-                {ImageUser.value && (
-                  <Button className="mx-auto" variant="contained" color="primary">
-                    Guardar
-                  </Button>
-                )}
-              </Grid>
+              <Tests infoUser={infoUser} />
             </Grid>
           </Grid>
         </Modal>

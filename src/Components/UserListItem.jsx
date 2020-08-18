@@ -12,31 +12,37 @@ import {
 import RolController from '../Controllers/UsersController';
 
 // eslint-disable-next-line react/prop-types
-const UserListItem = ({ rol, nombres, apellido, imgUsuario, estado, idUser }) => {
-  const [Rol, setRol] = useState({ value: false, nombre: '' })
+const UserListItem = ({ rol, nombres, apellido, imgUsuario, idUser }) => {
+  const [Rol, setRol] = useState({ value: false, nombre: '' });
   const history = useHistory();
 
   const onClick = () => {
     history.push(`/user/${idUser}`);
   };
 
-  const getRol = async () =>{
+  const getRol = async () => {
     const user = new RolController();
     const result = await user.getRolUser(rol);
     if (!result.err) {
-      setRol({value: true, nombre :result.item.nombre});
+      setRol({ value: true, nombre: result.item.nombre });
     }
-  }
+  };
 
   useEffect(() => {
     getRol();
-  }, [])
-
-
+  }, []);
 
   return (
     <>
-      <Grid item lg={3} md={4} sm={6} xs={12} className="mx-auto" style={{paddingLeft:'20px',paddingRight:'20px',margin:'0px'}}>
+      <Grid
+        item
+        lg={3}
+        md={4}
+        sm={6}
+        xs={12}
+        className="mx-auto"
+        style={{ paddingLeft: '20px', paddingRight: '20px', margin: '0px' }}
+      >
         <List>
           <ListItem
             alignItems="center"
@@ -56,14 +62,16 @@ const UserListItem = ({ rol, nombres, apellido, imgUsuario, estado, idUser }) =>
             </ListItemAvatar>
             <ListItemText
               primary={
-              <div style={{fontWeight:'bold'}}>{nombres} {apellido}</div>
+                <div style={{ fontWeight: 'bold' }}>
+                  {nombres} {apellido}
+                </div>
               }
               secondary={
                 <>
                   <Typography component="span" variant="body2" color="textPrimary">
                     Rol:
                   </Typography>
-                  {Rol.value && Rol.nombre}
+                  {Rol.value ? Rol.nombre : 'undefined'}
                 </>
               }
             />

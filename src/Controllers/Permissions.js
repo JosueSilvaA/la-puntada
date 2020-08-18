@@ -32,6 +32,7 @@ class Permissions {
       .then((result) => {
         res = { err: false, items: result.data.Items };
       })
+      // eslint-disable-next-line no-unused-vars
       .catch((error) => {
         res = { err: false, items: PermissionsRoutes };
       });

@@ -24,18 +24,14 @@ import PrivateProviderInvoice from './PrivateRoutes/PrivateProviderInvoice';
 import PrivateInvoiceList from './PrivateRoutes/PrivateInvoiceList';
 import PrivateEmployeeSalesReport from './PrivateRoutes/PrivateEmployeeSalesReport';
 import PrivateProviders from './PrivateRoutes/PrivateProviders';
-import Roles from './Pages/Role';
-import ManageRole from './Pages/ManageRole';
 import User from './Pages/User';
 import EmployeeSalesReportId from './Reports/EmployeeSalesReport';
-import MostSellsProducts from './Reports/MostSellsProducts';
 import Reporte from './Pages/ReporteVentasDiarias';
-import bitacora from './Pages/Bitacora';
-import PrivateInventoryAction from './PrivateRoutes/PrivateInventoryAction';
 import PrivateRoles from './PrivateRoutes/PrivateRoles';
 import PrivateManageRole from './PrivateRoutes/PrivateManageRole';
 import PrivateBitacora from './PrivateRoutes/PrivateBitacora';
 import PrivateMostSellsProducts from './PrivateRoutes/PrivateMostSellsProducts';
+import test from './Components/tests';
 
 const logOut = () => {
   // eslint-disable-next-line no-undef
@@ -231,7 +227,7 @@ function App() {
                 Auth={Auth}
                 Permission={Permission.mostSelledProducts}
               />
-              {/* <Route path="/mostSelledProducts" exact component={MostSellsProducts} /> */}
+              <Route exact path="/test" component={test} />
             </Switch>
           )}
         </div>
