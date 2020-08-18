@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Grid,
   Avatar,
@@ -27,8 +28,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import swal from 'sweetalert';
 import NavBar from '../Components/Navbar';
 import UserController from '../Controllers/loginController';
+import UsersCtrl from '../Controllers/UsersController';
 import Permissions from '../Controllers/Permissions';
 import Tests from '../Components/tests';
 
@@ -91,6 +94,8 @@ const User = (props) => {
 
   const [OpenModal, setOpenModal] = useState(false);
 
+  const history = useHistory();
+
   const getInfo = async () => {
     const user = new UserController();
     const userData = await user.GetInfoUser(props.match.params.idUser);
@@ -123,6 +128,29 @@ const User = (props) => {
     } else {
       getInfo();
     }
+  };
+
+  const deleteUser = async () => {
+    const userCtrl = new UsersCtrl();
+    swal({
+      title: '¿Estás seguro?',
+      text: 'Eliminarás este usuario!.',
+      icon: 'warning',
+      // buttons: true,
+      buttons: ['Cancelar', 'Eliminar'],
+      dangerMode: true,
+    }).then(async (willDelete) => {
+      if (willDelete) {
+        const result = await userCtrl.deleteUser(infoUser._id);
+        if (!result.err) {
+          swal('Éxito', result.message, 'success', { timer: 2000 }).then(() => {
+            history.replace('/users');
+          });
+        } else {
+          swal('Error', result.message, 'error');
+        }
+      }
+    });
   };
 
   useEffect(() => {
@@ -218,6 +246,7 @@ const User = (props) => {
               </Button>
               <Button
                 size="medium"
+                onClick={deleteUser}
                 color="primary"
                 className="mx-auto"
                 style={{ fontWeight: 'bold', outline: '0' }}

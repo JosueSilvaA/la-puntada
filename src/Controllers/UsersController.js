@@ -1,6 +1,15 @@
+/* eslint-disable no-undef */
 import axios from 'axios';
 
 class UsersController {
+  getUserLogToken = () => {
+    let token = window.localStorage.getItem('userToken');
+    if (token === null) {
+      token = sessionStorage.getItem('userToken');
+    }
+    return token;
+  };
+
   getUsers = async () => {
     let Res;
     await axios
@@ -83,6 +92,28 @@ class UsersController {
       // eslint-disable-next-line no-unused-vars
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
+      });
+    return res;
+  };
+
+  deleteUser = async (id) => {
+    let res;
+    const token = this.getUserLogToken();
+    await axios
+      .put(`https://api-la-puntada.herokuapp.com/api/usuario/${id}/cambiarEstado`, {
+        headers: {
+          'access-token': token,
+        },
+      })
+      .then((response) => {
+        res = { err: false, message: response.data.Response };
+      })
+      // eslint-disable-next-line no-unused-vars
+      .catch((err) => {
+        res = {
+          err: true,
+          message: '¡Oops!, Ocurrió un problema al realizar la conexión.',
+        };
       });
     return res;
   };
