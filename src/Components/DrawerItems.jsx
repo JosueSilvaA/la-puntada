@@ -23,7 +23,12 @@ const DrawerItems = () => {
         </ListItem>
         <Divider />
         {data.map((element) => (
-          <DrawerListItem name={element.name} icon={element.icon} route={element.route} />
+          <DrawerListItem
+            key={element.name}
+            name={element.name}
+            icon={element.icon}
+            route={element.route}
+          />
         ))}
       </List>
       <Divider />

@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import EmployeeSalesReport from '../Pages/EmployeeSalesReport';
 
-const PrivateEmployeeSalesReport = ({ Auth }) => {
+const PrivateEmployeeSalesReport = ({ Auth, Permission }) => {
   return (
     <Route
       exact
       path="/employeeSalesReport"
-      render={() => (Auth ? <EmployeeSalesReport /> : <Redirect to="/login" />)}
+      render={() => (Auth && Permission ? <EmployeeSalesReport /> : <Redirect to="/login" />)}
     />
   );
 };

@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Providers from '../Pages/Providers';
 
-const PrivateProviders = ({ Auth }) => {
+const PrivateProviders = ({ Auth, Permission }) => {
   return (
     <Route
       exact
       path="/providers"
-      render={() => (Auth ? <Providers /> : <Redirect to="/login" />)}
+      render={() => (Auth && Permission ? <Providers /> : <Redirect to="/login" />)}
     />
   );
 };

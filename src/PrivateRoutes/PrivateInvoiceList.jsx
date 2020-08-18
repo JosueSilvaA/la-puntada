@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import InvoiceList from '../Pages/invoiceList';
 
-const PrivateInvoiceList = ({ Auth }) => {
+const PrivateInvoiceList = ({ Auth, Permission }) => {
   return (
     <Route
       exact
       path="/invoiceList"
-      render={() => (Auth ? <InvoiceList /> : <Redirect to="/login" />)}
+      render={() => (Auth && Permission ? <InvoiceList /> : <Redirect to="/login" />)}
     />
   );
 };
