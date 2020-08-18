@@ -33,11 +33,11 @@ const InvoiceListItemCli = ({cliente,rtn,telefono,direccion,fechaFactura,product
             title={cliente}//nombreCliente
             subheader={fechaCreada}//creada
           />
-          
+          <hr/>
           <CardContent>
             <Typography variant="button" color="textSecondary"  style={{fontWeight:"bold"}}>
               Fecha Factura : {fecha}
-              <br />
+              
               <div className="d-flex"> 
                     <div style={{width:'30%',textAlign:'Left'}}>RTN:</div>
                     <div  style={{width:'70%',textAlign:'leftt'}}>{rtn}</div>
@@ -54,7 +54,7 @@ const InvoiceListItemCli = ({cliente,rtn,telefono,direccion,fechaFactura,product
                     <div style={{width:'30%',textAlign:'Left'}}>Empleado:</div>
                     <div  style={{width:'70%',textAlign:'left'}}>{InfoEmpleado.infoEmpl.nombres} {InfoEmpleado.infoEmpl.apellidos}</div>
                </div> 
-              <br />
+              <hr/>
                   <div className="d-flex"> 
                     <div style={{width:'50%',textAlign:'center'}}>Productos</div>
                     <div  style={{width:'25%',textAlign:'right'}}>Cantidad</div>
@@ -64,14 +64,14 @@ const InvoiceListItemCli = ({cliente,rtn,telefono,direccion,fechaFactura,product
                {productos.map((product)=>
                   <> 
                   <div className="d-flex"> 
-                    <div style={{width:'60%',textAlign:'center'}}>{product.nombre}</div>
+                    <div style={{width:'60%',textAlign:'center'}}># {product.nombre}</div>
                     <div  style={{width:'25%',textAlign:'right'}}>{product.cantidad}</div>
                <div  style={{width:'25%',textAlign:'right'}}>{product.precio}</div>  
                   </div>
                 </> 
               
               )} 
-              <br />
+              <hr/>
               <div className="d-flex"> 
                     <div style={{width:'60%',textAlign:'right'}}>Subtotal</div>
                     <div  style={{width:'40%',textAlign:'right'}}>{subtotal}</div>

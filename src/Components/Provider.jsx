@@ -14,7 +14,6 @@ const Provider = ({provider}) => {
         return date;
     };
 
-    console.log('PROVEEDOR ',provider)
 
     return (
         <>

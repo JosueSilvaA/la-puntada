@@ -11,12 +11,12 @@ import '../Styles/Inventario.css'
 const MainInventory = () => {
   return (
     <>
-      <Helmet bodyAttributes={{ style: 'background-color : #654062' }} />
+      <Helmet bodyAttributes={{ style: 'background-color : #318fb5' }} />
       <NavBar pageName="La Puntada - Inventario" goBack />
       <Divider />
       <Hidden only={['lg', 'xl', 'md']}>
           <div className="contenedor-opciones-movil" >
-            <Grid container className='prueba'  alignItems="center" spacing={5} style={{width:'95%'}}>
+            <Grid container   alignItems="center" spacing={5} style={{width:'95%'}}>
               
                 <Grid item xs>
                   <MainInventoryItem

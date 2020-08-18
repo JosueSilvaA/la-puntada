@@ -18,25 +18,25 @@ const Main = () => {
             iconItem="fab fa-stack-overflow"
             nameItem="Catalogos"
             route="/catalogo"
-            bgColor=" #e67e22 "
+            bgColor=" #df5e88"
           />
           <MainItem
             iconItem="fas fa-list-alt"
             nameItem="Inventario"
             route="/maininventory"
-            bgColor="#654062"
+            bgColor="#318fb5"
           />
           <MainItem
             iconItem="fas fa-file-invoice"
             nameItem="Factura"
             route="/mainInvoice"
-            bgColor="blue"
+            bgColor="#ffe196"
           />
           <MainItem
             iconItem="fas fa-chart-line"
             nameItem="Reportes"
             route="/mainReport"
-            bgColor="blue"
+            bgColor="#ffb6b9"
           />
           <MainItem
             iconItem="fas fa-user-tie"
@@ -48,6 +48,12 @@ const Main = () => {
             iconItem="fas fa-book"
             nameItem="Bitacora"
             route="/Bitacora"
+            bgColor="#0f4c75"
+          />
+          <MainItem
+            iconItem="fas fa-book"
+            nameItem="Permisos"
+            route="/Roles"
             bgColor="#00CED1"
           />
         </Grid>
