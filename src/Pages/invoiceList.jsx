@@ -49,7 +49,6 @@ const InvoiceList= () => {
       <Divider className="bg-success0" />
       <Grid
         container
-        spacing={2}
         className = 'contenedor-catalogo'
       > 
           <Grid className="mt-2 contenedor-titulo">

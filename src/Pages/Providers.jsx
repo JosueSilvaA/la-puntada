@@ -65,7 +65,6 @@ const Providers = () => {
                 </Tooltip>
             <Grid
                 container
-                spacing={2}
                 className = ' mt-1'
                 style={{display:'flex',justifyContent:'center',padding:'2%'}}
             > 
@@ -73,7 +72,7 @@ const Providers = () => {
                     <Provider key ={pro._id} provider ={pro}/>
                 ))}
                 <Modal
-                    style={{position:'fixed',marginTop:'2%'}}
+                    style={{position:'absolute',marginTop:'2.5%'}}
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
                     open={Open}

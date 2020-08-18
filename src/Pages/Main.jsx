@@ -18,7 +18,7 @@ const Main = () => {
             iconItem="fab fa-stack-overflow"
             nameItem="Catalogos"
             route="/catalogo"
-            bgColor=" #e67e22 "
+            bgColor=" #ffa36c "
           />
           <MainItem
             iconItem="fas fa-list-alt"
@@ -48,6 +48,12 @@ const Main = () => {
             iconItem="fas fa-book"
             nameItem="Bitacora"
             route="/Bitacora"
+            bgColor="#00CED1"
+          />
+          <MainItem
+            iconItem="fas fa-book"
+            nameItem="Permisos"
+            route="/Roles"
             bgColor="#00CED1"
           />
         </Grid>

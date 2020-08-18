@@ -9,7 +9,7 @@ import "../Styles/Catalogue.css";
 const ProductListItemSchool = ({ product }) => {
   return (
     <>
-      <Grid item xs={12} sm={6} md={4} lg={3} style={{padding:'10px'}}>
+      <Grid item xs={12} sm={6} md={4} lg={3} style={{padding:'10px',margin:'5px'}}>
         <Card style={{cursor:"default"}}>
           <CardHeader
             action={
