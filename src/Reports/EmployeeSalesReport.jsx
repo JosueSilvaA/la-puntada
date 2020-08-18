@@ -10,6 +10,7 @@ import swal from 'sweetalert';
 import SalesReport from '../Controllers/SalesReports';
 import EmployeeSales from './EmployeeSales';
 import Users from '../Controllers/UsersController';
+import Permissions from '../Controllers/Permissions';
 
 // import NavBar from '../Components/Navbar';
 
@@ -86,8 +87,17 @@ const EmployeeSalesReport = (props) => {
     }
   };
 
+  const viewToken = async () => {
+    const UserPermissions = new Permissions();
+    const resultToken = await UserPermissions.ViewUserToken();
+    if (!resultToken) {
+      UserPermissions.RedirectUser();
+    } else {
+      viewParams();
+    }
+  };
   useEffect(() => {
-    viewParams();
+    viewToken();
   }, []);
 
   return (

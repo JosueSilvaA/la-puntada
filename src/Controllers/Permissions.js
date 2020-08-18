@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import axios from 'axios';
 
 class Permissions {
@@ -38,6 +39,21 @@ class Permissions {
       });
     // const res = { err: false, items: PermissionsRoutes };
     return res;
+  };
+
+  ViewUserToken = async () => {
+    let token = window.localStorage.getItem('userToken');
+    if (token === null) {
+      token = window.sessionStorage.getItem('userToken');
+    }
+    if (token === null) {
+      return false;
+    }
+    return true;
+  };
+
+  RedirectUser = () => {
+    window.location.replace('/login');
   };
 }
 

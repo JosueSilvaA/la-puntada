@@ -38,6 +38,7 @@ const logOut = () => {
   localStorage.removeItem('userToken');
   // eslint-disable-next-line no-undef
   sessionStorage.removeItem('userToken');
+  window.location.reload(false);
   return <Redirect to="/login" />;
 };
 

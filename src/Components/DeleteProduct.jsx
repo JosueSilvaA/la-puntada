@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import swal from 'sweetalert';
 import { useHistory } from 'react-router-dom';
@@ -136,7 +137,13 @@ const DeleteProduct = ({ idProduct = '0' }) => {
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="medium" color="primary" className="mx-auto" style={{fontWeight:'bold'}} onClick={deleteP}>
+              <Button
+                size="medium"
+                color="primary"
+                className="mx-auto"
+                style={{ fontWeight: 'bold' }}
+                onClick={deleteP}
+              >
                 Eliminar Producto
               </Button>
             </CardActions>

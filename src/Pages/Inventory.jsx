@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
 import NavBar from '../Components/Navbar';
 import NewProduct from '../Components/NewProduct';
 import DeleteProduct from '../Components/DeleteProduct';
 import EditProduct from '../Components/EditProduct';
+import Permissions from '../Controllers/Permissions';
 
 const Inventory = (props) => {
   const [RenderOption, setRenderOption] = useState({
@@ -65,11 +67,19 @@ const Inventory = (props) => {
     }
   };
 
-  useEffect(() => {
-    if (!RenderOption.value) {
+  const viewToken = async () => {
+    const UserPermissions = new Permissions();
+    const resultToken = await UserPermissions.ViewUserToken();
+    if (!resultToken) {
+      UserPermissions.RedirectUser();
+    } else if (!RenderOption.value) {
       viewParams();
     }
-  });
+  };
+
+  useEffect(() => {
+    viewToken();
+  }, []);
 
   return (
     <>

@@ -29,6 +29,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import NavBar from '../Components/Navbar';
 import UserController from '../Controllers/loginController';
+import Permissions from '../Controllers/Permissions';
 import Tests from '../Components/tests';
 
 const columns = [
@@ -114,8 +115,18 @@ const User = (props) => {
     setOpenModal(false);
   };
 
+  const viewToken = async () => {
+    const UserPermissions = new Permissions();
+    const resultToken = await UserPermissions.ViewUserToken();
+    if (!resultToken) {
+      UserPermissions.RedirectUser();
+    } else {
+      getInfo();
+    }
+  };
+
   useEffect(() => {
-    getInfo();
+    viewToken();
   }, []);
 
   // Tabla bitacora
