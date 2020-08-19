@@ -3,7 +3,7 @@
     min-height:93vh;
     margin: 0px;
     padding: 2%;
-    background: #df5e88;
+    background: #3b6978;
 }
 
 .contenedor-titulo {
@@ -15,7 +15,7 @@
 .titulo-categoria {
     text-align: center;
     font-weight: bold;
-    color: #444444;
+    color: white;
     cursor: default;
 }
 

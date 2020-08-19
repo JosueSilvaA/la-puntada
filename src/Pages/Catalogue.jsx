@@ -9,7 +9,7 @@ import SearchProduct from '../Components/SearchProducts'
 import { Grid, Card, CardHeader, CardContent, Typography } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-
+import moment from 'moment';
 
 const Catalogue = () => {
   const [ProductListSchool, setProductListSchool] = useState([0]);
@@ -64,6 +64,13 @@ const Catalogue = () => {
     }
   };
 
+  const dateFormat = (data) => {
+      let date = data;
+      moment.locale('es');
+      date = moment().format('LL');
+      return date;
+  };
+
   return (
     <>
       <Navbar pageName={"La Puntada - Catalogo"} goBack />
@@ -84,9 +91,10 @@ const Catalogue = () => {
                   </IconButton>
                 }
                 title={productSelect.product.nombre}
-                subheader={productSelect.product.creada}
+                subheader={dateFormat(productSelect.product.creada)}
               />
               <img
+                loading='lazy'
                 src={productSelect.product.imgProducto}
                 title="Paella dish"
                 className = 'imagen-tarjeta'
@@ -122,7 +130,7 @@ const Catalogue = () => {
                             </IconButton>
                           }
                         title={productSelect.product.nombre}
-                        subheader={productSelect.product.creada}
+                        subheader={dateFormat(productSelect.product.creada)}
                     />
                     <img
                         src={productSelect.product.imgProducto}
@@ -158,7 +166,7 @@ const Catalogue = () => {
                             </IconButton>
                           }
                         title={productSelect.product.nombre}
-                        subheader={productSelect.product.creada}
+                        subheader={dateFormat(productSelect.product.creada)}
                     />
                     <img
                         src={productSelect.product.imgProducto}

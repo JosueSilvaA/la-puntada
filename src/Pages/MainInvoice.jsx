@@ -10,7 +10,7 @@ const MainInvoice = () => {
       <NavBar pageName="La Puntada - Factura" goBack />
       <Divider />
       <Grid >
-          <div className="contenedor-opciones" style={{width:'100%',backgroundColor:'#ffe196'}}>
+          <div className="contenedor-opciones" style={{width:'100%',backgroundColor:'#3b6978'}}>
             <Grid container mx="auto" className='opciones'  alignItems="center" spacing={5} style={{width:'80%'}}>
                 <Grid item lg={12} xl={12} md={12} xs={12} sm={12} style={{padding:'0px'}}>
                     <MainInvoiceItem 

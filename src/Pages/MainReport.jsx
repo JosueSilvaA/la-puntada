@@ -10,7 +10,7 @@ const MainReport = () => {
       <NavBar pageName="La Puntada - Reportes" goBack />
       <Divider />
       <Grid>
-        <div className="contenedor-opciones pt-3 pb-3" style={{ width: '100%',backgroundColor:'#ffb6b9' }}>
+        <div className="contenedor-opciones pt-3 pb-3" style={{ width: '100%',backgroundColor:'#3b6978' }}>
           <Grid
             container
             mx="auto"

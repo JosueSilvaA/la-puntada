@@ -29,6 +29,7 @@ const Provider = ({provider}) => {
                     subheader={dateFormat(provider.creado)}
                 />
                 <img
+                    loading='lazy'
                     src={provider.imgProveedor}
                     title="Paella dish"
                     className = 'imagen-tarjeta'

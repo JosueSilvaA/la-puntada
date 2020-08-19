@@ -83,7 +83,7 @@ export default function StickyHeadTable() {
   return (
     <>
       <NavBar pageName="La Puntada - Bitacora" goBack />
-      <Grid style={{ padding:'5%',backgroundColor:'#0f4c75',minHeight:'92vh'}}>
+      <Grid style={{ padding:'5%',backgroundColor:'#3b6978',minHeight:'94vh'}}>
         <Paper className={classes.root}>
           <TableContainer className={classes.container}>
             <Table stickyHeader aria-label="sticky table">
