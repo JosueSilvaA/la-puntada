@@ -2,14 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import {
   PDFViewer,
+  PDFDownloadLink,
   // PDFDownloadLink
 } from '@react-pdf/renderer';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
+import { Hidden, Grid } from '@material-ui/core';
+import { Helmet } from 'react-helmet';
 import SalesReport from '../Controllers/SalesReports';
 import EmployeeSales from './EmployeeSales';
 import Users from '../Controllers/UsersController';
+import NavBar from '../Components/Navbar';
 import Permissions from '../Controllers/Permissions';
 
 // import NavBar from '../Components/Navbar';
@@ -29,6 +33,7 @@ const dateFormat = (data) => {
 const EmployeeSalesReport = (props) => {
   const [Report, setReport] = useState({ value: false, reports: [], user: {} });
   const history = useHistory();
+  const dateNow = moment().format('LLL');
 
   const getEmployeeReport = async (id) => {
     const { params } = props.match;
@@ -102,10 +107,34 @@ const EmployeeSalesReport = (props) => {
 
   return (
     <>
-      {/* <NavBar goBack pageName="Reporte de ventas" /> */}
-      <div style={{ height: '100vh' }}>
-        {Report.value && Reporte(Report)}
-        {/* <div>
+      <Helmet bodyAttributes={{ style: 'background-color : #3d3d3d' }} />
+      <NavBar goBack pageName="Ventas por usuario" />
+      <Hidden only={['xs']}>
+        <div style={{ height: '89.1vh' }}>{Report.value && Reporte(Report)}</div>
+      </Hidden>
+      <Hidden only={['xl', 'lg', 'md']}>
+        {Report.value && (
+          <Grid container className="mt-5">
+            <Grid
+              item
+              xs={8}
+              sm={6}
+              className="btn btn-block btn-success text-danger border border-danger mx-auto"
+            >
+              <PDFDownloadLink
+                style={{ textDecoration: 'none', color: 'white' }}
+                document={<EmployeeSales data={Report} />}
+                fileName={`${dateNow}.pdf`}
+              >
+                {({ blob, url, loading, error }) =>
+                  loading ? 'Loading document...' : 'Descargar Reporte'
+                }
+              </PDFDownloadLink>
+            </Grid>
+          </Grid>
+        )}
+      </Hidden>
+      {/* <div>
         {value ? (
           <PDFDownloadLink document={<EmployeeSales data={reports} />} fileName="somename.pdf">
             {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
@@ -114,7 +143,6 @@ const EmployeeSalesReport = (props) => {
           'Cargando'
         )}
       </div> */}
-      </div>
     </>
   );
 };
