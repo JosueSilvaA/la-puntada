@@ -1,10 +1,23 @@
 import axios from 'axios';
 
 class ProvidersController {
+    getUserLogToken = () => {
+        let token = window.localStorage.getItem('userToken');
+        if (token === null) {
+          token = sessionStorage.getItem('userToken');
+        }
+        return token;
+      };
+
     getProviders = async () =>{
+        const token = this.getUserLogToken();
         let Res;
         await axios
-            .get('https://api-la-puntada.herokuapp.com/api/proveedor/obtenerProveedores')
+            .get('https://api-la-puntada.herokuapp.com/api/proveedor/obtenerProveedores', {
+                headers: {
+                'access-token': token,
+                },
+            })
             .then((res) => {
                 Res = { err: false, items: res.data.Items };
             })
@@ -16,6 +29,7 @@ class ProvidersController {
     }
 
     newProvider = async (provider,tipoProducto) =>{
+        const token = this.getUserLogToken();
         let Res;
         const newProvider = {
             nombre:provider.nombre,
@@ -25,7 +39,11 @@ class ProvidersController {
             tipoProducto:tipoProducto
           };
         await axios
-            .post('https://api-la-puntada.herokuapp.com/api/proveedor/registroProveedor',newProvider)
+            .post('https://api-la-puntada.herokuapp.com/api/proveedor/registroProveedor',newProvider, {
+                headers: {
+                  'access-token': token,
+                },
+              })
             .then((res) => {
                 Res = res.data;
             })
