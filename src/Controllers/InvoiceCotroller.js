@@ -1,13 +1,25 @@
 import axios from 'axios';
 
 class InvoiceController {
+  getUserLogToken = () => {
+    let token = window.localStorage.getItem('userToken');
+    if (token === null) {
+      token = sessionStorage.getItem('userToken');
+    }
+    return token;
+  };
+
   saveClientInvoice = async (data) => {
     let res;
+    const token = this.getUserLogToken();
     await axios
-      .post(`https://api-la-puntada.herokuapp.com/api/facturaCliente/registroFacturaCliente`, data)
+      .post(`https://api-la-puntada.herokuapp.com/api/facturaCliente/registroFacturaCliente`, data, {
+          headers: {
+            'access-token': token,
+          },
+        })
       .then((response) => {
         res = { err: false, message: response.data.Response };
-        console.log('FACTURA DEVOLUCION CLIENTE',response.data.Items)
       })
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
@@ -16,16 +28,19 @@ class InvoiceController {
   };
 
   saveProviderInvoice = async (data) => {
-    console.log(data)
     let res;
+    const token = this.getUserLogToken();
     await axios
       .post(
         `https://api-la-puntada.herokuapp.com/api/facturaProveedor/registroFacturaProveedor`,
-        data
+        data, {
+          headers: {
+            'access-token': token,
+          },
+        }
       )
       .then((response) => {
         res = { err: false, message: response.data.Response };
-        console.log('FACTURA DEVOLUCION ',response.data.Items)
       })
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
@@ -34,8 +49,13 @@ class InvoiceController {
   };
   getInvoicesProv = async () => {
     let Res;
+    const token = this.getUserLogToken();
     await axios
-      .get('https://api-la-puntada.herokuapp.com/api/facturaProveedor/obtenerFacturasProveedores')
+      .get('https://api-la-puntada.herokuapp.com/api/facturaProveedor/obtenerFacturasProveedores', {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((res) => {
         Res = { err: false, items: res.data.Items };
       })
@@ -47,8 +67,13 @@ class InvoiceController {
   };
    getInvoicesCli = async () => {
     let Res;
+    const token = this.getUserLogToken();
     await axios
-      .get('https://api-la-puntada.herokuapp.com/api/facturaCliente/obtenerFacturasClientes')
+      .get('https://api-la-puntada.herokuapp.com/api/facturaCliente/obtenerFacturasClientes', {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((res) => {
         Res = { err: false, items: res.data.Items };
       })
@@ -60,8 +85,13 @@ class InvoiceController {
   };
   GetNameProvider = async (idProveedor) => {
     let res;
+    const token = this.getUserLogToken();
     await axios
-      .get(`https://api-la-puntada.herokuapp.com/api/proveedor/${idProveedor}/obtenerProveedor`)
+      .get(`https://api-la-puntada.herokuapp.com/api/proveedor/${idProveedor}/obtenerProveedor`, {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((response) => {
         res = { err: false, items: response.data.Items };
       })
@@ -73,8 +103,13 @@ class InvoiceController {
   };
   GetNameEmployee = async (idEmpleado) => {
     let res;
+    const token = this.getUserLogToken();
     await axios
-      .get(`https://api-la-puntada.herokuapp.com/api/usuario/${idEmpleado}/obtenerUsuario`)
+      .get(`https://api-la-puntada.herokuapp.com/api/usuario/${idEmpleado}/obtenerUsuario`, {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((response) => {
         res = { err: false, items: response.data.Items };
         

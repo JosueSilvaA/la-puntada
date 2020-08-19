@@ -11,9 +11,14 @@ class UsersController {
   };
 
   getUsers = async () => {
+    const token = this.getUserLogToken();
     let Res;
     await axios
-      .get('https://api-la-puntada.herokuapp.com/api/usuario/infoUsuarios')
+      .get('https://api-la-puntada.herokuapp.com/api/usuario/infoUsuarios', {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((res) => {
         Res = { err: false, items: res.data.Items };
       })
@@ -25,6 +30,7 @@ class UsersController {
   };
 
   registerUser = async (data) => {
+    const token = this.getUserLogToken();
     let Res;
     const dataUser = {
       nombres: data.nombres,
@@ -38,7 +44,11 @@ class UsersController {
     };
 
     await axios
-      .post('https://api-la-puntada.herokuapp.com/api/usuario/registroUsuario', dataUser)
+      .post('https://api-la-puntada.herokuapp.com/api/usuario/registroUsuario', dataUser, {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((res) => {
         Res = res.data;
         return res;
@@ -51,9 +61,14 @@ class UsersController {
   };
 
   GetInfoUser = async (idUser) => {
+    const token = this.getUserLogToken();
     let res;
     await axios
-      .get(`https://api-la-puntada.herokuapp.com/api/usuario/infoUsuario/${idUser}`)
+      .get(`https://api-la-puntada.herokuapp.com/api/usuario/infoUsuario/${idUser}`, {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((response) => {
         res = { err: false, item: response.data.Items };
       })
@@ -65,9 +80,14 @@ class UsersController {
   };
 
   getRolUser = async (idRol) => {
+    const token = this.getUserLogToken();
     let res;
     await axios
-      .post(`https://api-la-puntada.herokuapp.com/api/usuario/obtenerRol/${idRol}`)
+      .post(`https://api-la-puntada.herokuapp.com/api/usuario/obtenerRol/${idRol}`, {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((response) => {
         res = { err: false, item: response.data.Items };
       })
@@ -79,13 +99,18 @@ class UsersController {
   };
 
   changeRolUser = async (id, rol) => {
+    const token = this.getUserLogToken();
     let res;
     const data = {
       id,
       rol,
     };
     await axios
-      .put(`https://api-la-puntada.herokuapp.com/api/usuario/${id}/cambiarRol`, data)
+      .put(`https://api-la-puntada.herokuapp.com/api/usuario/${id}/cambiarRol`, data, {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((response) => {
         res = { err: false, message: response.data.Response };
       })

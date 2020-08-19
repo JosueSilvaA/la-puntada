@@ -1,10 +1,23 @@
 import axios from 'axios';
 
 class Products {
+  getUserLogToken = () => {
+    let token = window.localStorage.getItem('userToken');
+    if (token === null) {
+      token = sessionStorage.getItem('userToken');
+    }
+    return token;
+  };
+
   getPproviders = async () => {
+    const token = this.getUserLogToken();
     let Res;
     await axios
-      .get('https://api-la-puntada.herokuapp.com/api/proveedor/obtenerProveedores')
+      .get('https://api-la-puntada.herokuapp.com/api/proveedor/obtenerProveedores', {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((res) => {
         Res = res.data.Items;
       })
@@ -16,7 +29,7 @@ class Products {
 
   newProducto = async (Selected, data) => {
     let route = '';
-
+    const token = this.getUserLogToken();
     let dataProduct = {};
 
     if (Selected.selectedType.id === 1) {
@@ -55,7 +68,11 @@ class Products {
 
     let res;
     await axios
-      .post(`${route}`, dataProduct)
+      .post(`${route}`, dataProduct, {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((response) => {
         res = { err: false, message: response.data.Response };
       })
@@ -66,9 +83,14 @@ class Products {
   };
 
   getProductsLIst = async () => {
+    const token = this.getUserLogToken();
     let res;
     await axios
-      .get('https://api-la-puntada.herokuapp.com/api/productoGeneral/obtenerProductos')
+      .get('https://api-la-puntada.herokuapp.com/api/productoGeneral/obtenerProductos', {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((response) => {
         res = { err: false, items: response.data.Items };
       })
@@ -79,6 +101,7 @@ class Products {
   };
 
   delete = async (Product) => {
+    const token = this.getUserLogToken();
     let res;
     let route;
     if (Product.tipoTextil !== undefined) {
@@ -89,7 +112,11 @@ class Products {
       route = `https://api-la-puntada.herokuapp.com/api/productoVariado/${Product._id}/eliminarProductoVariado`;
     }
     await axios
-      .put(`${route}`)
+      .put(`${route}`, {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((response) => {
         res = { err: false, message: response.data.Response };
       })
@@ -100,6 +127,7 @@ class Products {
   };
 
   Edit = async (product) => {
+    const token = this.getUserLogToken();
     let res;
     let route;
     if (product.type.escolar) {
@@ -114,7 +142,11 @@ class Products {
       route = `https://api-la-puntada.herokuapp.com/api/productoTextil/${product.id}/editarProductoTextil`;
     }
     await axios
-      .put(`${route}`, product.data)
+      .put(`${route}`, product.data, {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((response) => {
         res = { err: false, message: response.data.Response };
       })
@@ -125,10 +157,15 @@ class Products {
   };
 
   GetProductById = async (idProduct) => {
+    const token = this.getUserLogToken();
     let res;
     await axios
       .get(
-        `https://api-la-puntada.herokuapp.com/api/productoGeneral/obtenerProductoPorId/${idProduct}`
+        `https://api-la-puntada.herokuapp.com/api/productoGeneral/obtenerProductoPorId/${idProduct}`, {
+          headers: {
+            'access-token': token,
+          },
+        }
       )
       .then((response) => {
         res = { err: false, items: response.data.Items };

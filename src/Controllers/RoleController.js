@@ -1,10 +1,23 @@
 import axios from 'axios';
 
 class RoleController {
+  getUserLogToken = () => {
+    let token = window.localStorage.getItem('userToken');
+    if (token === null) {
+      token = sessionStorage.getItem('userToken');
+    }
+    return token;
+  };
+
   async getRoles() {
     this.datosRespuesta = '';
+    const token = this.getUserLogToken();
     await axios
-      .get('https://api-la-puntada.herokuapp.com/api/rol/obtenerRoles')
+      .get('https://api-la-puntada.herokuapp.com/api/rol/obtenerRoles', {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((res) => {
         this.datosRespuesta = res.data;
         return res;
@@ -17,9 +30,14 @@ class RoleController {
   }
 
   async getPrivilegiosPorRol(idRol) {
+    const token = this.getUserLogToken();
     this.datosRespuesta = '';
     await axios
-      .post(`https://api-la-puntada.herokuapp.com/api/rol/${idRol}/obtenerPrivilegios`)
+      .post(`https://api-la-puntada.herokuapp.com/api/rol/${idRol}/obtenerPrivilegios`, {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((res) => {
         this.datosRespuesta = res.data;
         return res;
@@ -32,12 +50,17 @@ class RoleController {
   }
 
   async getPrivilegiosNotInRol(nombreRol) {
+    const token = this.getUserLogToken();
     this.datosRespuesta = '';
     this.data = { rol: nombreRol };
     await axios
       .post(
         `https://api-la-puntada.herokuapp.com/api/privilegio/obtenerPrivilegiosNotInRol`,
-        this.data
+        this.data, {
+          headers: {
+            'access-token': token,
+          },
+        }
       )
       .then((res) => {
         console.log(res);
@@ -52,10 +75,15 @@ class RoleController {
   }
 
   async addPrivToRole(idRol, idPrivilegio) {
+    const token = this.getUserLogToken();
     this.datosRespuesta = '';
     await axios
       .post(
-        `https://api-la-puntada.herokuapp.com/api/rol/${idRol}/privilegio/${idPrivilegio}/registroPrivilegio`
+        `https://api-la-puntada.herokuapp.com/api/rol/${idRol}/privilegio/${idPrivilegio}/registroPrivilegio`, {
+          headers: {
+            'access-token': token,
+          },
+        }
       )
       .then((res) => {
         this.datosRespuesta = res.data;
@@ -69,10 +97,15 @@ class RoleController {
   }
 
   async removePrivFromRole(idRol, idPrivilegio) {
+    const token = this.getUserLogToken();
     this.datosRespuesta = '';
     await axios
       .delete(
-        `https://api-la-puntada.herokuapp.com/api/rol/${idRol}/privilegios/${idPrivilegio}/eliminarPrivilegio`
+        `https://api-la-puntada.herokuapp.com/api/rol/${idRol}/privilegios/${idPrivilegio}/eliminarPrivilegio`, {
+          headers: {
+            'access-token': token,
+          },
+        }
       )
       .then((res) => {
         console.log(res)
