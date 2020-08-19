@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Grid,
+  Modal,
   Card,
   CardHeader,
   CardContent,
@@ -8,22 +9,24 @@ import {
   MenuItem,
   Menu as MenuUser,
   Fade,
-} from "@material-ui/core";
+} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import IconButton from "@material-ui/core/IconButton";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import moment from "moment";
-import "../Styles/Catalogue.css";
+import IconButton from '@material-ui/core/IconButton';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import moment from 'moment';
+import EditImageProduct from './EditProductImage';
+import '../Styles/Catalogue.css';
 
 const ProductListItemVaried = ({ product }) => {
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [OpenModal, setOpenModal] = useState(false);
 
   const dateFormat = (data) => {
     let date = data;
-    moment.locale("es");
-    date = moment().format("LL");
+    moment.locale('es');
+    date = moment().format('LL');
     return date;
   };
 
@@ -37,7 +40,7 @@ const ProductListItemVaried = ({ product }) => {
 
   const handleClickDelete = () => {
     // eslint-disable-next-line no-underscore-dangle
-    console.log('ID PRODUCTO ',product._id)
+    console.log('ID PRODUCTO ', product._id);
     history.push(`/inventory/deleteProduct/${product._id}`);
   };
 
@@ -46,10 +49,18 @@ const ProductListItemVaried = ({ product }) => {
     history.push(`/inventory/editProduct/${product._id}`);
   };
 
+  const handleOPenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
   return (
     <>
-      <Grid item xs={12} sm={6} md={4} lg={3} style={{ padding: "10px" }}>
-        <Card style={{ cursor: "default" }}>
+      <Grid item xs={12} sm={6} md={4} lg={3} style={{ padding: '10px' }}>
+        <Card style={{ cursor: 'default' }}>
           <CardHeader
             action={
               <IconButton
@@ -76,7 +87,7 @@ const ProductListItemVaried = ({ product }) => {
               variant="button"
               color="textSecondary"
               component="p"
-              style={{ fontWeight: "bold" }}
+              style={{ fontWeight: 'bold' }}
             >
               Descripcion : {product.descripcion}
               <br />
@@ -96,7 +107,6 @@ const ProductListItemVaried = ({ product }) => {
         open={open}
         onClose={handleClose}
         TransitionComponent={Fade}
-        
       >
         <MenuItem onClick={handleClickEdit}>
           <Typography variant="inherit" className="ml-0">
@@ -108,12 +118,27 @@ const ProductListItemVaried = ({ product }) => {
             Eliminar
           </Typography>
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={handleOPenModal}>
           <Typography variant="inherit" className="ml-0">
             Imagen
           </Typography>
         </MenuItem>
       </MenuUser>
+      <div>
+        <Modal
+          open={OpenModal}
+          onClose={handleCloseModal}
+          className="mt-5"
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+        >
+          <Grid container alignItems="center" spacing={3}>
+            <Grid item lg={6} md={6} sm={6} xs={10} className="bg-white mx-auto">
+              <EditImageProduct Product={product} Varied />
+            </Grid>
+          </Grid>
+        </Modal>
+      </div>
     </>
   );
 };

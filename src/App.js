@@ -31,7 +31,7 @@ import PrivateRoles from './PrivateRoutes/PrivateRoles';
 import PrivateManageRole from './PrivateRoutes/PrivateManageRole';
 import PrivateBitacora from './PrivateRoutes/PrivateBitacora';
 import PrivateMostSellsProducts from './PrivateRoutes/PrivateMostSellsProducts';
-import test from './Components/tests';
+import EditProductImage from './Components/EditProductImage';
 
 const logOut = () => {
   // eslint-disable-next-line no-undef
@@ -228,7 +228,7 @@ function App() {
                 Auth={Auth}
                 Permission={Permission.mostSelledProducts}
               />
-              <Route exact path="/test" component={test} />
+              <Route exact path="/test" component={EditProductImage} />
             </Switch>
           )}
         </div>
