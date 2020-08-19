@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   Grid,
@@ -18,7 +18,7 @@ import swal from 'sweetalert';
 import SearchProduct from './SearchProducts';
 import Product from '../Controllers/ProductsController';
 
-const EditProduct = () => {
+const EditProduct = ({idProduct = '0'}) => {
   const [ProductToEdit, setProductToEdit] = useState({
     value: false,
     product: {},
@@ -91,15 +91,29 @@ const EditProduct = () => {
         product: {},
       });
       swal('Exito', result.message, 'success', { timer: 2000 }).then(() => {
-        history.replace('/maininventory');
+        history.goBack();
       });
     }
     event.preventDefault();
   };
 
+  const getProductById = async () => {
+    const product = new Product();
+    const result = await product.GetProductById(idProduct);
+    if (!result.err) {
+      setProductToEdit({ value: true, product: result.items });
+    }
+  };
+
+  useEffect(() => {
+    if (idProduct !== '0' && ProductToEdit.value === false) {
+      getProductById();
+    }
+  },[]);
+
   return (
     <>
-      <SearchProduct selectProduct={selectProduct} />
+      <SearchProduct selectProduct={selectProduct} idProduct={idProduct}/>
 
       {ProductToEdit.value && (
         <Grid item xs={10} md={4} className="mx-auto mt-5">

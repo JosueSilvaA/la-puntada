@@ -53,6 +53,16 @@ const Inventory = (props) => {
           value: true,
           navbarName: 'La Puntada - Editar Producto',
         });
+      }else{
+        setRenderOption({
+          delete: false,
+          edit: false,
+          new: false,
+          deleteiId: false,
+          editId: true,
+          value: true,
+          navbarName: 'La Puntada - Borrar Producto',
+        });
       }
     } else if (route.action === 'newProduct') {
       setRenderOption({
@@ -91,6 +101,7 @@ const Inventory = (props) => {
         {RenderOption.delete && <DeleteProduct />}
         {RenderOption.deleteiId && <DeleteProduct idProduct={props.match.params.idProduct} />}
         {RenderOption.edit && <EditProduct />}
+        {RenderOption.editId && <EditProduct idProduct={props.match.params.idProduct}/>}
         {RenderOption.new && <NewProduct />}
       </div>
     </>
