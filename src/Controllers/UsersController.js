@@ -117,5 +117,34 @@ class UsersController {
       });
     return res;
   };
+
+  changeUserImage = async (userId, image) => {
+    let res;
+    const token = this.getUserLogToken();
+    const data = new FormData();
+    data.append('image', image);
+    await axios
+      .post(
+        `https://api-la-puntada.herokuapp.com/api/usuario/cambiarImagenUsuario/${userId}`,
+        data,
+        {
+          headers: {
+            'access-token': token,
+            'name-file': userId,
+          },
+        }
+      )
+      .then((response) => {
+        res = { err: false, message: response.data.Response };
+      })
+      // eslint-disable-next-line no-unused-vars
+      .catch((err) => {
+        res = {
+          err: true,
+          message: '¡Oops!, Ocurrió un problema al realizar la conexión.',
+        };
+      });
+    return res;
+  };
 }
 export default UsersController;

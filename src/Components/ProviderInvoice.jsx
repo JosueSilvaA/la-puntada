@@ -131,13 +131,12 @@ const ProviderInvoice = () => {
     setOpen(true);
   };
 
-  const onSubmit = async (data, e) => {
+  const onSubmit = async (data) => {
     if (!ProviderSelected.value) {
       swal('Ojo', 'Se debe seleccionar el proveedor', 'warning');
     } else if (!ProductsSelected.value) {
       swal('Ojo', 'Se debe seleccionar al menos un producto', 'warning');
     } else {
-      console.log(ProductsSelected);
       const invoice = new InvoiceController();
       const result = await invoice.saveProviderInvoice({
         data,
@@ -378,6 +377,7 @@ const ProviderInvoice = () => {
         onClose={handleCloseModal}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
+        className="mt-4"
       >
         <>
           <Grid container alignItems="center">

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
@@ -154,7 +155,7 @@ const ClientInvoice = () => {
 
   const selectProduct = (data) => {
     let tempBan = false;
-    ProductsSelected.products.forEach((element, index) => {
+    ProductsSelected.products.forEach((element) => {
       if (element.producto === data._id) {
         tempBan = true;
       }
@@ -170,7 +171,7 @@ const ClientInvoice = () => {
     }
   };
 
-  const onSubmit = async (data, e) => {
+  const onSubmit = async (data) => {
     if (!ProductsSelected.value) {
       swal('Aviso', 'Se debe seleccionar al menos un producto', 'warning');
     } else if (!UsersList.selected.value) {
@@ -484,6 +485,7 @@ const ClientInvoice = () => {
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
+        className="mt-4"
       >
         <>
           <Grid container alignItems="center">

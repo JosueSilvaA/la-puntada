@@ -36,7 +36,6 @@ import Permissions from '../Controllers/Permissions';
 import Tests from '../Components/tests';
 import BitacoraListUser from '../Components/BitacoraListUser';
 
-
 const User = (props) => {
   const [infoUser, setInfoUser] = useState(false);
   const [InfoRol, setInfoRol] = useState({ value: false, info: {} });
@@ -105,8 +104,6 @@ const User = (props) => {
   useEffect(() => {
     viewToken();
   }, []);
-
-  
 
   return (
     <>
@@ -279,6 +276,7 @@ const User = (props) => {
         <Modal
           open={OpenModal}
           onClose={handleClose}
+          className="mt-6"
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
         >

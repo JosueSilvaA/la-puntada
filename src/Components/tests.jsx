@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import {
@@ -76,6 +78,18 @@ const Tests = ({ infoUser }) => {
     }
   };
 
+  const changeUserImage = async () => {
+    const user = new UserCtrl();
+    const result = await user.changeUserImage(infoUser._id, ImageUser.file);
+    if (!result.err) {
+      swal('Éxito', result.message, 'success', { timer: 2000 }).then(() => {
+        window.location.reload();
+      });
+    } else {
+      swal('Error', result.message, 'warning', { timer: 2000 });
+    }
+  };
+
   const changeRole = async () => {
     const User = new UserCtrl();
     // eslint-disable-next-line react/prop-types
@@ -100,7 +114,7 @@ const Tests = ({ infoUser }) => {
           id="panel1bh-header"
         >
           <Typography className={classes.heading}>Ajustes de usuario</Typography>
-          <Typography className={classes.secondaryHeading}>Editar foto imagen</Typography>
+          <Typography className={classes.secondaryHeading}>Editar imagen de usuario</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Grid container>
@@ -131,7 +145,13 @@ const Tests = ({ infoUser }) => {
                 </Button>
               )}
               {ImageUser.value && (
-                <Button className="mx-auto" variant="contained" color="primary">
+                <Button
+                  className="mx-auto"
+                  variant="contained"
+                  color="primary"
+                  disabled={!ImageUser.value}
+                  onClick={changeUserImage}
+                >
                   Guardar
                 </Button>
               )}
