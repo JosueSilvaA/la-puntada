@@ -1,6 +1,15 @@
 import axios from 'axios';
 
 class LoginController {
+
+  getUserLogToken = () => {
+    let token = window.localStorage.getItem('userToken');
+    if (token === null) {
+      token = sessionStorage.getItem('userToken');
+    }
+    return token;
+  };
+
   async Autenticar(usuario, contrasena, remember) {
     this.data = { usuario, contrasena };
     let datosRespuesta;
@@ -26,9 +35,14 @@ class LoginController {
   }
 
   GetInfoUser = async (idUser) => {
+    const token = this.getUserLogToken();
     let res;
     await axios
-      .get(`https://api-la-puntada.herokuapp.com/api/usuario/infoUsuario/${idUser}`)
+      .get(`https://api-la-puntada.herokuapp.com/api/usuario/infoUsuario/${idUser}`, {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((response) => {
         res = { err: false, item: response.data.Items };
       })
@@ -39,9 +53,14 @@ class LoginController {
   };
 
   GetInfoRol = async (idRol) => {
+    const token = this.getUserLogToken();
     let res;
     await axios
-      .get(`https://api-la-puntada.herokuapp.com/api/usuario/obtenerRolPrivilegios/${idRol}`)
+      .get(`https://api-la-puntada.herokuapp.com/api/usuario/obtenerRolPrivilegios/${idRol}`, {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((response) => {
         res = { err: false, items: response.data.Items };
       })

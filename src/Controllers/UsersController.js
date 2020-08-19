@@ -71,6 +71,7 @@ class UsersController {
       })
       .then((response) => {
         res = { err: false, item: response.data.Items };
+        console.log('LOGUEADO',res.item)
       })
       // eslint-disable-next-line no-unused-vars
       .catch((err) => {
@@ -80,16 +81,18 @@ class UsersController {
   };
 
   getRolUser = async (idRol) => {
+    console.log('id Rol', idRol)
     const token = this.getUserLogToken();
     let res;
     await axios
-      .post(`https://api-la-puntada.herokuapp.com/api/usuario/obtenerRol/${idRol}`, {
+      .get(`https://api-la-puntada.herokuapp.com/api/usuario/obtenerRol/${idRol}`, {
         headers: {
           'access-token': token,
         },
       })
       .then((response) => {
         res = { err: false, item: response.data.Items };
+        console.log('id rol user', res)
       })
       // eslint-disable-next-line no-unused-vars
       .catch((err) => {
