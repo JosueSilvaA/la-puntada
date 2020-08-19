@@ -276,7 +276,7 @@ const User = (props) => {
         <Modal
           open={OpenModal}
           onClose={handleClose}
-          className="mt-6"
+          className="mt-5"
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
         >

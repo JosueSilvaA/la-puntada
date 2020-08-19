@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Alert from '@material-ui/lab/Alert';
 import { useHistory } from 'react-router-dom';
 import {
+  CircularProgress,
   FormControl,
   Checkbox,
   Button,
@@ -15,11 +16,38 @@ import {
   InputAdornment,
   CardContent,
 } from '@material-ui/core';
-
+import { makeStyles } from '@material-ui/core/styles';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import LoginController from '../Controllers/loginController';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+  },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: 'relative',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  buttonSuccess: {
+    backgroundColor: 'green',
+    '&:hover': {
+      backgroundColor: 'white',
+    },
+  },
+  buttonProgress: {
+    color: 'green',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
+  },
+}));
+
 const LoginForm = ({ changeAuth }) => {
+  const classes = useStyles();
   const [Data, setData] = useState({ showPass: false, loading: false, error: '' });
   const history = useHistory();
   const inputStyles = {
@@ -121,19 +149,21 @@ const LoginForm = ({ changeAuth }) => {
                 <span className="text-success" style={{ marginLeft: '-10px' }}>
                   Mantener sesión
                 </span>
+              </div>
+              {Data.error ? <Alert severity="error">{Data.error}</Alert> : ''}
+              <div className={classes.wrapper}>
                 <Button
                   type="submit"
                   variant="contained"
-                  className="btn-block mt-3"
-                  disabled={!!Data.loading}
-                  style={{ backgroundColor: '#39a8bf', color: 'white', minHeight: '2.5rem' }}
+                  className="btn btn-block"
+                  style={{ backgroundColor: !Data.loading ? '#39a8bf' : 'gray', color: 'white' }}
+                  disabled={Data.loading}
                 >
-                  {Data.loading && <i className="fa fa-refresh fa-spin" />}
-                  {!Data.loading && 'Login'}
+                  Iniciar Sesión
                 </Button>
+                {Data.loading && <CircularProgress size={24} className={classes.buttonProgress} />}
               </div>
               <br />
-              {Data.error ? <Alert severity="error">{Data.error}</Alert> : ''}
             </form>
           </CardContent>
         </Card>

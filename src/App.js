@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
+  // Redirect,
   // Link
 } from 'react-router-dom';
 import { CircularProgress } from '@material-ui/core';
@@ -38,8 +38,8 @@ const logOut = () => {
   localStorage.removeItem('userToken');
   // eslint-disable-next-line no-undef
   sessionStorage.removeItem('userToken');
-  window.location.reload(false);
-  return <Redirect to="/login" />;
+  window.location.replace('/login');
+  // return <Redirect to="/login" />;
 };
 
 function App() {

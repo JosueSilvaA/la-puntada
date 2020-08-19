@@ -14,6 +14,7 @@ import {
   FormLabel,
   RadioGroup,
   FormControlLabel,
+  CircularProgress,
   Radio,
 } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
@@ -35,6 +36,26 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
   },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: 'relative',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  buttonSuccess: {
+    backgroundColor: 'green',
+    '&:hover': {
+      backgroundColor: 'white',
+    },
+  },
+  buttonProgress: {
+    color: 'green',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
+  },
 }));
 
 // eslint-disable-next-line react/prop-types
@@ -50,6 +71,7 @@ const Tests = ({ infoUser }) => {
   });
   // eslint-disable-next-line react/prop-types
   const [Role, setRole] = React.useState({ selected: false, rol: infoUser.rol });
+  const [Loading, setLoading] = useState(false);
 
   const handleChangeRatio = (event) => {
     setRole({ selected: true, rol: event.target.value });
@@ -79,9 +101,11 @@ const Tests = ({ infoUser }) => {
   };
 
   const changeUserImage = async () => {
+    setLoading(true);
     const user = new UserCtrl();
     const result = await user.changeUserImage(infoUser._id, ImageUser.file);
     if (!result.err) {
+      setLoading(false);
       swal('Éxito', result.message, 'success', { timer: 2000 }).then(() => {
         window.location.reload();
       });
@@ -91,11 +115,14 @@ const Tests = ({ infoUser }) => {
   };
 
   const changeRole = async () => {
+    setLoading(true);
     const User = new UserCtrl();
     // eslint-disable-next-line react/prop-types
     const result = await User.changeRolUser(infoUser._id, Role.rol);
     if (!result.err) {
       swal('Éxito', result.message, 'success');
+      setLoading(false);
+      window.location.reload();
     } else {
       swal('Error', result.message, 'error');
     }
@@ -118,7 +145,7 @@ const Tests = ({ infoUser }) => {
         </AccordionSummary>
         <AccordionDetails>
           <Grid container>
-            <Grid item lg={12} className="bg-white mx-auto">
+            <Grid item lg={12} md={12} sm={12} xm={12} className="bg-white mx-auto mb-3">
               <Avatar
                 // eslint-disable-next-line react/prop-types
                 alt={infoUser.nombre}
@@ -133,7 +160,7 @@ const Tests = ({ infoUser }) => {
                 ref={imageUploader}
               />
             </Grid>
-            <Grid item lg={6} className="mx-auto d-flex mt-3">
+            <Grid item lg={6} md={12} sm={12} className="mx-auto my-auto d-flex">
               {!ImageUser.value && (
                 <Button
                   onClick={() => imageUploader.current.click()}
@@ -145,15 +172,18 @@ const Tests = ({ infoUser }) => {
                 </Button>
               )}
               {ImageUser.value && (
-                <Button
-                  className="mx-auto"
-                  variant="contained"
-                  color="primary"
-                  disabled={!ImageUser.value}
-                  onClick={changeUserImage}
-                >
-                  Guardar
-                </Button>
+                <div className={classes.wrapper}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.buttonClassname}
+                    disabled={Loading}
+                    onClick={changeUserImage}
+                  >
+                    Guardar
+                  </Button>
+                  {Loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                </div>
               )}
             </Grid>
           </Grid>
@@ -191,15 +221,18 @@ const Tests = ({ infoUser }) => {
                 </RadioGroup>
               </FormControl>
               <Grid item lg={8} md={12} sm={12} xs={11} className="mx-auto d-flex">
-                <Button
-                  className="mx-auto"
-                  variant="contained"
-                  color="primary"
-                  disabled={!Role.selected}
-                  onClick={changeRole}
-                >
-                  Cambiar Rol
-                </Button>
+                <div className={classes.wrapper}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.buttonClassname}
+                    disabled={Loading}
+                    onClick={changeRole}
+                  >
+                    Cambiar Rol
+                  </Button>
+                  {Loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                </div>
               </Grid>
             </Grid>
           </Grid>
