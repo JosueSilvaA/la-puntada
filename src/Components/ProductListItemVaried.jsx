@@ -13,6 +13,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import moment from 'moment';
 import "../Styles/Catalogue.css";
 
+
 const ProductListItemVaried = ({product}) => {
     const dateFormat = (data) => {
         let date = data;
@@ -20,6 +21,7 @@ const ProductListItemVaried = ({product}) => {
         date = moment().format('LL');
         return date;
     };
+
     return (
         <>
             <Grid item  xs={12} sm={6} md={4} lg={3} style={{padding:'10px'}}>
@@ -27,7 +29,7 @@ const ProductListItemVaried = ({product}) => {
                     <CardHeader
                         action={
                             <IconButton aria-label="settings">
-                              <MoreVertIcon />
+                                    <MoreVertIcon/>
                             </IconButton>
                           }
                         title={product.nombre}

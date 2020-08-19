@@ -253,7 +253,7 @@ class ManageRole extends React.Component {
           <DialogTitle id="alert-dialog-title">Remover Privilegio</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              ¿Está seguro que desea remover el privilegio <b>{privSelected}</b> del rol{' '}
+              ¿Está seguro que desea remover el privilegio <b>{privSelected}</b> del rol
               <b>{location.state.roleName}</b>?
             </DialogContentText>
           </DialogContent>
