@@ -17,12 +17,15 @@ import { Autocomplete } from '@material-ui/lab';
 import swal from 'sweetalert';
 import SearchProduct from './SearchProducts';
 import Product from '../Controllers/ProductsController';
+import InvoiceController from '../Controllers/InvoiceCotroller'
 
 const EditProduct = ({idProduct = '0'}) => {
   const [ProductToEdit, setProductToEdit] = useState({
     value: false,
     product: {},
   });
+
+  const [nameProvider, setNameProvider] = useState('')
 
   const [Editing, setEditing] = useState({
     value: false,
@@ -45,7 +48,15 @@ const EditProduct = ({idProduct = '0'}) => {
         variado: false,
       },
     });
+    getName(dataProduct.proveedor);
   };
+
+  const getName = async (idProvider) =>{
+    const controller = new InvoiceController();
+    const name = await controller.GetNameProvider(idProvider);
+    setNameProvider(name.items.nombre)
+
+  } 
 
   const editP = () => {
     setProductToEdit((prevState) => {
@@ -100,8 +111,10 @@ const EditProduct = ({idProduct = '0'}) => {
   const getProductById = async () => {
     const product = new Product();
     const result = await product.GetProductById(idProduct);
+   
     if (!result.err) {
       setProductToEdit({ value: true, product: result.items });
+      getName(result.items.proveedor)
     }
   };
 
@@ -109,6 +122,7 @@ const EditProduct = ({idProduct = '0'}) => {
     if (idProduct !== '0' && ProductToEdit.value === false) {
       getProductById();
     }
+    
   },[]);
 
   return (
@@ -167,7 +181,7 @@ const EditProduct = ({idProduct = '0'}) => {
                       <Typography component="span" variant="body2" color="textPrimary">
                         Proveedor :
                       </Typography>
-                      {ProductToEdit.product.proveedor}
+                      {nameProvider}
                     </>
                   }
                 />
