@@ -53,7 +53,7 @@ const Main = () => {
           <MainItem
             iconItem="fas fa-book"
             nameItem="Permisos"
-            route="/manage-role"
+            route="/roles"
             bgColor="#00CED1"
           />
         </Grid>
