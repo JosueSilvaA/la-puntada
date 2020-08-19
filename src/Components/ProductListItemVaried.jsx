@@ -134,7 +134,7 @@ const ProductListItemVaried = ({ product }) => {
         >
           <Grid container alignItems="center" spacing={3}>
             <Grid item lg={6} md={6} sm={6} xs={10} className="bg-white mx-auto">
-              <EditImageProduct Product={product} Varied />
+              <EditImageProduct Product={product} Varied closeModal={handleCloseModal} />
             </Grid>
           </Grid>
         </Modal>
