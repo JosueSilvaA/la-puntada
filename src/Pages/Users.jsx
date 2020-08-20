@@ -94,7 +94,7 @@ const Users = () => {
           <UserListItem
             key={user._id}
             idUser={user._id}
-            rol={user.rol}
+            rol={user.rol.nombre}
             nombres={user.nombres}
             apellido={user.apellidos}
             imgUsuario={user.imgUsuario}

@@ -37,7 +37,7 @@ import Tests from '../Components/tests';
 import BitacoraListUser from '../Components/BitacoraListUser';
 
 const User = (props) => {
-  const [infoUser, setInfoUser] = useState(false);
+  const [infoUser, setInfoUser] = useState({ value: false, user: '' });
   const [InfoRol, setInfoRol] = useState({ value: false, info: {} });
 
   const [OpenModal, setOpenModal] = useState(false);
@@ -48,9 +48,9 @@ const User = (props) => {
     const user = new UserController();
     const userData = await user.GetInfoUser(props.match.params.idUser);
     if (!userData.err) {
-      setInfoUser(userData.item);
+      setInfoUser({ value: true, user: userData.item });
     }
-    const dataRol = await user.GetInfoRol(userData.item.rol);
+    const dataRol = await user.GetInfoRol(userData.item.rol._id);
     if (!dataRol.err) {
       setInfoRol({ value: true, info: dataRol.items });
     }
@@ -89,7 +89,7 @@ const User = (props) => {
       dangerMode: true,
     }).then(async (willDelete) => {
       if (willDelete) {
-        const result = await userCtrl.deleteUser(infoUser._id);
+        const result = await userCtrl.deleteUser(infoUser.user._id);
         if (!result.err) {
           swal('Éxito', result.message, 'success', { timer: 2000 }).then(() => {
             history.replace('/users');
@@ -114,8 +114,8 @@ const User = (props) => {
           <Card>
             <CardActionArea>
               <Avatar
-                alt={infoUser.nombre}
-                src={infoUser.imgUsuario}
+                alt={infoUser.value && infoUser.user.nombre}
+                src={infoUser.value && infoUser.user.imgUsuario}
                 className="mx-auto border border-danger mt-2"
                 style={{ width: '10rem', height: '10rem', fontSize: '7rem' }}
               />
@@ -126,7 +126,7 @@ const User = (props) => {
                     secondary={
                       <>
                         <Typography component="span" variant="h5" className="text-danger">
-                          {infoUser.usuario}
+                          {infoUser.value && infoUser.user.usuario}
                         </Typography>
                       </>
                     }
@@ -138,7 +138,7 @@ const User = (props) => {
                         <Typography component="span" variant="body2" color="textPrimary">
                           Nombres :
                         </Typography>
-                        {infoUser.nombres}
+                        {infoUser.value && infoUser.user.nombres}
                       </>
                     }
                   />
@@ -149,7 +149,7 @@ const User = (props) => {
                         <Typography component="span" variant="body2" color="textPrimary">
                           Apellidos :
                         </Typography>
-                        {infoUser.apellidos}
+                        {infoUser.value && infoUser.user.apellidos}
                       </>
                     }
                   />
@@ -160,8 +160,8 @@ const User = (props) => {
                         <Typography component="span" variant="body2" color="textPrimary">
                           Rol :
                         </Typography>
-                        {/* {infoUser.rol} */}
-                        {InfoRol.value && InfoRol.info.rol.nombre}
+                        {infoUser.value && infoUser.user.rol.nombre}
+                        {/* {InfoRol.value && InfoRol.info.rol.nombre} */}
                       </>
                     }
                   />
@@ -264,10 +264,7 @@ const User = (props) => {
             <Divider />
             <Divider />
             <CardContent style={{ minHeight: '19.8rem' }}>
-              <BitacoraListUser
-              nombre='Silva'
-              />
-
+              <BitacoraListUser nombre="Silva" />
             </CardContent>
           </CardActionArea>
         </Grid>
@@ -282,7 +279,7 @@ const User = (props) => {
         >
           <Grid container alignItems="center" spacing={3}>
             <Grid item lg={6} md={6} sm={6} xs={10} className="bg-white mx-auto">
-              <Tests infoUser={infoUser} />
+              <Tests infoUser={infoUser.user} />
             </Grid>
           </Grid>
         </Modal>

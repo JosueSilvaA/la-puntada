@@ -128,7 +128,7 @@ class UsersController {
     let res;
     const token = this.getUserLogToken();
     await axios
-      .put(`https://api-la-puntada.herokuapp.com/api/usuario/${id}/cambiarEstado`, {
+      .put(`https://api-la-puntada.herokuapp.com/api/usuario/${id}/cambiarEstado`, id, {
         headers: {
           'access-token': token,
         },

@@ -70,7 +70,7 @@ const Tests = ({ infoUser }) => {
     value: [{ _id: 1, nombre: 'Esperando conexión.' }],
   });
   // eslint-disable-next-line react/prop-types
-  const [Role, setRole] = React.useState({ selected: false, rol: infoUser.rol });
+  const [Role, setRole] = React.useState({ selected: false, rol: infoUser.rol._id });
   const [Loading, setLoading] = useState(false);
 
   const handleChangeRatio = (event) => {

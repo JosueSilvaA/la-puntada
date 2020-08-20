@@ -71,7 +71,8 @@ const UserListItem = ({ rol, nombres, apellido, imgUsuario, idUser }) => {
                   <Typography component="span" variant="body2" color="textPrimary">
                     Rol:
                   </Typography>
-                  {Rol.value ? Rol.nombre : 'undefined'}
+                  {/* {Rol.value ? Rol.nombre : 'undefined'} */}
+                  {rol}
                 </>
               }
             />
