@@ -11,7 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
 // eslint-disable-next-line react/prop-types
-const BitacoraListUser = ({fecha, categoria, actividad, entidad, finalidad}) => {
+const BitacoraItem = ({usu, fecha, categoria, actividad, entidad, finalidad}) => {
   const fechaCreada= moment(fecha).format('DD-MM-YYYY HH:mm');
   return (
     <>
@@ -35,7 +35,12 @@ const BitacoraListUser = ({fecha, categoria, actividad, entidad, finalidad}) => 
           >   
           <div style={{margin:'10px', width:'100%'}}>  
             <ListItemText style={{marginLeft:'5px', fontWeight: 'bold' ,marginRight:'5px'}}>
-                           
+                  <Typography item xs={12}  sm={12} style={{marginLeft:'5px', fontWeight: 'bold' ,marginRight:'10px'}} component="span" variant="body2" color="textPrimary">
+                     Usuario: {usu}
+                   </Typography>
+                   <Hidden only={['lg', 'md','xl']} >
+                    <br></br>
+                    </Hidden>         
                   <Typography item xs={12}  sm={12} style={{marginLeft:'10px', marginRight:'5px'}} component="span" variant="body2" color="textPrimary">
                     Fecha: {fechaCreada}
                   </Typography>
@@ -71,4 +76,4 @@ const BitacoraListUser = ({fecha, categoria, actividad, entidad, finalidad}) => 
     </>
   );
 };
-export default BitacoraListUser;
+export default BitacoraItem;
