@@ -32,6 +32,8 @@ import PrivateManageRole from './PrivateRoutes/PrivateManageRole';
 import PrivateBitacora from './PrivateRoutes/PrivateBitacora';
 import PrivateMostSellsProducts from './PrivateRoutes/PrivateMostSellsProducts';
 import EditProductImage from './Components/EditProductImage';
+import Roles from './Pages/Role';
+import ManageRole from './Pages/ManageRole';
 
 const logOut = () => {
   // eslint-disable-next-line no-undef
@@ -152,7 +154,6 @@ function App() {
                 Permission={Permission.catalogo}
               />
               <PrivateUsers exact path="/users" Auth={Auth} Permission={Permission.users} />
-
               {/* <PrivateUser exact path="/user/:idUser" Auth={Auth} /> */}
               <Route path="/user/:idUser" exact component={User} />
               <PrivateClientInvoice
@@ -167,15 +168,15 @@ function App() {
                 Auth={Auth}
                 Permission={Permission.providerInvoice}
               />
-              <PrivateRoles exact path="/roles" Auth={Auth} Permission={Permission.roles} />
+              {/*   <PrivateRoles exact path="/roles" Auth={Auth} Permission={Permission.roles} />
               <PrivateManageRole
                 exact
                 path="/manage-role"
                 Auth={Auth}
                 Permission={Permission.manageRole}
-              />
-              {/* <Route path="/roles" exact component={Roles} />
-              <Route path="/manage-role" exact component={ManageRole} /> */}
+              /> */}
+              <Route path="/roles" exact component={Roles} />
+              <Route path="/manage-role" exact component={ManageRole} />
               <PrivateInvoiceList
                 exact
                 path="/invoiceList"
