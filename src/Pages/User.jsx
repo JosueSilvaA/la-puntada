@@ -25,16 +25,11 @@ import UserController from '../Controllers/loginController';
 import UsersCtrl from '../Controllers/UsersController';
 import Permissions from '../Controllers/Permissions';
 import Tests from '../Components/tests';
-import BitacoraController from '../Controllers/BitacoraController';
-import BitacoraListUser from '../Components/BitacoraListUser';
-
+import UserBitacora from '../Components/UserBitacora';
 
 const User = (props) => {
   const [infoUser, setInfoUser] = useState({ value: false, user: '' });
   const [InfoRol, setInfoRol] = useState({ value: false, info: {} });
-  //bitacora
-  const [DataBitacoraUsuario, setInfoBitacoraUser] = useState({ infoBitaUsuario: [], loading: true, value: false });
-    //
   const [OpenModal, setOpenModal] = useState(false);
 
   const history = useHistory();
@@ -42,10 +37,7 @@ const User = (props) => {
   const getInfo = async () => {
     const user = new UserController();
     const userData = await user.GetInfoUser(props.match.params.idUser);
-    //bitacora
-    const bitacoraUser = new BitacoraController();
-    const infoBitaUsuario = await bitacoraUser.getInfoBitacoraUsuario(props.match.params.idUser);
-//
+
     if (!userData.err) {
       setInfoUser({ value: true, user: userData.item });
     }
@@ -53,18 +45,8 @@ const User = (props) => {
     if (!dataRol.err) {
       setInfoRol({ value: true, info: dataRol.items });
     }
-    //bitacora
-    console.log(infoBitaUsuario);
-    if (!infoBitaUsuario.err) {
-      setInfoBitacoraUser({
-        infoBitaUsuario: infoBitaUsuario.items,
-        value: true,
-        loading: false,
-      });
-    }
   };
 
-  
   const handleOPen = () => {
     setOpenModal(true);
   };
@@ -112,7 +94,6 @@ const User = (props) => {
 
   useEffect(() => {
     viewToken();
-    //getBitacoraUser();
   }, []);
 
   return (
@@ -274,17 +255,7 @@ const User = (props) => {
             <Divider />
             <Divider />
             <CardContent style={{ minHeight: '19.8rem' }}>
-            <>
-              
-                <BitacoraListUser
-                  fecha={DataBitacoraUsuario.infoBitaUsuario.creada}
-                  categoria={DataBitacoraUsuario.infoBitaUsuario.categoria}
-                  actividad={DataBitacoraUsuario.infoBitaUsuario.actividad}
-                  entidad={DataBitacoraUsuario.infoBitaUsuario.entidadAlterada}
-                  finalidad={DataBitacoraUsuario.infoBitaUsuario.finalidad}
-                />
-               
-             </>
+              <UserBitacora idUser={props.match.params.idUser} />
             </CardContent>
           </CardActionArea>
         </Grid>
