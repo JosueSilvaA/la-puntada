@@ -19,27 +19,22 @@ import {
   Modal,
 } from '@material-ui/core';
 import Helmet from 'react-helmet';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
 import swal from 'sweetalert';
 import NavBar from '../Components/Navbar';
 import UserController from '../Controllers/loginController';
 import UsersCtrl from '../Controllers/UsersController';
 import Permissions from '../Controllers/Permissions';
 import Tests from '../Components/tests';
+import BitacoraController from '../Controllers/BitacoraController';
 import BitacoraListUser from '../Components/BitacoraListUser';
+
 
 const User = (props) => {
   const [infoUser, setInfoUser] = useState({ value: false, user: '' });
   const [InfoRol, setInfoRol] = useState({ value: false, info: {} });
-
+  //bitacora
+  const [DataBitacoraUsuario, setInfoBitacoraUser] = useState({ infoBitaUsuario: [], loading: true, value: false });
+    //
   const [OpenModal, setOpenModal] = useState(false);
 
   const history = useHistory();
@@ -47,6 +42,10 @@ const User = (props) => {
   const getInfo = async () => {
     const user = new UserController();
     const userData = await user.GetInfoUser(props.match.params.idUser);
+    //bitacora
+    const bitacoraUser = new BitacoraController();
+    const infoBitaUsuario = await bitacoraUser.getInfoBitacoraUsuario(props.match.params.idUser);
+//
     if (!userData.err) {
       setInfoUser({ value: true, user: userData.item });
     }
@@ -54,8 +53,18 @@ const User = (props) => {
     if (!dataRol.err) {
       setInfoRol({ value: true, info: dataRol.items });
     }
+    //bitacora
+    console.log(infoBitaUsuario);
+    if (!infoBitaUsuario.err) {
+      setInfoBitacoraUser({
+        infoBitaUsuario: infoBitaUsuario.items,
+        value: true,
+        loading: false,
+      });
+    }
   };
 
+  
   const handleOPen = () => {
     setOpenModal(true);
   };
@@ -103,6 +112,7 @@ const User = (props) => {
 
   useEffect(() => {
     viewToken();
+    //getBitacoraUser();
   }, []);
 
   return (
@@ -264,7 +274,17 @@ const User = (props) => {
             <Divider />
             <Divider />
             <CardContent style={{ minHeight: '19.8rem' }}>
-              <BitacoraListUser nombre="Silva" />
+            <>
+              
+                <BitacoraListUser
+                  fecha={DataBitacoraUsuario.infoBitaUsuario.creada}
+                  categoria={DataBitacoraUsuario.infoBitaUsuario.categoria}
+                  actividad={DataBitacoraUsuario.infoBitaUsuario.actividad}
+                  entidad={DataBitacoraUsuario.infoBitaUsuario.entidadAlterada}
+                  finalidad={DataBitacoraUsuario.infoBitaUsuario.finalidad}
+                />
+               
+             </>
             </CardContent>
           </CardActionArea>
         </Grid>
