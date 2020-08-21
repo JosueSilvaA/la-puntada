@@ -112,7 +112,7 @@ class Products {
       route = `https://api-la-puntada.herokuapp.com/api/productoVariado/${Product._id}/eliminarProductoVariado`;
     }
     await axios
-      .put(`${route}`, {
+      .put(`${route}`, Product.id, {
         headers: {
           'access-token': token,
         },

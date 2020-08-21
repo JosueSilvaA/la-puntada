@@ -43,7 +43,7 @@ const User = (props) => {
     }
     const dataRol = await user.GetInfoRol(userData.item.rol._id);
     if (!dataRol.err) {
-      setInfoRol({ value: true, info: dataRol.items });
+      setInfoRol({ value: true, info: dataRol.items.privilegios });
     }
   };
 
@@ -185,11 +185,6 @@ const User = (props) => {
           <Grid item lg={12} md={12} xs={11} className="mx-auto">
             <Card className="border border-danger">
               <CardActionArea>
-                {!InfoRol.value && (
-                  <div className="d-flex">
-                    <CircularProgress className="mx-auto" size={50} color="secondary" />
-                  </div>
-                )}
                 <div className="d-flex mt-3">
                   <Typography component="h3" variant="h5" className="mx-auto">
                     <div style={{ fontSize: '25px', color: '#444444', fontWeight: 'bold' }}>
@@ -205,7 +200,7 @@ const User = (props) => {
                     </div>
                   )}
                   {InfoRol.value &&
-                    InfoRol.info.privilegios.map((elemento) => (
+                    InfoRol.info.map((elemento) => (
                       <div key={elemento._id}>
                         <Divider />
                         <List component="nav" aria-label="mailbox folders">
