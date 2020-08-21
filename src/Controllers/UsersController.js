@@ -186,7 +186,6 @@ class UsersController {
   };
 
   changeUserPassword = async (data) => {
-
     const token = this.getUserLogToken();
     await axios
       .post(
