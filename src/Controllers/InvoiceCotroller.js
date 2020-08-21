@@ -13,13 +13,21 @@ class InvoiceController {
     let res;
     const token = this.getUserLogToken();
     await axios
-      .post(`https://api-la-puntada.herokuapp.com/api/facturaCliente/registroFacturaCliente`, data, {
+      .post(
+        `https://api-la-puntada.herokuapp.com/api/facturaCliente/registroFacturaCliente`,
+        data,
+        {
           headers: {
             'access-token': token,
           },
-        })
+        }
+      )
       .then((response) => {
-        res = { err: false, message: response.data.Response };
+        if (!response.data.Error) {
+          res = { err: false, message: response.data.Response };
+        } else {
+          res = { err: true, message: response.data.Response };
+        }
       })
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
@@ -33,20 +41,26 @@ class InvoiceController {
     await axios
       .post(
         `https://api-la-puntada.herokuapp.com/api/facturaProveedor/registroFacturaProveedor`,
-        data, {
+        data,
+        {
           headers: {
             'access-token': token,
           },
         }
       )
       .then((response) => {
-        res = { err: false, message: response.data.Response };
+        if (!response.data.Error) {
+          res = { err: false, message: response.data.Response };
+        } else {
+          res = { err: true, message: response.data.Response };
+        }
       })
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
       });
     return res;
   };
+
   getInvoicesProv = async () => {
     let Res;
     const token = this.getUserLogToken();
@@ -65,7 +79,8 @@ class InvoiceController {
       });
     return Res;
   };
-   getInvoicesCli = async () => {
+
+  getInvoicesCli = async () => {
     let Res;
     const token = this.getUserLogToken();
     await axios
@@ -83,6 +98,7 @@ class InvoiceController {
       });
     return Res;
   };
+
   GetNameProvider = async (idProveedor) => {
     let res;
     const token = this.getUserLogToken();
@@ -98,9 +114,10 @@ class InvoiceController {
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
       });
-    
+
     return res;
   };
+
   GetNameEmployee = async (idEmpleado) => {
     let res;
     const token = this.getUserLogToken();
@@ -112,12 +129,10 @@ class InvoiceController {
       })
       .then((response) => {
         res = { err: false, items: response.data.Items };
-        
       })
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
       });
-    console.log(res);
     return res;
   };
 }

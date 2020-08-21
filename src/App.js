@@ -47,26 +47,7 @@ function App() {
   const [Auth, setAuth] = useState(false);
   // routes permisions
   // eslint-disable-next-line no-unused-vars
-  const [Permission, setPermission] = useState({
-    users: false,
-    editProduct: true,
-    deleteProduc: false,
-    newProduct: true,
-    mainReport: false,
-    MainInventory: true,
-    catalogo: true,
-    clientInvoice: true,
-    providerInvoice: true,
-    roles: false,
-    manageRole: false,
-    invoiceList: true,
-    mainInvoice: true,
-    employeeSalesReport: false,
-    VentasDiarias: true,
-    bitacora: false,
-    providers: true,
-    mostSelledProducts: true,
-  });
+  const [Permission, setPermission] = useState({});
   const [RenderOption, setRenderOption] = useState(false);
 
   const routesConfig = async () => {

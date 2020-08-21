@@ -13,20 +13,18 @@ class CatalogueController {
     let Res;
     const token = this.getUserLogToken();
     await axios
-      .get(
-        "https://api-la-puntada.herokuapp.com/api/productoEscolar/obtenerProductosEscolares", {
-          headers: {
-            'access-token': token,
-          },
-        }
-      )
-      .then(res => {
+      .get('https://api-la-puntada.herokuapp.com/api/productoEscolar/obtenerProductosEscolares', {
+        headers: {
+          'access-token': token,
+        },
+      })
+      .then((res) => {
         Res = res.data.Items;
       })
-      .catch(err => {
+      .catch((err) => {
         Res = {
           err: true,
-          message: "¡Oops!, Ocurrió un problema al realizar la conexión."
+          message: '¡Oops!, Ocurrió un problema al realizar la conexión.',
         };
       });
     return Res;
@@ -36,20 +34,18 @@ class CatalogueController {
     let Res;
     const token = this.getUserLogToken();
     await axios
-      .get(
-        "https://api-la-puntada.herokuapp.com/api/productoTextil/obtenerProductosTextiles", {
-          headers: {
-            'access-token': token,
-          },
-        }
-      )
-      .then(res => {
+      .get('https://api-la-puntada.herokuapp.com/api/productoTextil/obtenerProductosTextiles', {
+        headers: {
+          'access-token': token,
+        },
+      })
+      .then((res) => {
         Res = res.data.Items;
       })
-      .catch(err => {
+      .catch((err) => {
         Res = {
           err: true,
-          message: "¡Oops!, Ocurrió un problema al realizar la conexión."
+          message: '¡Oops!, Ocurrió un problema al realizar la conexión.',
         };
       });
     return Res;
@@ -59,20 +55,18 @@ class CatalogueController {
     let Res;
     const token = this.getUserLogToken();
     await axios
-      .get(
-        "https://api-la-puntada.herokuapp.com/api/productoVariado/obtenerProductosVariados", {
-          headers: {
-            'access-token': token,
-          },
-        }
-      )
-      .then(res => {
+      .get('https://api-la-puntada.herokuapp.com/api/productoVariado/obtenerProductosVariados', {
+        headers: {
+          'access-token': token,
+        },
+      })
+      .then((res) => {
         Res = res.data.Items;
       })
-      .catch(err => {
+      .catch((err) => {
         Res = {
           err: true,
-          message: "¡Oops!, Ocurrió un problema al realizar la conexión."
+          message: '¡Oops!, Ocurrió un problema al realizar la conexión.',
         };
       });
     return Res;

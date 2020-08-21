@@ -56,14 +56,14 @@ class RoleController {
     await axios
       .post(
         `https://api-la-puntada.herokuapp.com/api/privilegio/obtenerPrivilegiosNotInRol`,
-        this.data, {
+        this.data,
+        {
           headers: {
             'access-token': token,
           },
         }
       )
       .then((res) => {
-        console.log(res);
         this.datosRespuesta = res.data;
         return res;
       })
@@ -79,14 +79,19 @@ class RoleController {
     this.datosRespuesta = '';
     await axios
       .post(
-        `https://api-la-puntada.herokuapp.com/api/rol/${idRol}/privilegio/${idPrivilegio}/registroPrivilegio`, {
+        `https://api-la-puntada.herokuapp.com/api/rol/${idRol}/privilegio/${idPrivilegio}/registroPrivilegio`,
+        {
           headers: {
             'access-token': token,
           },
         }
       )
       .then((res) => {
-        this.datosRespuesta = res.data;
+        if (!res.data.Error) {
+          this.datosRespuesta = res.data;
+        } else {
+          this.datosRespuesta = new Error(`${res.data.Response}`);
+        }
         return res;
       })
       .catch((err) => {
@@ -101,15 +106,19 @@ class RoleController {
     this.datosRespuesta = '';
     await axios
       .delete(
-        `https://api-la-puntada.herokuapp.com/api/rol/${idRol}/privilegios/${idPrivilegio}/eliminarPrivilegio`, {
+        `https://api-la-puntada.herokuapp.com/api/rol/${idRol}/privilegios/${idPrivilegio}/eliminarPrivilegio`,
+        {
           headers: {
             'access-token': token,
           },
         }
       )
       .then((res) => {
-        console.log(res)
-        this.datosRespuesta = res.data;
+        if (!res.data.Error) {
+          this.datosRespuesta = res.data;
+        } else {
+          this.datosRespuesta = new Error(`${res.data.Response}`);
+        }
         return res;
       })
       .catch((err) => {

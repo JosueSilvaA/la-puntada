@@ -26,7 +26,11 @@ class ProductImageController {
         }
       )
       .then((response) => {
-        res = { err: false, message: response.data.Response };
+        if (!response.data.Error) {
+          res = { err: false, message: response.data.Response };
+        } else {
+          res = { err: true, message: response.data.Response };
+        }
       })
       // eslint-disable-next-line no-unused-vars
       .catch((err) => {
@@ -55,7 +59,11 @@ class ProductImageController {
         }
       )
       .then((response) => {
-        res = { err: false, message: response.data.Response };
+        if (!response.data.Error) {
+          res = { err: false, message: response.data.Response };
+        } else {
+          res = { err: true, message: response.data.Response };
+        }
       })
       // eslint-disable-next-line no-unused-vars
       .catch((err) => {
@@ -84,7 +92,11 @@ class ProductImageController {
         }
       )
       .then((response) => {
-        res = { err: false, message: response.data.Response };
+        if (!response.data.Error) {
+          res = { err: false, message: response.data.Response };
+        } else {
+          res = { err: true, message: response.data.Response };
+        }
       })
       // eslint-disable-next-line no-unused-vars
       .catch((err) => {

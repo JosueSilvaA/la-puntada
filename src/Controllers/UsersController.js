@@ -72,7 +72,6 @@ class UsersController {
       })
       .then((response) => {
         res = { err: false, item: response.data.Items };
-        console.log('LOGUEADO', res.item);
       })
       // eslint-disable-next-line no-unused-vars
       .catch((err) => {
@@ -82,7 +81,6 @@ class UsersController {
   };
 
   getRolUser = async (idRol) => {
-    console.log('id Rol', idRol);
     const token = this.getUserLogToken();
     let res;
     await axios
@@ -93,7 +91,6 @@ class UsersController {
       })
       .then((response) => {
         res = { err: false, item: response.data.Items };
-        console.log('id rol user', res);
       })
       // eslint-disable-next-line no-unused-vars
       .catch((err) => {
@@ -116,7 +113,11 @@ class UsersController {
         },
       })
       .then((response) => {
-        res = { err: false, message: response.data.Response };
+        if (!response.data.Error) {
+          res = { err: false, message: response.data.Response };
+        } else {
+          res = { err: true, message: response.data.Response };
+        }
       })
       // eslint-disable-next-line no-unused-vars
       .catch((err) => {
@@ -135,7 +136,11 @@ class UsersController {
         },
       })
       .then((response) => {
-        res = { err: false, message: response.data.Response };
+        if (!res.data.Error) {
+          res = { err: false, message: response.data.Response };
+        } else {
+          res = { err: true, message: response.data.Response };
+        }
       })
       // eslint-disable-next-line no-unused-vars
       .catch((err) => {
@@ -164,7 +169,11 @@ class UsersController {
         }
       )
       .then((response) => {
-        res = { err: false, message: response.data.Response };
+        if (!response.data.Error) {
+          res = { err: false, message: response.data.Response };
+        } else {
+          res = { err: true, message: response.data.Response };
+        }
       })
       // eslint-disable-next-line no-unused-vars
       .catch((err) => {
@@ -177,10 +186,9 @@ class UsersController {
   };
 
   changeUserPassword = async (data) => {
-    const res = { err: true, message: 'Contraseña error' };
 
     const token = this.getUserLogToken();
-    /* await axios
+    await axios
       .post(
         `https://api-la-puntada.herokuapp.com/api/usuario/cambiarImagenUsuario/${idUser}`,
         data,
@@ -191,14 +199,18 @@ class UsersController {
         }
       )
       .then((response) => {
-        res = { err: false, message: response.data.Response };
+        if (!response.data.Error) {
+          res = { err: false, message: response.data.Response };
+        } else {
+          res = { err: true, message: response.data.Response };
+        }
       })
       .catch((err) => {
         res = {
           err: true,
           message: '¡Oops!, Ocurrió un problema al realizar la conexión.',
         };
-      }); */
+      });
 
     return res;
   };

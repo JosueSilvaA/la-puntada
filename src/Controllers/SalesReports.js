@@ -19,7 +19,8 @@ class SalesReports {
     }
     await axios
       .get(
-        `https://api-la-puntada.herokuapp.com/api/reporteVentas/obtenerVentasEmpleado/${id}/${date}`, {
+        `https://api-la-puntada.herokuapp.com/api/reporteVentas/obtenerVentasEmpleado/${id}/${date}`,
+        {
           headers: {
             'access-token': token,
           },
@@ -39,7 +40,6 @@ class SalesReports {
         }
       })
       .catch((err) => {
-        console.log(err);
         Res = {
           err: true,
           message: '¡Oops!, Ocurrió un problema al realizar la conexión.',
@@ -48,34 +48,28 @@ class SalesReports {
     return Res;
   };
 
-
   // Obtener los productos mas vendidos de mayor a menor
 
-  mostSellsProducts = async () =>{
+  mostSellsProducts = async () => {
     const token = this.getUserLogToken();
     let Res;
     await axios
-      .get(
-        `https://api-la-puntada.herokuapp.com/api/reporteVentas/productoMasVendido`, {
-          headers: {
-            'access-token': token,
-          },
-        }
-      )
+      .get(`https://api-la-puntada.herokuapp.com/api/reporteVentas/productoMasVendido`, {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((res) => {
-        Res = { err:res.data.Error,data:res.data.Items}
+        Res = { err: res.data.Error, data: res.data.Items };
       })
       .catch((err) => {
-        console.log(err);
         Res = {
           err: true,
           message: '¡Oops!, Ocurrió un problema al realizar la conexión.',
         };
       });
     return Res;
-  }
+  };
 }
-
-
 
 export default SalesReports;

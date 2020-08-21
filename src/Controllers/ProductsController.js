@@ -74,7 +74,11 @@ class Products {
         },
       })
       .then((response) => {
-        res = { err: false, message: response.data.Response };
+        if (!response.data.Error) {
+          res = { err: false, message: response.data.Response };
+        } else {
+          res = { err: true, message: response.data.Response };
+        }
       })
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
@@ -118,7 +122,11 @@ class Products {
         },
       })
       .then((response) => {
-        res = { err: false, message: response.data.Response };
+        if (!response.data.Error) {
+          res = { err: false, message: response.data.Response };
+        } else {
+          res = { err: true, message: response.data.Response };
+        }
       })
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
@@ -148,7 +156,11 @@ class Products {
         },
       })
       .then((response) => {
-        res = { err: false, message: response.data.Response };
+        if (!response.data.Error) {
+          res = { err: false, message: response.data.Response };
+        } else {
+          res = { err: true, message: response.data.Response };
+        }
       })
       .catch((err) => {
         res = { err: true, message: '¡Oops!, Ocurrió un problema al realizar la conexión.' };
