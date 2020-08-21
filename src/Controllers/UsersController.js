@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import axios from 'axios';
 
@@ -71,7 +72,7 @@ class UsersController {
       })
       .then((response) => {
         res = { err: false, item: response.data.Items };
-        console.log('LOGUEADO',res.item)
+        console.log('LOGUEADO', res.item);
       })
       // eslint-disable-next-line no-unused-vars
       .catch((err) => {
@@ -81,7 +82,7 @@ class UsersController {
   };
 
   getRolUser = async (idRol) => {
-    console.log('id Rol', idRol)
+    console.log('id Rol', idRol);
     const token = this.getUserLogToken();
     let res;
     await axios
@@ -92,7 +93,7 @@ class UsersController {
       })
       .then((response) => {
         res = { err: false, item: response.data.Items };
-        console.log('id rol user', res)
+        console.log('id rol user', res);
       })
       // eslint-disable-next-line no-unused-vars
       .catch((err) => {
@@ -172,6 +173,33 @@ class UsersController {
           message: '¡Oops!, Ocurrió un problema al realizar la conexión.',
         };
       });
+    return res;
+  };
+
+  changeUserPassword = async (data) => {
+    const res = { err: true, message: 'Contraseña error' };
+
+    const token = this.getUserLogToken();
+    /* await axios
+      .post(
+        `https://api-la-puntada.herokuapp.com/api/usuario/cambiarImagenUsuario/${idUser}`,
+        data,
+        {
+          headers: {
+            'access-token': token,
+          },
+        }
+      )
+      .then((response) => {
+        res = { err: false, message: response.data.Response };
+      })
+      .catch((err) => {
+        res = {
+          err: true,
+          message: '¡Oops!, Ocurrió un problema al realizar la conexión.',
+        };
+      }); */
+
     return res;
   };
 }

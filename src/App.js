@@ -27,11 +27,10 @@ import PrivateProviders from './PrivateRoutes/PrivateProviders';
 import User from './Pages/User';
 import EmployeeSalesReportId from './Reports/EmployeeSalesReport';
 import Reporte from './Pages/ReporteVentasDiarias';
-import PrivateRoles from './PrivateRoutes/PrivateRoles';
-import PrivateManageRole from './PrivateRoutes/PrivateManageRole';
+// import PrivateRoles from './PrivateRoutes/PrivateRoles';
+// import PrivateManageRole from './PrivateRoutes/PrivateManageRole';
 import PrivateBitacora from './PrivateRoutes/PrivateBitacora';
 import PrivateMostSellsProducts from './PrivateRoutes/PrivateMostSellsProducts';
-import EditProductImage from './Components/EditProductImage';
 import Roles from './Pages/Role';
 import ManageRole from './Pages/ManageRole';
 
@@ -229,7 +228,7 @@ function App() {
                 Auth={Auth}
                 Permission={Permission.mostSelledProducts}
               />
-              <Route exact path="/test" component={EditProductImage} />
+              {/* <Route exact path="/test" component={ChangePassword} /> */}
             </Switch>
           )}
         </div>

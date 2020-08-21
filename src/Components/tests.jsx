@@ -14,14 +14,16 @@ import {
   FormLabel,
   RadioGroup,
   FormControlLabel,
+  IconButton,
   CircularProgress,
   Radio,
 } from '@material-ui/core';
-import { ExpandMore } from '@material-ui/icons';
+import { ExpandMore, Close } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import swal from 'sweetalert';
 import RolCtrl from '../Controllers/RoleController';
 import UserCtrl from '../Controllers/UsersController';
+import ChangePassword from './ChangePassword';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // eslint-disable-next-line react/prop-types
-const Tests = ({ infoUser }) => {
+const Tests = ({ infoUser, closeModal }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const imageUploader = React.useRef(null);
@@ -134,6 +136,9 @@ const Tests = ({ infoUser }) => {
 
   return (
     <div className={classes.root}>
+      <IconButton onClick={closeModal}>
+        <Close />
+      </IconButton>
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary
           expandIcon={<ExpandMore />}
@@ -245,10 +250,12 @@ const Tests = ({ infoUser }) => {
           id="panel2bh-header"
         >
           <Typography className={classes.heading}>Ajustes de usuario</Typography>
-          <Typography className={classes.secondaryHeading}>Editar información</Typography>
+          <Typography className={classes.secondaryHeading}>Cambiar contraseña</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <h1>horo</h1>
+          <Grid container alignContent="center">
+            <ChangePassword />
+          </Grid>
         </AccordionDetails>
       </Accordion>
     </div>

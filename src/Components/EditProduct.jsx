@@ -117,7 +117,7 @@ const EditProduct = ({ idProduct = '0' }) => {
       <SearchProduct selectProduct={selectProduct} idProduct={idProduct} />
 
       {ProductToEdit.value && (
-        <Grid item xs={10} md={4} className="mx-auto mt-5">
+        <Grid item lg={3} md={4} sm={5} xs={8} className="mx-auto mt-5">
           <Card>
             <CardActionArea>
               <CardMedia
@@ -195,7 +195,13 @@ const EditProduct = ({ idProduct = '0' }) => {
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="medium" color="primary" className="mx-auto" onClick={editP}>
+              <Button
+                size="medium"
+                color="primary"
+                variant="outlined"
+                className="mx-auto"
+                onClick={editP}
+              >
                 Editar Producto
               </Button>
             </CardActions>
@@ -217,29 +223,6 @@ const EditProduct = ({ idProduct = '0' }) => {
             className="mx-auto pt-3 border border-success"
           >
             <Grid container spacing={3} alignItems="center">
-              {/* <Grid item xs={11} className="mx-auto">
-            <FormControl>
-              <InputLabel id="demo-simple-select-label">Tipo de producto</InputLabel>
-              <Select
-                labelId="demo-multiple-name-label"
-                id="demo-simple-select-label"
-                lalue={Selected.selectedType.name}
-                onChange={handleChangeTypeProduct}
-              >
-                {SelectOption.productType.map((productType) => (
-                  <MenuItem key={productType.id} value={productType}>
-                    {productType.name}
-                  </MenuItem>
-                ))}
-              </Select>
-              {!Selected.selectedType.value && (
-                <FormHelperText className="text-small text-danger">
-                  *Selecciona tipo de producto
-                </FormHelperText>
-              )}
-            </FormControl>
-          </Grid>
- */}
               <Grid item xs={11} className="mx-auto">
                 <TextField
                   style={{ width: '100%' }}

@@ -69,7 +69,7 @@ const DeleteProduct = ({ idProduct = '0' }) => {
     <>
       <SearchProduct selectProduct={selectProduct} idProduct={idProduct} />
       {ProducSelected.value && (
-        <Grid item xs={10} md={4} className="mx-auto mt-5">
+        <Grid item lg={4} md={4} sm={5} xs={8} className="mx-auto mt-5">
           <Card>
             <CardActionArea>
               <CardMedia
@@ -139,7 +139,8 @@ const DeleteProduct = ({ idProduct = '0' }) => {
             <CardActions>
               <Button
                 size="medium"
-                color="primary"
+                color="secondary"
+                variant="outlined"
                 className="mx-auto"
                 style={{ fontWeight: 'bold' }}
                 onClick={deleteP}

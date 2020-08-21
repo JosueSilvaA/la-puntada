@@ -263,13 +263,15 @@ const User = (props) => {
         <Modal
           open={OpenModal}
           onClose={handleClose}
+          disableScrollLock="false"
+          style={{ position: 'absolute' }}
           className="mt-5"
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
         >
           <Grid container alignItems="center" spacing={3}>
             <Grid item lg={6} md={6} sm={6} xs={10} className="bg-white mx-auto">
-              <Tests infoUser={infoUser.user} />
+              <Tests infoUser={infoUser.user} closeModal={handleClose} />
             </Grid>
           </Grid>
         </Modal>
