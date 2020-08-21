@@ -192,38 +192,42 @@ const User = (props) => {
                     </div>
                   </Typography>
                 </div>
-                <CardContent style={{ minHeight: '19.8rem' }}>
-                  <Divider />
+                <Divider />
+                <CardContent>
                   {!InfoRol.value && (
                     <div className="d-flex">
                       <CircularProgress className="mx-auto" size={50} color="secondary" />
                     </div>
                   )}
-                  {InfoRol.value &&
-                    InfoRol.info.map((elemento) => (
-                      <div key={elemento._id}>
-                        <Divider />
-                        <List component="nav" aria-label="mailbox folders">
-                          <ListItem button>
-                            <ListItemText
-                              primary={
-                                <div
-                                  className="mb-2"
-                                  style={{ fontSize: '20px', color: '#444444' }}
-                                >
-                                  #{elemento.nombre}
-                                </div>
-                              }
-                              secondary={
-                                <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
-                                  {elemento.descripcion}
-                                </div>
-                              }
-                            />
-                          </ListItem>
-                        </List>
-                      </div>
-                    ))}
+                  <div
+                    className="border border-success"
+                    style={{ overflow: 'auto', minHeight: '18rem', maxHeight: '18rem' }}
+                  >
+                    {InfoRol.value &&
+                      InfoRol.info.map((elemento) => (
+                        <div key={elemento._id}>
+                          <List component="nav" aria-label="mailbox folders">
+                            <ListItem button>
+                              <ListItemText
+                                primary={
+                                  <div
+                                    className="mb-2"
+                                    style={{ fontSize: '20px', color: '#444444' }}
+                                  >
+                                    #{elemento.nombre}
+                                  </div>
+                                }
+                                secondary={
+                                  <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
+                                    {elemento.descripcion}
+                                  </div>
+                                }
+                              />
+                            </ListItem>
+                          </List>
+                        </div>
+                      ))}
+                  </div>
                 </CardContent>
               </CardActionArea>
             </Card>
