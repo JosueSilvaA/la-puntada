@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   Grid,
   Card,
@@ -9,11 +9,13 @@ import {
   Menu as MenuUser,
   Fade,
 } from "@material-ui/core";
+import swal from 'sweetalert';
 import { useHistory } from 'react-router-dom';
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import moment from "moment";
 import "moment/locale/es";
+import ProviderController from '../Controllers/ProvidersController'
 
 const Provider = ({ provider }) => {
   const history = useHistory();
@@ -34,6 +36,37 @@ const Provider = ({ provider }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+
+
+  const  deleteProvider = async() =>{
+    const proveedorController = new ProviderController();
+  
+    swal({
+      title: '¿Estás seguro?',
+      text: 'Ya no podrás consultar este proveedor!.',
+      icon: 'warning',
+      // buttons: true,
+      buttons: ['Cancelar', 'Eliminar'],
+      dangerMode: true,
+    }).then(async (willDelete) => {
+      if (willDelete) {
+        const proveedor = await proveedorController.deleteProvider(provider._id)
+        console.log('PROVEEEDORRR', proveedor)
+        if (!proveedor.err) {
+          swal('Éxito', proveedor.item.Response, 'success', { timer: 2000 }).then(() => {
+            history.goBack();
+          });
+        } else {
+          swal('Error', proveedor.item.Response, 'warning', { timer: 2000 });
+        }
+      } else {
+        swal('El proveedor esta seguro!');
+      }
+    });
+  }
+
+
 
   return (
     <>
@@ -85,12 +118,7 @@ const Provider = ({ provider }) => {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <MenuItem>
-          <Typography variant="inherit" className="ml-0">
-            Editar
-          </Typography>
-        </MenuItem>
-        <MenuItem>
+        <MenuItem onClick ={ deleteProvider }>
           <Typography variant="inherit" className="ml-0">
             Eliminar
           </Typography>

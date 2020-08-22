@@ -80,6 +80,25 @@ class InvoiceController {
     return Res;
   };
 
+  getInvoiceProv = async (idFactura) => {
+    let Res;
+    const token = this.getUserLogToken();
+    await axios
+      .get(`https://api-la-puntada.herokuapp.com/api/facturaProveedor/obtenerFacturaProveedor/${idFactura}`, {
+        headers: {
+          'access-token': token,
+        },
+      })
+      .then((res) => {
+        Res = { err: false, item: res.data.Items[0] };
+      })
+      .catch((err) => {
+        Res = new Error('¡Oops!, Ocurrió un problema al realizar la conexión.');
+        return err;
+      });
+    return Res;
+  };
+
   getInvoicesCli = async () => {
     let Res;
     const token = this.getUserLogToken();
@@ -91,6 +110,25 @@ class InvoiceController {
       })
       .then((res) => {
         Res = { err: false, items: res.data.Items };
+      })
+      .catch((err) => {
+        Res = new Error('¡Oops!, Ocurrió un problema al realizar la conexión.');
+        return err;
+      });
+    return Res;
+  };
+
+  getInvoiceCli = async (idInvoice) => {
+    let Res;
+    const token = this.getUserLogToken();
+    await axios
+      .get(`https://api-la-puntada.herokuapp.com/api/facturaCliente/obtenerFacturaCliente/${idInvoice}`, {
+        headers: {
+          'access-token': token,
+        },
+      })
+      .then((res) => {
+        Res = { err: false, item: res.data.Items[0] };
       })
       .catch((err) => {
         Res = new Error('¡Oops!, Ocurrió un problema al realizar la conexión.');

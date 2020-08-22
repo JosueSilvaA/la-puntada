@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import {
   Hidden,
   Grid,
@@ -10,9 +10,45 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
+import UserController from '../Controllers/UsersController'
+import ProductController from '../Controllers/ProductsController'
+import InvoiceController from '../Controllers/InvoiceCotroller'
 // eslint-disable-next-line react/prop-types
 const BitacoraListUser = ({fecha, categoria, actividad, entidad, finalidad}) => {
   const fechaCreada= moment(fecha).format('DD-MM-YYYY HH:mm');
+  
+
+  const [nombreEntidad, setNombreEntidad] = useState('')
+
+  const obtenerEntidad = async() =>{
+    const usuarioController =  new UserController();
+    const productoController =  new ProductController();
+    const facturaController = new InvoiceController();
+
+    const usuario = await usuarioController.GetInfoUser(entidad);
+    const producto = await productoController.GetProductById(entidad);
+    const facturaCli = await facturaController.getInvoiceCli(entidad);
+    const facturaPro = await facturaController.getInvoiceProv(entidad);
+
+    if(usuario.item !== null){
+      setNombreEntidad(usuario.item.nombres)
+    }else if (producto.items !== null){
+      setNombreEntidad(producto.items.nombre)
+    }
+
+    if(facturaCli.item !== undefined){
+      setNombreEntidad(`Factura del Cliente - ${facturaCli.item.nombreCliente}`)
+    }
+
+    if(facturaPro.item !== undefined){
+      setNombreEntidad(`Factura del Proveedor - ${facturaPro.item.proveedor.nombre}`)
+    }
+  }
+
+  useEffect(() => {
+    obtenerEntidad();
+  }, [])
+
   return (
     <>
       <Grid
@@ -56,7 +92,7 @@ const BitacoraListUser = ({fecha, categoria, actividad, entidad, finalidad}) => 
                     <br></br>
                     </Hidden> 
                   <Typography item xs={12}  sm={12} style={{marginLeft:'10px', marginRight:'10px'}} component="span" variant="body2" color="textPrimary">
-                    Entidad Alterada: {entidad}
+                    Entidad Alterada: {nombreEntidad}
                   </Typography>
                   <Hidden only={['lg', 'md','xl']} >
                     <br></br>
