@@ -127,6 +127,7 @@ const Tests = ({ infoUser, closeModal }) => {
       window.location.reload();
     } else {
       swal('Error', result.message, 'error');
+      setLoading(false);
     }
   };
 

@@ -136,7 +136,7 @@ class UsersController {
         },
       })
       .then((response) => {
-        if (!res.data.Error) {
+        if (!response.data.Error) {
           res = { err: false, message: response.data.Response };
         } else {
           res = { err: true, message: response.data.Response };

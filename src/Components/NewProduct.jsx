@@ -14,7 +14,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { Autocomplete } from '@material-ui/lab';
 import Products from '../Controllers/ProductsController';
-import '../Styles/Productos.css'
+import '../Styles/Productos.css';
 
 const NewProduct = () => {
   /* Selects options */
@@ -121,7 +121,6 @@ const NewProduct = () => {
       /* Mandar a registrar el producto */
       const products = new Products();
       const result = await products.newProducto(Selected, data);
-      console.log(result)
       if (result.err) {
         /* Ocurri'o un error de conexi'on */
 

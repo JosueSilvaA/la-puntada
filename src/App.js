@@ -115,9 +115,9 @@ function App() {
               <PrivateMain exact path="/main" Auth={Auth} />
               <PrivateMainInventory
                 exact
-                path="/MainInventory"
+                path="/mainInventory"
                 Auth={Auth}
-                Permission={Permission.MainInventory}
+                Permission={Permission.mainInventory}
               />
               {/* <PrivateInventoryAction
                 exact

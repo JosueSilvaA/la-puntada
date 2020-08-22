@@ -68,7 +68,7 @@ class Products {
 
     let res;
     await axios
-      .post(`${route}`, dataProduct, {
+      .post(route, dataProduct, {
         headers: {
           'access-token': token,
         },
