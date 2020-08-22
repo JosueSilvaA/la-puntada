@@ -10,14 +10,14 @@ const MainReport = () => {
       <NavBar pageName="La Puntada - Reportes" goBack />
       <Divider />
       <Grid>
-        <div className="contenedor-opciones pt-3 pb-3" style={{ width: '100%',backgroundColor:'#3b6978' }}>
+        <div className="contenedor-opciones pt-3 pb-3" style={{ width: '100%',height:'100%',backgroundColor:'#3b6978' }}>
           <Grid
             container
             mx="auto"
             className="opciones"
             alignItems="center"
             spacing={5}
-            style={{ width: '80%' }}
+            style={{ width: '80%',marginBottom:'10px',marginTop:'10px' }}
           >
             <MainReportItem
               iconItem="fas fa-file-invoice-dollar"

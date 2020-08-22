@@ -15,8 +15,8 @@ const MainInventory = () => {
       <NavBar pageName="La Puntada - Inventario" goBack />
       <Divider />
       <Hidden only={['lg', 'xl', 'md']}>
-          <div className="contenedor-opciones-movil" >
-            <Grid container   alignItems="center" spacing={5} style={{width:'95%'}}>
+          <div className="contenedor-opciones-movil" style={{height:'100%'}}>
+            <Grid container   alignItems="center" spacing={5} style={{width:'95%',marginBottom:'10px',marginTop:'10px'}}>
               
                 <Grid item xs>
                   <MainInventoryItem
@@ -52,8 +52,8 @@ const MainInventory = () => {
           </div>
       </Hidden>
       <Hidden only={['xs', 'sm']}>
-          <div className='contenedor-opciones'>
-            <Grid container className="opciones"   alignItems="center" spacing={5} style={{width:'80%'}}>
+          <div className='contenedor-opciones' style={{height:'100%'}}>
+            <Grid container className="opciones"   alignItems="center" spacing={5} style={{width:'80%',marginBottom:'10px',marginTop:'10px' }}>
               
                 <Grid item xs={6}>
                       <MainInventoryItem2

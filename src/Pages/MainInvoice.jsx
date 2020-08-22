@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Divider } from '@material-ui/core';
+import Helmet from 'react-helmet';
 import NavBar from '../Components/Navbar';
 import MainInvoiceItem from '../Components/MainInvoiceItem';
 import '../Styles/Reportes.css'
@@ -9,9 +10,10 @@ const MainInvoice = () => {
     <>
       <NavBar pageName="La Puntada - Factura" goBack />
       <Divider />
+      <Helmet bodyAttributes={{ style: 'background-color : #3b6978' }} />
       <Grid >
-          <div className="contenedor-opciones" style={{width:'100%',backgroundColor:'#3b6978'}}>
-            <Grid container mx="auto" className='opciones'  alignItems="center" spacing={5} style={{width:'80%'}}>
+          <div className="contenedor-opciones" style={{width:'100%',height:'100%'}}>
+            <Grid container mx="auto" className='opciones'  alignItems="center" spacing={5} style={{width:'80%',marginBottom:'10px',marginTop:'10px'}}>
                 <Grid item lg={12} xl={12} md={12} xs={12} sm={12} style={{padding:'0px'}}>
                     <MainInvoiceItem 
                         iconItem="fas fa-tasks"
