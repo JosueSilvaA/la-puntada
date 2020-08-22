@@ -112,7 +112,7 @@ function App() {
             <Switch>
               <Route path="/" exact component={() => <Login changeAuth={changeAuth} />} />
               <Route path="/login" exact component={() => <Login changeAuth={changeAuth} />} />
-              <PrivateMain exact path="/main" Auth={Auth} />
+              <PrivateMain exact path="/main" Auth={Auth} Permissions={Permission} />
               <PrivateMainInventory
                 exact
                 path="/mainInventory"
@@ -148,7 +148,8 @@ function App() {
                 Auth={Auth}
                 Permission={Permission.providerInvoice}
               />
-              {/*   <PrivateRoles exact path="/roles" Auth={Auth} Permission={Permission.roles} />
+              {/*   
+              <PrivateRoles exact path="/roles" Auth={Auth} Permission={Permission.roles} />
               <PrivateManageRole
                 exact
                 path="/manage-role"
@@ -174,6 +175,7 @@ function App() {
                 path="/mainInvoice"
                 Auth={Auth}
                 Permission={Permission.mainInvoice}
+                SecondPermission={Permission.clientInvoice}
               />
               <PrivateEmployeeSalesReport
                 exact

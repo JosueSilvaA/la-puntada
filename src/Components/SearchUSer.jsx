@@ -51,7 +51,7 @@ const SearchUser = ({ selectUser }) => {
           id="select"
           onClose={selectOneUser}
           disableListWrap={!Connection}
-          options={Connection ? Users : [{ nombre: '....' }]}
+          options={Connection ? Users : [{ nombres: '....' }]}
           getOptionLabel={(user) => user.nombres}
           filterOptions={filterOptions}
           renderInput={(params) => (

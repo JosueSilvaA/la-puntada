@@ -7,8 +7,10 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import SecurityIcon from '@material-ui/icons/Security';
 import Divider from '@material-ui/core/Divider';
+import { CircularProgress } from '@material-ui/core';
 import RoleController from '../Controllers/RoleController';
 import AppBar from '../Components/AppBar';
+import NavBar from '../Components/Navbar';
 
 class Role extends React.Component {
   isAlreadyMounted = false;
@@ -47,20 +49,30 @@ class Role extends React.Component {
     const { loaded, roles } = this.state;
     return (
       <div>
-        <AppBar titulo="Roles" />
+        {/* <AppBar titulo="Roles" /> */}
+        <NavBar goBack pageName="Roles" />
         <List>
-          {loaded
-            ? roles.map((e, i) => (
-                <ListItem button onClick={() => this.handleClick(e._id, e.nombre)}>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <SecurityIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary={e.nombre} secondary={e.descripcion} />
-                </ListItem>
-              ))
-            : ''}
+          {loaded ? (
+            roles.map((e, i) => (
+              <ListItem button onClick={() => this.handleClick(e._id, e.nombre)}>
+                <ListItemAvatar>
+                  <Avatar>
+                    <SecurityIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={e.nombre} secondary={e.descripcion} />
+              </ListItem>
+            ))
+          ) : (
+            <div className="mx-auto">
+              <div className="d-flex mt-5">
+                <CircularProgress className="mx-auto" size={60} color="secondary" />
+              </div>
+              <div className="d-flex">
+                <p className="mx-auto text-danger">Obteniendo datos...</p>
+              </div>
+            </div>
+          )}
           <Divider variant="inset" component="li" />
         </List>
       </div>

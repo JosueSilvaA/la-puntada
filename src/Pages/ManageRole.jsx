@@ -28,6 +28,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import RoleController from '../Controllers/RoleController';
 import AppBar from '../Components/AppBar';
 import BottomNav from '../Components/BottomNav';
+import { CircularProgress } from '@material-ui/core';
+import NavBar from '../Components/Navbar';
 
 class ManageRole extends React.Component {
   isAlreadyMounted = false;
@@ -173,24 +175,34 @@ class ManageRole extends React.Component {
     const { location } = this.props;
     return (
       <div>
-        <AppBar titulo="Privilegios" />
+        {/* <AppBar titulo="Privilegios" /> */}
+        <NavBar goBack pageName="Privilegios" />
         <List>
-          {loaded
-            ? privilegios.map((e, i) => (
-                <ListItem
-                  button
-                  onClick={() => this.updateSelected(i, e.nombre, e._id)}
-                  selected={selected === i}
-                >
-                  <ListItemAvatar>
-                    <Avatar>
-                      <BuildIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary={e.nombre} secondary={e.descripcion} />
-                </ListItem>
-              ))
-            : ''}
+          {loaded ? (
+            privilegios.map((e, i) => (
+              <ListItem
+                button
+                onClick={() => this.updateSelected(i, e.nombre, e._id)}
+                selected={selected === i}
+              >
+                <ListItemAvatar>
+                  <Avatar>
+                    <BuildIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={e.nombre} secondary={e.descripcion} />
+              </ListItem>
+            ))
+          ) : (
+            <div className="mx-auto">
+              <div className="d-flex mt-5">
+                <CircularProgress className="mx-auto" size={60} color="secondary" />
+              </div>
+              <div className="d-flex">
+                <p className="mx-auto text-danger">Obteniendo datos...</p>
+              </div>
+            </div>
+          )}
           <Divider variant="inset" component="li" />
         </List>
         <BottomNav

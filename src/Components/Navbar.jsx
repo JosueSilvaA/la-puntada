@@ -77,7 +77,7 @@ const NavBar = ({ pageName, goBack }) => {
       <div>
         <AppBar position="static" className="pl-0" style={{ background: '#24a19c' }}>
           <Toolbar>
-            <Hidden only={['sl', 'lg', 'md']}>{goBack && <BackButton />}</Hidden>
+            <Hidden only={['xl', 'lg', 'md']}>{goBack && <BackButton />}</Hidden>
             <p className="logo" style={{ width: '60%' }}>
               {pageName}
             </p>
