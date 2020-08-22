@@ -52,7 +52,6 @@ const Provider = ({ provider }) => {
     }).then(async (willDelete) => {
       if (willDelete) {
         const proveedor = await proveedorController.deleteProvider(provider._id)
-        console.log('PROVEEEDORRR', proveedor)
         if (!proveedor.err) {
           swal('Éxito', proveedor.item.Response, 'success', { timer: 2000 }).then(() => {
             history.goBack();

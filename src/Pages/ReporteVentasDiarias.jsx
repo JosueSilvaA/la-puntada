@@ -28,12 +28,6 @@ const App = () => {
         datosRespuesta = new Error('¡Oops!, Ocurrió un problema al realizar la conexión.');
       });
     setReporte({ value: true, reporte: datosRespuesta.Items });
-    // if(datosRespuesta.Items){
-    //   datosRespuesta.Items.map((e,i)=>(console.log(e.rtn)))
-    //   // datosRespuesta.Items.forEach(element => {
-    //   //   console.log(element)
-    //   // });
-    // }
   }
 
   useEffect(() => {

@@ -40,7 +40,6 @@ const ProductListItemVaried = ({ product }) => {
 
   const handleClickDelete = () => {
     // eslint-disable-next-line no-underscore-dangle
-    console.log('ID PRODUCTO ', product._id);
     history.push(`/inventory/deleteProduct/${product._id}`);
   };
 

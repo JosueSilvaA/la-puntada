@@ -9,7 +9,6 @@ export default function Bitacora() {
   const getBitacora = async () => {
     const bitacora = new BitacoraController();
     const infoBit = await bitacora.getInfoBitacora();
-    console.log(infoBit);
     if (!infoBit.err) {
       setInfoBitacora({
         infoBit: infoBit.items,
@@ -25,8 +24,10 @@ export default function Bitacora() {
     <>
     <Helmet bodyAttributes={{ style: 'background-color : #3b6978' }} />
     <NavBar pageName="La Puntada - Bitacora" goBack />
+    <br/>
     {DataBitacora.infoBit.map((bit) => (
           <BitacoraItem
+            key = {bit._id}
             usu= {bit.usuario.usuario}
             fecha={bit.creada}
             categoria={bit.categoria}

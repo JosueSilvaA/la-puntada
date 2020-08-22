@@ -27,7 +27,6 @@ const MostSellsProducts = () => {
     const getSellProducts = async () =>{
         const reportController = new SalesReport();
         const mostSells = await reportController.mostSellsProducts();
-        console.log('mas vendido', mostSells)
         if(!mostSells.err){
             if(mostSells.data.length === 0){
                 swal('Aviso', 'El usuaio no tiene ninguna venta registrada', 'error', {
@@ -41,7 +40,6 @@ const MostSellsProducts = () => {
                     value:true,
                     data:mostSells.data
                 })
-                console.log('FUCK ',mostSells.data)
             }
         }
 

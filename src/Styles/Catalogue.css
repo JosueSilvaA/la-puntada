@@ -6,6 +6,10 @@
     background: #3b6978;
 }
 
+.contenedor-bitacora{
+    width: 70%;
+}
+
 .contenedor-titulo {
     width: 100%;
     margin: 0px;
@@ -40,17 +44,26 @@
     .titulo-categoria{
         font-size: 30px;
     }
+    .contenedor-bitacora{
+        width: 80%;
+    }
 }
 
 @media (max-width: 991.98px) {
     .titulo-categoria{
         font-size: 25px;
     }
+    .contenedor-bitacora{
+        width: 80%;
+    }
 }
 
 @media (max-width: 767.98px) {
     .titulo-categoria {
         font-size: 20px;
+    }
+    .contenedor-bitacora{
+        width: 90%;
     }
 }
 
@@ -61,6 +74,9 @@
 
     .contenedor-catalogo{
         padding: 5%;
+    }
+    .contenedor-bitacora{
+        width: 100%;
     }
 }
 

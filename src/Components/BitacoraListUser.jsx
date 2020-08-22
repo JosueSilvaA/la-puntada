@@ -13,6 +13,7 @@ import moment from 'moment';
 import UserController from '../Controllers/UsersController'
 import ProductController from '../Controllers/ProductsController'
 import InvoiceController from '../Controllers/InvoiceCotroller'
+import ProvidersController from '../Controllers/ProvidersController'
 // eslint-disable-next-line react/prop-types
 const BitacoraListUser = ({fecha, categoria, actividad, entidad, finalidad}) => {
   const fechaCreada= moment(fecha).format('DD-MM-YYYY HH:mm');
@@ -24,24 +25,26 @@ const BitacoraListUser = ({fecha, categoria, actividad, entidad, finalidad}) => 
     const usuarioController =  new UserController();
     const productoController =  new ProductController();
     const facturaController = new InvoiceController();
+    const proveedorController = new ProvidersController();
 
     const usuario = await usuarioController.GetInfoUser(entidad);
     const producto = await productoController.GetProductById(entidad);
     const facturaCli = await facturaController.getInvoiceCli(entidad);
     const facturaPro = await facturaController.getInvoiceProv(entidad);
-
+    const provider = await proveedorController.getProvider(entidad);
+ 
     if(usuario.item !== null){
       setNombreEntidad(usuario.item.nombres)
-    }else if (producto.items !== null){
+    }else if (producto.items.length !== 0){
       setNombreEntidad(producto.items.nombre)
-    }
-
-    if(facturaCli.item !== undefined){
+    }else if(facturaCli.item !== undefined){
       setNombreEntidad(`Factura del Cliente - ${facturaCli.item.nombreCliente}`)
-    }
-
-    if(facturaPro.item !== undefined){
+    }else if(facturaPro.item !== undefined){
       setNombreEntidad(`Factura del Proveedor - ${facturaPro.item.proveedor.nombre}`)
+    }else if(provider.item.length !== 0){
+      setNombreEntidad(`Proveedor alterado - ${provider.item.nombre}`)
+    }else{
+      setNombreEntidad(`REPORTE`)
     }
   }
 

@@ -15,7 +15,7 @@ const UserBitacora = ({ idUser }) => {
     const bitacoraUser = new BitacoraController();
     const infoBitaUsuario = await bitacoraUser.getInfoBitacoraUsuario(idUser);
     //    //bitacora
-    console.log('infoBitaUsuario', infoBitaUsuario);
+    
     if (!infoBitaUsuario.err) {
       setInfoBitacoraUser({
         infoBitaUsuario: infoBitaUsuario.items,

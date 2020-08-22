@@ -28,6 +28,25 @@ class ProvidersController {
     return Res;
   };
 
+  getProvider = async (idProvider) => {
+    const token = this.getUserLogToken();
+    let Res;
+    await axios
+      .get( `https://api-la-puntada.herokuapp.com/api/proveedor/${idProvider}/obtenerProveedor`, {
+        headers: {
+          'access-token': token,
+        },
+      })
+      .then((res) => {
+        Res = { err: false, item: res.data.Items };
+      })
+      .catch((err) => {
+        Res = new Error('¡Oops!, Ocurrió un problema al realizar la conexión.');
+        return err;
+      });
+    return Res;
+  };
+
   newProvider = async (provider, tipoProducto) => {
     const token = this.getUserLogToken();
     let Res;

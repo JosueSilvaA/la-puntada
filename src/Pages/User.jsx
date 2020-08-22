@@ -243,7 +243,7 @@ const User = (props) => {
           className="mx-auto"
           style={{ backgroundColor: '#f1f3f5', borderRadius: '5px' }}
         >
-          <CardActionArea style={{ padding: '20px' }}>
+          <CardActionArea style={{ padding: '1%'}}>
             <div className="d-flex mt-3">
               <Typography component="h3" variant="h5" className="mx-auto">
                 <div style={{ fontSize: '25px', color: '#444444', fontWeight: 'bold' }}>
@@ -253,7 +253,7 @@ const User = (props) => {
             </div>
             <Divider />
             <Divider />
-            <CardContent style={{ minHeight: '19.8rem' }}>
+            <CardContent style={{ minHeight: '19.8rem',margin:'0px',padding:'0px'}}>
               <UserBitacora idUser={props.match.params.idUser} />
             </CardContent>
           </CardActionArea>

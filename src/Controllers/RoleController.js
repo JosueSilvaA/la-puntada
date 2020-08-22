@@ -53,7 +53,6 @@ class RoleController {
     const token = this.getUserLogToken();
     this.datosRespuesta = '';
     this.data = { rol: nombreRol };
-    console.log(this.data)
     await axios
       .post(
         `https://api-la-puntada.herokuapp.com/api/privilegio/obtenerPrivilegiosNotInRol`,
