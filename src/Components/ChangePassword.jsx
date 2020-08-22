@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ChangePassword = () => {
+const ChangePassword = ({ user }) => {
   const classes = useStyles();
   const history = useHistory();
   const [ShowPass, setShowPass] = useState({ current: false, new: false, loading: false });
@@ -73,8 +73,8 @@ const ChangePassword = () => {
   const onSubmit = async (data, event) => {
     setShowPass({ current: false, new: false, loading: true });
     event.preventDefault();
-    const user = new UserCtrl();
-    const result = await user.changeUserPassword(data);
+    const userCtrl = new UserCtrl();
+    const result = await userCtrl.changeUserPassword(data, user);
     if (!result.err) {
       swal('Éxito', `${result.message}. Se procedera a cerrar la sesión.`, 'success', {
         timer: 2000,

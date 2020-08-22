@@ -185,18 +185,15 @@ class UsersController {
     return res;
   };
 
-  changeUserPassword = async (data) => {
+  changeUserPassword = async (data, idUser) => {
     const token = this.getUserLogToken();
+    let res;
     await axios
-      .post(
-        `https://api-la-puntada.herokuapp.com/api/usuario/cambiarImagenUsuario/${idUser}`,
-        data,
-        {
-          headers: {
-            'access-token': token,
-          },
-        }
-      )
+      .put(`https://api-la-puntada.herokuapp.com/api/usuario/cambiarContrasena/${idUser}`, data, {
+        headers: {
+          'access-token': token,
+        },
+      })
       .then((response) => {
         if (!response.data.Error) {
           res = { err: false, message: response.data.Response };

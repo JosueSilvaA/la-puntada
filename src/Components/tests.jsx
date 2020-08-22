@@ -255,7 +255,7 @@ const Tests = ({ infoUser, closeModal }) => {
         </AccordionSummary>
         <AccordionDetails>
           <Grid container alignContent="center">
-            <ChangePassword />
+            <ChangePassword user={infoUser._id} />
           </Grid>
         </AccordionDetails>
       </Accordion>
