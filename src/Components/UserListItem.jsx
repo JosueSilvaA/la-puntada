@@ -13,24 +13,12 @@ import RolController from '../Controllers/UsersController';
 
 // eslint-disable-next-line react/prop-types
 const UserListItem = ({ rol, nombres, apellido, imgUsuario, idUser }) => {
-  const [Rol, setRol] = useState({ value: false, nombre: '' });
   const history = useHistory();
 
   const onClick = () => {
     history.push(`/user/${idUser}`);
   };
 
-  const getRol = async () => {
-    const user = new RolController();
-    const result = await user.getRolUser(rol);
-    if (!result.err) {
-      setRol({ value: true, nombre: result.item.nombre });
-    }
-  };
-
-  useEffect(() => {
-    getRol();
-  }, []);
 
   return (
     <>

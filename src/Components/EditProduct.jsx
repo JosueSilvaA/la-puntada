@@ -94,6 +94,8 @@ const EditProduct = ({ idProduct = '0' }) => {
       swal('Exito', result.message, 'success', { timer: 2000 }).then(() => {
         history.goBack();
       });
+    }else {
+      swal('Error', result.message, 'warning', { timer: 2000 });
     }
     event.preventDefault();
   };
@@ -125,6 +127,7 @@ const EditProduct = ({ idProduct = '0' }) => {
                 alt="Imagen del producto"
                 src={ProductToEdit.product.imgProducto}
                 title="Contemplative Reptile"
+                style={{maxHeight:'24rem',backgroundSize:'cover',backgroundPosition:'center center'}}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">

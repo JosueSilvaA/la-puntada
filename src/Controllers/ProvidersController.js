@@ -57,5 +57,28 @@ class ProvidersController {
       });
     return Res;
   };
+
+  deleteProvider = async (idProvider) => {
+    const token = this.getUserLogToken();
+    let Res;
+    let dato ={
+      nombre:'dato'
+    }
+    await axios
+      .put(`https://api-la-puntada.herokuapp.com/api/proveedor/${idProvider}/eliminarProveedor`,dato, {
+        headers: {
+          'access-token': token,
+        },
+      })
+      .then((res) => {
+        
+        Res = { err: false, item: res.data };
+      })
+      .catch((err) => {
+        Res = new Error('¡Oops!, Ocurrió un problema al realizar la conexión.');
+        return err;
+      });
+    return Res;
+  };
 }
 export default ProvidersController;

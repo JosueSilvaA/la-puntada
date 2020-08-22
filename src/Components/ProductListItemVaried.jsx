@@ -128,7 +128,7 @@ const ProductListItemVaried = ({ product }) => {
         <Modal
           open={OpenModal}
           onClose={handleCloseModal}
-          className="mt-5"
+          style={{marginTop:'7%'}}
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
         >
