@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   imgStyles: {
     width: '100%',
-    height: '10rem',
+    maxHeight:'240px',
   },
 }));
 
@@ -84,14 +84,15 @@ const EditProductImage = ({
 
   return (
     <>
-      <h2>Cabiar Imagen del Producto</h2>
+      <h3 style={{color:'#444444',width:'100%',textAlign:'center'}}>Cambiar Imagen del Producto</h3>
+      <hr/>
       <Grid container alignItems="center" className="d-block">
         <Grid item lg={6} md={6} sm={12} xm={12} className="bg-white mx-auto mb-3">
           <img
             src={ImageProduct.img}
             className={classes.imgStyles}
             title="imagen producto"
-            alt=""
+            
           />
           <input
             type="file"
@@ -126,6 +127,7 @@ const EditProductImage = ({
             </div>
           )}
         </Grid>
+        <hr/>
         <Grid item lg={12} md={12} sm={12} className="mx-auto mt-3 d-flex">
           <Button
             variant="contained"

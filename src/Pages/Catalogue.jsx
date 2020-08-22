@@ -273,7 +273,7 @@ const Catalogue = () => {
             </div>
           )}
         </Grid>
-        {!ProductListVaried &&
+        {!ProductListVaried.loading &&
           ProductListVaried.data.map((productVaried) => (
             <ProductListItemVaried key={productVaried._id} product={productVaried} />
           ))}

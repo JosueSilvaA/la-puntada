@@ -77,6 +77,7 @@ const DeleteProduct = ({ idProduct = '0' }) => {
                 alt="Imagen del producto"
                 src={ProducSelected.product.imgProducto}
                 title="Contemplative Reptile"
+                style={{maxHeight:'24rem',backgroundSize:'cover',backgroundPosition:'center center'}}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
