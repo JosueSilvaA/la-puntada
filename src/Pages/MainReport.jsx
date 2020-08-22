@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Divider } from '@material-ui/core';
+import Helmet from 'react-helmet';
 import NavBar from '../Components/Navbar';
 import MainReportItem from '../Components/MainReportItem';
 import '../Styles/Reportes.css';
@@ -7,10 +8,11 @@ import '../Styles/Reportes.css';
 const MainReport = () => {
   return (
     <>
+      <Helmet bodyAttributes={{ style: 'background-color : #3b6978' }} />      
       <NavBar pageName="La Puntada - Reportes" goBack />
       <Divider />
       <Grid>
-        <div className="contenedor-opciones pt-3 pb-3" style={{ width: '100%',height:'100%',backgroundColor:'#3b6978' }}>
+        <div className="contenedor-opciones pt-3 pb-3" style={{ width: '100%',height:'100%'}}>
           <Grid
             container
             mx="auto"
