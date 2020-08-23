@@ -21,6 +21,7 @@ const BitacoraListUser = ({fecha, categoria, actividad, entidad, finalidad}) => 
 
   const [nombreEntidad, setNombreEntidad] = useState('')
 
+  
   const obtenerEntidad = async() =>{
     const usuarioController =  new UserController();
     const productoController =  new ProductController();
