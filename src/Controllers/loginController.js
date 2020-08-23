@@ -1,7 +1,7 @@
 import axios from 'axios';
+import { NotificationPermissionRequest } from '../serviceWorker';
 
 class LoginController {
-
   getUserLogToken = () => {
     let token = window.localStorage.getItem('userToken');
     if (token === null) {
@@ -30,6 +30,7 @@ class LoginController {
         datosRespuesta = new Error('¡Oops!, Ocurrió un problema al realizar la conexión.');
         return err;
       });
+    NotificationPermissionRequest();
     return datosRespuesta;
   }
 
