@@ -30,7 +30,12 @@ class LoginController {
         datosRespuesta = new Error('¡Oops!, Ocurrió un problema al realizar la conexión.');
         return err;
       });
-    NotificationPermissionRequest();
+    try {
+      NotificationPermissionRequest();
+    } catch (error) {
+      /* Error on local develop version */
+    }
+
     return datosRespuesta;
   }
 

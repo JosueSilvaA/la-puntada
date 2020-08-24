@@ -80,6 +80,7 @@ class RoleController {
     await axios
       .post(
         `https://api-la-puntada.herokuapp.com/api/rol/${idRol}/privilegio/${idPrivilegio}/registroPrivilegio`,
+        idRol,
         {
           headers: {
             'access-token': token,

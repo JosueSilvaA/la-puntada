@@ -25,10 +25,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 // import { useHistory } from 'react-router';
+import { CircularProgress } from '@material-ui/core';
 import RoleController from '../Controllers/RoleController';
 import AppBar from '../Components/AppBar';
 import BottomNav from '../Components/BottomNav';
-import { CircularProgress } from '@material-ui/core';
 import NavBar from '../Components/Navbar';
 
 class ManageRole extends React.Component {
