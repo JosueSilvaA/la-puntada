@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Helmet from 'react-helmet';
 import { Grid, Fab, Backdrop, Fade, Modal, Button, Tooltip, Icon, CircularProgress } from '@material-ui/core';
 import NavBar from '../Components/Navbar';
-import '../Styles/Providers.css';
+
 import ProvidersController from '../Controllers/ProvidersController';
 import Provider from '../Components/Provider';
 import NewProvider from '../Components/NewProvider';
@@ -85,7 +85,7 @@ const Providers = () => {
           }}
         >
           <Fade in={Open}>
-            <div className="border border-dark" id="transition-modal-title">
+            <div  id="transition-modal-title">
               <div className="container">
                 <div className="">
                   <NewProvider providers={getProviders} />

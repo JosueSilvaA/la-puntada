@@ -28,6 +28,8 @@ const NewProduct = () => {
     colorEscolar: [
       { code: '#FD0A00', name: 'Rojo' },
       { code: '#00ff00', name: 'Verde' },
+      { code: '#ffffff', name: 'Blanco'},
+      { code: '#000000', name: 'Negro'}
     ],
   });
   /* Options selected */
@@ -337,7 +339,6 @@ const NewProduct = () => {
             <TextField
               style={{ width: '100%' }}
               id="standard-number"
-              type="number"
               label="Precio"
               color="primary"
               // prefix="L"
@@ -351,6 +352,10 @@ const NewProduct = () => {
                 min: {
                   value: 0,
                   message: 'El valor no puede ser negativo.',
+                },
+                pattern: {
+                  value: /^\d*(\.\d{0,2})?$/,
+                  message: 'solo puede contener números',
                 },
               })}
             />
