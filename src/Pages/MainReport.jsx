@@ -21,7 +21,7 @@ const MainReport = () => {
             spacing={5}
             style={{ width: '80%',marginBottom:'10px',marginTop:'10px' }}
           >
-            <MainReportItem
+           {/*  <MainReportItem
               iconItem="fas fa-file-invoice-dollar"
               nameItem="Ventas Diarias"
               route=""
@@ -41,7 +41,7 @@ const MainReport = () => {
               route=""
               bgColor="#3b2e5a"
               pdLeft="0px"
-            />
+            /> */}
 
             <MainReportItem
               iconItem="fas fa-chart-area"

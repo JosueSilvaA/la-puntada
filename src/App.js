@@ -33,7 +33,6 @@ import PrivateBitacora from './PrivateRoutes/PrivateBitacora';
 import PrivateMostSellsProducts from './PrivateRoutes/PrivateMostSellsProducts';
 import Roles from './Pages/Role';
 import ManageRole from './Pages/ManageRole';
-
 const logOut = () => {
   // eslint-disable-next-line no-undef
   localStorage.removeItem('userToken');

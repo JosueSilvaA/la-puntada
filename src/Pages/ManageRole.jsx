@@ -143,6 +143,7 @@ class ManageRole extends React.Component {
     this.setState({
       privilegiosFaltantes: privilegios.Items,
     });
+    window.location.reload(false)
   }
 
   async removePriv() {
@@ -157,6 +158,7 @@ class ManageRole extends React.Component {
       privilegiosFaltantes: privilegios.Items,
       reload: !reload,
     });
+    window.location.reload(false)
   }
 
   render() {

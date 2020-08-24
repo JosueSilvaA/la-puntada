@@ -10,6 +10,7 @@ const DrawerItems = () => {
     { name: 'Fatura', route: '/mainInvoice', icon: 'fas fa-file-invoice' },
     { name: 'Reportes', route: '/mainReport', icon: 'fas fa-chart-line' },
     { name: 'Proveedores', route: '/providers', icon: 'fas fa-user-tie' },
+    { name: 'Bitacora', route: '/bitacora', icon: 'fas fa-book'}
   ];
 
   return (

@@ -15,3 +15,7 @@ code {
 button{
   outline: 0;
 }
+
+* {
+  outline: none;
+}
